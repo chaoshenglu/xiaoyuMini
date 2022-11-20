@@ -4,15 +4,19 @@
       <view class="lxCenterColumn">
         <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id" @click="tapCell(tiezi)">
           <text class="title">{{tiezi.title}}</text>
-          <view class="lxCenterRow">
+          <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
             <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
             <uni-tag text="标签" type="success" size="small"></uni-tag>
             <uni-tag text="标签" type="warning" size="small"></uni-tag>
             <uni-tag text="标签" type="error" size="small"></uni-tag>
           </view>
-          <text>{{tiezi.title}}</text>
-          <text>{{tiezi.title}}</text>
-          <text>{{tiezi.title}}</text>
+          <text class="remark">备注：{{tiezi.remark}}</text>
+          <view class="lxCenterRow" style="margin-top: 8px;">
+            <image class="head" :src="tiezi.createdPersonAvatar || defaultAvatar" mode="aspectFit"></image>
+            <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
+            <text class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
+            <text class="name">{{tiezi.createdPersonName || '颐瑾羽毛球馆'}}</text>
+          </view>
         </view>
       </view>
     </z-paging>
@@ -25,6 +29,7 @@
   } from 'vue';
   const paging = ref(null)
   let tieziArr = ref([])
+  const defaultAvatar = '/static/defaultAvatar.png'
 
   const queryList = (pageNo, pageSize) => {
     let uri = 'tiezi/getTieZiArr'
@@ -47,6 +52,22 @@
     margin-right: 4px;
     padding-top: 0px !important;
     padding-bottom: 0px !important;
+  }
+
+  .name {
+    color: #0D81FF;
+    font-size: 14px;
+  }
+
+  .head {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+
+  .remark {
+    font-size: 14px;
+    color: #666666;
   }
 
   .title {
