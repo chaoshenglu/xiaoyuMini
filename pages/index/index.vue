@@ -20,6 +20,13 @@
         </view>
       </view>
     </z-paging>
+
+    <uni-popup ref="popup" type="center">
+      <view class="gift">
+        <image src="gift" mode="aspectFit"></image>
+      </view>
+    </uni-popup>
+
   </view>
 </template>
 
@@ -27,6 +34,7 @@
   import {
     ref
   } from 'vue';
+
   const paging = ref(null)
   let tieziArr = ref([])
 
