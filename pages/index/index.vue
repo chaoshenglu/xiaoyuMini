@@ -6,9 +6,9 @@
           <text class="title">{{tiezi.title}}</text>
           <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
             <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
-            <uni-tag text="标签" type="success" size="small"></uni-tag>
-            <uni-tag text="标签" type="warning" size="small"></uni-tag>
-            <uni-tag text="标签" type="error" size="small"></uni-tag>
+            <uni-tag :text="tiezi.fields" type="success" size="small"></uni-tag>
+            <uni-tag :text="tiezi.numberProportion" type="warning" size="small"></uni-tag>
+            <uni-tag :text="tiezi.statusStr" type="error" size="small"></uni-tag>
           </view>
           <text class="remark">备注：{{tiezi.remark}}</text>
           <view class="lxCenterRow" style="margin-top: 8px;">
@@ -35,6 +35,19 @@
     let uri = 'tiezi/getTieZiArr'
     getApp().get(uri).then(res => {
       console.log(JSON.stringify(res.data[0], null, 2))
+      let arr = res.data || []
+      for (const tiezi of arr) {
+        tiezi.numberProportion = `${tiezi.personNumber}/${tiezi.limitNumber}`
+        if (tiezi.status == 0) {
+          tiezi.statusStr = '未开放'
+        } else if (tiezi.status == 1) {
+          tiezi.statusStr = '报名中'
+        } else if (tiezi.status == 2) {
+          tiezi.statusStr = '活动已取消'
+        } else if (tiezi.status == 3) {
+          tiezi.statusStr = '已截止报名'
+        }
+      }
       paging.value.complete(res.data || [])
     }).catch(res => {
       paging.value.complete(false)
@@ -73,6 +86,5 @@
   .title {
     font-size: 16px;
     color: #222222;
-    margin-top: 6px;
   }
 </style>
