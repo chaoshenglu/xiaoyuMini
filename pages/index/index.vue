@@ -81,7 +81,7 @@
         }
       }
       paging.value.complete(res.data || [])
-    }).catch(res => {
+    }).catch(err => {
       paging.value.complete(false)
     })
   }
