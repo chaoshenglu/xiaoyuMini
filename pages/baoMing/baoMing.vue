@@ -1,5 +1,3 @@
-# xiaoyuMini
-```
 <template>
   <view>
 
@@ -13,4 +11,3 @@
 <style lang="scss">
 
 </style>
-```
