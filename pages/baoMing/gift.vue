@@ -1,8 +1,7 @@
 <template>
   <view class="gift lxCenterColumn">
-    <!-- <image :src="giftImage" mode="aspectFit"></image> -->
     <text class="giftName">{{props.gift.name}}</text>
-    <view class="lxBtn lxCenterC">
+    <view class="lxBtn lxCenterC" @click="tapReceiveGift">
       <text>立即领取</text>
     </view>
   </view>
@@ -14,8 +13,11 @@
   } from 'vue'
   const giftImage = '/static/gift.png'
   const props = defineProps(['gift'])
-</script>
 
+  function tapReceiveGift() {
+
+  }
+</script>
 
 <style lang="scss">
   .giftName {
