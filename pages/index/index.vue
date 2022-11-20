@@ -2,7 +2,7 @@
   <view>
     <z-paging ref="paging" v-model="tieziArr" @query="queryList">
       <view class="lxCenterColumn">
-        <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" @click="tapCell(tiezi)">
+        <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id" @click="tapCell(tiezi)">
           <text class="title">{{tiezi.title}}</text>
           <text>{{tiezi.title}}</text>
           <text>{{tiezi.title}}</text>
@@ -18,7 +18,7 @@
     ref
   } from 'vue';
   const paging = ref(null)
-  let dataList = ref([])
+  let tieziArr = ref([])
 
   const queryList = (pageNo, pageSize) => {
     let uri = 'tiezi/getTieZiArr'
@@ -31,8 +31,12 @@
 </script>
 
 <style lang="scss">
+  page {
+    background-color: #F6F6F6;
+  }
+
   .title {
     font-size: 15px;
-    color: #333333;
+    color: #222222;
   }
 </style>

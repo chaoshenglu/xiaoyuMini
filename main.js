@@ -21,10 +21,3 @@ export function createApp() {
   }
 }
 // #endif
-
-import zConfig from '@/uni_modules/z-paging/components/z-paging/js/z-paging-config'
-zConfig.setConfig({
-  'default-page-size': '20',
-  'empty-view-text': '空空如也~',
-  'safe-area-inset-bottom': true
-})
