@@ -7,7 +7,7 @@ import u from '.././z-paging-utils'
 import c from '.././z-paging-constant'
 import interceptor from '../z-paging-interceptor'
 
-const ZPI18n = {
+export default {
 	data() {
 		return {
 			language: uni.getSystemInfoSync().language
@@ -89,12 +89,8 @@ const ZPI18n = {
 				}
 				return 'zh-Hant';
 			}
-			if (formatedLanguage.indexOf('en') !== -1) {
-				return 'en';
-			}
+			if (formatedLanguage.indexOf('en') !== -1) return 'en';
 			return language;
 		}
 	}
 }
-
-export default ZPI18n;

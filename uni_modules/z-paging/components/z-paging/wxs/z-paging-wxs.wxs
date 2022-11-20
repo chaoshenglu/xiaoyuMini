@@ -228,13 +228,9 @@ function _getMoveDis(e, ins) {
 			diffDis = diffDis * (1 - refresherOutRate);
 		}
 	}
-	if (diffDis > 200) {
-		currentDis = 0;
-		diffDis = 0;
-	} else {
-		currentDis += diffDis;
-		currentDis = Math.max(0, currentDis);
-	}
+	diffDis = diffDis > 100 ? diffDis / 100 : diffDis;
+	currentDis += diffDis;
+	currentDis = Math.max(0, currentDis);
 	return {
 		currentDis: currentDis,
 		diffDis: diffDis,
@@ -283,7 +279,7 @@ function _touchDisabled(e, ins, processTag) {
 	}
 	var fixedIsTopHitCount = state.fixedIsTopHitCount || 0;
 	if (fixedIsTop) {
-		fixedIsTopHitCount++;
+		fixedIsTopHitCount ++;
 		if (fixedIsTopHitCount <= 3) {
 			fixedIsTop = false;
 		}
@@ -297,9 +293,9 @@ function _touchDisabled(e, ins, processTag) {
 	if (!isIos && processTag === 2) {
 		fixedIsTop = true;
 	}
-	var res = loading || useChatRecordMode || !refresherEnabled || !useCustomRefresher || ((usePageScroll && useCustomRefresher && pageScrollTop > 5) && !fixedIsTop) || 
+	return loading || useChatRecordMode || !refresherEnabled || !useCustomRefresher || 
+	((usePageScroll && useCustomRefresher && pageScrollTop > 5) && !fixedIsTop) || 
 	((!usePageScroll && useCustomRefresher && scrollTop > 5) && !fixedIsTop);
-	return res;
 }
 
 function _getAngleIsInRange(e, touch, state, dataset) {

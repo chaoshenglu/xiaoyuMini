@@ -3,14 +3,12 @@ import u from '.././z-paging-utils'
 import c from '.././z-paging-constant'
 import Enum from '.././z-paging-enum'
 
-const ZPRefresher = {
+export default {
 	props: {
 		//下拉刷新的主题样式，支持black，white，默认black
 		refresherThemeStyle: {
 			type: String,
-			default: function() {
-				return u.gc('refresherThemeStyle', '');
-			}
+			default: u.gc('refresherThemeStyle', '')
 		},
 		//自定义下拉刷新中左侧图标的样式
 		refresherImgStyle: {
@@ -41,9 +39,7 @@ const ZPRefresher = {
 		//底部加载更多的主题样式，支持black，white，默认black
 		loadingMoreThemeStyle: {
 			type: String,
-			default: function() {
-				return u.gc('loadingMoreThemeStyle', '');
-			}
+			default: u.gc('loadingMoreThemeStyle', '')
 		},
 		//是否只使用下拉刷新，设置为true后将关闭mounted自动请求数据、关闭滚动到底部加载更多，强制隐藏空数据图。默认为否
 		refresherOnly: {
@@ -185,6 +181,11 @@ const ZPRefresher = {
 			type: String,
 			default: u.gc('refresherUpdateTimeKey', 'default')
 		},
+		//下拉刷新时下拉到“松手立即刷新”状态时是否使手机短振动，默认为否（h5无效）
+		refresherVibrate: {
+			type: Boolean,
+			default: u.gc('refresherVibrate', false)
+		},
 	},
 	data() {
 		return {
@@ -215,6 +216,8 @@ const ZPRefresher = {
 			pullDownTimeStamp: 0,
 			moveDis: 0,
 			oldMoveDis: 0,
+			currentDis: 0,
+			oldCurrentMoveDis: 0,
 			oldRefresherTouchmoveY: 0,
 			oldTouchDirection: ''
 		}
@@ -228,15 +231,11 @@ const ZPRefresher = {
 			},
 			immediate: true
 		},
-		refresherStatus(newVal, oldVal) {
-			if (newVal === Enum.Refresher.Loading){
-				this._cleanRefresherEndTimeout();
-			}
+		refresherStatus(newVal) {
+			newVal === Enum.Refresher.Loading && this._cleanRefresherEndTimeout();
+			this.refresherVibrate && newVal === Enum.Refresher.ReleaseToRefresh && this._doVibrateShort();
 			this.$emit('refresherStatusChange', newVal);
 			this.$emit('update:refresherStatus', newVal);
-		},
-		moveDis(newVal, oldVal){
-			this.oldMoveDis = oldVal;
 		}
 	},
 	computed: {
@@ -257,9 +256,7 @@ const ZPRefresher = {
 					refresherThreshold = '120rpx';
 				}
 			}
-			if (idDefault && this.customRefresherHeight > 0) {
-				return this.customRefresherHeight;
-			}
+			if (idDefault && this.customRefresherHeight > 0) return this.customRefresherHeight;
 			return u.convertTextToPx(refresherThreshold);
 		},
 		finalRefresherFixedBacHeight() {
@@ -327,7 +324,7 @@ const ZPRefresher = {
 			this.refresherStatusChangedFunc = func;
 		},
 		//自定义下拉刷新被触发
-		_onRefresh(fromScrollView=false,isUserPullDown=true) {
+		_onRefresh(fromScrollView = false,isUserPullDown = true) {
 			if (fromScrollView && !(this.finalRefresherEnabled && !this.useCustomRefresher)) return;
 			this.$emit('onRefresh');
 			this.$emit('Refresh');
@@ -347,11 +344,7 @@ const ZPRefresher = {
 			this._startLoading(true);
 			this.refresherTriggered = true;
 			if(this.reloadWhenRefresh && isUserPullDown){
-				if (this.useChatRecordMode) {
-					this._onLoadingMore('click')
-				} else {
-					this._reload(false, false, isUserPullDown);
-				}
+				this.useChatRecordMode ? this._onLoadingMore('click') : this._reload(false, false, isUserPullDown);
 			}
 		},
 		//自定义下拉刷新被复位
@@ -437,7 +430,6 @@ const ZPRefresher = {
 			this.refresherReachMaxAngle = true;
 			this.isTouchmovingTimeout && clearTimeout(this.isTouchmovingTimeout);
 			this.isTouchmoving = true;
-			//this.refresherTransition = '';
 			this.isTouchEnded = false;
 			this.refresherStatus = moveDis >= this.finalRefresherThreshold ? Enum.Refresher.ReleaseToRefresh : this.refresherStatus = Enum.Refresher.Default;
 			// #ifndef APP-VUE || MP-WEIXIN || MP-QQ  || H5
@@ -467,15 +459,11 @@ const ZPRefresher = {
 			// #endif
 			this.isTouchmovingTimeout && clearTimeout(this.isTouchmovingTimeout);
 			this.refresherReachMaxAngle = true;
-			if (moveDis < 0 && this.usePageScroll && this.loadingMoreEnabled && this.useCustomRefresher && this.pageScrollTop === -1) {
-				if (this.showConsoleError) {
-					u.consoleErr('usePageScroll为true并且自定义下拉刷新时必须引入mixin或在page滚动时通过调用z-paging组件的updatePageScrollTop方法设置当前的scrollTop');
-				}
-			}
 			this.isTouchEnded = true;
 			if (moveDis >= this.finalRefresherThreshold && this.refresherStatus === Enum.Refresher.ReleaseToRefresh) {
-				// #ifndef APP-VUE || MP-WEIXIN || MP-QQ  || H5
+				// #ifndef APP-VUE || MP-WEIXIN || MP-QQ || H5
 				this.refresherTransform = `translateY(${this.finalRefresherThreshold}px)`;
+				this.refresherTransition = 'transform .1s linear';
 				// #endif
 				this.moveDis = this.finalRefresherThreshold;
 				this.refresherStatus = Enum.Refresher.Loading;
@@ -497,10 +485,12 @@ const ZPRefresher = {
 			}
 		},
 		//处理scroll-view bounce是否生效
-		_handleScrollViewDisableBounce(e) {
+		_handleScrollViewDisableBounce({ bounce }) {
 			if (!this.usePageScroll && !this.scrollToTopBounceEnabled) {
+				// #ifdef APP-VUE || MP-WEIXIN || MP-QQ || H5
 				this.refresherTransition = '';
-				this.scrollEnable = e.bounce;
+				// #endif
+				this.scrollEnable = bounce;
 			}
 		},
 		//wxs正在下拉状态改变处理
@@ -511,15 +501,15 @@ const ZPRefresher = {
 			}
 		},
 		//wxs正在下拉处理
-		_handleWxsPullingDown(e){
-			this._emitTouchmove({pullingDistance:e.moveDis,dy:e.diffDis});
+		_handleWxsPullingDown({ moveDis, diffDis }){
+			this._emitTouchmove({pullingDistance:moveDis,dy:diffDis});
 		},
 		//wxs触摸方向改变
-		_handleTouchDirectionChange(e) {
-			this.$emit('touchDirectionChange',e.direction);
+		_handleTouchDirectionChange({ direction }) {
+			this.$emit('touchDirectionChange',direction);
 		},
 		//wxs通知更新其props
-		_handlePropUpdate(e){
+		_handlePropUpdate(){
 			this.wxsPropType = u.getTime().toString();
 		},
 		//下拉刷新结束
@@ -532,7 +522,7 @@ const ZPRefresher = {
 				const refresherStatus = refresherCompleteDelay > 0 ? Enum.Refresher.Complete : Enum.Refresher.Default;
 				if (this.finalShowRefresherWhenReload) {
 					const stackCount = this.refresherRevealStackCount;
-					this.refresherRevealStackCount--;
+					this.refresherRevealStackCount --;
 					if (stackCount > 1) return;
 				}
 				this._cleanRefresherEndTimeout();
@@ -555,6 +545,7 @@ const ZPRefresher = {
 					this.refresherTransition = `transform ${fromAddData ? animateDuration : this.refresherDefaultDuration / 1000}s ${animateType}`;
 					// #ifndef APP-VUE || MP-WEIXIN || MP-QQ  || H5
 					this.refresherTransform = 'translateY(0px)';
+					this.currentDis = 0;
 					// #endif
 					// #ifdef APP-VUE || MP-WEIXIN || MP-QQ || H5
 					this.wxsPropType = this.refresherTransition + 'end' + u.getTime();
@@ -597,7 +588,7 @@ const ZPRefresher = {
 				return;
 			}
 			// #endif
-			this.refresherRevealStackCount++;
+			this.refresherRevealStackCount ++;
 			// #ifndef APP-VUE || MP-WEIXIN || MP-QQ  || H5
 			this.refresherTransform = `translateY(${this.finalRefresherThreshold}px)`;
 			// #endif
@@ -611,36 +602,37 @@ const ZPRefresher = {
 			this._doRefresherLoad(false);
 		},
 		//触发下拉刷新
-		_doRefresherLoad(isUserPullDown=true) {
+		_doRefresherLoad(isUserPullDown = true) {
 			this._onRefresh(false,isUserPullDown);
 			this.loading = true;
 		},
+		// #ifndef APP-VUE || MP-WEIXIN || MP-QQ || H5
 		//获取处理后的moveDis
 		_getFinalRefresherMoveDis(moveDis) {
-			moveDis = moveDis * this.finalRefresherPullRate;
-			if (moveDis >= this.finalRefresherThreshold) {
-				moveDis = this.finalRefresherThreshold + (moveDis - this.finalRefresherThreshold) * (1 - this.finalRefresherOutRate);
+			let diffDis = moveDis - this.oldCurrentMoveDis;
+			this.oldCurrentMoveDis = moveDis;
+			if (diffDis > 0) {
+				diffDis = diffDis * this.finalRefresherPullRate;
+				if (this.currentDis > this.finalRefresherThreshold) {
+					diffDis = diffDis * (1 - this.finalRefresherOutRate);
+				}
 			}
-			return moveDis;
+			diffDis = diffDis > 100 ? diffDis / 100 : diffDis;
+			this.currentDis += diffDis;
+			this.currentDis = Math.max(0, this.currentDis);
+			return this.currentDis;
 		},
-		// #ifndef APP-VUE || MP-WEIXIN || MP-QQ || H5
 		//判断touch手势是否要触发
 		_touchDisabled() {
-			let checkOldScrollTop = this.oldScrollTop > 5;
+			const checkOldScrollTop = this.oldScrollTop > 5;
 			return this.loading || this.isRefresherInComplete || this.useChatRecordMode || !this.refresherEnabled || !this.useCustomRefresher ||(this.usePageScroll && this.useCustomRefresher && this.pageScrollTop > 10) || (!(this.usePageScroll && this.useCustomRefresher) && checkOldScrollTop);
 		},
 		// #endif
 		//更新自定义下拉刷新view高度
 		_updateCustomRefresherHeight() {
 			this._getNodeClientRect('.zp-custom-refresher-slot-view').then((res) => {
-				if (res) {
-					this.customRefresherHeight = res[0].height;
-					if (this.customRefresherHeight > 0) {
-						this.showCustomRefresher = true;
-					}
-				} else {
-					this.customRefresherHeight = 0;
-				}
+				this.customRefresherHeight = res ? res[0].height : 0;
+				this.showCustomRefresher = this.customRefresherHeight > 0;
 				if (this.doRefreshAnimateAfter) {
 					this.doRefreshAnimateAfter = false;
 					this._doRefresherRefreshAnimate();
@@ -653,9 +645,7 @@ const ZPRefresher = {
 			e.viewHeight = this.finalRefresherThreshold;
 			// #endif
 			e.rate = e.pullingDistance / e.viewHeight;
-			if(this.hasTouchmove){
-				this.$emit('refresherTouchmove',e);
-			}
+			this.hasTouchmove && this.$emit('refresherTouchmove',e);
 		},
 		//清除refresherCompleteTimeout
 		_cleanRefresherCompleteTimeout() {
@@ -670,5 +660,3 @@ const ZPRefresher = {
 		},
 	}
 }
-
-export default ZPRefresher;

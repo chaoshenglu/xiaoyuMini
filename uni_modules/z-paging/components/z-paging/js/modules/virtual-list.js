@@ -3,7 +3,7 @@ import u from '.././z-paging-utils'
 import c from '.././z-paging-constant'
 import Enum from '.././z-paging-enum'
 
-const ZPVirtualList = {
+export default {
 	props: {
 		//是否使用虚拟列表，默认为否
 		useVirtualList: {
@@ -111,8 +111,8 @@ const ZPVirtualList = {
 						this._resetDynamicListState(!this.isUserPullDown);
 					}
 					this.getCellHeightRetryCount.fixed = 0;
-					this.finalUseVirtualList && newVal.length && this.cellHeightMode === Enum.CellHeightMode.Fixed && this.isFirstPage && this._updateFixedCellHeight();
-					this.finalUseVirtualList && this._updateVirtualScroll(this.oldScrollTop);
+					newVal.length && this.cellHeightMode === Enum.CellHeightMode.Fixed && this.isFirstPage && this._updateFixedCellHeight();
+					this._updateVirtualScroll(this.oldScrollTop);
 				})
 			}
 			// #endif
@@ -134,10 +134,8 @@ const ZPVirtualList = {
 		},
 		finalCellKeyName() {
 			// #ifdef APP-NVUE
-			if (this.finalUseVirtualList){
-				if (!this.cellKeyName.length){
-					u.consoleErr('在nvue中开启use-virtual-list必须设置cell-key-name，否则将可能导致列表渲染错误！');
-				}
+			if (this.finalUseVirtualList && !this.cellKeyName.length){
+				u.consoleErr('在nvue中开启use-virtual-list必须设置cell-key-name，否则将可能导致列表渲染错误！');
 			}
 			// #endif
 			return this.cellKeyName;
@@ -159,7 +157,7 @@ const ZPVirtualList = {
 			if (this.cellHeightMode !== Enum.CellHeightMode.Dynamic) return;
 			const currentNode = this.virtualHeightCacheList[index];
 			this._getNodeClientRect(`#zp-id-${index}`,this.finalUseInnerList).then(cellNode => {
-				const cellNodeHeight = cellNode && cellNode.length ? cellNode[0].height : 0;
+				const cellNodeHeight = cellNode ? cellNode[0].height : 0;
 				
 				const heightDis = cellNodeHeight - currentNode.height;
 				currentNode.height = cellNodeHeight;
@@ -192,7 +190,7 @@ const ZPVirtualList = {
 			this.$nextTick(() => {
 				setTimeout(() => {
 					this._getNodeClientRect('.zp-scroll-view').then(node => {
-						if (node && node.length) {
+						if (node) {
 							this.pagingOrgTop = node[0].top;
 							this.virtualPageHeight = node[0].height;
 						}
@@ -205,13 +203,10 @@ const ZPVirtualList = {
 			this.$nextTick(() => {
 				const updateFixedCellHeightTimeout = setTimeout(() => {
 					this._getNodeClientRect(`#zp-id-${0}`,this.finalUseInnerList).then(cellNode => {
-						const hasCellNode = cellNode && cellNode.length;
-						if (!hasCellNode) {
+						if (!cellNode) {
 							clearTimeout(updateFixedCellHeightTimeout);
-							if (this.getCellHeightRetryCount.fixed > 10) {
-								return;
-							}
-							this.getCellHeightRetryCount.fixed++;
+							if (this.getCellHeightRetryCount.fixed > 10) return;
+							this.getCellHeightRetryCount.fixed ++;
 							this._updateFixedCellHeight();
 						} else {
 							this.virtualCellHeight = cellNode[0].height;
@@ -228,22 +223,16 @@ const ZPVirtualList = {
 					for (let i = 0; i < list.length; i++) {
 						let item = list[i];
 						const cellNode = await this._getNodeClientRect(`#zp-id-${item[c.listCellIndexKey]}`,this.finalUseInnerList);
-						const hasCellNode = cellNode && cellNode.length;
-						const currentHeight = hasCellNode ? cellNode[0].height : 0;
-						if (!hasCellNode) {
+						const currentHeight = cellNode ? cellNode[0].height : 0;
+						if (!cellNode) {
 							clearTimeout(updateDynamicCellHeightTimeout);
 							this.virtualHeightCacheList = this.virtualHeightCacheList.slice(-i);
-							if (this.getCellHeightRetryCount.dynamic > 10) {
-								return;
-							}
+							if (this.getCellHeightRetryCount.dynamic > 10) return;
 							this.getCellHeightRetryCount.dynamic++;
 							this._updateDynamicCellHeight(list);
 							break;
 						}
-						let lastHeightCache = null;
-						if (this.virtualHeightCacheList.length) {
-							lastHeightCache = this.virtualHeightCacheList.slice(-1)[0];
-						}
+						const lastHeightCache = this.virtualHeightCacheList.length ? this.virtualHeightCacheList.slice(-1)[0] : null;
 						const lastHeight = lastHeightCache ? lastHeightCache.totalHeight : 0;
 						this.virtualHeightCacheList.push({
 							height: currentHeight,
@@ -257,13 +246,10 @@ const ZPVirtualList = {
 		},
 		//设置cellItem的index
 		_setCellIndex(list, isFirstPage) {
-			let lastItem = null;
 			let lastItemIndex = 0;
 			if (!isFirstPage) {
 				lastItemIndex = this.realTotalData.length;
-				if (this.realTotalData.length) {
-					lastItem = this.realTotalData.slice(-1)[0];
-				}
+				const lastItem = this.realTotalData.length ? this.realTotalData.slice(-1)[0] : null;
 				if (lastItem && lastItem[c.listCellIndexKey] !== undefined) {
 					lastItemIndex = lastItem[c.listCellIndexKey] + 1;
 				}
@@ -285,13 +271,11 @@ const ZPVirtualList = {
 		//更新scroll滚动
 		_updateVirtualScroll(scrollTop, scrollDiff = 0) {
 			const currentTimeStamp = u.getTime();
-			if (scrollTop === 0) {
-				this._resetTopRange();
-			}
+			scrollTop === 0 && this._resetTopRange();
 			if (scrollTop !== 0 && this.virtualScrollTimeStamp && currentTimeStamp - this.virtualScrollTimeStamp <= this.virtualScrollDisTimeStamp) {
 				return;
 			}
-			this.virtualScrollTimeStamp = Number(currentTimeStamp);
+			this.virtualScrollTimeStamp = currentTimeStamp;
 			
 			let scrollIndex = 0;
 			const cellHeightMode = this.cellHeightMode;
@@ -308,11 +292,9 @@ const ZPVirtualList = {
 				let virtualBottomRangeIndex = 0;
 				let virtualPlaceholderBottomHeight = 0;
 				let reachedLimitBottom = false;
-				let lastHeightCache = null;
 				const heightCacheList = this.virtualHeightCacheList;
-				if (heightCacheList.length) {
-					lastHeightCache = heightCacheList.slice(-1)[0];
-				}
+				const lastHeightCache = !!heightCacheList ? heightCacheList.slice(-1)[0] : null;
+				
 				let startTopRangeIndex = this.virtualTopRangeIndex;
 				if (scrollDirection === 'bottom') {
 					for (let i = startTopRangeIndex; i < heightCacheList.length;i++){
@@ -402,9 +384,8 @@ const ZPVirtualList = {
 			if (this.finalUseVirtualList) {
 				this.$nextTick(() => {
 					this._getNodeClientRect('.zp-paging-touch-view').then(node => {
-						const hasNode = node && node.length;
-						const currentTop = hasNode ? node[0].top : 0;
-						if (!hasNode || (currentTop === this.pagingOrgTop && this.virtualPlaceholderTopHeight !== 0)){
+						const currentTop = node ? node[0].top : 0;
+						if (!node || (currentTop === this.pagingOrgTop && this.virtualPlaceholderTopHeight !== 0)) {
 							this._updateVirtualScroll(0);
 						}
 					});
@@ -417,5 +398,3 @@ const ZPVirtualList = {
 		}
 	}
 }
-
-export default ZPVirtualList;

@@ -134,9 +134,7 @@ export default {
 		//loading(下拉刷新、上拉加载更多)的主题样式，支持black，white，默认black
 		defaultThemeStyle: {
 			type: String,
-			default: function() {
-				return u.gc('defaultThemeStyle', 'black');
-			}
+			default: u.gc('defaultThemeStyle', 'black')
 		},
 		//z-paging是否使用fixed布局，若使用fixed布局，则z-paging的父view无需固定高度，z-paging高度默认为100%，默认为是(当使用内置scroll-view滚动时有效)
 		fixed: {
@@ -178,14 +176,9 @@ export default {
 			type: Boolean,
 			default: u.gc('watchTouchDirectionChange', false)
 		},
-		//是否将错误信息打印至控制台，默认为是
-		showConsoleError: {
-			type: Boolean,
-			default: u.gc('showConsoleError', true)
-		},
 	},
 	created(){
-		if (this.createdReload && !this.refresherOnly && (this.mountedAutoCallReload && this.auto)) {
+		if (this.createdReload && !this.refresherOnly && this.auto) {
 			this._startLoading();
 			this._preReload();
 		}
@@ -193,7 +186,7 @@ export default {
 	mounted() {
 		this.wxsPropType = u.getTime().toString();
 		this.renderJsIgnore;
-		if (!this.createdReload && !this.refresherOnly && (this.mountedAutoCallReload && this.auto)) {
+		if (!this.createdReload && !this.refresherOnly && this.auto) {
 			this.$nextTick(() => {
 				this._preReload();
 			})
@@ -205,9 +198,7 @@ export default {
 		// #endif
 		this.$nextTick(() => {
 			this.systemInfo = uni.getSystemInfoSync();
-			if (!this.usePageScroll && this.autoHeight) {
-				this._setAutoHeight();
-			}
+			!this.usePageScroll && this.autoHeight && this._setAutoHeight();
 			this.loaded = true;
 		})
 		this.updatePageScrollTopHeight();
@@ -253,15 +244,11 @@ export default {
 			},
 			immediate: true
 		},
-		autoHeight(newVal, oldVal) {
-			if (this.loaded && !this.usePageScroll) {
-				this._setAutoHeight(newVal);
-			}
+		autoHeight(newVal) {
+			this.loaded && !this.usePageScroll && this._setAutoHeight(newVal);
 		},
-		autoHeightAddition(newVal, oldVal) {
-			if (this.loaded && !this.usePageScroll && this.autoHeight) {
-				this._setAutoHeight(newVal);
-			}
+		autoHeightAddition(newVal) {
+			this.loaded && !this.usePageScroll && this.autoHeight && this._setAutoHeight(newVal);
 		},
 	},
 	computed: {
@@ -379,21 +366,39 @@ export default {
 				this.$refs['zp-n-list'].setSpecialEffects(args);
 			}
 		},
+		//使手机发生较短时间的振动（15ms）
+		_doVibrateShort() {
+			// #ifdef APP-PLUS
+			if (this.isIos) {
+				const UISelectionFeedbackGenerator = plus.ios.importClass('UISelectionFeedbackGenerator');
+				const feedbackGenerator = new UISelectionFeedbackGenerator();
+				feedbackGenerator.init();
+				setTimeout(() => {
+					feedbackGenerator.selectionChanged();
+				},0)
+			} else {
+				plus.device.vibrate(15);
+			}
+			// #endif
+			// #ifndef APP-PLUS
+			uni.vibrateShort();
+			// #endif
+		},
 		//检测scrollView是否要铺满屏幕
-		_doCheckScrollViewShouldFullHeight(totalData){
+		_doCheckScrollViewShouldFullHeight(totalData) {
 			if (this.autoFullHeight && this.usePageScroll && this.isTotalChangeFromAddData) {
 				// #ifndef APP-NVUE
 				this.$nextTick(() => {
 					this._checkScrollViewShouldFullHeight((scrollViewNode, pagingContainerNode) => {
-						this._preCheckShowLoadingMoreWhenNoMoreAndInsideOfPaging(totalData, scrollViewNode, pagingContainerNode)
+						this._preCheckShowNoMoreInside(totalData, scrollViewNode, pagingContainerNode)
 					});
 				})
 				// #endif
 				// #ifdef APP-NVUE
-				this._preCheckShowLoadingMoreWhenNoMoreAndInsideOfPaging(totalData)
+				this._preCheckShowNoMoreInside(totalData)
 				// #endif
 			} else {
-				this._preCheckShowLoadingMoreWhenNoMoreAndInsideOfPaging(totalData)
+				this._preCheckShowNoMoreInside(totalData)
 			} 
 		},
 		//检测z-paging是否要全屏覆盖(当使用页面滚动并且不满全屏时，默认z-paging需要铺满全屏，避免数据过少时内部的empty-view无法正确展示)
@@ -469,11 +474,7 @@ export default {
 			return new Promise((resolve, reject) => {
 				if (ref) {
 					weexDom.getComponentRect(ref, option => {
-						if (option && option.result) {
-							resolve([option.size]);
-						} else {
-							resolve(false);
-						}
+						resolve(option && option.result ? [option.size] : false);
 					})
 				} else {
 					resolve(false);
@@ -485,11 +486,7 @@ export default {
 			inThis = false;
 			//#endif
 			let res = inThis ? uni.createSelectorQuery().in(this) : uni.createSelectorQuery();
-			if (scrollOffset) {
-				res.select(select).scrollOffset();
-			} else {
-				res.select(select).boundingClientRect();
-			}
+			scrollOffset ? res.select(select).scrollOffset() : res.select(select).boundingClientRect();
 			return new Promise((resolve, reject) => {
 				res.exec(data => {
 					resolve((data && data != '' && data != undefined && data.length) ? data : false);
