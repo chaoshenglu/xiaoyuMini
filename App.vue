@@ -42,6 +42,6 @@
   }
 </script>
 
-<style>
-
+<style lang="scss">
+  @import '@/uni_modules/uni-scss';
 </style>
