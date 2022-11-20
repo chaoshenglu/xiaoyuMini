@@ -12,7 +12,7 @@
           </view>
           <text class="remark">备注：{{tiezi.remark}}</text>
           <view class="lxCenterRow" style="margin-top: 8px;">
-            <image class="head" :src="tiezi.createdPersonAvatar || defaultAvatar" mode="aspectFit"></image>
+            <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFit" />
             <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
             <text class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
             <text class="name">{{tiezi.createdPersonName || '颐瑾羽毛球馆'}}</text>
@@ -29,7 +29,12 @@
   } from 'vue';
   const paging = ref(null)
   let tieziArr = ref([])
-  const defaultAvatar = '/static/defaultAvatar.png'
+
+  function tapCell(tiezi) {
+    uni.navigateTo({
+      url: '/pages/baoMing/baoMing'
+    })
+  }
 
   const queryList = (pageNo, pageSize) => {
     let uri = 'tiezi/getTieZiArr'
