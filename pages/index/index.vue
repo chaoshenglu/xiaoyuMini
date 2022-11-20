@@ -21,11 +21,7 @@
       </view>
     </z-paging>
 
-    <uni-popup ref="popup" type="center">
-      <view class="gift">
-        <image src="gift" mode="aspectFit"></image>
-      </view>
-    </uni-popup>
+    <Gift :gift="gift" />
 
   </view>
 </template>
@@ -34,9 +30,13 @@
   import {
     ref
   } from 'vue';
+  import Gift from '/pages/baoMing/gift.vue'
 
   const paging = ref(null)
   let tieziArr = ref([])
+  const gift = {
+    name: '新用户专享红包'
+  }
 
   function tapCell(tiezi) {
     uni.navigateTo({
