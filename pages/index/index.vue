@@ -13,38 +13,20 @@
   </view>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        tieziArr: []
-      }
-    },
+<script setup>
+  import {
+    ref
+  } from 'vue';
+  const paging = ref(null)
+  let dataList = ref([])
 
-    onLoad() {
-
-    },
-
-    computed: {
-
-    },
-
-    methods: {
-      queryList(pageNo, pageSize) {
-        let uri = 'tiezi/getTieZiArr'
-        getApp().get(uri).then(res => {
-          let arr = res.data || []
-          this.$refs.paging.complete(arr)
-        }).catch(err => {
-          console.log(err)
-          this.$refs.paging.complete(false)
-        })
-      },
-
-      tapCell(tiezi) {
-
-      },
-    }
+  const queryList = (pageNo, pageSize) => {
+    let uri = 'tiezi/getTieZiArr'
+    getApp().get(uri).then(res => {
+      paging.value.complete(res.data || [])
+    }).catch(res => {
+      paging.value.complete(false)
+    })
   }
 </script>
 
