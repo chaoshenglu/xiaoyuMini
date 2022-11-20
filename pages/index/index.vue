@@ -22,7 +22,7 @@
     </z-paging>
 
     <uni-popup ref="popup" type="center">
-      <Gift :gift="gift" />
+      <Gift :gift="gift" @closePop="closePop" />
     </uni-popup>
 
   </view>
@@ -50,6 +50,10 @@
       popup.value.open()
     }, 100)
   })
+
+  function closePop() {
+    popup.value.close()
+  }
 
   function tapCell(tiezi) {
     // uni.navigateTo({

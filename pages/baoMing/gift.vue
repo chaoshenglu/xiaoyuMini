@@ -13,12 +13,17 @@
   } from 'vue'
   const giftImage = '/static/gift.png'
   const props = defineProps(['gift'])
+  const emit = defineEmits(['closePop'])
 
   function tapReceiveGift() {
-    uni.showModal({
-      title: '恭喜你',
-      content: '获得了价值3元的优惠券，订单结算时将自动抵扣'
-    })
+    emit('closePop')
+    setTimeout(function() {
+      uni.showModal({
+        title: '🥳 🥳 🥳',
+        showCancel: false,
+        content: '恭喜你,获得了价值3元的优惠券，订单结算时将自动抵扣'
+      })
+    }, 400)
   }
 </script>
 
