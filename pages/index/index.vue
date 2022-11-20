@@ -1,8 +1,15 @@
 <template>
-  <view class="listCell">
-    <view class="lxColumn">
-      <text>test</text>
-    </view>
+  <view>
+    <z-paging ref="paging" v-model="tieziArr" @query="queryList">
+      <view class="lxCenterColumn">
+        <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" @click="tapCell(tiezi)">
+          <text>{{tiezi.title}}</text>
+          <text>{{tiezi.title}}</text>
+          <text>{{tiezi.title}}</text>
+          <text>{{tiezi.title}}</text>
+        </view>
+      </view>
+    </z-paging>
   </view>
 </template>
 
@@ -10,20 +17,12 @@
   export default {
     data() {
       return {
-        tieziArr: [{
-          title: '周二(11月22日)后生仔报名帖',
-          time: '20:00-22:00',
-          fields: [1, 2, 3, 4, 5, 6],
-          limitNumber: 27,
-          personNumber: 3,
-          status: 1,
-          remark: '入场时须扫描球馆场所码，持绿码进场。'
-        }]
+        tieziArr: []
       }
     },
 
     onLoad() {
-      this.requestList()
+
     },
 
     computed: {
@@ -31,14 +30,19 @@
     },
 
     methods: {
-      requestList() {
+      queryList() {
         let uri = 'tiezi/getTieZiArr'
         getApp().get(uri).then(res => {
-
+          let arr = res.data || []
+          this.$refs.paging.complete(arr)
         }).catch(err => {
           console.log(err)
         })
-      }
+      },
+
+      tapCell(tiezi) {
+
+      },
     }
   }
 </script>
