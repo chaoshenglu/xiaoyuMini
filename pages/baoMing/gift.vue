@@ -15,7 +15,10 @@
   const props = defineProps(['gift'])
 
   function tapReceiveGift() {
-
+    uni.showModal({
+      title: '恭喜你',
+      content: '获得了价值3元的优惠券，订单结算时将自动抵扣'
+    })
   }
 </script>
 
