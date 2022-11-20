@@ -9,8 +9,8 @@
     },
 
     onLaunch: function() {
-      this.globalData.openid = uni.getStorageInfoSync('openid') || ''
-      this.globalData.saveOpenIdTime = uni.getStorageInfoSync('saveOpenIdTime') || 0
+      this.globalData.openid = uni.getStorageSync('openid') || ''
+      this.globalData.saveOpenIdTime = uni.getStorageSync('saveOpenIdTime') || 0
       if (this.globalData.openid && this.globalData.saveOpenIdTime) {
         let nowTime = new Date().getTime()
         let cha = nowTime - this.globalData.saveOpenIdTime
@@ -18,7 +18,7 @@
           console.log('已经过去了一个小时，需要重新登录')
           this.loginAndGetOpenId()
         } else {
-          console.log('一个小时内，无需重新登录，openid=', openid)
+          console.log('一个小时内，无需重新登录，openid=', this.globalData.openid)
         }
       } else {
         this.loginAndGetOpenId()
@@ -42,7 +42,9 @@
               code: res.code
             }
             this.get('user/getOpenIdByCode', param).then(resp => {
-              this.globalData.openid = resp.data.openid
+              let dataStr = resp.data || ''
+              let dataJson = JSON.parse(dataStr)
+              this.globalData.openid = dataJson.openid
               this.globalData.saveOpenIdTime = new Date().getTime()
               uni.setStorageSync('openid', this.globalData.openid)
               uni.setStorageSync('saveOpenIdTime', this.globalData.saveOpenIdTime)

@@ -66,7 +66,7 @@
   const queryList = (pageNo, pageSize) => {
     let uri = 'tiezi/getTieZiArr'
     getApp().get(uri).then(res => {
-      console.log(JSON.stringify(res.data[0], null, 2))
+      // console.log(JSON.stringify(res.data[0], null, 2))
       let arr = res.data || []
       for (const tiezi of arr) {
         tiezi.numberProportion = `${tiezi.personNumber}/${tiezi.limitNumber}`
