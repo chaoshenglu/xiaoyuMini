@@ -2,6 +2,9 @@
   <view class="gift lxCenterColumn">
     <!-- <image :src="giftImage" mode="aspectFit"></image> -->
     <text class="giftName">{{props.gift.name}}</text>
+    <view class="lxBtn lxCenterC">
+      <text>立即领取</text>
+    </view>
   </view>
 </template>
 
@@ -19,8 +22,19 @@
     padding-top: 59vw;
     text-align: center;
     color: #FAE1AC;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
+  }
+
+  .lxBtn {
+    width: 136px;
+    height: 40px;
+    font-weight: 500;
+    background-image: linear-gradient(#FBF9D6, #E8A467);
+    border-radius: 20px;
+    margin-top: 10px;
+    color: #BB502E;
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.02);
   }
 
   .gift {

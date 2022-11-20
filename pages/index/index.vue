@@ -48,7 +48,7 @@
   onLoad(() => {
     setTimeout(function() {
       popup.value.open()
-    }, 1000)
+    }, 100)
   })
 
   function tapCell(tiezi) {
