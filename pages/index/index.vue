@@ -42,7 +42,8 @@
   const popup = ref(null)
   let tieziArr = ref([])
   const gift = {
-    name: '新用户专享红包'
+    name: '新用户专享红包',
+    money: 3
   }
 
   onLoad(() => {

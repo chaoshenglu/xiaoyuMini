@@ -1,5 +1,9 @@
 <template>
   <view class="gift lxCenterColumn">
+    <view class="lxCenterRow" style="margin-top: 11vw;">
+      <text class="giftMoney">{{props.gift.money}}</text>
+      <text class="giftMoneySuffix">元</text>
+    </view>
     <text class="giftName">{{props.gift.name}}</text>
     <view class="lxBtn lxCenterC" @click="tapReceiveGift">
       <text>立即领取</text>
@@ -28,8 +32,21 @@
 </script>
 
 <style lang="scss">
+  .giftMoney {
+    font-weight: bold;
+    font-size: 52px;
+    color: #EC6047;
+  }
+
+  .giftMoneySuffix {
+    font-weight: bold;
+    font-size: 25px;
+    color: #EC6047;
+    margin-top: 15px;
+  }
+
   .giftName {
-    padding-top: 59vw;
+    padding-top: 30vw;
     text-align: center;
     color: #FAE1AC;
     font-size: 24px;
