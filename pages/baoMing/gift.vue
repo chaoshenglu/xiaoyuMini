@@ -1,11 +1,7 @@
 <template>
-  <view>
-    <uni-popup ref="popup" type="center">
-      <view class="gift">
-        <image :src="giftImage" mode="aspectFit"></image>
-        <text>{{props.gift.name}}</text>
-      </view>
-    </uni-popup>
+  <view class="gift">
+    <image :src="giftImage" mode="aspectFit"></image>
+    <text>{{props.gift.name}}</text>
   </view>
 </template>
 

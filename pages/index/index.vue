@@ -21,7 +21,9 @@
       </view>
     </z-paging>
 
-    <Gift :gift="gift" />
+    <uni-popup ref="popup" type="center">
+      <Gift :gift="gift" />
+    </uni-popup>
 
   </view>
 </template>
@@ -31,17 +33,29 @@
     ref
   } from 'vue';
   import Gift from '/pages/baoMing/gift.vue'
+  import {
+    onLoad,
+    onShow
+  } from "@dcloudio/uni-app";
 
   const paging = ref(null)
+  const popup = ref(null)
   let tieziArr = ref([])
   const gift = {
     name: '新用户专享红包'
   }
 
+  onLoad(() => {
+    setTimeout(function() {
+      popup.value.open()
+    }, 1000)
+  })
+
   function tapCell(tiezi) {
-    uni.navigateTo({
-      url: '/pages/baoMing/baoMing'
-    })
+    // uni.navigateTo({
+    //   url: '/pages/baoMing/baoMing'
+    // })
+
   }
 
   const queryList = (pageNo, pageSize) => {
