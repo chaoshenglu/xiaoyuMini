@@ -1,9 +1,9 @@
 <template>
-  <view>
+  <view class="pageView">
     <uni-popup ref="popup" type="center">
       <Gift @closePop="closePop" />
     </uni-popup>
-    <uni-grid :column="4" :highlight="true" @change="change">
+    <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false">
       <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
         <view class="grid-item-box" style="background-color: #fff;">
           <image :src="person.avatar" mode="aspectFit" style="width: 30px;height: 30px;"></image>
@@ -11,6 +11,10 @@
         </view>
       </uni-grid-item>
     </uni-grid>
+
+
+
+
   </view>
 </template>
 
@@ -45,11 +49,18 @@
     })
   })
 
+  function closePop() {
+    popup.value.close()
+  }
+
   onHide(() => {
     uni.$off('noGift')
   })
 </script>
 
 <style lang="scss">
-
+  .pageView {
+    width: 100vw;
+    height: 100vh;
+  }
 </style>
