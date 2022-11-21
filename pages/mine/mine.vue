@@ -3,22 +3,22 @@
     <view class="mineCard lxCenterRow">
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill"></image>
       <view class="lxColumn" style="margin-left: 10px;">
-        <text class="lx333" style="font-size: 17px;font-weight: 500;">{{nameAndRole}}</text>
-        <text class="lx999" style="font-size: 15px;margin-top: 6px;">手机号码：{{user.openid}}</text>
+        <text class="lx333" style="font-size: 17px;">张三（微信昵称：张三丰）</text>
+        <text class="lx999" style="font-size: 15px;margin-top: 6px;">id : {{user.openid.slice(0,15)}}</text>
       </view>
     </view>
     <view style="height: 16px;"></view>
     <view class="mineCard lxCenterRow" style="justify-content: space-between;" @click="alertRole">
       <view class="lxCenterRow">
-        <image src="/static/switchRole.png" mode="aspectFit" class="rowIcon"></image>
-        <text class="lx666" style="font-size: 16px;">切换身份</text>
+        <image src="/static/coupon.png" mode="aspectFit" class="rowIcon"></image>
+        <text class="lx666" style="font-size: 16px;">我的优惠券</text>
       </view>
       <uni-icons color="#666666" type="right"></uni-icons>
     </view>
 
     <view class="mineCard lxCenterRow" style="justify-content: space-between;margin-top: 10px;" @click="clear">
       <view class="lxCenterRow">
-        <image src="/static/clear.png" mode="aspectFit" class="clearIcon"></image>
+        <image src="/static/clear.png" mode="aspectFit" class="rowIcon"></image>
         <text class="lx666" style="font-size: 16px;">清除缓存</text>
       </view>
       <uni-icons color="#666666" type="right"></uni-icons>
@@ -57,14 +57,6 @@
   .rowIcon {
     height: 24px;
     width: 24px;
-    margin-right: 8px;
-    margin-left: 4px;
-    margin-bottom: 1px;
-  }
-
-  .clearIcon {
-    height: 22px;
-    width: 21px;
     margin-right: 8px;
     margin-left: 4px;
     margin-bottom: 1px;
