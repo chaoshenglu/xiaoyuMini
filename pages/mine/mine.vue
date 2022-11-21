@@ -3,9 +3,9 @@
     <view class="mineCard lxCenterRow">
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill"></image>
       <view class="lxColumn" style="margin-left: 10px;">
-        <text v-if="user.name" class="lx333" style="font-size: 17px;">张三（{{user.name}}）</text>
+        <text v-if="user.nickName" class="lx333" style="font-size: 17px;">{{user.nickName}}</text>
         <button v-else @click="getWxName">点我授权微信头像昵称</button>
-        <text v-if="user.name" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
+        <text v-if="user.nickName" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
           {{user.openid.slice(0,15)}}</text>
       </view>
     </view>
@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-  const user = getApp().globalData.user
+  let user = getApp().globalData.user
 
   function tapCoupon() {
     uni.navigateTo({
@@ -52,6 +52,10 @@
         }
         getApp().get('user/setUserNameAvatar', param).then(res => {
           console.log('⭕️', res)
+          user.nickName = nickName
+          user.avatar = avatarUrl
+          getApp().globalData.user = user
+          uni.setStorageSync('user', user)
         }).catch(err => {
           console.log(err)
         })
