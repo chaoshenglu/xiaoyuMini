@@ -50,6 +50,9 @@
           avatar: avatarUrl,
           openid: user.openid
         }
+        if (getApp().globalData.penddingGift) {
+          param.gift = getApp().globalData.penddingGift.money
+        }
         getApp().get('user/setUserNameAvatar', param).then(res => {
           console.log('⭕️', res)
           user.nickName = nickName
