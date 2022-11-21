@@ -68,6 +68,11 @@
             this.globalData.user = userArr[0]
             uni.setStorageSync('user', this.globalData.user)
             console.log('this.globalData.user', this.globalData.user)
+            let gift = this.globalData.user.gift || 0
+            if (gift === 0) {
+              console.log('还没有收到新用户红包')
+              uni.$emit('noGift')
+            }
           } else {
             this.addUserByOpenId(param)
           }
@@ -80,6 +85,7 @@
         this.get('user/addUserByOpenId', param).then(res => {
           if (res.code === 1) {
             console.log('新增用户成功，通过openid初始化')
+            uni.$emit('noGift')
           } else {
             console.log('❌新增用户成功失败', res)
           }
