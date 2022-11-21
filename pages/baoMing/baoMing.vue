@@ -3,6 +3,24 @@
     <uni-popup ref="popup" type="center">
       <Gift @closePop="closePop" />
     </uni-popup>
+    <view class="lxCenterR" style="margin-top: 8px;">
+      <view class="smallTag lxCenterRow">
+        <view class="smallBox" style="background-color: #4685F3;" />
+        <text class="smallWord">男</text>
+      </view>
+      <view class="smallTag lxCenterRow">
+        <view class="smallBox" style="background-color: #FD5FA9;" />
+        <text class="smallWord">女</text>
+      </view>
+      <view class="smallTag lxCenterRow">
+        <view class="smallBox" style="background-color: #FABA2C" />
+        <text class="smallWord">VIP</text>
+      </view>
+      <view class="smallTag lxCenterRow">
+        <view class="smallBox" style="background-color: #999999" />
+        <text class="smallWord">排队</text>
+      </view>
+    </view>
     <view style="margin-left: 8px;margin-right: 8px;margin-top: 8px;">
       <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
@@ -64,9 +82,20 @@
 </script>
 
 <style lang="scss">
-  .pageView {
-    width: 100vw;
-    height: 100vh;
+  .smallTag {
+    margin-left: 4px;
+  }
+
+  .smallBox {
+    border-radius: 3px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .smallWord {
+    font-size: 13px;
+    color: #999999;
+    margin-left: 3px;
   }
 
   .pname {
