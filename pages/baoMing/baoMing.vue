@@ -28,9 +28,14 @@
   } from "@dcloudio/uni-app";
 
   const popup = ref(null)
+  let personArr = ref([])
 
   onLoad((option) => {
-    console.log("onLoad:", option)
+    getApp().get('getTZPerson').then(res => {
+      personArr.value = res.data || []
+    }).catch(err => {
+      console.log(err)
+    })
   })
 
   onShow(() => {

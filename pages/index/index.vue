@@ -63,10 +63,17 @@
   }
 
   function tapCell(tiezi) {
-    // uni.navigateTo({
-    //   url: '/pages/baoMing/baoMing'
+    uni.navigateTo({
+      url: '/pages/baoMing/baoMing'
+    })
+    // let user = getApp().globalData.user
+    // user.gift = 0
+    // user.isBoy = 1
+    // getApp().get('tz_person/addTZPerson', user).then(res => {
+    //   console.log('tz=', res)
+    // }).catch(err => {
+    //   console.log(err)
     // })
-
   }
 
   const queryList = (pageNo, pageSize) => {

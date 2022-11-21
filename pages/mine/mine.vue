@@ -27,8 +27,6 @@
       <uni-icons color="#666666" type="right"></uni-icons>
     </view>
 
-
-
   </view>
 </template>
 
