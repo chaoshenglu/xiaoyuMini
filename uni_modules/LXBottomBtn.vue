@@ -27,7 +27,7 @@
     bottomOffset.value = safeAreaInsets.bottom || 10
   })
 
-  function() {
+  function tapBottomBtn() {
     emit('tapBottomBtn')
   }
 </script>
