@@ -1,5 +1,5 @@
 import App from './App'
-import LXBottomBtn from '@/pages/baomMing/LXBottomBtn.vue'
+import LXBottomBtn from './uni_modules/LXBottomBtn.vue'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false

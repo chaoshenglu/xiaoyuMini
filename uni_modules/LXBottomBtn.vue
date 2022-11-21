@@ -1,16 +1,13 @@
 <template>
-  <!-- <view class="lxCenterC lxBottomBtn">
+  <view class="lxCenterC lxBottomBtn">
     {{title}}
-  </view> -->
+  </view>
   <view>
 
   </view>
 </template>
 
 <script setup>
-  export default {
-    name: "LXBottomBtn"
-  }
   const props = defineProps(['title'])
 </script>
 
