@@ -15,7 +15,7 @@
       </uni-grid>
     </view>
 
-
+    <LXBottomBtn title='报名' />
   </view>
 </template>
 
