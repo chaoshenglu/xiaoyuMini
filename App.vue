@@ -31,7 +31,7 @@
       if (!this.globalData.gift.money) {
         this.globalData.gift = {
           name: '新用户专享红包',
-          money: 3
+          money: this.randomNum(1, 9)
         }
         uni.setStorageSync('gift', this.globalData.gift)
       }
@@ -46,6 +46,20 @@
     },
 
     methods: {
+      randomNum(minNum, maxNum) {
+        switch (arguments.length) {
+          case 1:
+            return parseInt(Math.random() * minNum + 1, 10);
+            break;
+          case 2:
+            return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+            break;
+          default:
+            return 0;
+            break;
+        }
+      },
+
       loginAndGetOpenId() {
         uni.login({
           success: (res) => {

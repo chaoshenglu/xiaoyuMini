@@ -41,11 +41,8 @@
 
   const paging = ref(null)
   const popup = ref(null)
+  const gift = getApp().globalData.gift
   let tieziArr = ref([])
-  const gift = {
-    name: '新用户专享红包',
-    money: 3
-  }
 
   onShow(() => {
     uni.$on('noGift', function(data) {
