@@ -50,6 +50,8 @@
     onHide
   } from "@dcloudio/uni-app";
 
+  import baoMingPop from '/pages/baoMing/baoMingPop.vue'
+
   const popup = ref(null)
   let personArr = ref([])
 
