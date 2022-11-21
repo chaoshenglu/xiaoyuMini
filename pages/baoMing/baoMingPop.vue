@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="baoMingPop">
     <text>报名信息</text>
     <view class="lxCenterRow" style="justify-content: space-between;margin-top: 10px;">
       <view class="lxCenterRow">
@@ -22,6 +22,7 @@
   } from 'vue'
   let current = ref(0)
   const emit = defineEmits(['closeBaoMingPop'])
+  let user = ref(getApp().globalData.user)
 
   const items = [{
       value: 1,
@@ -44,5 +45,11 @@
 </script>
 
 <style lang="scss">
-
+  .baoMingPop {
+    width: 66vw;
+    height: 150px;
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px;
+  }
 </style>
