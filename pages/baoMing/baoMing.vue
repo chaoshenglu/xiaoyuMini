@@ -76,7 +76,11 @@
   })
 
   function baoMing() {
-    console.log('baoming')
+    bmPopup.value.open()
+  }
+
+  function closeBaoMingPop() {
+    bmPopup.value.close()
   }
 
   function closePop() {
