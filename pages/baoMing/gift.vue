@@ -27,7 +27,7 @@
       uni.showModal({
         title: '🥳 🥳 🥳',
         showCancel: false,
-        content: '恭喜你,获得了价值3元的优惠券，订单结算时将自动抵扣'
+        content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
       })
     }, 400)
   }
