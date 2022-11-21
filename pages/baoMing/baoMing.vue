@@ -31,7 +31,7 @@
   let personArr = ref([])
 
   onLoad((option) => {
-    getApp().get('getTZPerson').then(res => {
+    getApp().get('tz_person/getTZPerson').then(res => {
       personArr.value = res.data || []
     }).catch(err => {
       console.log(err)
