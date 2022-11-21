@@ -31,7 +31,10 @@
 </template>
 
 <script setup>
-  let user = getApp().globalData.user
+  import {
+    ref
+  } from 'vue';
+  let user = ref(getApp().globalData.user)
 
   function tapCoupon() {
     uni.navigateTo({
@@ -46,8 +49,8 @@
         console.log(JSON.stringify(res.userInfo, null, 2))
         let nickName = res.userInfo.nickName
         let avatarUrl = res.userInfo.avatarUrl
-        user.nickName = nickName
-        user.avatar = avatarUrl
+        user.value.nickName = nickName
+        user.value.avatar = avatarUrl
         getApp().globalData.user = user
         setUserNameAvatar()
       }
@@ -58,15 +61,13 @@
     let param = {
       nickName: nickName,
       avatar: avatarUrl,
-      openid: user.openid
+      openid: user.value.openid
     }
     if (getApp().globalData.penddingGift) {
       param.gift = getApp().globalData.penddingGift.money
     }
     getApp().get('user/setUserNameAvatar', param).then(res => {
-      console.log('⭕️', res)
-      console.log('⭕⭕️', user)
-      uni.setStorageSync('user', user)
+      uni.setStorageSync('user', user.value)
       if (getApp().globalData.penddingGift) {
         let gift = getApp().globalData.penddingGift
         getApp().globalData.penddingGift = null
