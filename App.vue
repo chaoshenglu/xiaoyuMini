@@ -19,6 +19,7 @@
           this.loginAndGetOpenId()
         } else {
           console.log('一个小时内，无需重新登录，openid=', this.globalData.openid)
+          this.getUserInfo(this.globalData.openid)
         }
       } else {
         this.loginAndGetOpenId()
@@ -34,7 +35,6 @@
     },
 
     methods: {
-
       loginAndGetOpenId() {
         uni.login({
           success: (res) => {
@@ -48,10 +48,41 @@
               this.globalData.saveOpenIdTime = new Date().getTime()
               uni.setStorageSync('openid', this.globalData.openid)
               uni.setStorageSync('saveOpenIdTime', this.globalData.saveOpenIdTime)
+              this.getUserInfo(this.globalData.openid)
             }).catch(err => {
               console.log(err)
             })
           }
+        })
+      },
+
+      // 查看数据库中是否已经存在此人，若没有，要加进来
+      getUserInfo(openid) {
+        let param = {
+          openid
+        }
+        this.get('user/getUserInfoByOpenid', param).then(res => {
+          let userArr = res.data || []
+          if (userArr.length > 0) {
+            this.globalData.user = userArr[0]
+            console.log('this.globalData.user', this.globalData.user)
+          } else {
+            this.addUserByOpenId(param)
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+
+      addUserByOpenId(param) {
+        this.get('user/addUserByOpenId', param).then(res => {
+          if (res.code === 1) {
+            console.log('新增用户成功，通过openid初始化')
+          } else {
+            console.log('❌新增用户成功失败', res)
+          }
+        }).catch(err => {
+          console.log(err)
         })
       },
 
