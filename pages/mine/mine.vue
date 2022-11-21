@@ -3,8 +3,10 @@
     <view class="mineCard lxCenterRow">
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill"></image>
       <view class="lxColumn" style="margin-left: 10px;">
-        <text class="lx333" style="font-size: 17px;">张三（微信昵称：张三丰）</text>
-        <text class="lx999" style="font-size: 15px;margin-top: 6px;">id : {{user.openid.slice(0,15)}}</text>
+        <text v-if="user.name" class="lx333" style="font-size: 17px;">张三（{{user.name}}）</text>
+        <button v-else @click="getWxName">点我授权微信头像昵称</button>
+        <text v-if="user.name" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
+          {{user.openid.slice(0,15)}}</text>
       </view>
     </view>
     <view style="height: 16px;"></view>
@@ -33,6 +35,18 @@
   function tapCoupon() {
     uni.navigateTo({
       url: '/pages/couponList/couponList'
+    })
+  }
+
+  function getWxName(e) {
+    wx.getUserProfile({
+      desc: '用于完善用户资料',
+      success: (res) => {
+        console.log(JSON.stringify(res.userInfo, null, 2))
+        let nickName = res.userInfo.nickName
+        let avatarUrl = res.userInfo.avatarUrl
+
+      }
     })
   }
 </script>
