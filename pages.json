@@ -16,6 +16,12 @@
       "navigationBarTitleText": "活动报名",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/couponList/couponList",
+    "style": {
+      "navigationBarTitleText": "我的优惠券",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",

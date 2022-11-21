@@ -8,7 +8,7 @@
       </view>
     </view>
     <view style="height: 16px;"></view>
-    <view class="mineCard lxCenterRow" style="justify-content: space-between;" @click="alertRole">
+    <view class="mineCard lxCenterRow" style="justify-content: space-between;" @click="tapCoupon">
       <view class="lxCenterRow">
         <image src="/static/coupon.png" mode="aspectFit" class="rowIcon"></image>
         <text class="lx666" style="font-size: 16px;">我的优惠券</text>
@@ -29,6 +29,12 @@
 
 <script setup>
   const user = getApp().globalData.user
+
+  function tapCoupon() {
+    uni.navigateTo({
+      url: '/pages/couponList/couponList'
+    })
+  }
 </script>
 
 <style lang="scss">
