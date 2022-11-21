@@ -3,10 +3,20 @@
     <z-paging ref="paging" v-model="couponArr" @query="queryList">
       <view class="lxCenterColumn">
         <view class="listCell lxColumn" v-for="(coupon,index) in couponArr" :key="coupon.id" @click="tapCell(coupon)">
-          <text class="title">{{coupon.title}}</text>
-          <text class="title">{{coupon.money}}</text>
-          <text class="remark">{{coupon.desc}}</text>
-          <text class="remark">{{coupon.remark}}</text>
+          <view class="lxCenterRow">
+            <view class="lxCenterColumn">
+              <view class="lxCenterRow">
+                <text style="font-size: 14px;color:#ff4500">￥</text>
+                <text style="font-size:26px;color:#ff4500">{{coupon.money}}</text>
+              </view>
+              <text class="remark">{{coupon.desc}}</text>
+            </view>
+            <view class="lxColumn" style="margin-left: 22px;">
+              <text class="title">{{coupon.title}}</text>
+              <view style="height: 5px;"></view>
+              <text class="remark">{{coupon.remark}}</text>
+            </view>
+          </view>
         </view>
       </view>
     </z-paging>
@@ -18,9 +28,9 @@
     ref
   } from 'vue';
   const paging = ref(null)
-  const couponArr = [{
+  let couponArr = [{
     title: '新人红包',
-    money: getApp().globalData.user.gift.money,
+    money: getApp().globalData.user.gift,
     desc: '无使用门槛',
     remark: '订单结算时自动抵扣',
     id: 0
@@ -32,13 +42,15 @@
 </script>
 
 <style lang="scss">
+  .moneyTitle {}
+
   .remark {
     font-size: 14px;
-    color: #666666;
+    color: #999999;
   }
 
   .title {
-    font-size: 16px;
-    color: #222222;
+    font-size: 18px;
+    color: #666666;
   }
 </style>
