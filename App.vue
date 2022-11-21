@@ -9,6 +9,7 @@
     },
 
     onLaunch: function() {
+      this.globalData.user = uni.getStorageSync('user') || {}
       this.globalData.openid = uni.getStorageSync('openid') || ''
       this.globalData.saveOpenIdTime = uni.getStorageSync('saveOpenIdTime') || 0
       if (this.globalData.openid && this.globalData.saveOpenIdTime) {
@@ -65,6 +66,7 @@
           let userArr = res.data || []
           if (userArr.length > 0) {
             this.globalData.user = userArr[0]
+            uni.setStorageSync('user', this.globalData.user)
             console.log('this.globalData.user', this.globalData.user)
           } else {
             this.addUserByOpenId(param)
