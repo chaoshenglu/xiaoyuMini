@@ -3,6 +3,14 @@
     <uni-popup ref="popup" type="center">
       <Gift @closePop="closePop" />
     </uni-popup>
+    <uni-grid :column="4" :highlight="true" @change="change">
+      <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
+        <view class="grid-item-box" style="background-color: #fff;">
+          <image :src="person.avatar" mode="aspectFit" style="width: 30px;height: 30px;"></image>
+          <text class="text">{{person.nickName}}</text>
+        </view>
+      </uni-grid-item>
+    </uni-grid>
   </view>
 </template>
 
