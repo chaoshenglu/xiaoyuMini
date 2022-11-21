@@ -32,23 +32,40 @@
     // }, 400)
 
     setTimeout(function() {
-      uni.showModal({
-        title: '温馨提示',
-        content: '为了方便活动组织者识别身份，请先前往授权微信头像与昵称',
-        success: function(res) {
-          if (res.confirm) {
-            getApp().globalData.penddingGift = gift
-            uni.navigateTo({
-              url: '/pages/mine/mine',
-              fail: function() {
-                uni.switchTab({
-                  url: '/pages/mine/mine',
-                })
-              }
-            })
-          }
+      let user = getApp().globalData.user
+      if (user.nickName) {
+        let param = {
+          gift: gift.money,
+          openid: user.openid
         }
-      })
+        getApp().get('user/setUserNameAvatar', param).then(res => {
+          console.log('⭕️', res)
+          user.gift = gift.money
+          getApp().globalData.user = user
+          uni.setStorageSync('user', user)
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        uni.showModal({
+          title: '温馨提示',
+          content: '为了方便活动组织者识别身份，请先前往授权微信头像与昵称',
+          success: function(res) {
+            if (res.confirm) {
+              getApp().globalData.penddingGift = gift
+              uni.navigateTo({
+                url: '/pages/mine/mine',
+                fail: function() {
+                  uni.switchTab({
+                    url: '/pages/mine/mine',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+
     }, 400)
   }
 </script>
