@@ -51,7 +51,7 @@
         let avatarUrl = res.userInfo.avatarUrl
         user.value.nickName = nickName
         user.value.avatar = avatarUrl
-        getApp().globalData.user = user
+        getApp().globalData.user = user.value
         setUserNameAvatar()
       }
     })
