@@ -35,7 +35,8 @@
   import Gift from '/pages/baoMing/gift.vue'
   import {
     onLoad,
-    onShow
+    onShow,
+    onHide
   } from "@dcloudio/uni-app";
 
   const paging = ref(null)
@@ -46,10 +47,19 @@
     money: 3
   }
 
-  onLoad(() => {
-    setTimeout(function() {
+  onShow(() => {
+    uni.$on('noGift', function(data) {
+      console.log('监听到事件来自 noGift')
       popup.value.open()
-    }, 100)
+    })
+  })
+
+  onHide(() => {
+    uni.$off('noGift')
+  })
+
+  onLoad(() => {
+
   })
 
   function closePop() {
