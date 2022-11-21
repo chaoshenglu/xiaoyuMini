@@ -28,16 +28,20 @@
     ref
   } from 'vue';
   const paging = ref(null)
-  let couponArr = [{
-    title: '新人红包',
-    money: getApp().globalData.user.gift,
-    desc: '无使用门槛',
-    remark: '订单结算时自动抵扣',
-    id: 0
-  }]
+  let couponArr = []
 
   const queryList = (pageNo, pageSize) => {
-    paging.value.complete(couponArr)
+    if (getApp().globalData.user.gift) {
+      paging.value.complete([{
+        title: '新人红包',
+        money: getApp().globalData.user.gift,
+        desc: '无使用门槛',
+        remark: '订单结算时自动抵扣',
+        id: 0
+      }])
+    } else {
+      paging.value.complete([])
+    }
   }
 </script>
 
