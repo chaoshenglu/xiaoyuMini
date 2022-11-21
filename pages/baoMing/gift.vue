@@ -23,14 +23,6 @@
 
   function tapReceiveGift() {
     emit('closePop')
-    // setTimeout(function() {
-    //   uni.showModal({
-    //     title: '🥳 🥳 🥳',
-    //     showCancel: false,
-    //     content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
-    //   })
-    // }, 400)
-
     setTimeout(function() {
       let user = getApp().globalData.user
       if (user.nickName) {
@@ -43,6 +35,11 @@
           user.gift = gift.money
           getApp().globalData.user = user
           uni.setStorageSync('user', user)
+          uni.showModal({
+            title: '🥳 🥳 🥳',
+            showCancel: false,
+            content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+          })
         }).catch(err => {
           console.log(err)
         })

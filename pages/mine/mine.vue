@@ -60,6 +60,15 @@
           user.avatar = avatarUrl
           getApp().globalData.user = user
           uni.setStorageSync('user', user)
+          if (getApp().globalData.penddingGift) {
+            let gift = getApp().globalData.penddingGift
+            getApp().globalData.penddingGift = null
+            uni.showModal({
+              title: '🥳 🥳 🥳',
+              showCancel: false,
+              content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+            })
+          }
         }).catch(err => {
           console.log(err)
         })
