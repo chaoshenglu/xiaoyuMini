@@ -1,5 +1,5 @@
 import App from './App'
-
+import LXBottomBtn from '@/pages/baomMing/LXBottomBtn.vue'
 // #ifndef VUE3
 import Vue from 'vue'
 Vue.config.productionTip = false
@@ -7,6 +7,7 @@ App.mpType = 'app'
 const app = new Vue({
   ...App
 })
+app.component('LXBottomBtn', LXBottomBtn)
 app.$mount()
 // #endif
 
@@ -16,6 +17,7 @@ import {
 } from 'vue'
 export function createApp() {
   const app = createSSRApp(App)
+  app.component('LXBottomBtn', LXBottomBtn)
   return {
     app
   }
