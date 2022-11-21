@@ -1,16 +1,18 @@
 <template>
-  <view class="lxCenterRow" style="justify-content: space-between;margin-top: 10px;">
-    <view class="lxCenterRow">
-      <text class="lx666" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
-      <radio-group @change="radioChange" class="lxCenterRow">
-        <view v-for="(item, index) in items" :key="item.value" class="lxCenterRow">
-          <radio color="#4685F3" style="margin-left: 6px;" :value="item.value" :checked="index === current" />
-          <view>{{item.name}}</view>
-        </view>
-      </radio-group>
-
+  <view>
+    <text>报名信息</text>
+    <view class="lxCenterRow" style="justify-content: space-between;margin-top: 10px;">
+      <view class="lxCenterRow">
+        <text class="lx666" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
+        <radio-group @change="radioChange" class="lxCenterRow">
+          <view v-for="(item, index) in items" :key="item.value" class="lxCenterRow">
+            <radio color="#4685F3" style="margin-left: 6px;" :value="item.value" :checked="index === current" />
+            <view>{{item.name}}</view>
+          </view>
+        </radio-group>
+      </view>
     </view>
-
+    <button type="default" @click="tapConfirm">确定</button>
   </view>
 </template>
 
@@ -30,6 +32,10 @@
       name: '女'
     }
   ]
+
+  function tapConfirm() {
+    emit('closeBaoMingPop')
+  }
 
   function radioChange(e) {
     console.log(e.detail.value)
