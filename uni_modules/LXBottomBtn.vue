@@ -23,10 +23,6 @@
   onMounted(() => {
     const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
     bottomOffset.value = safeAreaInsets.bottom || 10
-
-    setTimeout(function() {
-      console.log(style.value)
-    }, 1000);
   })
 </script>
 
