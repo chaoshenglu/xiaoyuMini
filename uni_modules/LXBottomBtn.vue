@@ -1,5 +1,5 @@
 <template>
-  <view class="lxCenterC lxBottomBtn">
+  <view class="lxCenterC lxBottomBtn" :style="style">
     {{props.title}}
   </view>
   <view>
@@ -10,13 +10,23 @@
 <script setup>
   import {
     onMounted,
+    computed,
     ref
   } from 'vue'
   const props = defineProps(['title'])
   let bottomOffset = ref(0)
+  const style = computed(() => {
+    return {
+      bottom: `${bottomOffset.value}px`
+    }
+  })
   onMounted(() => {
     const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
-    bottomOffset.value = safeAreaInsets.bottom || 34
+    bottomOffset.value = safeAreaInsets.bottom || 10
+
+    setTimeout(function() {
+      console.log(style.value)
+    }, 1000);
   })
 </script>
 
@@ -30,6 +40,5 @@
     color: white;
     left: 3vw;
     border-radius: 6px;
-    bottom: var(--status-bar-height);
   }
 </style>
