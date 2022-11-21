@@ -1,7 +1,8 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
     <view class="mineCard lxCenterRow">
-      <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill"></image>
+      <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" @click="getWxName">
+      </image>
       <view class="lxColumn" style="margin-left: 10px;">
         <text v-if="user.nickName" class="lx333" style="font-size: 17px;">{{user.nickName}}</text>
         <button v-else @click="getWxName">点我授权微信头像昵称</button>
