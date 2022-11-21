@@ -19,6 +19,7 @@
     ref
   } from 'vue'
   let current = ref(0)
+  const emit = defineEmits(['closeBaoMingPop'])
 
   const items = [{
       value: 1,

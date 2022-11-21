@@ -3,6 +3,11 @@
     <uni-popup ref="popup" type="center">
       <Gift @closePop="closePop" />
     </uni-popup>
+
+    <uni-popup ref="bmPopup" type="center">
+      <baoMingPop @closeBaoMingPop="closeBaoMingPop" />
+    </uni-popup>
+
     <view class="lxCenterR" style="margin-top: 8px;">
       <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #4685F3;" />
@@ -52,6 +57,7 @@
   } from "@dcloudio/uni-app"
 
   const popup = ref(null)
+  const bmPopup = ref(null)
   let personArr = ref([])
 
   onLoad((option) => {
