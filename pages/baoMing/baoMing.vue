@@ -1,6 +1,8 @@
 <template>
   <view>
-
+    <uni-popup ref="popup" type="center">
+      <Gift :gift="gift" @closePop="closePop" />
+    </uni-popup>
   </view>
 </template>
 

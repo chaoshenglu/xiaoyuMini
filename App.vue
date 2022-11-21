@@ -6,6 +6,7 @@
       user: null,
       openid: null,
       saveOpenIdTime: null,
+      gift: null,
     },
 
     onLaunch: function() {
@@ -24,6 +25,15 @@
         }
       } else {
         this.loginAndGetOpenId()
+      }
+
+      this.globalData.gift = uni.getStorageSync('gift') || {}
+      if (!this.globalData.gift.money) {
+        this.globalData.gift = {
+          name: '新用户专享红包',
+          money: 3
+        }
+        uni.setStorageSync('gift', this.globalData.gift)
       }
     },
 
