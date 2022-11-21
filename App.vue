@@ -7,6 +7,7 @@
       openid: null,
       saveOpenIdTime: null,
       gift: null,
+      penddingGift: null,
     },
 
     onLaunch: function() {

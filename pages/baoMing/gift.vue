@@ -37,6 +37,7 @@
         content: '为了方便活动组织者识别身份，请先前往授权微信头像与昵称',
         success: function(res) {
           if (res.confirm) {
+            getApp().globalData.penddingGift = gift
             uni.navigateTo({
               url: '/pages/mine/mine',
               fail: function() {
