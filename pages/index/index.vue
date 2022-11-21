@@ -22,7 +22,7 @@
     </z-paging>
 
     <uni-popup ref="popup" type="center">
-      <Gift :gift="gift" @closePop="closePop" />
+      <Gift @closePop="closePop" />
     </uni-popup>
 
   </view>
@@ -41,7 +41,6 @@
 
   const paging = ref(null)
   const popup = ref(null)
-  const gift = getApp().globalData.gift
   let tieziArr = ref([])
 
   onShow(() => {

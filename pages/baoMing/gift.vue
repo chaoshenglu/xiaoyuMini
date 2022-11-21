@@ -1,10 +1,10 @@
 <template>
   <view class="gift lxCenterColumn">
     <view class="lxCenterRow" style="margin-top: 11vw;">
-      <text class="giftMoney">{{props.gift.money}}</text>
+      <text class="giftMoney">{{gift.money}}</text>
       <text class="giftMoneySuffix">元</text>
     </view>
-    <text class="giftName">{{props.gift.name}}</text>
+    <text class="giftName">{{gift.name}}</text>
     <view class="lxBtn lxCenterC" @click="tapReceiveGift">
       <text>立即领取</text>
     </view>
@@ -16,8 +16,10 @@
     ref
   } from 'vue'
   const giftImage = '/static/gift.png'
-  const props = defineProps(['gift'])
+  // const props = defineProps(['gift'])
   const emit = defineEmits(['closePop'])
+
+  const gift = getApp().globalData.gift
 
   function tapReceiveGift() {
     emit('closePop')

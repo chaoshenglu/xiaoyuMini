@@ -10,6 +10,15 @@
     },
 
     onLaunch: function() {
+      this.globalData.gift = uni.getStorageSync('gift') || {}
+      if (!this.globalData.gift.money) {
+        this.globalData.gift = {
+          name: '新用户专享红包',
+          money: this.randomNum(1, 9)
+        }
+        uni.setStorageSync('gift', this.globalData.gift)
+      }
+
       this.globalData.user = uni.getStorageSync('user') || {}
       this.globalData.openid = uni.getStorageSync('openid') || ''
       this.globalData.saveOpenIdTime = uni.getStorageSync('saveOpenIdTime') || 0
@@ -25,15 +34,6 @@
         }
       } else {
         this.loginAndGetOpenId()
-      }
-
-      this.globalData.gift = uni.getStorageSync('gift') || {}
-      if (!this.globalData.gift.money) {
-        this.globalData.gift = {
-          name: '新用户专享红包',
-          money: this.randomNum(1, 9)
-        }
-        uni.setStorageSync('gift', this.globalData.gift)
       }
     },
 
