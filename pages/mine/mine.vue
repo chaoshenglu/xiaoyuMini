@@ -46,33 +46,38 @@
         console.log(JSON.stringify(res.userInfo, null, 2))
         let nickName = res.userInfo.nickName
         let avatarUrl = res.userInfo.avatarUrl
-        let param = {
-          nickName: nickName,
-          avatar: avatarUrl,
-          openid: user.openid
-        }
-        if (getApp().globalData.penddingGift) {
-          param.gift = getApp().globalData.penddingGift.money
-        }
-        getApp().get('user/setUserNameAvatar', param).then(res => {
-          console.log('⭕️', res)
-          user.nickName = nickName
-          user.avatar = avatarUrl
-          getApp().globalData.user = user
-          uni.setStorageSync('user', user)
-          if (getApp().globalData.penddingGift) {
-            let gift = getApp().globalData.penddingGift
-            getApp().globalData.penddingGift = null
-            uni.showModal({
-              title: '🥳 🥳 🥳',
-              showCancel: false,
-              content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
-            })
-          }
-        }).catch(err => {
-          console.log(err)
+        user.nickName = nickName
+        user.avatar = avatarUrl
+        getApp().globalData.user = user
+        setUserNameAvatar()
+      }
+    })
+  }
+
+  function setUserNameAvatar(nickName, avatarUrl) {
+    let param = {
+      nickName: nickName,
+      avatar: avatarUrl,
+      openid: user.openid
+    }
+    if (getApp().globalData.penddingGift) {
+      param.gift = getApp().globalData.penddingGift.money
+    }
+    getApp().get('user/setUserNameAvatar', param).then(res => {
+      console.log('⭕️', res)
+      console.log('⭕⭕️', user)
+      uni.setStorageSync('user', user)
+      if (getApp().globalData.penddingGift) {
+        let gift = getApp().globalData.penddingGift
+        getApp().globalData.penddingGift = null
+        uni.showModal({
+          title: '🥳 🥳 🥳',
+          showCancel: false,
+          content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
         })
       }
+    }).catch(err => {
+      console.log(err)
     })
   }
 </script>
