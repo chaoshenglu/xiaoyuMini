@@ -52,7 +52,7 @@
         user.value.nickName = nickName
         user.value.avatar = avatarUrl
         getApp().globalData.user = user.value
-        setUserNameAvatar()
+        setUserNameAvatar(nickName, avatarUrl)
       }
     })
   }
