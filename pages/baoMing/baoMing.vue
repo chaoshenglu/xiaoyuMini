@@ -39,18 +39,17 @@
 
 <script setup>
   import Gift from '/pages/baoMing/gift.vue'
+  import baoMingPop from '/pages/baoMing/baoMingPop.vue'
 
   import {
     ref
-  } from 'vue';
+  } from 'vue'
 
   import {
     onLoad,
     onShow,
     onHide
-  } from "@dcloudio/uni-app";
-
-  import baoMingPop from '/pages/baoMing/baoMingPop.vue'
+  } from "@dcloudio/uni-app"
 
   const popup = ref(null)
   let personArr = ref([])
