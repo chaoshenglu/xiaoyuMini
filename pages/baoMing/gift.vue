@@ -23,11 +23,24 @@
 
   function tapReceiveGift() {
     emit('closePop')
+    // setTimeout(function() {
+    //   uni.showModal({
+    //     title: '🥳 🥳 🥳',
+    //     showCancel: false,
+    //     content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+    //   })
+    // }, 400)
+
     setTimeout(function() {
       uni.showModal({
-        title: '🥳 🥳 🥳',
-        showCancel: false,
-        content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+        title: '为了方便活动组织者识别身份，请先前往授权微信头像与昵称',
+        success: function(res) {
+          if (res.confirm) {
+            uni.navigateTo({
+              url: '/pages/mine/mine'
+            })
+          }
+        }
       })
     }, 400)
   }
