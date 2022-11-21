@@ -15,7 +15,7 @@
       </uni-grid>
     </view>
 
-    <LXBottomBtn title='报名' />
+    <LXBottomBtn title='报名' @tapBottomBtn="baoMing" />
   </view>
 </template>
 
@@ -49,6 +49,10 @@
       popup.value.open()
     })
   })
+
+  function baoMing() {
+    console.log('baoming')
+  }
 
   function closePop() {
     popup.value.close()
