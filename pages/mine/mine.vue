@@ -38,14 +38,23 @@
     })
   }
 
-  function getWxName(e) {
+  function getWxName() {
     wx.getUserProfile({
       desc: '用于完善用户资料',
       success: (res) => {
         console.log(JSON.stringify(res.userInfo, null, 2))
         let nickName = res.userInfo.nickName
         let avatarUrl = res.userInfo.avatarUrl
-
+        let param = {
+          nickName: nickName,
+          avatar: avatarUrl,
+          openid: user.openid
+        }
+        getApp().get('user/setUserNameAvatar', param).then(res => {
+          console.log('⭕️', res)
+        }).catch(err => {
+          console.log(err)
+        })
       }
     })
   }

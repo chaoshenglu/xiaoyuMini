@@ -88,6 +88,7 @@
       }
       paging.value.complete(res.data || [])
     }).catch(err => {
+      console.log(err)
       paging.value.complete(false)
     })
   }
