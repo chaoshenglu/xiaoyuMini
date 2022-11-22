@@ -20,17 +20,17 @@
   import {
     ref
   } from 'vue'
-  let current = ref(getApp().globalData.user.isGirl || 1)
+  let current = ref(getApp().globalData.user.isGirl || 0)
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
   const items = [{
-      value: 1,
-      name: '男',
-    },
-    {
       value: 0,
       name: '女'
+    },
+    {
+      value: 1,
+      name: '男'
     }
   ]
 
