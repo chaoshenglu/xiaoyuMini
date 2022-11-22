@@ -20,7 +20,7 @@
   import {
     ref
   } from 'vue'
-  let current = ref(0)
+  let current = ref(getApp().globalData.user.isBoy || 1)
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
