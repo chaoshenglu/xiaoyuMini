@@ -39,7 +39,7 @@
     if (user.gift == null || user.gift == undefined) {
       uni.showToast({
         title: 'gift未初始化',
-        icon: 'err'
+        icon: 'error'
       })
       return
     }
@@ -47,24 +47,28 @@
     user.isBoy = current.value
     getApp().get('tz_person/addTZPerson', user).then(res => {
       emit('closeBaoMingPop')
-      if (res.code === 1) {
-        uni.showToast({
-          title: '报名成功',
-          icon: 'success'
-        })
-      } else {
-        uni.showToast({
-          title: '系统出错',
-          icon: 'err'
-        })
-      }
+      handleRes(res)
     }).catch(err => {
       emit('closeBaoMingPop')
       uni.showToast({
         title: '系统出错',
-        icon: 'err'
+        icon: 'error'
       })
     })
+  }
+
+  function handleRes(res) {
+    if (res.code === 1) {
+      uni.showToast({
+        title: '报名成功',
+        icon: 'success'
+      })
+    } else {
+      uni.showToast({
+        title: '系统出错',
+        icon: 'error'
+      })
+    }
   }
 
   function radioChange(e) {
