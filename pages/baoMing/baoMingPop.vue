@@ -43,9 +43,13 @@
       })
       return
     }
-    user.gift = 0
     user.isGirl = current.value
     baoMing_addTZPerson(user)
+    updateUserGender(user)
+  }
+
+  function updateUserGender(user) {
+
   }
 
   function baoMing_addTZPerson(user) {

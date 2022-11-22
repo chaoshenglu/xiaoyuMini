@@ -66,7 +66,7 @@
     if (getApp().globalData.penddingGift) {
       param.gift = getApp().globalData.penddingGift.money
     }
-    getApp().get('user/setUserNameAvatar', param).then(res => {
+    getApp().get('user/updateUser', param).then(res => {
       uni.setStorageSync('user', user.value)
       if (getApp().globalData.penddingGift) {
         let gift = getApp().globalData.penddingGift
