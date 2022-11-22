@@ -1,18 +1,18 @@
 <template>
   <view class="baoMingPop">
-    <text>报名信息</text>
-    <view class="lxCenterRow" style="justify-content: space-between;margin-top: 10px;">
+    <text class="lx333" style="font-size: 18px;font-weight: 500;">报名信息</text>
+    <view class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;margin-bottom: 16px;">
       <view class="lxCenterRow">
-        <text class="lx666" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
+        <text class="lx333" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
         <radio-group @change="radioChange" class="lxCenterRow">
           <view v-for="(item, index) in items" :key="item.value" class="lxCenterRow">
             <radio color="#4685F3" style="margin-left: 6px;" :value="item.value" :checked="index === current" />
-            <view>{{item.name}}</view>
+            <view class="lx666">{{item.name}}</view>
           </view>
         </radio-group>
       </view>
     </view>
-    <button type="default" @click="tapConfirm">确定</button>
+    <button type="default" @click="tapConfirm" class="confirmBtn">确定</button>
   </view>
 </template>
 
@@ -76,6 +76,7 @@
   }
 
   function radioChange(e) {
+    console.log('e.detail.value', e.detail.value)
     current.value = e.detail.value
   }
 </script>
@@ -83,9 +84,14 @@
 <style lang="scss">
   .baoMingPop {
     width: 66vw;
-    height: 150px;
     background-color: white;
     border-radius: 6px;
-    padding: 10px;
+    padding: 16px;
+  }
+
+  .confirmBtn {
+    margin-top: 15px;
+    background-color: #4685F3 !important;
+    color: white !important;
   }
 </style>
