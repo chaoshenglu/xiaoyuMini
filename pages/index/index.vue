@@ -68,7 +68,7 @@
     })
     // let user = getApp().globalData.user
     // user.gift = 0
-    // user.isBoy = 1
+    // user.isGirl = 1
     // getApp().get('tz_person/addTZPerson', user).then(res => {
     //   console.log('tz=', res)
     // }).catch(err => {

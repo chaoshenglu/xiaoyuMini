@@ -20,7 +20,7 @@
   import {
     ref
   } from 'vue'
-  let current = ref(getApp().globalData.user.isBoy || 1)
+  let current = ref(getApp().globalData.user.isGirl || 1)
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
@@ -44,7 +44,7 @@
       return
     }
     user.gift = 0
-    user.isBoy = current.value
+    user.isGirl = current.value
     getApp().get('tz_person/addTZPerson', user).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
