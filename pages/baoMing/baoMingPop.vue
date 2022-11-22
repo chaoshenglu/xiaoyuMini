@@ -26,11 +26,11 @@
 
   const items = [{
       value: 0,
-      name: '女'
+      name: '男'
     },
     {
       value: 1,
-      name: '男'
+      name: '女'
     }
   ]
 
