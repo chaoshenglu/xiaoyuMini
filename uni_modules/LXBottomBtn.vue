@@ -23,8 +23,12 @@
   })
 
   onMounted(() => {
-    const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
-    bottomOffset.value = safeAreaInsets.bottom || 10
+    try {
+      const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
+      bottomOffset.value = safeAreaInsets.bottom || 10
+    } catch (e) {
+      bottomOffset.value = 34
+    }
   })
 
   function tapBottomBtn() {
