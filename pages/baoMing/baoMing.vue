@@ -6,6 +6,7 @@
 
     <uni-popup ref="bmPopup" type="center">
       <baoMingPop @closeBaoMingPop="closeBaoMingPop" />
+      <view style="height: 20vh;" />
     </uni-popup>
 
     <view class="lxCenterR" style="margin-top: 8px;">
