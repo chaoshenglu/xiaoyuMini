@@ -49,7 +49,17 @@
   }
 
   function updateUserGender(user) {
-
+    let param = {
+      isGirl: user.isGirl,
+      openid: user.openid
+    }
+    getApp().get('user/updateUser', param).then(res => {
+      if (res.code === 1) {
+        uni.setStorageSync('user', user)
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   function baoMing_addTZPerson(user) {
