@@ -35,7 +35,36 @@
   ]
 
   function tapConfirm() {
-    emit('closeBaoMingPop')
+    let user = getApp().globalData.user
+    if (user.gift == null || user.gift == undefined) {
+      uni.showToast({
+        title: 'gift未初始化',
+        icon: 'err'
+      })
+      return
+    }
+    user.gift = 0
+    user.isBoy = current.value
+    getApp().get('tz_person/addTZPerson', user).then(res => {
+      emit('closeBaoMingPop')
+      if (res.code === 1) {
+        uni.showToast({
+          title: '报名成功',
+          icon: 'success'
+        })
+      } else {
+        uni.showToast({
+          title: '系统出错',
+          icon: 'err'
+        })
+      }
+    }).catch(err => {
+      emit('closeBaoMingPop')
+      uni.showToast({
+        title: '系统出错',
+        icon: 'err'
+      })
+    })
   }
 
   function radioChange(e) {
