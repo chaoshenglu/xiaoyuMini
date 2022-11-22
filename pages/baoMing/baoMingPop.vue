@@ -20,7 +20,7 @@
   import {
     ref
   } from 'vue'
-  let current = ref(getApp().globalData.user.isGirl || 0)
+  let current = ref(getApp().globalData.user.isGirl === 1 ? 0 : 1)
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
@@ -45,6 +45,10 @@
     }
     user.gift = 0
     user.isGirl = current.value
+    baoMing_addTZPerson(user)
+  }
+
+  function baoMing_addTZPerson(user) {
     getApp().get('tz_person/addTZPerson', user).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
@@ -72,8 +76,7 @@
   }
 
   function radioChange(e) {
-    console.log(e.detail.value)
-
+    current.value = e.detail.value
   }
 </script>
 
