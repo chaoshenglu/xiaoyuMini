@@ -4,9 +4,9 @@
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill">
       </image>
 
-      <button v-if="!user.avatar" class="setAvatar" @chooseavatar="getWxName" open-type="chooseAvatar">点我设置头像</button>
+      <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
 
-      <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">点我设置昵称</button>
+      <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">设置昵称</button>
 
       <view class="lxColumn" style="margin-left: 10px;">
         <view v-if="user.nickName" class="lxCenterRow">
@@ -73,20 +73,9 @@
     })
   }
 
-  function getWxName(e) {
-    console.log(JSON.stringify(e, null, 2))
-    // wx.getUserProfile({
-    //   desc: '用于完善用户资料',
-    //   success: (res) => {
-    //     console.log(JSON.stringify(res.userInfo, null, 2))
-    //     let nickName = res.userInfo.nickName
-    //     let avatarUrl = res.userInfo.avatarUrl
-    //     user.value.nickName = nickName
-    //     user.value.avatar = avatarUrl
-    //     getApp().globalData.user = user.value
-    //     setUserNameAvatar(nickName, avatarUrl)
-    //   }
-    // })
+  function chooseHead(e) {
+    console.log(e.detail)
+
   }
 
   function alert2setNickName() {
@@ -160,7 +149,7 @@
   }
 
   .setAvatar {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 
   .mineCard {
