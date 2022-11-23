@@ -55,7 +55,7 @@
       nickName: user.nickName,
       actionType: 1,
     }
-    getApp().get('user/addTZRecord', param).then(res => {
+    getApp().get('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
         baoMing_addTZPerson(user)
       } else {
