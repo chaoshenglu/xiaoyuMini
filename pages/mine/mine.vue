@@ -3,18 +3,17 @@
     <view class="mineCard lxCenterRow">
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill">
       </image>
-
+      <text v-if="user.nickName" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
       <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
 
       <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">设置昵称</button>
 
-      <view class="lxColumn" style="margin-left: 10px;">
-        <view v-if="user.nickName" class="lxCenterRow">
+      <view class="lxColumn" style="margin-left: 10px;" v-if="user.nickName && user.avatar">
+        <view class="lxCenterRow">
           <text class="lx333" style="font-size: 17px;margin-right: 5px;">{{user.nickName}}</text>
-          <image :src="genderIcon" mode="aspectFit" style="width:15px;height:15px;margin-right:4px;"></image>
           <image src="/static/vip.png" mode="aspectFit" style="width: 16px;height: 16px;"></image>
         </view>
-        <text v-if="user.nickName" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
+        <text class="lx999" style="font-size: 15px;margin-top: 6px;">id :
           {{user.openid.slice(0,15)}}</text>
       </view>
     </view>
@@ -74,8 +73,13 @@
   }
 
   function chooseHead(e) {
-    console.log(e.detail.avatarUrl)
-
+    uni.getFileSystemManager().readFile({
+      filePath: e.detail.avatarUrl,
+      encoding: 'base64',
+      success: res => {
+        setAvatar('data:image/jpeg;base64,' + res.data)
+      }
+    })
   }
 
   function alert2setNickName() {
