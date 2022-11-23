@@ -58,6 +58,10 @@
 
   })
 
+  function onShareAppMessage(res) {
+
+  }
+
   function closePop() {
     popup.value.close()
   }

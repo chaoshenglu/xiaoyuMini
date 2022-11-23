@@ -80,6 +80,9 @@
     })
   }
 
+  function onShareAppMessage(res) {
+
+  }
 
   function baoMing() {
     bmPopup.value.open()
