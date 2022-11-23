@@ -61,6 +61,15 @@
         }
       },
 
+      toastAndConsoleSystemError(err) {
+        console.log(err)
+        let errStr = JSON.stringify(err)
+        uni.showToast({
+          title: `系统出错：${errStr}`,
+          icon: 'none'
+        })
+      },
+
       loginAndGetOpenId() {
         uni.login({
           success: (res) => {

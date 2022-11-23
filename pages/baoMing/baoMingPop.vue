@@ -44,8 +44,20 @@
       return
     }
     user.isGirl = current.value
-    baoMing_addTZPerson(user)
+    addTZRecord(user)
     updateUserGender(user)
+  }
+
+  function addTZRecord(user) {
+    getApp().get('user/addTZRecord', param).then(res => {
+      if (res.code === 1) {
+        baoMing_addTZPerson(user)
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   function updateUserGender(user) {
@@ -58,7 +70,7 @@
         uni.setStorageSync('user', user)
       }
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
     })
   }
 
@@ -68,10 +80,7 @@
       handleRes(res)
     }).catch(err => {
       emit('closeBaoMingPop')
-      uni.showToast({
-        title: '系统出错',
-        icon: 'error'
-      })
+      getApp().toastAndConsoleSystemError(err)
     })
   }
 
@@ -82,10 +91,7 @@
         icon: 'success'
       })
     } else {
-      uni.showToast({
-        title: '系统出错',
-        icon: 'error'
-      })
+      getApp().toastAndConsoleSystemError(res)
     }
   }
 
