@@ -49,6 +49,12 @@
   }
 
   function addTZRecord(user) {
+    let param = {
+      openid: user.openid,
+      name: user.name,
+      nickName: user.nickName,
+      actionType: 1,
+    }
     getApp().get('user/addTZRecord', param).then(res => {
       if (res.code === 1) {
         baoMing_addTZPerson(user)
