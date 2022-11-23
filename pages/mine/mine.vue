@@ -3,7 +3,7 @@
     <view class="mineCard lxCenterRow">
       <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill">
       </image>
-      <text v-if="user.nickName" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
+      <text v-if="user.nickName && !user.avatar" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
       <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
 
       <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">设置昵称</button>
