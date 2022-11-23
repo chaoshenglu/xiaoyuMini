@@ -6,8 +6,8 @@
       <view class="lxColumn" style="margin-left: 10px;">
         <view v-if="user.nickName" class="lxCenterRow">
           <text class="lx333" style="font-size: 17px;margin-right: 5px;">{{user.nickName}}</text>
-          <image src="/static/man.png" mode="aspectFit" style="width: 15px;height: 15px;margin-right: 4px;"></image>
-          <image src="/static/vip.png" mode="aspectFit" style="width: 20px;height: 20px;"></image>
+          <image :src="genderIcon" mode="aspectFit" style="width:15px;height:15px;margin-right:4px;"></image>
+          <image src="/static/vip.png" mode="aspectFit" style="width: 16px;height: 16px;"></image>
         </view>
         <button v-else @click="getWxName">点我授权微信头像昵称</button>
         <text v-if="user.nickName" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
@@ -36,9 +36,14 @@
 
 <script setup>
   import {
-    ref
+    ref,
+    computed
   } from 'vue';
   let user = ref(getApp().globalData.user)
+
+  const genderIcon = computed(() => {
+    return user.value.isGirl === 1 ? "/static/woman.png" : "/static/man.png"
+  })
 
   function tapCoupon() {
     uni.navigateTo({
