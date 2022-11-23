@@ -76,6 +76,7 @@
     wx.compressImage({
       src: e.detail.avatarUrl,
       compressedWidth: 60,
+      compressHeight: 60,
       quality: 80,
       success: res => {
         uni.getFileSystemManager().readFile({
