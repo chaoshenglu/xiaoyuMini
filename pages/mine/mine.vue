@@ -74,7 +74,7 @@
   }
 
   function chooseHead(e) {
-    console.log(e.detail)
+    console.log(e.detail.avatarUrl)
 
   }
 
@@ -150,6 +150,8 @@
 
   .setAvatar {
     transform: scale(0.9);
+    margin-right: 0px !important;
+    margin-left: 8px !important;
   }
 
   .mineCard {
