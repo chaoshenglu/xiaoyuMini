@@ -73,11 +73,18 @@
   }
 
   function chooseHead(e) {
-    uni.getFileSystemManager().readFile({
-      filePath: e.detail.avatarUrl,
-      encoding: 'base64',
+    wx.compressImage({
+      src: e.detail.avatarUrl,
+      compressedWidth: 60,
+      quality: 80,
       success: res => {
-        setAvatar('data:image/jpeg;base64,' + res.data)
+        uni.getFileSystemManager().readFile({
+          filePath: res.tempFilePath,
+          encoding: 'base64',
+          success: resp => {
+            setAvatar('data:image/jpeg;base64,' + resp.data)
+          }
+        })
       }
     })
   }
