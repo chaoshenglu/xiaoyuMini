@@ -1,15 +1,19 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
     <view class="mineCard lxCenterRow">
-      <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" @click="getWxName">
+      <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill">
       </image>
+
+      <button v-if="!user.avatar" class="setAvatar" @chooseavatar="getWxName" open-type="chooseAvatar">点我设置头像</button>
+
+      <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">点我设置昵称</button>
+
       <view class="lxColumn" style="margin-left: 10px;">
         <view v-if="user.nickName" class="lxCenterRow">
           <text class="lx333" style="font-size: 17px;margin-right: 5px;">{{user.nickName}}</text>
           <image :src="genderIcon" mode="aspectFit" style="width:15px;height:15px;margin-right:4px;"></image>
           <image src="/static/vip.png" mode="aspectFit" style="width: 16px;height: 16px;"></image>
         </view>
-        <button v-else @click="getWxName">点我授权微信头像昵称</button>
         <text v-if="user.nickName" class="lx999" style="font-size: 15px;margin-top: 6px;">id :
           {{user.openid.slice(0,15)}}</text>
       </view>
@@ -69,44 +73,83 @@
     })
   }
 
-  function getWxName() {
-    wx.getUserProfile({
-      desc: '用于完善用户资料',
+  function getWxName(e) {
+    console.log(JSON.stringify(e, null, 2))
+    // wx.getUserProfile({
+    //   desc: '用于完善用户资料',
+    //   success: (res) => {
+    //     console.log(JSON.stringify(res.userInfo, null, 2))
+    //     let nickName = res.userInfo.nickName
+    //     let avatarUrl = res.userInfo.avatarUrl
+    //     user.value.nickName = nickName
+    //     user.value.avatar = avatarUrl
+    //     getApp().globalData.user = user.value
+    //     setUserNameAvatar(nickName, avatarUrl)
+    //   }
+    // })
+  }
+
+  function alert2setNickName() {
+    uni.showModal({
+      title: '请输入昵称（限四字以内）',
+      editable: true,
+      placeholderText: '请尽量与群昵称相同或相似',
       success: (res) => {
-        console.log(JSON.stringify(res.userInfo, null, 2))
-        let nickName = res.userInfo.nickName
-        let avatarUrl = res.userInfo.avatarUrl
-        user.value.nickName = nickName
-        user.value.avatar = avatarUrl
-        getApp().globalData.user = user.value
-        setUserNameAvatar(nickName, avatarUrl)
+        if (res.confirm && res.content) {
+          if (res.content.length === 0 || res.content.length > 4) {
+            getApp().toast('请输入四字以内的昵称')
+            return
+          }
+          setNickName(res.content)
+        }
       }
     })
   }
 
-  function setUserNameAvatar(nickName, avatarUrl) {
+  function setNickName(nickName) {
     let param = {
       nickName: nickName,
-      avatar: avatarUrl,
       openid: user.value.openid
     }
-    if (getApp().globalData.penddingGift) {
+    if (getApp().globalData.penddingGift && user.value.avatar) {
       param.gift = getApp().globalData.penddingGift.money
     }
     getApp().get('user/updateUser', param).then(res => {
+      user.value.nickName = nickName
       uni.setStorageSync('user', user.value)
-      if (getApp().globalData.penddingGift) {
-        let gift = getApp().globalData.penddingGift
-        getApp().globalData.penddingGift = null
-        uni.showModal({
-          title: '🥳 🥳 🥳',
-          showCancel: false,
-          content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
-        })
-      }
+      handlePenddingGift()
     }).catch(err => {
       console.log(err)
     })
+  }
+
+  function setAvatar(avatar) {
+    let param = {
+      avatar: avatar,
+      openid: user.value.openid
+    }
+    if (getApp().globalData.penddingGift && user.value.nickName) {
+      param.gift = getApp().globalData.penddingGift.money
+    }
+    getApp().get('user/updateUser', param).then(res => {
+      user.value.avatar = avatar
+      uni.setStorageSync('user', user.value)
+      handlePenddingGift()
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  function handlePenddingGift() {
+    if (getApp().globalData.penddingGift && user.value.avatar && user.value.nickName) {
+      let gift = getApp().globalData.penddingGift
+      getApp().globalData.penddingGift = null
+      uni.showModal({
+        title: '🥳 🥳 🥳',
+        showCancel: false,
+        content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+      })
+    }
   }
 </script>
 
@@ -114,6 +157,10 @@
   page {
     padding-top: 5vw;
     background-color: #f6f6f6;
+  }
+
+  .setAvatar {
+    transform: scale(0.8);
   }
 
   .mineCard {

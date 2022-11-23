@@ -47,6 +47,14 @@
     },
 
     methods: {
+
+      toast(title) {
+        uni.showToast({
+          title: title,
+          icon: 'none'
+        })
+      },
+
       randomNum(minNum, maxNum) {
         switch (arguments.length) {
           case 1:
