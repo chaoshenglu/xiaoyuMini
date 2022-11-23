@@ -39,7 +39,10 @@
       </uni-grid>
     </view>
 
-    <LXBottomBtn title='报名' @tapBottomBtn="baoMing" />
+    <!-- <LXBottomBtn title='报名' @tapBottomBtn="baoMing" /> -->
+
+    <HalfBottomBtn title='报名+1' :isLeft="true" @tapBottomBtn="baoMing" />
+    <HalfBottomBtn title='取消报名' :isLeft="false" @tapBottomBtn="baoMing" />
   </view>
 </template>
 
