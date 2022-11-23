@@ -45,6 +45,24 @@
     return user.value.isGirl === 1 ? "/static/woman.png" : "/static/man.png"
   })
 
+  function clear() {
+    getApp().globalData.openid = null
+    getApp().globalData.saveOpenIdTime = null
+    getApp().globalData.user = null
+    uni.showLoading({
+      title: '正在清理'
+    })
+    try {
+      uni.clearStorageSync()
+    } catch (e) {
+      console.log(eee)
+    }
+    setTimeout(() => {
+      uni.hideLoading()
+      getApp().loginAndGetOpenId()
+    }, 500)
+  }
+
   function tapCoupon() {
     uni.navigateTo({
       url: '/pages/couponList/couponList'
