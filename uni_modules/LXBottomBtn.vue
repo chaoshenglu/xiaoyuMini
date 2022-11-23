@@ -1,5 +1,8 @@
 <template>
-  <view class="lxCenterC lxBottomBtn" :style="style" @click="tapBottomBtn">
+  <view v-if="props.isLeft" class="lxCenterC leftBottomBtn" :style="style" @click="tapBottomBtn">
+    {{props.title}}
+  </view>
+  <view v-else class="lxCenterC rightBottomBtn" :style="style" @click="tapBottomBtn">
     {{props.title}}
   </view>
   <view>
@@ -13,7 +16,7 @@
     computed,
     ref
   } from 'vue'
-  const props = defineProps(['title'])
+  const props = defineProps(['title', 'isLeft'])
   const emit = defineEmits(['tapBottomBtn'])
   let bottomOffset = ref(0)
   const style = computed(() => {
@@ -37,14 +40,25 @@
 </script>
 
 <style lang="scss">
-  .lxBottomBtn {
+  .leftBottomBtn {
     position: fixed;
-    width: 94vw;
+    width: 44vw;
     height: 44px;
     background-color: #4685F3;
     font-size: 16px;
     color: white;
     left: 3vw;
+    border-radius: 6px;
+  }
+
+  .rightBottomBtn {
+    position: fixed;
+    width: 44vw;
+    height: 44px;
+    background-color: #4685F3;
+    font-size: 16px;
+    color: white;
+    right: 3vw;
     border-radius: 6px;
   }
 </style>
