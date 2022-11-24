@@ -126,6 +126,8 @@
       addUserByOpenId(param) {
         this.get('user/addUserByOpenId', param).then(res => {
           if (res.code === 1) {
+            this.globalData.user = param
+            uni.setStorageSync('user', this.globalData.user)
             console.log('新增用户成功，通过openid初始化')
             uni.$emit('noGift')
           } else {
