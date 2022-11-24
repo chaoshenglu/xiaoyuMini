@@ -157,6 +157,28 @@
         })
         return promise
       },
+
+      post(uri, param) {
+        let url = this.globalData.baseUrl + uri
+        console.log('🔽网络请求Post=>', url)
+        console.log('参数=>', JSON.stringify(param))
+        let promise = new Promise(function(resolve, reject) {
+          uni.request({
+            url: url,
+            data: param,
+            method: 'POST',
+            success: res => {
+              console.log(uri, '🔼接口返回=>', res.data)
+              resolve(res.data)
+            },
+            fail: err => {
+              console.log(uri, '🔼请求失败=>', err)
+              reject(err)
+            }
+          })
+        })
+        return promise
+      },
     }
 
   }
