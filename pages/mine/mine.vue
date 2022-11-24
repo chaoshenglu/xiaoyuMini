@@ -115,7 +115,7 @@
     if (getApp().globalData.penddingGift && user.value.avatar) {
       param.gift = getApp().globalData.penddingGift.money
     }
-    getApp().get('user/updateUser', param).then(res => {
+    getApp().post('user/updateUserInfo', param).then(res => {
       user.value.nickName = nickName
       uni.setStorageSync('user', user.value)
       handlePenddingGift()
@@ -132,7 +132,7 @@
     if (getApp().globalData.penddingGift && user.value.nickName) {
       param.gift = getApp().globalData.penddingGift.money
     }
-    getApp().get('user/updateUser', param).then(res => {
+    getApp().post('user/updateUserInfo', param).then(res => {
       user.value.avatar = avatar
       uni.setStorageSync('user', user.value)
       handlePenddingGift()

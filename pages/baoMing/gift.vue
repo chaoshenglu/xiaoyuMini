@@ -30,7 +30,7 @@
           gift: gift.money,
           openid: user.openid
         }
-        getApp().get('user/updateUser', param).then(res => {
+        getApp().post('user/updateUserInfo', param).then(res => {
           console.log('⭕️', res)
           user.gift = gift.money
           getApp().globalData.user = user

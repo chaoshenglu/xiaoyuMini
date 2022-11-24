@@ -74,7 +74,7 @@
       isGirl: user.isGirl,
       openid: user.openid
     }
-    getApp().get('user/updateUser', param).then(res => {
+    getApp().post('user/updateUserInfo', param).then(res => {
       if (res.code === 1) {
         uni.setStorageSync('user', user)
       }
