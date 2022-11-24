@@ -93,7 +93,7 @@
               uni.setStorageSync('saveOpenIdTime', this.globalData.saveOpenIdTime)
               this.getUserInfo(this.globalData.openid)
             }).catch(err => {
-              console.log(err)
+              getApp().toastAndConsoleSystemError(err)
             })
           }
         })
@@ -119,7 +119,7 @@
             this.addUserByOpenId(param)
           }
         }).catch(err => {
-          console.log(err)
+          getApp().toastAndConsoleSystemError(err)
         })
       },
 
@@ -134,7 +134,7 @@
             console.log('❌新增用户成功失败', res)
           }
         }).catch(err => {
-          console.log(err)
+          getApp().toastAndConsoleSystemError(err)
         })
       },
 
