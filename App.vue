@@ -27,11 +27,11 @@
         if (this.globalData.openid && this.globalData.saveOpenIdTime) {
           let nowTime = new Date().getTime()
           let cha = nowTime - this.globalData.saveOpenIdTime
-          if (cha > 1000 * 60 * 60) {
-            console.log('已经过去了一个小时，需要重新登录')
+          if (cha > 1000 * 60 * 60 * 24) {
+            console.log('已经过去了24小时，需要重新登录')
             this.loginAndGetOpenId()
           } else {
-            console.log('一个小时内，无需重新登录，openid=', this.globalData.openid)
+            console.log('24小时内，无需重新登录，openid=', this.globalData.openid)
             this.getUserInfo(this.globalData.openid)
           }
         } else {
