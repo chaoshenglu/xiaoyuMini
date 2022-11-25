@@ -104,7 +104,7 @@
         let param = {
           openid
         }
-        this.get('user/getUserInfoByOpenid', param).then(res => {
+        this.get('user/getUserInfo', param).then(res => {
           let userArr = res.data || []
           if (userArr.length > 0) {
             this.globalData.user = userArr[0]
