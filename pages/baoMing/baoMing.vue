@@ -186,8 +186,8 @@
   }
 
   .head {
-    width: 26px;
-    height: 26px;
-    border-radius: 13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
   }
 </style>
