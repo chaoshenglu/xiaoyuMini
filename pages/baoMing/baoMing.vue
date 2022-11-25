@@ -24,8 +24,8 @@
         <text class="smallWord">女</text>
       </view>
       <view class="smallTag lxCenterRow">
-        <view class="smallBox" style="background-color: #FABA2C" />
-        <text class="smallWord">VIP</text>
+        <view class="smallBox" style="background-color: #E2E2E2;" />
+        <text class="smallWord">空位</text>
       </view>
       <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #999999" />
