@@ -29,7 +29,7 @@
   } from 'vue'
   let current = ref(0)
   let nickName = ref('')
-  const emit = defineEmits(['closeBaoMingPop'])
+  const emit = defineEmits(['closeJiaYiPop'])
   let user = ref(getApp().globalData.user)
 
   const items = [{
@@ -78,10 +78,10 @@
 
   function baoMing_addTZPerson(user) {
     getApp().post('tz_person/addTZPerson', user).then(res => {
-      emit('closeBaoMingPop')
+      emit('closeJiaYiPop')
       handleRes(res)
     }).catch(err => {
-      emit('closeBaoMingPop')
+      emit('closeJiaYiPop')
       getApp().toastAndConsoleSystemError(err)
     })
   }

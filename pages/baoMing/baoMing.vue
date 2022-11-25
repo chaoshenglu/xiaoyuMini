@@ -10,7 +10,7 @@
     </uni-popup>
 
     <uni-popup ref="jiayiPopup" type="center">
-      <jiayiPop @closeBaoMingPop="closeBaoMingPop" />
+      <jiayiPop @closeJiaYiPop="closeJiaYiPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
@@ -118,6 +118,11 @@
         }
       })
     }
+  }
+
+  function closeJiaYiPop() {
+    jiayiPopup.value.close()
+    refreshPerson()
   }
 
   function closeBaoMingPop() {
