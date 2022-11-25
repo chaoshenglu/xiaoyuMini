@@ -36,7 +36,10 @@
       <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
           <view class="lxCenterR cell" :class="{ 'boyClass': person.isGirl === 0}" v-if="person.nickName">
-            <image class="head" :src="person.avatar" mode="aspectFit"></image>
+            <view class="headBox">
+              <image class="head" :src="person.avatar" mode="aspectFit" />
+              <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+            </view>
             <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
             <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
             <text v-else class="pname">{{person.nickName}}</text>
@@ -183,6 +186,20 @@
     border-radius: 6px;
     margin: 5px;
     padding: 5px;
+  }
+
+  .headBox {
+    width: 24px;
+    height: 24px;
+    position: relative;
+  }
+
+  .jia {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
   }
 
   .head {
