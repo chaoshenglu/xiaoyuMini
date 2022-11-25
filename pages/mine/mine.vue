@@ -75,8 +75,8 @@
   function chooseHead(e) {
     wx.compressImage({
       src: e.detail.avatarUrl,
-      compressedWidth: 100,
-      compressHeight: 100,
+      compressedWidth: 112,
+      compressHeight: 112,
       quality: 90,
       success: res => {
         uni.getFileSystemManager().readFile({

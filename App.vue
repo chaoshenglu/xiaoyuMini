@@ -14,9 +14,9 @@
 
     onLaunch: function() {
       this.globalData.user = uni.getStorageSync('user') || {}
-      onLaunch_checkGift()
-      onLaunch_checkOSS()
-      onLaunch_checkOpenId()
+      this.onLaunch_checkGift()
+      this.onLaunch_checkOSS()
+      this.onLaunch_checkOpenId()
     },
 
     methods: {
