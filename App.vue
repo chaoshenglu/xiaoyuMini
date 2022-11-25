@@ -149,6 +149,10 @@
           let userArr = res.data || []
           if (userArr.length > 0) {
             this.globalData.user = userArr[0]
+            if (this.globalData.user.inBlackList) {
+              this.alert2exit()
+              return
+            }
             uni.setStorageSync('user', this.globalData.user)
             console.log('this.globalData.user', this.globalData.user)
             let gift = this.globalData.user.gift || 0
@@ -161,6 +165,18 @@
           }
         }).catch(err => {
           getApp().toastAndConsoleSystemError(err)
+        })
+      },
+
+      alert2exit() {
+        uni.showModal({
+          title: '你已被系统加入黑名单',
+          content: '若有疑问，请联系13924290420',
+          showCancel: false,
+          confirmText: '退出小程序',
+          success: res => {
+            wx.exitMiniProgram()
+          }
         })
       },
 
