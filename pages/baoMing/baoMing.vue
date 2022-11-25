@@ -39,6 +39,7 @@
             <view class="headBox">
               <image class="head" :src="person.avatar" mode="aspectFit" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+              <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" />
             </view>
             <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
             <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
@@ -192,6 +193,14 @@
     width: 24px;
     height: 24px;
     position: relative;
+  }
+
+  .vip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
   }
 
   .jia {
