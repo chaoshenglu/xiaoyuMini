@@ -9,6 +9,11 @@
       <view style="height: 20vh;" />
     </uni-popup>
 
+    <uni-popup ref="jiayiPopup" type="center">
+      <baoMingPop @closeBaoMingPop="closeBaoMingPop" />
+      <view style="height: 20vh;" />
+    </uni-popup>
+
     <view class="lxCenterR" style="margin-top: 8px;">
       <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #4685F3;" />
@@ -39,10 +44,8 @@
       </uni-grid>
     </view>
 
-    <LXBottomBtn title='报名' @tapBottomBtn="baoMing" />
-    <!-- 
-    <HalfBottomBtn title='报名+1' :isLeft="true" @tapBottomBtn="baoMing" />
-    <HalfBottomBtn title='取消报名' :isLeft="false" @tapBottomBtn="baoMing" /> -->
+    <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
+    <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
   </view>
 </template>
 
@@ -61,6 +64,7 @@
   } from "@dcloudio/uni-app"
 
   const popup = ref(null)
+  const jiayiPopup = ref(null)
   const bmPopup = ref(null)
   let personArr = ref([])
   let didAddMyself = ref(false)
@@ -88,10 +92,14 @@
 
   }
 
-  function baoMing() {
+  function baoMing(isJiaYi) {
     let user = getApp().globalData.user
     if (user.nickName && user.avatar) {
-      bmPopup.value.open()
+      if (isJiaYi) {
+        jiayiPopup.value.open()
+      } else {
+        bmPopup.value.open()
+      }
     } else {
       uni.showModal({
         title: '温馨提示',
