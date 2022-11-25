@@ -197,8 +197,8 @@
 
   .vip {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -3px;
+    right: -1px;
     width: 24px;
     height: 24px;
   }
