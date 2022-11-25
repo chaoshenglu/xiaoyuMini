@@ -50,6 +50,7 @@
   function tapConfirm() {
     let user = {
       nickName: nickName.value,
+      avatar: getApp().globalData.user.avatar,
       isGirl: current.value,
       isJiaYi: 1,
       openid: getApp().globalData.openid,
