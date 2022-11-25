@@ -10,7 +10,7 @@
     </uni-popup>
 
     <uni-popup ref="jiayiPopup" type="center">
-      <baoMingPop @closeBaoMingPop="closeBaoMingPop" />
+      <jiayiPop @closeBaoMingPop="closeBaoMingPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
@@ -52,7 +52,7 @@
 <script setup>
   import Gift from '/pages/baoMing/gift.vue'
   import baoMingPop from '/pages/baoMing/baoMingPop.vue'
-
+  import jiayiPop from '/pages/baoMing/jiayiPop.vue'
   import {
     ref
   } from 'vue'

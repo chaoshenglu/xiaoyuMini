@@ -1,10 +1,14 @@
 <template>
   <view class="baoMingPop">
     <view style="padding: 16px;">
-      <text class="lx333" style="font-size: 18px;font-weight: 500;">报名信息</text>
+      <view class="lxCenterRow" style="margin-top: 6px;margin-bottom: 10px;">
+        <text class="lx333" style="margin-right: 10px;">昵称</text>
+        <input type="text" @input="onInput" placeholder="请输入姓名或昵称">
+      </view>
+      <view style="background-color: #ededed;margin-left: 40px;margin-right: 30px;height: 1px;" />
       <view class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
         <view class="lxCenterRow">
-          <text class="lx333" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
+          <text class="lx333" style="font-size: 16px;margin-right: 4px;">性别</text>
           <radio-group @change="radioChange" class="lxCenterRow">
             <view v-for="(item, index) in items" :key="item.value" class="lxCenterRow">
               <radio color="#4685F3" style="margin-left: 6px;" :value="item.value" :checked="index === current" />
@@ -23,7 +27,7 @@
   import {
     ref
   } from 'vue'
-  let current = ref(getApp().globalData.user.isGirl === 1 ? 0 : 1)
+  let current = ref(0)
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
@@ -37,6 +41,10 @@
     }
   ]
 
+  function onInput(e) {
+    console.log(e.detail.value)
+  }
+
   function tapConfirm() {
     let user = getApp().globalData.user
     if (user.gift == null || user.gift == undefined) {
@@ -49,7 +57,6 @@
     user.isGirl = current.value
     user.isJiaYi = 0
     addTZRecord(user)
-    updateUserGender(user)
   }
 
   function addTZRecord(user) {
@@ -57,27 +64,13 @@
       openid: user.openid,
       name: user.name,
       nickName: user.nickName,
-      actionType: 1,
+      actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
         baoMing_addTZPerson(user)
       } else {
         getApp().toastAndConsoleSystemError(res)
-      }
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
-
-  function updateUserGender(user) {
-    let param = {
-      isGirl: user.isGirl,
-      openid: user.openid
-    }
-    getApp().post('user/updateUserInfo', param).then(res => {
-      if (res.code === 1) {
-        uni.setStorageSync('user', user)
       }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
