@@ -61,9 +61,8 @@
   function addTZRecord(user) {
     let param = {
       openid: user.openid,
-      name: user.name,
-      nickName: user.nickName,
-      onNickName: nickName.value,
+      nickName: getApp().globalData.user.nickName,
+      onNickName: user.nickName,
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
