@@ -85,7 +85,7 @@
   }
 
   function baoMing_addTZPerson(user) {
-    getApp().get('tz_person/addTZPerson', user).then(res => {
+    getApp().post('tz_person/addTZPerson', user).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
     }).catch(err => {
