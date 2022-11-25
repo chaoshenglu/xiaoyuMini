@@ -63,6 +63,7 @@
   const popup = ref(null)
   const bmPopup = ref(null)
   let personArr = ref([])
+  let didAddMyself = ref(false)
 
   onLoad((option) => {
     refreshPerson()
