@@ -2,8 +2,8 @@
   <view class="baoMingPop">
     <view style="padding: 16px;">
       <view class="lxCenterRow" style="margin-top: 6px;margin-bottom: 10px;">
-        <text class="lx333" style="margin-right: 10px;">昵称</text>
-        <input type="text" @input="onInput" placeholder="请输入姓名或昵称">
+        <text class="lx333" style="margin-right: 10px;flex-shrink:0;">昵称</text>
+        <input type="text" @input="onInput" placeholder="请输入TA的昵称">
       </view>
       <view style="background-color: #ededed;margin-left: 40px;margin-right: 30px;height: 1px;" />
       <view class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
