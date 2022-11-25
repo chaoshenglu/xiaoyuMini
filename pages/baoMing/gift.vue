@@ -25,7 +25,7 @@
     emit('closePop')
     setTimeout(function() {
       let user = getApp().globalData.user
-      if (user.nickName) {
+      if (user.nickName && user.avatar) {
         let param = {
           gift: gift.money,
           openid: user.openid
