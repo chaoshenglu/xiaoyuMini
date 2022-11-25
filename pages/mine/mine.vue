@@ -102,14 +102,15 @@
   function upload(tempFilePath) {
     let ossConfig = getApp().globalData.ossConfig
     ossConfig.key = getApp().globalData.openid + '.jpg'
+    let host = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/'
     uni.uploadFile({
-      url: 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com',
+      url: host,
       filePath: tempFilePath,
       name: 'file',
       formData: ossConfig,
       success: resp => {
         uni.hideLoading()
-        console.log(resp, 'resp')
+        setAvatar(host + ossConfig.key)
       },
       fail: error => {
         uni.hideLoading()
