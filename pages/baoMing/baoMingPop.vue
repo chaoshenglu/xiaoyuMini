@@ -48,6 +48,7 @@
     }
     user.isGirl = current.value
     user.isJiaYi = 0
+    user.status = 1 //1已报名2已取消3已飞机
     addTZRecord(user)
     updateUserGender(user)
   }

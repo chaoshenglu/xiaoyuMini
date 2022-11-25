@@ -28,6 +28,7 @@
     ref
   } from 'vue'
   let current = ref(0)
+  let nickName = ref('')
   const emit = defineEmits(['closeBaoMingPop'])
   let user = ref(getApp().globalData.user)
 
@@ -43,19 +44,17 @@
 
   function onInput(e) {
     console.log(e.detail.value)
+    nickName.value = e.detail.value
   }
 
   function tapConfirm() {
-    let user = getApp().globalData.user
-    if (user.gift == null || user.gift == undefined) {
-      uni.showToast({
-        title: 'gift未初始化',
-        icon: 'error'
-      })
-      return
+    let user = {
+      nickName: nickName.value,
+      isGirl: current.value,
+      isJiaYi: 1,
+      openid: getApp().globalData.openid,
+      status: 1, //1已报名2已取消3已飞机
     }
-    user.isGirl = current.value
-    user.isJiaYi = 0
     addTZRecord(user)
   }
 
@@ -64,6 +63,7 @@
       openid: user.openid,
       name: user.name,
       nickName: user.nickName,
+      onNickName: nickName.value,
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
