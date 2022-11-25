@@ -73,19 +73,47 @@
   }
 
   function chooseHead(e) {
+    uni.showLoading({
+      title: '正在上传',
+      mask: true
+    })
     wx.compressImage({
       src: e.detail.avatarUrl,
       compressedWidth: 112,
       compressHeight: 112,
       quality: 90,
       success: res => {
-        uni.getFileSystemManager().readFile({
-          filePath: res.tempFilePath,
-          encoding: 'base64',
-          success: resp => {
-            setAvatar('data:image/jpeg;base64,' + resp.data)
-          }
-        })
+        upload(res.tempFilePath)
+        // uni.getFileSystemManager().readFile({
+        //   filePath: res.tempFilePath,
+        //   encoding: 'base64',
+        //   success: resp => {
+        //     setAvatar('data:image/jpeg;base64,' + resp.data)
+        //   }
+        // })
+      },
+      fail: (err) => {
+        uni.hideLoading()
+        getApp().toastAndConsoleSystemError(err)
+      }
+    })
+  }
+
+  function upload(tempFilePath) {
+    let ossConfig = getApp().globalData.ossConfig
+    ossConfig.key = getApp().globalData.openid + '.jpg'
+    uni.uploadFile({
+      url: 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com',
+      filePath: tempFilePath,
+      name: 'file',
+      formData: ossConfig,
+      success: resp => {
+        uni.hideLoading()
+        console.log(resp, 'resp')
+      },
+      fail: error => {
+        uni.hideLoading()
+        getApp().toastAndConsoleSystemError(err)
       }
     })
   }
@@ -120,7 +148,7 @@
       uni.setStorageSync('user', user.value)
       handlePenddingGift()
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
     })
   }
 
@@ -137,7 +165,7 @@
       uni.setStorageSync('user', user.value)
       handlePenddingGift()
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
     })
   }
 
