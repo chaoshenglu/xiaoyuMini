@@ -8,45 +8,86 @@
       saveOpenIdTime: null,
       gift: null,
       penddingGift: null,
+      saveOssTime: null,
+      ossConfig: null,
     },
 
     onLaunch: function() {
-      this.globalData.gift = uni.getStorageSync('gift') || {}
-      if (!this.globalData.gift.money) {
-        this.globalData.gift = {
-          name: '新用户专享红包',
-          money: this.randomNum(1, 9)
-        }
-        uni.setStorageSync('gift', this.globalData.gift)
-      }
-
       this.globalData.user = uni.getStorageSync('user') || {}
-      this.globalData.openid = uni.getStorageSync('openid') || ''
-      this.globalData.saveOpenIdTime = uni.getStorageSync('saveOpenIdTime') || 0
-      if (this.globalData.openid && this.globalData.saveOpenIdTime) {
-        let nowTime = new Date().getTime()
-        let cha = nowTime - this.globalData.saveOpenIdTime
-        if (cha > 1000 * 60 * 60) {
-          console.log('已经过去了一个小时，需要重新登录')
-          this.loginAndGetOpenId()
-        } else {
-          console.log('一个小时内，无需重新登录，openid=', this.globalData.openid)
-          this.getUserInfo(this.globalData.openid)
-        }
-      } else {
-        this.loginAndGetOpenId()
-      }
-    },
-
-    onShow: function() {
-      console.log('App Show')
-    },
-
-    onHide: function() {
-      console.log('App Hide')
+      onLaunch_checkGift()
+      onLaunch_checkOSS()
+      onLaunch_checkOpenId()
     },
 
     methods: {
+
+      onLaunch_checkOpenId() {
+        this.globalData.openid = uni.getStorageSync('openid') || ''
+        this.globalData.saveOpenIdTime = uni.getStorageSync('saveOpenIdTime') || 0
+        if (this.globalData.openid && this.globalData.saveOpenIdTime) {
+          let nowTime = new Date().getTime()
+          let cha = nowTime - this.globalData.saveOpenIdTime
+          if (cha > 1000 * 60 * 60) {
+            console.log('已经过去了一个小时，需要重新登录')
+            this.loginAndGetOpenId()
+          } else {
+            console.log('一个小时内，无需重新登录，openid=', this.globalData.openid)
+            this.getUserInfo(this.globalData.openid)
+          }
+        } else {
+          console.log('第一次获取openid')
+          this.loginAndGetOpenId()
+        }
+      },
+
+      onLaunch_checkOSS() {
+        this.globalData.ossConfig = uni.getStorageSync('ossConfig')
+        this.globalData.saveOssTime = uni.getStorageSync('saveOssTime') || 0
+        if (this.globalData.ossConfig && this.globalData.saveOssTime) {
+          let nowTime = new Date().getTime()
+          let cha = nowTime - this.globalData.saveOssTime
+          if (cha > 1000 * 60 * 60 * 6) {
+            console.log('已经过去了6个小时，需要刷新oss')
+            this.requestOssConfig()
+          } else {
+            console.log('6小时内，无需刷新oss')
+          }
+        } else {
+          console.log('第一次请求oss')
+          this.requestOssConfig()
+        }
+      },
+
+      onLaunch_checkGift() {
+        this.globalData.gift = uni.getStorageSync('gift') || {}
+        if (!this.globalData.gift.money) {
+          this.globalData.gift = {
+            name: '新用户专享红包',
+            money: this.randomNum(1, 9)
+          }
+          uni.setStorageSync('gift', this.globalData.gift)
+        }
+      },
+
+      requestOssConfig() {
+        this.get('user/getWxToken').then(res => {
+          let access_token = res.data.access_token || ''
+          this.get('user/getOssConfig', {
+            access_token
+          }).then(resp => {
+            let resp_data_str = resp.data.resp_data || ''
+            let config = JSON.parse(resp_data_str)
+            this.globalData.ossConfig = config
+            this.globalData.saveOssTime = new Date().getTime()
+            uni.setStorageSync('ossConfig', this.globalData.ossConfig)
+            uni.setStorageSync('saveOssTime', this.globalData.saveOssTime)
+          }).catch(err => {
+            getApp().toastAndConsoleSystemError(err)
+          })
+        }).catch(err => {
+          getApp().toastAndConsoleSystemError(err)
+        })
+      },
 
       toast(title) {
         uni.showToast({
