@@ -111,7 +111,7 @@
       },
 
       toastAndConsoleSystemError(err) {
-        console.log(err)
+        console.log('❌', err)
         let errStr = JSON.stringify(err)
         uni.showToast({
           title: `系统出错：${errStr}`,
@@ -173,7 +173,7 @@
           title: '你已被系统加入黑名单',
           content: '若有疑问，请联系13924290420',
           showCancel: false,
-          confirmText: '退出小程序',
+          confirmText: '退出应用',
           success: res => {
             wx.exitMiniProgram()
           }
