@@ -47,6 +47,7 @@
       return
     }
     user.isGirl = current.value
+    user.isJiaYi = 0
     addTZRecord(user)
     updateUserGender(user)
   }
