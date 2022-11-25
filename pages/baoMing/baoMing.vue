@@ -88,7 +88,27 @@
   }
 
   function baoMing() {
-    bmPopup.value.open()
+    let user = getApp().globalData.user
+    if (user.nickName && user.avatar) {
+      bmPopup.value.open()
+    } else {
+      uni.showModal({
+        title: '温馨提示',
+        content: '为了方便活动组织者识别身份，请先前往设置微信头像与昵称',
+        success: function(res) {
+          if (res.confirm) {
+            uni.navigateTo({
+              url: '/pages/mine/mine',
+              fail: function() {
+                uni.switchTab({
+                  url: '/pages/mine/mine',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
   }
 
   function closeBaoMingPop() {
