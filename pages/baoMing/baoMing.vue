@@ -32,7 +32,7 @@
         <text class="smallWord">排队</text>
       </view>
     </view>
-    <view style="margin-left: 8px;margin-right: 8px;margin-top: 8px;">
+    <view style="margin-left: 4px;margin-right: 4px;margin-top: 8px;">
       <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
           <view class="lxCenterR cell" :class="{ 'boyClass': person.isGirl === 0}" v-if="person.nickName">
