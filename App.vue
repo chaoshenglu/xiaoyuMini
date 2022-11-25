@@ -165,7 +165,7 @@
       },
 
       addUserByOpenId(param) {
-        this.get('user/addUserByOpenId', param).then(res => {
+        this.post('user/addUser', param).then(res => {
           if (res.code === 1) {
             this.globalData.user = param
             uni.setStorageSync('user', this.globalData.user)
