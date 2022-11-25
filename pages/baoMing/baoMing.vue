@@ -37,8 +37,9 @@
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
           <view class="lxCenterR cell" :class="{ 'boyClass': person.isGirl === 0}" v-if="person.nickName">
             <image class="head" :src="person.avatar" mode="aspectFit"></image>
-            <text v-if="person.nickName.length < 3" class="pname">{{person.nickName}}</text>
-            <text v-else class="pname">{{person.nickName.slice(0,2)}}</text>
+            <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
+            <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
+            <text v-else class="pname">{{person.nickName}}</text>
           </view>
         </uni-grid-item>
       </uni-grid>
@@ -159,6 +160,18 @@
   .pname {
     margin-left: 6px;
     color: white;
+  }
+
+  .pname10 {
+    margin-left: 3px;
+    color: white;
+    font-size: 10px;
+  }
+
+  .pname12 {
+    margin-left: 6px;
+    color: white;
+    font-size: 12px;
   }
 
   .boyClass {
