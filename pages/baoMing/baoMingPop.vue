@@ -59,6 +59,7 @@
       openid: user.openid,
       name: user.name,
       nickName: user.nickName,
+      tieziId: tieziId,
       actionType: 1, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
@@ -87,7 +88,9 @@
   }
 
   function baoMing_addTZPerson(user, tieziId) {
-    getApp().post('tz_person/addTZPerson', user).then(res => {
+    let param = user
+    param.tieziId = tieziId
+    getApp().post('tz_person/addTZPerson', param).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
     }).catch(err => {
