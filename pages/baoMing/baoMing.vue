@@ -4,12 +4,12 @@
       <Gift @closePop="closePop" />
     </uni-popup>
 
-    <uni-popup ref="bmPopup" type="center">
+    <uni-popup v-if="tiezi" ref="bmPopup" type="center">
       <baoMingPop :tiezi="tiezi" @closeBaoMingPop="closeBaoMingPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
-    <uni-popup ref="jiayiPopup" type="center">
+    <uni-popup v-if="tiezi" ref="jiayiPopup" type="center">
       <jiayiPop :tiezi="tiezi" @closeJiaYiPop="closeJiaYiPop" />
       <view style="height: 20vh;" />
     </uni-popup>
@@ -38,7 +38,7 @@
           <view class="lxCenterR cell" @click="tapCell(person)" :class="{ 'boyClass': person.isGirl === 0}"
             v-if="person.nickName">
             <view class="headBox">
-              <image class="head" :src="person.avatar" mode="aspectFit" />
+              <image class="head" :src="person.avatar" mode="aspectFill" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
               <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" />
             </view>
@@ -82,7 +82,7 @@
 
   onLoad((option) => {
     getTieZi(option.id)
-    getPersonArr()
+    getPersonArr(option.id)
   })
 
   onShow(() => {
