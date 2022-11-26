@@ -1,8 +1,7 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
     <view class="mineCard lxCenterRow">
-      <image class="avatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill">
-      </image>
+      <image class="avatar" @click="tapAvatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
       <text v-if="user.nickName && !user.avatar" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
       <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
 
@@ -100,8 +99,9 @@
   }
 
   function upload(tempFilePath) {
+    let random = getApp().randomNum(0, 999999)
     let ossConfig = getApp().globalData.ossConfig
-    ossConfig.key = getApp().globalData.openid + '.jpg'
+    ossConfig.key = getApp().globalData.openid + `_${random}.jpg`
     let host = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/'
     uni.uploadFile({
       url: host,
@@ -150,6 +150,18 @@
       handlePenddingGift()
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
+    })
+  }
+
+  function tapAvatar() {
+    uni.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album'], //从相册选择
+      success: function(res) {
+        let path = res.tempFilePaths[0]
+        upload(path)
+      }
     })
   }
 
