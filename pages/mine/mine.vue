@@ -159,8 +159,13 @@
       sizeType: ['compressed'],
       sourceType: ['album'], //从相册选择
       success: function(res) {
-        let path = res.tempFilePaths[0]
-        upload(path)
+        let avatarUrl = res.tempFilePaths[0]
+        let detail = {
+          avatarUrl
+        }
+        chooseHead({
+          detail
+        })
       }
     })
   }
