@@ -52,7 +52,7 @@
     // user.status = 1 //1已报名2已取消3已飞机
     // addTZRecord(user)
     // updateUserGender(user)
-    console.log(props.tiezi.id)
+    console.log(props.tiezi)
   }
 
   function addTZRecord(user) {
