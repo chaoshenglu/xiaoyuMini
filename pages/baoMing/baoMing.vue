@@ -97,7 +97,7 @@
     getApp().get(uri, {
       id
     }).then(res => {
-      console.log('res=', JSON.stringify(res.data, null, 2))
+      console.log('data=', JSON.stringify(res.data, null, 2))
       tiezi.value = res.data
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
@@ -107,7 +107,7 @@
   function getPersonArr(id) {
     let param = {}
     param.tieziId = id
-    getApp().get('tz_person/getTZPerson').then(res => {
+    getApp().get('tz_person/getTZPerson', param).then(res => {
       personArr.value = res.data || []
     }).catch(err => {
       console.log(err)
