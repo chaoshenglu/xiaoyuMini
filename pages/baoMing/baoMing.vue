@@ -4,12 +4,12 @@
       <Gift @closePop="closePop" />
     </uni-popup>
 
-    <uni-popup v-if="tiezi" ref="bmPopup" type="center">
+    <uni-popup ref="bmPopup" type="center">
       <baoMingPop :tiezi="tiezi" @closeBaoMingPop="closeBaoMingPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
-    <uni-popup v-if="tiezi" ref="jiayiPopup" type="center">
+    <uni-popup ref="jiayiPopup" type="center">
       <jiayiPop :tiezi="tiezi" @closeJiaYiPop="closeJiaYiPop" />
       <view style="height: 20vh;" />
     </uni-popup>
@@ -199,12 +199,12 @@
 
   function closeJiaYiPop() {
     jiayiPopup.value.close()
-    refreshPerson()
+    getPersonArr()
   }
 
   function closeBaoMingPop() {
     bmPopup.value.close()
-    refreshPerson()
+    getPersonArr()
   }
 
   function closePop() {

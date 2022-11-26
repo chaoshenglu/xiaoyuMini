@@ -68,16 +68,8 @@
 
   function tapCell(tiezi) {
     uni.navigateTo({
-      url: '/pages/baoMing/baoMing'
+      url: '/pages/baoMing/baoMing?id=' + tiezi.id
     })
-    // let user = getApp().globalData.user
-    // user.gift = 0
-    // user.isGirl = 1
-    // getApp().get('tz_person/addTZPerson', user).then(res => {
-    //   console.log('tz=', res)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
   }
 
   const queryList = (pageNo, pageSize) => {
