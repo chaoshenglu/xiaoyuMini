@@ -39,23 +39,22 @@
   ]
 
   function tapConfirm() {
-    // let user = getApp().globalData.user
-    // if (user.gift == null || user.gift == undefined) {
-    //   uni.showToast({
-    //     title: 'gift未初始化',
-    //     icon: 'error'
-    //   })
-    //   return
-    // }
-    // user.isGirl = current.value
-    // user.isJiaYi = 0
-    // user.status = 1 //1已报名2已取消3已飞机
-    // addTZRecord(user)
-    // updateUserGender(user)
-    console.log(props.tiezi)
+    let user = getApp().globalData.user
+    if (user.gift == null || user.gift == undefined) {
+      uni.showToast({
+        title: 'gift未初始化',
+        icon: 'error'
+      })
+      return
+    }
+    user.isGirl = current.value
+    user.isJiaYi = 0
+    user.status = 1 //1已报名2已取消3已飞机
+    addTZRecord(user, props.tiezi.id)
+    updateUserGender(user)
   }
 
-  function addTZRecord(user) {
+  function addTZRecord(user, tieziId) {
     let param = {
       openid: user.openid,
       name: user.name,
@@ -64,7 +63,7 @@
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
-        baoMing_addTZPerson(user)
+        baoMing_addTZPerson(user, tieziId)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
@@ -87,7 +86,7 @@
     })
   }
 
-  function baoMing_addTZPerson(user) {
+  function baoMing_addTZPerson(user, tieziId) {
     getApp().post('tz_person/addTZPerson', user).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
