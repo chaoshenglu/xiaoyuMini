@@ -49,6 +49,10 @@
       </uni-grid>
     </view>
 
+    <view style="width: 100vw;margin-top: 100px" class="lxCenterC">
+      <image src="/static/more.png" mode="aspectFit" style="width: 100px;"></image>
+    </view>
+
     <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
     <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
   </view>
