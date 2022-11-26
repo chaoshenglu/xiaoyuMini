@@ -30,6 +30,7 @@
   let current = ref(0)
   let nickName = ref('')
   const emit = defineEmits(['closeJiaYiPop'])
+  const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
 
   const items = [{

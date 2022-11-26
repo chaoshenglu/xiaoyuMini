@@ -5,12 +5,12 @@
     </uni-popup>
 
     <uni-popup ref="bmPopup" type="center">
-      <baoMingPop @closeBaoMingPop="closeBaoMingPop" />
+      <baoMingPop :tiezi="tiezi" @closeBaoMingPop="closeBaoMingPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
     <uni-popup ref="jiayiPopup" type="center">
-      <jiayiPop @closeJiaYiPop="closeJiaYiPop" />
+      <jiayiPop :tiezi="tiezi" @closeJiaYiPop="closeJiaYiPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
@@ -78,6 +78,7 @@
   const bmPopup = ref(null)
   let personArr = ref([])
   let didAddMyself = ref(false)
+  let tiezi = ref(null)
 
   onLoad((option) => {
     refreshPerson()

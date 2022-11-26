@@ -25,6 +25,7 @@
   } from 'vue'
   let current = ref(getApp().globalData.user.isGirl === 1 ? 0 : 1)
   const emit = defineEmits(['closeBaoMingPop'])
+  const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
 
   const items = [{
@@ -38,19 +39,20 @@
   ]
 
   function tapConfirm() {
-    let user = getApp().globalData.user
-    if (user.gift == null || user.gift == undefined) {
-      uni.showToast({
-        title: 'gift未初始化',
-        icon: 'error'
-      })
-      return
-    }
-    user.isGirl = current.value
-    user.isJiaYi = 0
-    user.status = 1 //1已报名2已取消3已飞机
-    addTZRecord(user)
-    updateUserGender(user)
+    // let user = getApp().globalData.user
+    // if (user.gift == null || user.gift == undefined) {
+    //   uni.showToast({
+    //     title: 'gift未初始化',
+    //     icon: 'error'
+    //   })
+    //   return
+    // }
+    // user.isGirl = current.value
+    // user.isJiaYi = 0
+    // user.status = 1 //1已报名2已取消3已飞机
+    // addTZRecord(user)
+    // updateUserGender(user)
+    console.log(props.tiezi.id)
   }
 
   function addTZRecord(user) {
