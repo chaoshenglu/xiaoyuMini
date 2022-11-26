@@ -133,23 +133,23 @@
   function tapCell(person) {
     console.log(JSON.stringify(person, null, 2))
     if (person.openid == getApp().globalData.openid) {
-      alert2cancel2owner()
+      alert2cancel2owner(person)
     }
   }
 
-  function alert2cancel2owner() {
+  function alert2cancel2owner(person) {
     uni.showModal({
       title: '确定取消报名吗？',
       content: '每次取消报名，将扣除10积分',
       cancelText: '再考虑下',
       confirmText: '确定',
       success: res => {
-
+        updatePersonStatus(person)
       }
     })
   }
 
-  function sjdklf(person) {
+  function updatePersonStatus(person) {
     let uri = 'tz_person/updateTZPerson'
     let param = {
       id: person.id,
