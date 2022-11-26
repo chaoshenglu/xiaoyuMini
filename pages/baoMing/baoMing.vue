@@ -81,7 +81,8 @@
   let tiezi = ref(null)
 
   onLoad((option) => {
-    refreshPerson()
+    getTieZi(option.id)
+    getPersonArr()
   })
 
   onShow(() => {
@@ -91,7 +92,21 @@
     })
   })
 
-  function refreshPerson() {
+  function getTieZi(id) {
+    let uri = 'tiezi/getTieZiById'
+    getApp().get(uri, {
+      id
+    }).then(res => {
+      console.log('res=', JSON.stringify(res.data, null, 2))
+      tiezi.value = res.data
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
+
+  function getPersonArr(id) {
+    let param = {}
+    param.tieziId = id
     getApp().get('tz_person/getTZPerson').then(res => {
       personArr.value = res.data || []
     }).catch(err => {
