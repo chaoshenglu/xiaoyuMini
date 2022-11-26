@@ -35,7 +35,8 @@
     <view style="margin-left: 4px;margin-right: 4px;margin-top: 8px;">
       <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
-          <view class="lxCenterR cell" :class="{ 'boyClass': person.isGirl === 0}" v-if="person.nickName">
+          <view class="lxCenterR cell" @click="tapCell(person)" :class="{ 'boyClass': person.isGirl === 0}"
+            v-if="person.nickName">
             <view class="headBox">
               <image class="head" :src="person.avatar" mode="aspectFit" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
@@ -127,6 +128,38 @@
         }
       })
     }
+  }
+
+  function tapCell(person) {
+    console.log(JSON.stringify(person, null, 2))
+    if (person.openid == getApp().globalData.openid) {
+      alert2cancel2owner()
+    }
+  }
+
+  function alert2cancel2owner() {
+    uni.showModal({
+      title: '确定取消报名吗？',
+      content: '每次取消报名，将扣除10积分',
+      cancelText: '再考虑下',
+      confirmText: '确定',
+      success: res => {
+
+      }
+    })
+  }
+
+  function sjdklf(person) {
+    let uri = 'tz_person/updateTZPerson'
+    let param = {
+      id: person.id,
+      status: 2
+    }
+    getApp().post(uri, param).then(res => {
+      console.log('res=', JSON.stringify(res, null, 2))
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   function closeJiaYiPop() {
