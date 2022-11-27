@@ -13,6 +13,12 @@
   position: relative;
 }
 
+.lx100vwLine {
+  width: 100vw;
+  height: 1rpx;
+  background-color: #e6e6e6;
+}
+
 .lxColumn {
   display: flex;
   flex-direction: column;

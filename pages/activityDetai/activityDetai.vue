@@ -1,7 +1,10 @@
 <template>
-  <view style="width: 100vw;">
-    <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="14"
-      @getIndex="didChangeTabIndex" />
+  <view class="lxColumn">
+    <view class="topBar">
+      <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="15"
+        @getIndex="didChangeTabIndex" />
+    </view>
+
   </view>
 </template>
 
@@ -22,5 +25,17 @@
 </script>
 
 <style lang="scss">
+  page {
+    padding-top: 32px;
+  }
 
+  .topBar {
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 32px;
+    box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 4px;
+    z-index: 99997;
+  }
 </style>
