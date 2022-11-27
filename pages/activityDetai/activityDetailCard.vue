@@ -1,5 +1,5 @@
 <template>
-  <view class="infoListCell">
+  <view class="lxCenterColumn">
     <view class="lxColumn infoCard">
       <view class="infoRow lxCenterRow">
         <text class="lx666">活动日期</text> <text class="lx333">{{ tz.date }}</text>
@@ -45,7 +45,22 @@
         <text class="lx666">报名截止时间</text> <text class="lx333">{{ tz.stopBaoMingTime }}</text>
       </view>
 
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">飞机扣费</text> <text class="lx333">{{ tz.feijiMoney }}元</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">费用说明</text> <text class="lx333">女生19元，剩余费用男生AA</text>
+      </view>
+
+      <!-- <view class="infoRow lxCenterRow">
+        <text class="lx666" style="flex-shrink:0;">注意事项</text>
+        <text class="lx333"
+          style="margin-left: 28px;font-size: 14px;"></text>
+      </view> -->
+
     </view>
+    <div class="tip">请各位球友根据自身的身体情况控制运动强度，避免出现外，如在运动中出现碰伤或者意外发生，组织者不承担任何法律责任。</div>
   </view>
 </template>
 
@@ -78,6 +93,14 @@
 </script>
 
 <style lang="scss">
+  .tip {
+    font-size: 13px;
+    color: #666666;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 10px;
+  }
+
   .infoRow {
     justify-content: space-between;
     min-height: 70rpx;
