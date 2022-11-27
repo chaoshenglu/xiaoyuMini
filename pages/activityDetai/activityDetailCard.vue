@@ -6,7 +6,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">羽毛球馆</text> <text class="lx333">{{ tz.qiuguanName || '-' }}</text>
+        <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName || '-' }}</text>
       </view>
     </view>
   </view>
@@ -22,7 +22,7 @@
     return props.tiezi
   })
   const dateStr = computed(() => {
-    return tz.date + tz.time
+    return `${tz.value.date}  ${tz.value.time}`
   })
 </script>
 
@@ -42,5 +42,6 @@
     padding-bottom: 10px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
     margin-top: 20px;
+    font-size: 15px;
   }
 </style>
