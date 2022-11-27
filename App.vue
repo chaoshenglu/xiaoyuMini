@@ -244,5 +244,5 @@
 </script>
 
 <style lang="scss">
-
+  @import url("/uni_modules/lgd-tab/components/lgd-tab/lgd-tab.css");
 </style>
