@@ -108,8 +108,8 @@
     border-radius: 10px;
     padding-left: 3vw;
     padding-right: 3vw;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
     font-size: 15px;
   }

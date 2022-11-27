@@ -1,6 +1,7 @@
 <template>
-  <view class="lxColumn" style="margin-top: 10px;">
-
+  <view class="lxColumn" style="padding-top: 20px;width: 100vw;background-color: white;">
+    <uni-steps :options="recordArr" active-color="#4685F3" active-icon="smallcircle" :active="recordArr.length-1"
+      direction="column" />
   </view>
 </template>
 
@@ -24,7 +25,12 @@
     let param = {}
     param.tieziId = tz.value.id
     getApp().get('tz_record/getTZRecord', param).then(res => {
-      recordArr.value = res.data || []
+      let oriArr = res.data || []
+      for (const item of oriArr) {
+        item.title = '这是标题啊'
+        item.desc = item.createTime
+      }
+      recordArr.value = oriArr
     }).catch(err => {
       console.log(err)
     })
