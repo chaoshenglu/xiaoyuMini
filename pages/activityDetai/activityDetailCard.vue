@@ -1,6 +1,8 @@
 <template>
   <view class="infoListCell">
     <view class="lxColumn infoCard">
+
+
       <view class="infoRow lxCenterRow">
         <text class="lx666">活动时间</text> <text class="lx333">{{ dateStr }}</text>
       </view>
@@ -8,6 +10,36 @@
       <view class="infoRow lxCenterRow">
         <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName || '-' }}</text>
       </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">活动场地</text> <text class="lx333">{{ tz.fields || '-' }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">活动状态</text> <text class="lx333">{{ statusStr }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">发起人</text> <text class="lx333">{{ tz.createdPersonName }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">发起组织</text> <text class="lx333">{{ tz.clubName }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">发起时间</text> <text class="lx333">{{ tz.createTime }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">人数限制</text> <text class="lx333">{{ tz.limitNumber || '-' }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">加塞</text> <text class="lx333">{{ tz.limitNumber || '-' }}</text>
+      </view>
+
+
     </view>
   </view>
 </template>
@@ -23,6 +55,20 @@
   })
   const dateStr = computed(() => {
     return `${tz.value.date}  ${tz.value.time}`
+  })
+  const statusStr = computed(() => {
+    //0未开放 1报名中 2活动已取消 3已截止报名 4活动已结束
+    if (tz.value.status == 0) {
+      return '未开放'
+    } else if (tz.value.status == 1) {
+      return '报名中'
+    } else if (tz.value.status == 2) {
+      return '活动已取消'
+    } else if (tz.value.status == 3) {
+      return '已截止报名'
+    } else {
+      return '活动已结束'
+    }
   })
 </script>
 
