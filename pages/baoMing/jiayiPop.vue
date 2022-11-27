@@ -44,7 +44,6 @@
   ]
 
   function onInput(e) {
-    console.log(e.detail.value)
     nickName.value = e.detail.value
   }
 
@@ -56,6 +55,7 @@
       isJiaYi: 1,
       openid: getApp().globalData.openid,
       status: 1, //1已报名2已取消3已飞机
+      tieziId: props.tiezi.id,
     }
     addTZRecord(user)
   }
@@ -63,6 +63,7 @@
   function addTZRecord(user) {
     let param = {
       openid: user.openid,
+      tieziId: props.tiezi.id,
       nickName: getApp().globalData.user.nickName,
       onNickName: user.nickName,
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名

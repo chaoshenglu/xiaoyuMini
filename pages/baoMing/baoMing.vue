@@ -199,12 +199,12 @@
 
   function closeJiaYiPop() {
     jiayiPopup.value.close()
-    getPersonArr()
+    getPersonArr(tiezi.value.id)
   }
 
   function closeBaoMingPop() {
     bmPopup.value.close()
-    getPersonArr()
+    getPersonArr(tiezi.value.id)
   }
 
   function closePop() {
