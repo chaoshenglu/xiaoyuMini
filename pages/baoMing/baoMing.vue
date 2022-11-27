@@ -148,8 +148,16 @@
 
   function tapCell(person) {
     console.log(JSON.stringify(person, null, 2))
+    let user = getApp().globalData.user
+    let ownClubIdsStr = user.ownClubIds || ''
+    let ownClubIds = ownClubIdsStr.split(',')
     if (person.openid == getApp().globalData.openid) {
+      console.log('报名者取消报名')
       alert2cancel2owner(person)
+    } else if (ownClubIds.indexOf(tiezi.value.clubId) >= 0) {
+      console.log('管理员取消报名')
+    } else {
+      console.log('查看此人信息')
     }
   }
 
@@ -171,6 +179,7 @@
     let param = {
       openid: user.openid,
       nickName: user.nickName,
+      tieziId: tiezi.value.id,
       actionType: 3 //默认是给自己取消报名
     }
     if (person.isJiaYi === 1) {
