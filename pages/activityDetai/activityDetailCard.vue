@@ -107,7 +107,7 @@
 
   .infoCard {
     background-color: white;
-    width: 90vw;
+    width: 88vw;
     border-radius: 10px;
     padding-left: 3vw;
     padding-right: 3vw;
