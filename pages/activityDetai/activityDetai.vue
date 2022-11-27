@@ -4,7 +4,7 @@
       <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="15"
         @getIndex="didChangeTabIndex" />
     </view>
-    <activityDetailCard :tiezi="tiezi" />
+    <activityDetailCard v-if="tiezi" :tiezi="tiezi" />
   </view>
 </template>
 
@@ -23,10 +23,24 @@
   let tabs = ref(['活动信息', '报名人员', '操作记录', '活动费用'])
   let tabIndex = ref(0)
   let tiezi = ref(null)
+  let tieziId = ref(null)
 
   onLoad((option) => {
-
+    tieziId.value = option.tieziId
+    getTieZi()
   })
+
+  function getTieZi() {
+    let uri = 'tiezi/getTieZiById'
+    getApp().get(uri, {
+      id: tieziId.value
+    }).then(res => {
+      console.log('data=', JSON.stringify(res.data, null, 2))
+      tiezi.value = res.data
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
   function didChangeTabIndex(e) {
     tabIndex.value = e
