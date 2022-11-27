@@ -1,6 +1,7 @@
 <template>
   <view style="width: 100vw;">
-    <lgd-tab v-model="tabIndex" :tabValue="tabs" underlineColor="#4685F3" fontSize="14" @change="didChangeTabIndex" />
+    <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" fontSize="14"
+      @getIndex="didChangeTabIndex" />
   </view>
 </template>
 
@@ -14,7 +15,7 @@
     },
     methods: {
       didChangeTabIndex(e) {
-        console.log(e)
+        this.tabIndex = e
       },
     }
   }
