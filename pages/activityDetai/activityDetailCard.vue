@@ -53,11 +53,10 @@
         <text class="lx666">费用说明</text> <text class="lx333">女生19元，剩余费用男生AA</text>
       </view>
 
-      <!-- <view class="infoRow lxCenterRow">
-        <text class="lx666" style="flex-shrink:0;">注意事项</text>
-        <text class="lx333"
-          style="margin-left: 28px;font-size: 14px;"></text>
-      </view> -->
+      <view class="infoRow lxCenterRow">
+        <text class="lx666" style="flex-shrink:0;">备注</text>
+        <text class="lx333" style="margin-left: 28px;font-size: 14px;">{{tz.remark}}</text>
+      </view>
 
     </view>
     <div class="tip">请各位球友根据自身的身体情况控制运动强度，避免出现外，如在运动中出现碰伤或者意外发生，组织者不承担任何法律责任。</div>
