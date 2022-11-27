@@ -14,7 +14,8 @@
         </view>
         <view class="lxColumn" style="align-items:flex-end;">
           <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
-          <uni-tag text="已取消" type="primary" size="small"></uni-tag>
+          <uni-tag v-if="person.status===2" text="已取消" type="warning" size="small"></uni-tag>
+          <uni-tag v-if="person.status===3" text="已飞机" type="error" size="small"></uni-tag>
         </view>
       </view>
     </view>
