@@ -3,7 +3,11 @@
     <view v-for="(person, index) in personArr" :index="index" :key="index">
       <view class="lxCenterRow listCell" style="justify-content: space-between;" @click="tapCell(person)">
         <view class="lxCenterRow">
-          <image class="head" :src="person.avatar" mode="aspectFill" />
+          <view class="headBox">
+            <image class="head" :src="person.avatar" mode="aspectFill" />
+            <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+            <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" />
+          </view>
           <text class="pname lx333">{{person.nickName}}</text>
           <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
           <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
@@ -46,10 +50,32 @@
     margin-left: 6px;
   }
 
+  .headBox {
+    width: 40px;
+    height: 40px;
+    position: relative;
+  }
+
+  .vip {
+    position: absolute;
+    top: -5px;
+    right: -1px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .jia {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+  }
+
   .head {
     width: 40px;
     height: 40px;
-    border-radius: 30px;
+    border-radius: 20px;
   }
 
   .gender {
