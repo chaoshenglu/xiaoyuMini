@@ -168,8 +168,10 @@
       cancelText: '再考虑下',
       confirmText: '确定',
       success: res => {
-        updatePersonStatus(person)
-        addCancelRecord(person)
+        if (res.confirm) {
+          updatePersonStatus(person)
+          addCancelRecord(person)
+        }
       }
     })
   }
@@ -201,6 +203,7 @@
     }
     getApp().post(uri, param).then(res => {
       console.log('res=', JSON.stringify(res, null, 2))
+      getPersonArr(tiezi.value.id)
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
