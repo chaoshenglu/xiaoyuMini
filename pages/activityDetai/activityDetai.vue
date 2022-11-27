@@ -4,23 +4,28 @@
       <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="15"
         @getIndex="didChangeTabIndex" />
     </view>
-
   </view>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        tabs: ['活动信息', '报名人员', '操作记录', '活动费用'],
-        tabIndex: 0
-      }
-    },
-    methods: {
-      didChangeTabIndex(e) {
-        this.tabIndex = e
-      },
-    }
+<script setup>
+  import {
+    computed,
+    ref
+  } from 'vue'
+
+  import {
+    onLoad
+  } from "@dcloudio/uni-app"
+
+  let tabs = ref(['活动信息', '报名人员', '操作记录', '活动费用'])
+  let tabIndex = ref(0)
+
+  onLoad((option) => {
+
+  })
+
+  function didChangeTabIndex(e) {
+    tabIndex.value = e
   }
 </script>
 
