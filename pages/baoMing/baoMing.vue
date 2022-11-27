@@ -50,7 +50,7 @@
       </uni-grid>
     </view>
 
-    <view class="bottomBox lxColumn">
+    <view class="bottomBox lxColumn" :style="bottomBoxStyle">
       <text>{{tiezi.title}}</text>
       <text>{{tiezi.time}} {{tiezi.fields}}</text>
     </view>
@@ -65,6 +65,7 @@
   import baoMingPop from '/pages/baoMing/baoMingPop.vue'
   import jiayiPop from '/pages/baoMing/jiayiPop.vue'
   import {
+    computed,
     ref
   } from 'vue'
 
@@ -80,10 +81,23 @@
   let personArr = ref([])
   let didAddMyself = ref(false)
   let tiezi = ref(null)
+  let bottomOffset = ref(0)
+  const bottomBoxStyle = computed(() => {
+    return {
+      bottom: `${bottomOffset.value + 50}px`
+    }
+  })
 
   onLoad((option) => {
     getTieZi(option.id)
     getPersonArr(option.id)
+
+    try {
+      const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
+      bottomOffset.value = safeAreaInsets.bottom || 10
+    } catch (e) {
+      bottomOffset.value = 34
+    }
   })
 
   onShow(() => {
@@ -243,7 +257,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
-    bottom: 100px;
     left: 3vw;
     position: fixed;
   }
