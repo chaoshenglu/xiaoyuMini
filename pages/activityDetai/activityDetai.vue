@@ -1,6 +1,6 @@
 <template>
   <view style="width: 100vw;">
-    <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" fontSize="14"
+    <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="14"
       @getIndex="didChangeTabIndex" />
   </view>
 </template>
