@@ -12,7 +12,10 @@
           <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
           <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
         </view>
-        <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
+        <view class="lxColumn" style="align-items:flex-end;">
+          <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
+          <uni-tag text="已取消" type="primary" size="small"></uni-tag>
+        </view>
       </view>
     </view>
   </view>
@@ -48,6 +51,13 @@
 <style lang="scss">
   .pname {
     margin-left: 6px;
+  }
+
+  .uni-tag--small {
+    border-radius: 4px !important;
+    margin-right: 4px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
   }
 
   .headBox {
