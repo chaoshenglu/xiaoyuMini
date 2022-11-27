@@ -1,5 +1,5 @@
 <template>
-  <view class="lxCenterColumn">
+  <view class="lxCenterColumn" style="margin-top: 24px;">
     <view class="lxColumn infoCard">
       <view class="infoRow lxCenterRow">
         <text class="lx666">活动日期</text> <text class="lx333">{{ tz.date }}</text>
@@ -111,7 +111,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
-    margin-top: 20px;
     font-size: 15px;
   }
 </style>
