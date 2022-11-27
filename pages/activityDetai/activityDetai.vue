@@ -5,6 +5,7 @@
         @getIndex="didChangeTabIndex" />
     </view>
     <activityDetailCard v-if="tiezi && tabIndex === 0" :tiezi="tiezi" />
+    <personListView v-if="tiezi && tabIndex === 1" :tiezi="tiezi" />
   </view>
 </template>
 
@@ -19,6 +20,7 @@
   } from "@dcloudio/uni-app"
 
   import activityDetailCard from '/pages/activityDetai/activityDetailCard.vue'
+  import personListView from '/pages/activityDetai/personListView.vue'
 
   let tabs = ref(['活动信息', '报名人员', '操作记录', '活动费用'])
   let tabIndex = ref(0)

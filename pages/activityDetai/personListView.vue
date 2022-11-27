@@ -1,18 +1,12 @@
 <template>
-  <view class="lxCenterColumn">
-
+  <view class="lxCenterColumn" style="margin-top: 10px;">
     <view v-for="(person, index) in personArr" :index="index" :key="index">
       <view class="lxCenterRow listCell" @click="tapCell(person)">
-        <view class="headBox">
-          <image class="head" :src="person.avatar" mode="aspectFill" />
-          <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
-          <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" />
-        </view>
-        <text class="pname">{{person.nickName}}</text>
+        <image class="head" :src="person.avatar" mode="aspectFill" />
+        <text class="pname lx333">{{person.nickName}}</text>
+        <image class="gender" src="/static/man.png" mode="aspectFit"></image>
       </view>
     </view>
-
-
   </view>
 </template>
 
@@ -27,13 +21,14 @@
     return props.tiezi
   })
   let personArr = ref([])
+
   onMounted(() => {
     getPersonArr()
   })
 
   function getPersonArr() {
     let param = {}
-    param.tieziId = tz.id
+    param.tieziId = tz.value.id
     getApp().get('tz_person/getTZPerson', param).then(res => {
       personArr.value = res.data || []
     }).catch(err => {
@@ -43,5 +38,19 @@
 </script>
 
 <style lang="scss">
+  .pname {
+    margin-left: 6px;
+  }
 
+  .head {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+  }
+
+  .gender {
+    width: 15px;
+    height: 15px;
+    margin-left: 4px;
+  }
 </style>
