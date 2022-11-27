@@ -1,18 +1,20 @@
 <template>
   <view class="infoListCell">
     <view class="lxColumn infoCard">
-
-
       <view class="infoRow lxCenterRow">
-        <text class="lx666">活动时间</text> <text class="lx333">{{ dateStr }}</text>
+        <text class="lx666">活动日期</text> <text class="lx333">{{ tz.date }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName || '-' }}</text>
+        <text class="lx666">活动时间</text> <text class="lx333">{{ tz.time }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">活动场地</text> <text class="lx333">{{ tz.fields || '-' }}</text>
+        <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName }}</text>
+      </view>
+
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">活动场地</text> <text class="lx333">{{ tz.fields }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
@@ -32,11 +34,11 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">人数限制</text> <text class="lx333">{{ tz.limitNumber || '-' }}</text>
+        <text class="lx666">人数限制</text> <text class="lx333">{{ tz.limitNumber }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">加塞</text> <text class="lx333">{{ tz.limitNumber || '-' }}</text>
+        <text class="lx666">加塞</text> <text class="lx333">{{ tz.limitNumber }}</text>
       </view>
 
 
