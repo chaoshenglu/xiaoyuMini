@@ -72,9 +72,6 @@
   const tz = computed(() => {
     return props.tiezi
   })
-  const dateStr = computed(() => {
-    return `${tz.value.date}  ${tz.value.time}`
-  })
   const statusStr = computed(() => {
     //0未开放 1报名中 2活动已取消 3已截止报名 4活动已结束
     if (tz.value.status == 0) {
