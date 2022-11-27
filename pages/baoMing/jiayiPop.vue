@@ -3,7 +3,7 @@
     <view style="padding: 16px;">
       <view class="lxCenterRow" style="margin-top: 6px;margin-bottom: 10px;">
         <text class="lx333" style="margin-right: 10px;flex-shrink:0;">昵称</text>
-        <input type="text" @input="onInput" placeholder="请输入TA的昵称">
+        <input type="text" @input="onInput" placeholder="请输入TA的昵称" maxlength="4">
       </view>
       <view style="background-color: #ededed;margin-left: 40px;margin-right: 30px;height: 1px;" />
       <view class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
@@ -101,7 +101,6 @@
   }
 
   function radioChange(e) {
-    console.log('e.detail.value', e.detail.value)
     current.value = e.detail.value
   }
 </script>
