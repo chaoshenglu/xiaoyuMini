@@ -4,7 +4,7 @@
       <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="15"
         @getIndex="didChangeTabIndex" />
     </view>
-    <activityDetailCard v-if="tiezi" :tiezi="tiezi" />
+    <activityDetailCard v-if="tiezi && tabIndex === 0" :tiezi="tiezi" />
   </view>
 </template>
 
