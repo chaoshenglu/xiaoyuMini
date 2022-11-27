@@ -50,9 +50,14 @@
       </uni-grid>
     </view>
 
-    <view class="bottomBox lxColumn" :style="bottomBoxStyle">
-      <text>{{tiezi.title}}</text>
-      <text>{{tiezi.time}} {{tiezi.fields}}</text>
+    <view class="bottomBox" :style="bottomBoxStyle">
+      <view class="lxCenterRow" style="justify-content: space-between;">
+        <view class="lxColumn">
+          <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title}}</text>
+          <text class="lx999" style="font-size: 13px;">{{tiezi.time}} {{tiezi.fields}}</text>
+        </view>
+        <text style="color: #4685F3;font-size: 14px;margin-right: 10px;">查看详情</text>
+      </view>
     </view>
 
     <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
@@ -84,7 +89,7 @@
   let bottomOffset = ref(0)
   const bottomBoxStyle = computed(() => {
     return {
-      bottom: `${bottomOffset.value + 50}px`
+      bottom: `${bottomOffset.value + 56}px`
     }
   })
 
