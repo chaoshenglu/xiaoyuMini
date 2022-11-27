@@ -41,6 +41,9 @@
         <text class="lx666">已报名人数</text> <text class="lx333">{{ tz.personNumber }}</text>
       </view>
 
+      <view class="infoRow lxCenterRow">
+        <text class="lx666">报名截止时间</text> <text class="lx333">{{ tz.stopBaoMingTime }}</text>
+      </view>
 
     </view>
   </view>
