@@ -50,8 +50,9 @@
       </uni-grid>
     </view>
 
-    <view class="lxCenterC">
-
+    <view class="bottomBox lxColumn">
+      <text>{{tiezi.title}}</text>
+      <text>{{tiezi.time}} {{tiezi.fields}}</text>
     </view>
 
     <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
@@ -229,6 +230,24 @@
 </script>
 
 <style lang="scss">
+  page {
+    background-color: #F6F6F6;
+  }
+
+  .bottomBox {
+    background-color: white;
+    width: 88vw;
+    border-radius: 6px;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
+    bottom: 100px;
+    left: 3vw;
+    position: fixed;
+  }
+
   .smallTag {
     margin-left: 4px;
   }
