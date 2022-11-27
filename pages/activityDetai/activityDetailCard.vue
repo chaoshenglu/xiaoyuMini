@@ -38,7 +38,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">加塞</text> <text class="lx333">{{ tz.limitNumber }}</text>
+        <text class="lx666">已报名人数</text> <text class="lx333">{{ tz.personNumber }}</text>
       </view>
 
 
