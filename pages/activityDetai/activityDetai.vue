@@ -1,9 +1,10 @@
 <template>
-  <view class="lxColumn">
+  <view class="lxCenterColumn">
     <view class="topBar">
       <lgd-tab :tabIndex="tabIndex" :tabValue="tabs" underlineColor="#4685F3" :fontSize="15"
         @getIndex="didChangeTabIndex" />
     </view>
+    <activityDetailCard :tiezi="tiezi" />
   </view>
 </template>
 
@@ -17,8 +18,11 @@
     onLoad
   } from "@dcloudio/uni-app"
 
+  import activityDetailCard from '/pages/activityDetai/activityDetailCard.vue'
+
   let tabs = ref(['活动信息', '报名人员', '操作记录', '活动费用'])
   let tabIndex = ref(0)
+  let tiezi = ref(null)
 
   onLoad((option) => {
 
@@ -32,6 +36,7 @@
 <style lang="scss">
   page {
     padding-top: 32px;
+    background-color: #f6f6f6;
   }
 
   .topBar {
@@ -42,5 +47,6 @@
     box-shadow: 0px 0px 6px 6px rgba(0, 0, 0, 0.1);
     padding-top: 4px;
     z-index: 99997;
+    background-color: white;
   }
 </style>
