@@ -127,6 +127,7 @@
   function getPersonArr(id) {
     let param = {}
     param.tieziId = id
+    param.status = 1
     getApp().get('tz_person/getTZPerson', param).then(res => {
       personArr.value = res.data || []
     }).catch(err => {
