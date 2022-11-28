@@ -6,7 +6,7 @@
           <view class="headBox">
             <image class="head" :src="person.avatar" mode="aspectFill" />
             <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
-            <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" />
+            <!-- <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" /> -->
           </view>
           <text class="pname lx333">{{person.nickName}}</text>
           <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
