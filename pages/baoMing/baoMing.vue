@@ -56,7 +56,7 @@
           <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title}}</text>
           <text class="lx999" style="font-size: 13px;">{{tiezi.time}} {{tiezi.fields}}</text>
         </view>
-        <text style="color: #4685F3;font-size: 14px;margin-right: 10px;">查看详情</text>
+        <text style="color: #4685F3;font-size: 14px;margin-right: 10px;" @click="tapDetail">查看详情</text>
       </view>
     </view>
 
@@ -232,6 +232,12 @@
       console.log('addTZRecord res=', JSON.stringify(res, null, 2))
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
+    })
+  }
+
+  function tapDetail() {
+    uni.navigateTo({
+      url: `/pages/activityDetai/activityDetai?tieziId=${tiezi.value.id}`
     })
   }
 
