@@ -129,9 +129,23 @@
     param.tieziId = id
     param.status = 1
     getApp().get('tz_person/getTZPerson', param).then(res => {
-      personArr.value = res.data || []
+      let arr = res.data || []
+      personArr.value = arr
+      updateTieziPersonNumber(arr.length)
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
+
+  function updateTieziPersonNumber(length) {
+    let param = {
+      id: tiezi.value.id,
+      personNumber: length
+    }
+    getApp().post('tiezi/updateTiezi', param).then(res => {
+      console.log('updateTiezi res=', res)
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
     })
   }
 
