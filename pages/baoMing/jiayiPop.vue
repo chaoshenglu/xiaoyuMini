@@ -48,6 +48,9 @@
   }
 
   function tapConfirm() {
+    if (nickName.value === '' || !nickName.value) {
+      return
+    }
     let user = {
       nickName: nickName.value,
       avatar: getApp().globalData.user.avatar,
