@@ -7,7 +7,7 @@
     <activityDetailCard v-if="tiezi && tabIndex === 0" :tiezi="tiezi" />
     <personListView v-if="tiezi && tabIndex === 1" :tiezi="tiezi" />
     <recordListView v-if="tiezi && tabIndex === 2" :tiezi="tiezi" />
-    <recordListView v-if="tiezi && tabIndex === 3" :tiezi="tiezi" />
+    <settleView v-if="tiezi && tabIndex === 3" :tiezi="tiezi" />
   </view>
 </template>
 
