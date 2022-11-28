@@ -1,5 +1,5 @@
 <template>
-  <view class="lxColumn" style="padding-top: 20px;width: 100vw;background-color: white;">
+  <view class="lxColumn" style="padding-top: 20px;width: 100vw;height:100vh;background-color: white;">
     <image :src="src" mode="aspectFit" style="width: 100vw;height: 100vw;"></image>
   </view>
 </template>
