@@ -23,10 +23,10 @@
         <view class="smallBox" style="background-color: #FD5FA9;" />
         <text class="smallWord">女</text>
       </view>
-      <view class="smallTag lxCenterRow">
+      <!-- <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #E2E2E2;" />
         <text class="smallWord">空位</text>
-      </view>
+      </view> -->
       <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #999999" />
         <text class="smallWord">排队</text>
@@ -35,8 +35,7 @@
     <view style="margin-left: 4px;margin-right: 4px;margin-top: 8px;">
       <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
-          <view class="lxCenterR cell" @click="tapCell(person)" :class="{ 'boyClass': person.isGirl === 0}"
-            v-if="person.nickName">
+          <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
             <view class="headBox">
               <image class="head" :src="person.avatar" mode="aspectFill" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
@@ -50,10 +49,10 @@
       </uni-grid>
     </view>
 
-    <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail">
+    <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail" v-if="tiezi">
       <view class="lxCenterRow" style="justify-content: space-between;">
         <view class="lxColumn">
-          <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title}}</text>
+          <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title || '-'}}</text>
           <text class="lx999" style="font-size: 13px;">{{tiezi.time}} {{tiezi.fields}}</text>
         </view>
         <text style="color: #4685F3;font-size: 14px;margin-right: 10px;">查看详情</text>
@@ -106,7 +105,6 @@
 
   onShow(() => {
     getTieZi(tieziId.value)
-    getPersonArr(tieziId.value)
     uni.$on('noGift', function(data) {
       console.log('监听到事件来自 noGift')
       popup.value.open()
@@ -120,6 +118,7 @@
     }).then(res => {
       console.log('data=', JSON.stringify(res.data, null, 2))
       tiezi.value = res.data
+      getPersonArr(tieziId.value)
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
@@ -131,6 +130,25 @@
     param.status = 1
     getApp().get('tz_person/getTZPerson', param).then(res => {
       let arr = res.data || []
+
+      for (var i = 0; i < arr.length; i++) {
+        let person = arr[i]
+        if (person.isGirl) {
+          person.style = {
+            backgroundColor: '#FD5FA9'
+          }
+        } else {
+          person.style = {
+            backgroundColor: '#4685F3'
+          }
+        }
+        if (i > tiezi.value.limitNumber) {
+          person.style = {
+            backgroundColor: '#999999'
+          }
+        }
+      }
+
       personArr.value = arr
       updateTieziPersonNumber(arr.length)
     }).catch(err => {
@@ -346,10 +364,6 @@
     margin-left: 6px;
     color: white;
     font-size: 12px;
-  }
-
-  .boyClass {
-    background-color: #4685F3 !important;
   }
 
   .cell {
