@@ -191,7 +191,7 @@
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
-          updatePersonStatus(person)
+          updatePersonStatus(person, 2)
           addCancelRecord(person, 5)
         }
       }
@@ -199,14 +199,21 @@
   }
 
   function alert2cancel2owner(person) {
+    let content = '每次取消报名，将扣除10积分'
+    let timestamp = new Date().getTime()
+    let status = 2
+    if (timestamp > 1669708800000) {
+      content = '取消后若无人接替，将扣除10积分，且须支付10元飞机费'
+      status = 3
+    }
     uni.showModal({
       title: '确定取消报名吗？',
-      content: '每次取消报名，将扣除10积分',
+      content: content,
       cancelText: '再考虑下',
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
-          updatePersonStatus(person)
+          updatePersonStatus(person, status)
           addCancelRecord(person)
         }
       }
@@ -242,11 +249,11 @@
     })
   }
 
-  function updatePersonStatus(person) {
+  function updatePersonStatus(person, status) {
     let uri = 'tz_person/updateTZPerson'
     let param = {
       id: person.id,
-      status: 2
+      status: status //1已报名2已取消3已飞机
     }
     getApp().post(uri, param).then(res => {
       console.log('res=', JSON.stringify(res, null, 2))
