@@ -86,6 +86,7 @@
   let personArr = ref([])
   let didAddMyself = ref(false)
   let tiezi = ref(null)
+  let tieziId = ref(null)
   let bottomOffset = ref(0)
   const bottomBoxStyle = computed(() => {
     return {
@@ -94,9 +95,7 @@
   })
 
   onLoad((option) => {
-    getTieZi(option.id)
-    getPersonArr(option.id)
-
+    tieziId.value = option.id
     try {
       const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
       bottomOffset.value = safeAreaInsets.bottom || 10
@@ -106,6 +105,8 @@
   })
 
   onShow(() => {
+    getTieZi(tieziId.value)
+    getPersonArr(tieziId.value)
     uni.$on('noGift', function(data) {
       console.log('监听到事件来自 noGift')
       popup.value.open()
