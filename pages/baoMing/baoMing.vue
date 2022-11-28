@@ -225,8 +225,9 @@
       param.actionType = 4 //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
       param.onNickName = person.nickName
     }
-    if (actionType) {
+    if (actionType === 5) {
       param.actionType = actionType
+      param.onNickName = person.nickName
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       console.log('addTZRecord res=', JSON.stringify(res, null, 2))
