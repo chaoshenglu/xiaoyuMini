@@ -50,13 +50,13 @@
       </uni-grid>
     </view>
 
-    <view class="bottomBox" :style="bottomBoxStyle">
+    <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail">
       <view class="lxCenterRow" style="justify-content: space-between;">
         <view class="lxColumn">
           <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title}}</text>
           <text class="lx999" style="font-size: 13px;">{{tiezi.time}} {{tiezi.fields}}</text>
         </view>
-        <text style="color: #4685F3;font-size: 14px;margin-right: 10px;" @click="tapDetail">查看详情</text>
+        <text style="color: #4685F3;font-size: 14px;margin-right: 10px;">查看详情</text>
       </view>
     </view>
 
