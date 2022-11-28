@@ -172,14 +172,30 @@
     let user = getApp().globalData.user
     let ownClubIdsStr = user.ownClubIds || ''
     let ownClubIds = ownClubIdsStr.split(',')
+    console.log('ownClubIds=', ownClubIds)
     if (person.openid == getApp().globalData.openid) {
       console.log('报名者取消报名')
       alert2cancel2owner(person)
-    } else if (ownClubIds.indexOf(tiezi.value.clubId) >= 0) {
+    } else if (ownClubIds.indexOf(`${tiezi.value.clubId}`) >= 0) {
       console.log('管理员取消报名')
+      alert2cancel2remove(person)
     } else {
       console.log('查看此人信息')
     }
+  }
+
+  function alert2cancel2remove(person) {
+    uni.showModal({
+      title: '确定将此人移除吗？',
+      cancelText: '再考虑下',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          updatePersonStatus(person)
+          addCancelRecord(person, 5)
+        }
+      }
+    })
   }
 
   function alert2cancel2owner(person) {
@@ -197,7 +213,7 @@
     })
   }
 
-  function addCancelRecord(person) {
+  function addCancelRecord(person, actionType) {
     let user = getApp().globalData.user
     let param = {
       openid: user.openid,
@@ -208,6 +224,9 @@
     if (person.isJiaYi === 1) {
       param.actionType = 4 //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
       param.onNickName = person.nickName
+    }
+    if (actionType) {
+      param.actionType = actionType
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       console.log('addTZRecord res=', JSON.stringify(res, null, 2))
