@@ -15,7 +15,7 @@
             <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFit" />
             <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
             <text class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
-            <text class="name">{{tiezi.createdPersonName || '颐瑾羽毛球馆'}}</text>
+            <text class="name">{{tiezi.qiuguanName || '-'}}</text>
           </view>
         </view>
       </view>
@@ -118,6 +118,7 @@
     width: 25px;
     height: 25px;
     margin-right: 5px;
+    border-radius: 12.5px;
   }
 
   .remark {
