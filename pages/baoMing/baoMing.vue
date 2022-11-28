@@ -142,7 +142,7 @@
             backgroundColor: '#4685F3'
           }
         }
-        if (i > tiezi.value.limitNumber) {
+        if (i >= tiezi.value.limitNumber) {
           person.style = {
             backgroundColor: '#999999'
           }
