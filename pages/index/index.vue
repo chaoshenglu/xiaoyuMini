@@ -12,7 +12,7 @@
           </view>
           <text class="remark">备注：{{tiezi.remark}}</text>
           <view class="lxCenterRow" style="margin-top: 8px;">
-            <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFit" />
+            <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFill" />
             <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
             <text class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
             <text class="name">{{tiezi.qiuguanName || '-'}}</text>
