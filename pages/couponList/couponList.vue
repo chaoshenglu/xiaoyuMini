@@ -28,7 +28,7 @@
     ref
   } from 'vue';
   const paging = ref(null)
-  let couponArr = []
+  let couponArr = ref([])
 
   const queryList = (pageNo, pageSize) => {
     if (getApp().globalData.user.gift) {

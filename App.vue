@@ -63,7 +63,7 @@
         if (!this.globalData.gift.money) {
           this.globalData.gift = {
             name: '新用户专享红包',
-            money: this.randomNum(1, 9)
+            money: 3
           }
           uni.setStorageSync('gift', this.globalData.gift)
         }
