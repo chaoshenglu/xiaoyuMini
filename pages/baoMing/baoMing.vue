@@ -69,7 +69,7 @@
       </view>
     </view>
     <view v-else>
-      <LXBottomBtn title="报名" backgroundColor="#999999" />
+      <LXBottomBtn :title="tieziStatusStr" backgroundColor="#999999" />
     </view>
 
   </view>
@@ -101,6 +101,16 @@
   const bottomBoxStyle = computed(() => {
     return {
       bottom: `${bottomOffset.value + 56}px`
+    }
+  })
+
+  const tieziStatusStr = computed(() => {
+    if (tiezi.value.status === 1) {
+      return '报名'
+    } else if (tiezi.value.status === 2) {
+      return '活动已取消'
+    } else if (tiezi.value.status === 3) {
+      return '已截止报名'
     }
   })
 
