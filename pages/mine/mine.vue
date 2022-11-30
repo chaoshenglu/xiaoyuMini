@@ -19,7 +19,7 @@
 
     <MineCell title="我的积分" icon="/static/jifen.png" @tapMineCell="tapMineCell" />
     <MineCell title="我的优惠券" icon="/static/coupon.png" @tapMineCell="tapMineCell" />
-    <MineCell title="我的报名" icon="/static/clear.png" @tapMineCell="tapMineCell" />
+    <MineCell title="我的报名" icon="/static/baoming.png" @tapMineCell="tapMineCell" />
     <MineCell title="我的组织" icon="/static/clear.png" @tapMineCell="tapMineCell" />
     <MineCell title="更多功能" icon="/static/clear.png" @tapMineCell="tapMineCell" />
     <MineCell title="清除缓存" icon="/static/clear.png" @tapMineCell="tapMineCell" />
