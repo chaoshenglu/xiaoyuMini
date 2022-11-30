@@ -60,7 +60,7 @@
     </view>
 
     <view v-if="didAddMyself">
-      <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)">
+      <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)" />
     </view>
 
     <view v-else>

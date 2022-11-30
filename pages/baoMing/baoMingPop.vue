@@ -97,7 +97,7 @@
       uni.showModal({
         title: '报名成功',
         showCancel: false,
-        content: '点击自己的头像，可取消报名，点右上角“三个点”分享此页面到群里，可获得1积分奖励',
+        content: '点击自己的头像，可取消报名，点右上角“三个点”分享此页面到群里，将有机会获得1积分奖励',
         confirmText: '我知道了'
       })
     } else {
