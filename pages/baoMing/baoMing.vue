@@ -131,7 +131,7 @@
     })
   }
 
-  function getPersonArr(id) {
+  function getPersonArr(id, updateTiezi) {
     let param = {}
     param.tieziId = id
     param.status = 1
@@ -159,7 +159,11 @@
         }
       }
       personArr.value = arr
-      updateTieziPersonNumber(arr.length)
+
+      if (updateTiezi === 1) {
+        updateTieziPersonNumber(arr.length)
+      }
+
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
@@ -299,7 +303,7 @@
     }
     getApp().post(uri, param).then(res => {
       console.log('res=', JSON.stringify(res, null, 2))
-      getPersonArr(tiezi.value.id)
+      getPersonArr(tiezi.value.id, 1)
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
@@ -307,12 +311,12 @@
 
   function closeJiaYiPop() {
     jiayiPopup.value.close()
-    getPersonArr(tiezi.value.id)
+    getPersonArr(tiezi.value.id, 1)
   }
 
   function closeBaoMingPop() {
     bmPopup.value.close()
-    getPersonArr(tiezi.value.id)
+    getPersonArr(tiezi.value.id, 1)
   }
 
   function closePop() {
