@@ -37,10 +37,18 @@
   })
 
   function tapMineCell(e) {
-    console.log('❌tapMineCell', e)
+    if (e === '我的积分') {
+
+    } else if (e === '我的优惠券') {
+      pushCouponList()
+    } else if (e === '我的活动') {
+
+    } else if (e === '清除缓存') {
+      clearCache()
+    }
   }
 
-  function clear() {
+  function clearCache() {
     getApp().globalData.openid = null
     getApp().globalData.saveOpenIdTime = null
     getApp().globalData.user = null
@@ -58,7 +66,7 @@
     }, 500)
   }
 
-  function tapCoupon() {
+  function pushCouponList() {
     uni.navigateTo({
       url: '/pages/couponList/couponList'
     })
