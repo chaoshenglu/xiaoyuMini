@@ -69,7 +69,7 @@
       </view>
     </view>
     <view v-else>
-
+      <LXBottomBtn title="报名" backgroundColor="#999999" />
     </view>
 
   </view>

@@ -13,12 +13,13 @@
     computed,
     ref
   } from 'vue'
-  const props = defineProps(['title'])
+  const props = defineProps(['title', 'backgroundColor'])
   const emit = defineEmits(['tapBottomBtn'])
   let bottomOffset = ref(0)
   const style = computed(() => {
     return {
-      bottom: `${bottomOffset.value}px`
+      bottom: `${bottomOffset.value}px`,
+      backgroundColor: props.backgroundColor || '#4685F3'
     }
   })
 
@@ -41,7 +42,6 @@
     position: fixed;
     width: 94vw;
     height: 44px;
-    background-color: #4685F3;
     font-size: 16px;
     color: white;
     left: 3vw;
