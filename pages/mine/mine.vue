@@ -45,7 +45,11 @@
 
     } else if (e === '我的优惠券') {
       pushCouponList()
-    } else if (e === '我的活动') {
+    } else if (e === '我的报名') {
+
+    } else if (e === '我的组织') {
+
+    } else if (e === '更多功能') {
 
     } else if (e === '清除缓存') {
       clearCache()
