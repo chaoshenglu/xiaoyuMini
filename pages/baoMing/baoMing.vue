@@ -59,13 +59,14 @@
       </view>
     </view>
 
-    <view v-if="didAddMyself">
-      <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)" />
-    </view>
-
-    <view v-else>
-      <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
-      <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
+    <view v-if="tiezi && tiezi.status===1">
+      <view v-if="didAddMyself">
+        <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)" />
+      </view>
+      <view v-else>
+        <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
+        <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
+      </view>
     </view>
 
   </view>
