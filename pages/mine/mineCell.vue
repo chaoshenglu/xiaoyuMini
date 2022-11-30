@@ -1,6 +1,10 @@
 <template>
-  <view class="lxCenterC lxBottomBtn" :style="style" @click="tapBottomBtn">
-    {{props.title}}
+  <view class="mineCard lxCenterRow mineCell" @click="tapMineCell">
+    <view class="lxCenterRow">
+      <image :src="props.icon" mode="aspectFit" class="rowIcon"></image>
+      <text class="lx666" style="font-size: 16px;">{{props.title}}</text>
+    </view>
+    <uni-icons color="#666666" type="right"></uni-icons>
   </view>
   <view>
 
@@ -9,42 +13,20 @@
 
 <script setup>
   import {
-    onMounted,
     computed,
     ref
   } from 'vue'
-  const props = defineProps(['title', 'backgroundColor'])
-  const emit = defineEmits(['tapBottomBtn'])
-  let bottomOffset = ref(0)
-  const style = computed(() => {
-    return {
-      bottom: `${bottomOffset.value}px`,
-      backgroundColor: props.backgroundColor || '#4685F3'
-    }
-  })
+  const props = defineProps(['title', 'icon'])
+  const emit = defineEmits(['tapMineCell'])
 
-  onMounted(() => {
-    try {
-      const safeAreaInsets = uni.getWindowInfo().safeAreaInsets || {}
-      bottomOffset.value = safeAreaInsets.bottom || 10
-    } catch (e) {
-      bottomOffset.value = 34
-    }
-  })
-
-  function tapBottomBtn() {
-    emit('tapBottomBtn')
+  function tapMineCell() {
+    emit('tapMineCell', props.title)
   }
 </script>
 
 <style lang="scss">
-  .lxBottomBtn {
-    position: fixed;
-    width: 94vw;
-    height: 44px;
-    font-size: 16px;
-    color: white;
-    left: 3vw;
-    border-radius: 6px;
+  .mineCell {
+    margin-bottom: 10px;
+    justify-content: space-between;
   }
 </style>

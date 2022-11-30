@@ -1,6 +1,6 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
-    <view class="mineCard lxCenterRow">
+    <view class="mineCard lxCenterRow" style="margin-bottom: 16px;">
       <image class="avatar" @click="tapAvatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
       <text v-if="user.nickName && !user.avatar" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
       <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
@@ -16,27 +16,16 @@
           :{{user.openid.slice(0,15)}}</text>
       </view>
     </view>
-    <view style="height: 16px;"></view>
-    <view class="mineCard lxCenterRow" style="justify-content: space-between;" @click="tapCoupon">
-      <view class="lxCenterRow">
-        <image src="/static/coupon.png" mode="aspectFit" class="rowIcon"></image>
-        <text class="lx666" style="font-size: 16px;">我的优惠券</text>
-      </view>
-      <uni-icons color="#666666" type="right"></uni-icons>
-    </view>
 
-    <view class="mineCard lxCenterRow" style="justify-content: space-between;margin-top: 10px;" @click="clear">
-      <view class="lxCenterRow">
-        <image src="/static/clear.png" mode="aspectFit" class="rowIcon"></image>
-        <text class="lx666" style="font-size: 16px;">清除缓存</text>
-      </view>
-      <uni-icons color="#666666" type="right"></uni-icons>
-    </view>
+    <MineCell title="我的优惠券" icon="/static/coupon.png" @tapMineCell="tapMineCell" />
+    <MineCell title="清除缓存" icon="/static/clear.png" @tapMineCell="tapMineCell" />
+
 
   </view>
 </template>
 
 <script setup>
+  import MineCell from '/pages/mine/mineCell.vue'
   import {
     ref,
     computed
@@ -46,6 +35,10 @@
   const genderIcon = computed(() => {
     return user.value.isGirl === 1 ? "/static/woman.png" : "/static/man.png"
   })
+
+  function tapMineCell(e) {
+    console.log('❌tapMineCell', e)
+  }
 
   function clear() {
     getApp().globalData.openid = null
@@ -210,17 +203,6 @@
     transform: scale(0.9);
     margin-right: 0px !important;
     margin-left: 8px !important;
-  }
-
-  .mineCard {
-    background-color: white;
-    width: 86vw;
-    border-radius: 20rpx;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    margin-left: 4vw;
   }
 
   .avatar {
