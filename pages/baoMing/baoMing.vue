@@ -59,8 +59,15 @@
       </view>
     </view>
 
-    <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
-    <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
+    <view v-if="didAddMyself">
+      <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)">
+    </view>
+
+    <view v-else>
+      <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
+      <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
+    </view>
+
   </view>
 </template>
 
@@ -130,7 +137,7 @@
     param.status = 1
     getApp().get('tz_person/getTZPerson', param).then(res => {
       let arr = res.data || []
-
+      didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
         if (person.isGirl) {
@@ -147,8 +154,10 @@
             backgroundColor: '#999999'
           }
         }
+        if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
+          didAddMyself.value = 1
+        }
       }
-
       personArr.value = arr
       updateTieziPersonNumber(arr.length)
     }).catch(err => {
