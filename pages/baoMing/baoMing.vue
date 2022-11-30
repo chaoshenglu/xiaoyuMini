@@ -1,15 +1,15 @@
 <template>
-  <view>
+  <view v-if="tiezi">
     <uni-popup ref="popup" type="center">
       <Gift @closePop="closePop" />
     </uni-popup>
 
-    <uni-popup v-if="tiezi" ref="bmPopup" type="center">
+    <uni-popup ref="bmPopup" type="center">
       <baoMingPop :tiezi="tiezi" @closeBaoMingPop="closeBaoMingPop" />
       <view style="height: 20vh;" />
     </uni-popup>
 
-    <uni-popup v-if="tiezi" ref="jiayiPopup" type="center">
+    <uni-popup ref="jiayiPopup" type="center">
       <jiayiPop :tiezi="tiezi" @closeJiaYiPop="closeJiaYiPop" />
       <view style="height: 20vh;" />
     </uni-popup>
@@ -49,7 +49,7 @@
       </uni-grid>
     </view>
 
-    <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail" v-if="tiezi">
+    <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail">
       <view class="lxCenterRow" style="justify-content: space-between;">
         <view class="lxColumn">
           <text class="lx333" style="font-size: 14px;font-weight: bold;">{{tiezi.title || '-'}}</text>
@@ -59,7 +59,7 @@
       </view>
     </view>
 
-    <view v-if="tiezi && tiezi.status===1">
+    <view v-if="tiezi.status===1">
       <view v-if="didAddMyself">
         <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)" />
       </view>
@@ -67,6 +67,9 @@
         <HalfBottomBtn title='报名' :isLeft="true" @tapBottomBtn="baoMing(0)" />
         <HalfBottomBtn title='报名+1' :isLeft="false" @tapBottomBtn="baoMing(1)" />
       </view>
+    </view>
+    <view v-else>
+
     </view>
 
   </view>
