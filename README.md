@@ -36,31 +36,3 @@ getApp().post(uri, param).then(res => {
   getApp().toastAndConsoleSystemError(err)
 })
 ```
-
-```
-<template>
-  <view>
-
-  </view>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-
-      }
-    },
-    onLoad() {
-
-    },
-    methods: {
-
-    }
-  }
-</script>
-
-<style lang="scss">
-
-</style>
-```
