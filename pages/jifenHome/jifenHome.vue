@@ -12,20 +12,23 @@
       <view class="lxCenterC btn">已签到</view>
     </view>
     <view class="card lxColumn">
-      <view class="lxCenterRow">
+
+      <view class="lxCenterRow" style="margin-left: 16px;margin-top: 6px;">
         <image src="/static/choujiang.png" style="width: 30px;height: 50px;" mode="aspectFit"></image>
-        <view class="lxColumn">
+        <view class="lxColumn" style="margin-left: 10px;">
           <text>天天抽奖</text>
           <text>最高得10元立减金</text>
         </view>
       </view>
-      <view class="lxCenterRow">
+
+      <view class="lxCenterRow" style="margin-left: 12px;margin-top: 6px;">
         <image src="/static/duihuan.png" style="width: 44px;height: 44px;" mode="aspectFit"></image>
         <view class="lxColumn">
           <text>积分兑换优惠券</text>
           <text>10积分价值1元</text>
         </view>
       </view>
+
     </view>
   </view>
 </template>
