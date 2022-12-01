@@ -11,22 +11,30 @@
       </view>
       <view class="lxCenterC btn">已签到</view>
     </view>
-    <view class="card lxColumn">
+    <view class="card lxColumn" style="padding-top: 5px;">
 
-      <view class="lxCenterRow" style="margin-left: 16px;margin-top: 6px;">
-        <image src="/static/choujiang.png" style="width: 30px;height: 50px;" mode="aspectFit"></image>
-        <view class="lxColumn" style="margin-left: 10px;">
-          <text>天天抽奖</text>
-          <text>最高得10元立减金</text>
+      <view class="lxCenterRow gameCell">
+        <view class="lxCenterRow" style="margin-left:8px;">
+          <image src="/static/choujiang.png" style="width: 34px;height: 50px;" mode="aspectFit"></image>
+          <view class="lxColumn" style="margin-left: 14px;">
+            <text style="color: #222222; font-size: 15px;">天天抽奖</text>
+            <view style="height: 4px;"></view>
+            <text style="color: #999999; font-size: 13px;">最高得10元立减金</text>
+          </view>
         </view>
+        <uni-icons color="#999999" type="right" size="18"></uni-icons>
       </view>
 
-      <view class="lxCenterRow" style="margin-left: 12px;margin-top: 6px;">
-        <image src="/static/duihuan.png" style="width: 44px;height: 44px;" mode="aspectFit"></image>
-        <view class="lxColumn">
-          <text>积分兑换优惠券</text>
-          <text>10积分价值1元</text>
+      <view class="lxCenterRow gameCell">
+        <view class="lxCenterRow">
+          <image src="/static/duihuan.png" style="width: 50px;height: 50px;" mode="aspectFit"></image>
+          <view class="lxColumn" style="margin-left: 7px;">
+            <text style="color: #222222; font-size: 15px;">积分兑换优惠券</text>
+            <view style="height: 4px;"></view>
+            <text style="color: #999999; font-size: 13px;">10积分价值1元</text>
+          </view>
         </view>
+        <uni-icons color="#999999" type="right" size="18"></uni-icons>
       </view>
 
     </view>
@@ -56,10 +64,17 @@
 
   .bg {
     width: 100vw;
-    height: 66.67vw;
+    height: 60vw;
     position: fixed;
     top: 0px;
     z-index: -1;
+  }
+
+  .gameCell {
+    margin-left: 15px;
+    margin-top: 15px;
+    padding-right: 20px;
+    justify-content: space-between;
   }
 
   .card {
@@ -67,7 +82,7 @@
     border-radius: 10px;
     width: 92vw;
     margin-left: 4vw;
-    height: 170px;
+    height: 150px;
     box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.02);
   }
 
