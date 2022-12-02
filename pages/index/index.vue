@@ -58,29 +58,6 @@
 
   })
 
-  onShow(() => {
-    let uri = 'tiezi/getTieZiArr'
-    getApp().get(uri).then(res => {
-      // console.log(JSON.stringify(res.data[0], null, 2))
-      let arr = res.data || []
-      for (const tiezi of arr) {
-        tiezi.numberProportion = `${tiezi.personNumber}/${tiezi.limitNumber}`
-        if (tiezi.status == 0) {
-          tiezi.statusStr = '未开放'
-        } else if (tiezi.status == 1) {
-          tiezi.statusStr = '报名中'
-        } else if (tiezi.status == 2) {
-          tiezi.statusStr = '活动已取消'
-        } else if (tiezi.status == 3) {
-          tiezi.statusStr = '已截止报名'
-        }
-      }
-      tieziArr.value = res.data || []
-    }).catch(err => {
-      console.log(err)
-    })
-  })
-
   function onShareAppMessage(res) {
 
   }
@@ -96,10 +73,10 @@
   }
 
   const queryList = (pageNo, pageSize) => {
-    let uri = 'tiezi/getTieZiArr'
+    let uri = 'tiezi/getTieZiArr?page=1&size=10'
     getApp().get(uri).then(res => {
       // console.log(JSON.stringify(res.data[0], null, 2))
-      let arr = res.data || []
+      let arr = res.data.list || []
       for (const tiezi of arr) {
         tiezi.numberProportion = `${tiezi.personNumber}/${tiezi.limitNumber}`
         if (tiezi.status == 0) {
@@ -112,7 +89,7 @@
           tiezi.statusStr = '已截止报名'
         }
       }
-      paging.value.complete(res.data || [])
+      paging.value.complete(arr)
     }).catch(err => {
       console.log(err)
       paging.value.complete(false)
