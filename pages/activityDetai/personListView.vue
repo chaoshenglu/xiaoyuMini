@@ -2,7 +2,8 @@
   <view>
     <z-paging ref="paging" v-model="personArr" @query="queryList" paging-style="margin-top: 32px;">
       <view class="lxCenterColumn" v-for="(person, index) in personArr" :index="index" :key="index">
-        <view class="lxCenterRow listCell" style="justify-content: space-between;" @click="tapCell(person)">
+        <view class="lxCenterRow listCell" :class="{ firstClass: index===0 }" style="justify-content: space-between;"
+          @click="tapCell(person)">
           <view class="lxCenterRow">
             <view class="headBox">
               <image class="head" :src="person.avatar" mode="aspectFill" />
@@ -67,6 +68,10 @@
     width: 40px;
     height: 40px;
     position: relative;
+  }
+
+  .firstClass {
+    margin-top: 24px !important;
   }
 
   .vip {
