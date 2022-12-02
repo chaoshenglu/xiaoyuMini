@@ -1,8 +1,7 @@
 <template>
-  <!-- class="lxCenterColumn" style="margin-top: 10px;" -->
   <view>
-    <z-paging ref="paging" v-model="personArr" @query="queryList">
-      <view v-for="(person, index) in personArr" :index="index" :key="index">
+    <z-paging ref="paging" v-model="personArr" @query="queryList" paging-style="margin-top: 32px;">
+      <view class="lxCenterColumn" v-for="(person, index) in personArr" :index="index" :key="index">
         <view class="lxCenterRow listCell" style="justify-content: space-between;" @click="tapCell(person)">
           <view class="lxCenterRow">
             <view class="headBox">
@@ -28,7 +27,6 @@
 <script setup>
   import {
     computed,
-    onMounted,
     ref
   } from 'vue'
   const props = defineProps(['tiezi'])
@@ -37,9 +35,6 @@
   })
   let personArr = ref([])
   const paging = ref(null)
-  onMounted(() => {
-    getPersonArr()
-  })
 
   const queryList = (pageNo, pageSize) => {
     let param = {}
