@@ -200,6 +200,29 @@
   }
 
   function baoMing(isJiaYi) {
+    if (personArr.value.length >= tiezi.value.limitNumber) {
+      uni.showModal({
+        title: '需要排队了',
+        content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
+        success: function(res) {
+          if (res.confirm) {
+            baoMing_continue(isJiaYi)
+          }
+        }
+      })
+      return
+    }
+    if (personArr.value.length >= 100) {
+      uni.showModal({
+        title: '报名人数过多',
+        content: '当前人数已达100人，超过了系统极限',
+      })
+      return
+    }
+    baoMing_continue(isJiaYi)
+  }
+
+  function baoMing_continue(isJiaYi) {
     let user = getApp().globalData.user
     if (user.nickName && user.avatar) {
       if (isJiaYi) {
