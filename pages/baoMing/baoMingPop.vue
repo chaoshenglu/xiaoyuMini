@@ -21,7 +21,8 @@
 
 <script setup>
   import {
-    ref
+    ref,
+    onMounted
   } from 'vue'
   let current = ref(getApp().globalData.user.isGirl === 1 ? 0 : 1)
   const emit = defineEmits(['closeBaoMingPop'])
@@ -37,6 +38,19 @@
       name: '女'
     }
   ]
+
+  onMounted(() => {
+    let param = {}
+    param.tieziId = id
+    param.status = 2
+    getApp().get('tz_person/getTZPerson?page=1&size=100', param).then(res => {
+      let arr = res.data.list || []
+
+
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  })
 
   function tapConfirm() {
     let user = getApp().globalData.user

@@ -20,7 +20,6 @@
 <script setup>
   import {
     computed,
-    onMounted,
     ref
   } from 'vue'
   const props = defineProps(['tiezi'])
@@ -29,10 +28,6 @@
   })
   let recordArr = ref([])
   const paging = ref(null)
-
-  onMounted(() => {
-    getRecordArr()
-  })
 
   const queryList = (pageNo, pageSize) => {
     let param = {}
