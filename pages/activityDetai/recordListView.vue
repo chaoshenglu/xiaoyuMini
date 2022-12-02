@@ -1,7 +1,6 @@
 <template>
   <view>
-    <z-paging ref="paging" v-model="recordArr" @query="queryList" paging-style="margin-top: 32px;"
-      :default-page-size="20">
+    <z-paging ref="paging" v-model="recordArr" @query="queryList" :paging-style="pagingStyle" :default-page-size="20">
       <view class="lxCenterColumn" v-for="(record, index) in recordArr" :index="index" :key="index">
         <view class="lxCenterRow listCell" :class="{ firstClass: index===0 }" style="justify-content: space-between;"
           @click="tapCell(record)">
@@ -24,6 +23,9 @@
   })
   let recordArr = ref([])
   const paging = ref(null)
+  const pagingStyle = ref({
+    marginTop: '32px'
+  })
 
   const queryList = (pageNo, pageSize) => {
     let param = {}
