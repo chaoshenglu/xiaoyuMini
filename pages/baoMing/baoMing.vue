@@ -149,8 +149,8 @@
     let param = {}
     param.tieziId = id
     param.status = 1
-    getApp().get('tz_person/getTZPerson', param).then(res => {
-      let arr = res.data || []
+    getApp().get('tz_person/getTZPerson?page=1&size=100', param).then(res => {
+      let arr = res.data.list || []
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
@@ -285,7 +285,7 @@
     let content = '每次取消报名，将扣除10积分'
     let timestamp = new Date().getTime()
     let status = 2
-    if (timestamp > 1669708800000) {
+    if (timestamp > 1669708800000) { //lxtodo
       content = '取消后若无人接替，将扣除10积分，且须支付10元飞机费'
       status = 3
     }
