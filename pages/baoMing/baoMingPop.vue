@@ -46,10 +46,11 @@
     param.page = 1
     param.size = 100
     param.status = [2, 3]
+    param.openid = getApp().globalData.openid
     getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
       for (const person of arr) {
-        if (person.openid == getApp().globalData.openid && person.isJiaYi === 0) {
+        if (person.isJiaYi != 1) {
           existingMyself.value = person
           break
         }
@@ -119,7 +120,7 @@
   }
 
   function tryDeleteOldMyself(tieziId) {
-    if (existingMyself.value.id) {
+    if (existingMyself.value && existingMyself.value.id) {
       let param = {
         personId: existingMyself.value.id,
         tieziId: tieziId
