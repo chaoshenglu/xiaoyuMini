@@ -107,10 +107,15 @@
     getApp().post('tz_person/addTZPerson', param).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
+      tryDeleteOldMyself()
     }).catch(err => {
       emit('closeBaoMingPop')
       getApp().toastAndConsoleSystemError(err)
     })
+  }
+
+  function tryDeleteOldMyself() {
+
   }
 
   function handleRes(res) {
