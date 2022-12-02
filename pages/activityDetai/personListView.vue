@@ -55,6 +55,10 @@
   }
 
   function delPerson(id) {
+    let param = {
+      personId: id,
+      tieziId: tz.value.id
+    }
     getApp().post('tz_person/delTZPerson', param).then(res => {
       console.log('delTZPerson', res)
       queryList(1, 20)
