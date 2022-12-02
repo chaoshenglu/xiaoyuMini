@@ -28,6 +28,7 @@
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
+  let existingMyself = ref(null)
 
   const items = [{
       value: 0,
@@ -47,7 +48,12 @@
     param.status = [2, 3]
     getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
-      console.log(arr)
+      for (const person of arr) {
+        if (person.openid == getApp().globalData.openid && person.isJiaYi === 0) {
+          existingMyself.value = person
+          break
+        }
+      }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
