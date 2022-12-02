@@ -42,11 +42,12 @@
   onMounted(() => {
     let param = {}
     param.tieziId = id
-    param.status = 2
-    getApp().get('tz_person/getTZPerson?page=1&size=100', param).then(res => {
+    param.page = 1
+    param.size = 100
+    param.status = [2, 3]
+    getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
-
-
+      console.log(arr)
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })

@@ -43,7 +43,7 @@
     param.page = pageNo
     param.size = pageSize
     param.tieziId = tz.value.id
-    getApp().get('tz_person/getTZPerson', param).then(res => {
+    getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
       paging.value.complete(arr)
     }).catch(err => {

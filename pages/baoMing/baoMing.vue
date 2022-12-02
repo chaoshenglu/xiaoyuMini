@@ -144,8 +144,10 @@
   function getPersonArr(id, updateTiezi) {
     let param = {}
     param.tieziId = id
-    param.status = 1
-    getApp().get('tz_person/getTZPerson?page=1&size=100', param).then(res => {
+    param.status = [1]
+    param.page = 1
+    param.size = 100
+    getApp().post('tz_person/getTZPerson?page=1&size=100', param).then(res => {
       let arr = res.data.list || []
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
