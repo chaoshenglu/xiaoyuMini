@@ -202,9 +202,9 @@
   function baoMing(isJiaYi) {
     if (personArr.value.length >= tiezi.value.limitNumber) {
       uni.showModal({
-        title: '需要排队了',
+        title: '报名人数超限',
         content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
-        success: function(res) {
+        success: res => {
           if (res.confirm) {
             baoMing_continue(isJiaYi)
           }
@@ -234,7 +234,7 @@
       uni.showModal({
         title: '温馨提示',
         content: '为了方便活动组织者识别身份，请先前往设置微信头像与昵称',
-        success: function(res) {
+        success: res => {
           if (res.confirm) {
             uni.navigateTo({
               url: '/pages/mine/mine',
