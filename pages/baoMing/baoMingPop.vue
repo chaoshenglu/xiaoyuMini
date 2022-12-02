@@ -24,7 +24,7 @@
     ref,
     onMounted
   } from 'vue'
-  let current = ref(getApp().globalData.user.isGirl === 1 ? 0 : 1)
+  let current = ref(getApp().globalData.user.isGirl === 1 ? 1 : 0)
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
@@ -41,7 +41,7 @@
 
   onMounted(() => {
     let param = {}
-    param.tieziId = id
+    param.tieziId = props.tiezi.id
     param.page = 1
     param.size = 100
     param.status = [2, 3]
