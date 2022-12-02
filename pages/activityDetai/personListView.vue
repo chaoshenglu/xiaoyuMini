@@ -40,6 +40,29 @@
     marginTop: '32px'
   })
 
+  function tapCell(person) {
+    console.log(person.id)
+    if (getApp().globalData.openid === 'oNNsT5GULfIM8Yv9cXO7mzKlVsU4') {
+      uni.showModal({
+        title: '确定删除吗？',
+        success: res => {
+          if (res.confirm) {
+            delPerson(person.id)
+          }
+        }
+      })
+    }
+  }
+
+  function delPerson(id) {
+    getApp().post('tz_person/delTZPerson', param).then(res => {
+      console.log('delTZPerson', res)
+      queryList(1, 20)
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
+
   const queryList = (pageNo, pageSize) => {
     let param = {}
     param.page = pageNo
