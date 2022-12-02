@@ -1,7 +1,19 @@
 <template>
-  <view class="lxColumn" style="padding-top: 20px;width: 100vw;background-color: white;">
-    <uni-steps :options="recordArr" active-color="#4685F3" active-icon="smallcircle" :active="recordArr.length-1"
-      direction="column" />
+  <view>
+    <z-paging ref="paging" v-model="recordArr" @query="queryList" paging-style="margin-top: 32px;"
+      default-page-size="20">
+      <view class="lxCenterColumn" v-for="(record, index) in recordArr" :index="index" :key="index">
+        <view class="lxCenterRow listCell" :class="{ firstClass: index===0 }" style="justify-content: space-between;"
+          @click="tapCell(record)">
+          <view class="lxCenterRow">
+            <text class="lx333">{{record.title}}</text>
+          </view>
+          <view class="lxColumn" style="align-items:flex-end;">
+            <text class="lx999" style="font-size: 14px;">{{record.createTime}}</text>
+          </view>
+        </view>
+      </view>
+    </z-paging>
   </view>
 </template>
 
@@ -16,18 +28,21 @@
     return props.tiezi
   })
   let recordArr = ref([])
+  const paging = ref(null)
 
   onMounted(() => {
     getRecordArr()
   })
 
-  function getRecordArr() {
+  const queryList = (pageNo, pageSize) => {
     let param = {}
     param.tieziId = tz.value.id
+    param.page = pageNo
+    param.size = pageSize
     // actionType 1报名 2为加一报名 3为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
     getApp().get('tz_record/getTZRecord', param).then(res => {
-      let oriArr = res.data || []
-      for (const item of oriArr) {
+      let arr = res.data.list || []
+      for (const item of arr) {
         if (item.actionType === 1) {
           item.title = item.nickName + '报名'
         } else if (item.actionType === 2) {
@@ -39,15 +54,17 @@
         } else if (item.actionType === 5) {
           item.title = item.nickName + `将${item.onNickName}从帖子中移除`
         }
-        item.desc = item.createTime
       }
-      recordArr.value = oriArr
+      paging.value.complete(arr)
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
+      paging.value.complete(false)
     })
   }
 </script>
 
 <style lang="scss">
-
+  .firstClass {
+    margin-top: 24px !important;
+  }
 </style>
