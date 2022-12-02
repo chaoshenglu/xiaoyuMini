@@ -1,16 +1,12 @@
 <template>
   <view>
     <z-paging ref="paging" v-model="recordArr" @query="queryList" paging-style="margin-top: 32px;"
-      default-page-size="20">
+      :default-page-size="20">
       <view class="lxCenterColumn" v-for="(record, index) in recordArr" :index="index" :key="index">
         <view class="lxCenterRow listCell" :class="{ firstClass: index===0 }" style="justify-content: space-between;"
           @click="tapCell(record)">
-          <view class="lxCenterRow">
-            <text class="lx333">{{record.title}}</text>
-          </view>
-          <view class="lxColumn" style="align-items:flex-end;">
-            <text class="lx999" style="font-size: 14px;">{{record.createTime}}</text>
-          </view>
+          <text class="lx333" style="font-size: 14px;">{{record.title}}</text>
+          <text class="lx999" style="font-size: 14px;">{{record.createTime}}</text>
         </view>
       </view>
     </z-paging>

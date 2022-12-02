@@ -1,7 +1,7 @@
 <template>
   <view>
     <z-paging ref="paging" v-model="personArr" @query="queryList" paging-style="margin-top: 32px;"
-      default-page-size="20">
+      :default-page-size="20">
       <view class="lxCenterColumn" v-for="(person, index) in personArr" :index="index" :key="index">
         <view class="lxCenterRow listCell" :class="{ firstClass: index===0 }" style="justify-content: space-between;"
           @click="tapCell(person)">
