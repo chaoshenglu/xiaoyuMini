@@ -78,7 +78,7 @@
   }
 
   const queryList = (pageNo, pageSize) => {
-    let uri = 'tiezi/getTieZiArr?page=1&size=10'
+    let uri = `tiezi/getTieZiArr?page=${pageNo}&size=${pageSize}`
     getApp().get(uri).then(res => {
       // console.log(JSON.stringify(res.data[0], null, 2))
       let arr = res.data.list || []
@@ -96,7 +96,7 @@
       }
       paging.value.complete(arr)
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
       paging.value.complete(false)
     })
   }

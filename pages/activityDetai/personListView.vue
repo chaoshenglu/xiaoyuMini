@@ -1,24 +1,27 @@
 <template>
-  <view class="lxCenterColumn" style="margin-top: 10px;">
-    <view v-for="(person, index) in personArr" :index="index" :key="index">
-      <view class="lxCenterRow listCell" style="justify-content: space-between;" @click="tapCell(person)">
-        <view class="lxCenterRow">
-          <view class="headBox">
-            <image class="head" :src="person.avatar" mode="aspectFill" />
-            <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
-            <!-- <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" /> -->
+  <!-- class="lxCenterColumn" style="margin-top: 10px;" -->
+  <view>
+    <z-paging ref="paging" v-model="personArr" @query="queryList">
+      <view v-for="(person, index) in personArr" :index="index" :key="index">
+        <view class="lxCenterRow listCell" style="justify-content: space-between;" @click="tapCell(person)">
+          <view class="lxCenterRow">
+            <view class="headBox">
+              <image class="head" :src="person.avatar" mode="aspectFill" />
+              <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+              <!-- <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" /> -->
+            </view>
+            <text class="pname lx333">{{person.nickName}}</text>
+            <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
+            <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
           </view>
-          <text class="pname lx333">{{person.nickName}}</text>
-          <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
-          <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
-        </view>
-        <view class="lxColumn" style="align-items:flex-end;">
-          <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
-          <uni-tag v-if="person.status===2" text="已取消" type="warning" size="small"></uni-tag>
-          <uni-tag v-if="person.status===3" text="已飞机" type="error" size="small"></uni-tag>
+          <view class="lxColumn" style="align-items:flex-end;">
+            <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
+            <uni-tag v-if="person.status===2" text="已取消" type="warning" size="small"></uni-tag>
+            <uni-tag v-if="person.status===3" text="已飞机" type="error" size="small"></uni-tag>
+          </view>
         </view>
       </view>
-    </view>
+    </z-paging>
   </view>
 </template>
 
@@ -33,18 +36,22 @@
     return props.tiezi
   })
   let personArr = ref([])
-
+  const paging = ref(null)
   onMounted(() => {
     getPersonArr()
   })
 
-  function getPersonArr() {
+  const queryList = (pageNo, pageSize) => {
     let param = {}
+    param.page = pageNo
+    param.size = pageSize
     param.tieziId = tz.value.id
     getApp().get('tz_person/getTZPerson', param).then(res => {
-      personArr.value = res.data || []
+      let arr = res.data.list || []
+      paging.value.complete(arr)
     }).catch(err => {
-      console.log(err)
+      getApp().toastAndConsoleSystemError(err)
+      paging.value.complete(false)
     })
   }
 </script>
