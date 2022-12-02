@@ -107,15 +107,25 @@
     getApp().post('tz_person/addTZPerson', param).then(res => {
       emit('closeBaoMingPop')
       handleRes(res)
-      tryDeleteOldMyself()
+      tryDeleteOldMyself(tieziId)
     }).catch(err => {
       emit('closeBaoMingPop')
       getApp().toastAndConsoleSystemError(err)
     })
   }
 
-  function tryDeleteOldMyself() {
-
+  function tryDeleteOldMyself(tieziId) {
+    if (existingMyself.value.id) {
+      let param = {
+        personId: existingMyself.value.id,
+        tieziId: tieziId
+      }
+      getApp().post('tz_person/delTZPerson', param).then(res => {
+        console.log('删除我上次报名产生的person', res)
+      }).catch(err => {
+        getApp().toastAndConsoleSystemError(err)
+      })
+    }
   }
 
   function handleRes(res) {
