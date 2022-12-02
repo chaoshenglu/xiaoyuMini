@@ -31,7 +31,8 @@
   let couponArr = ref([])
 
   const queryList = (pageNo, pageSize) => {
-    if (getApp().globalData.user.gift) {
+    let gift = getApp().globalData.user.gift || 0
+    if (gift > 0) {
       paging.value.complete([{
         title: '新人红包',
         money: getApp().globalData.user.gift,
