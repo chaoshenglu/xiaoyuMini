@@ -48,6 +48,11 @@
       console.log('监听到事件来自 noGift')
       popup.value.open()
     })
+
+    if (tieziArr.value.length > 0) {
+      queryList(1, 10)
+    }
+
   })
 
   onHide(() => {
