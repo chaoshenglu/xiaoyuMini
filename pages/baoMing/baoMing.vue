@@ -23,10 +23,6 @@
         <view class="smallBox" style="background-color: #FD5FA9;" />
         <text class="smallWord">女</text>
       </view>
-      <!-- <view class="smallTag lxCenterRow">
-        <view class="smallBox" style="background-color: #E2E2E2;" />
-        <text class="smallWord">空位</text>
-      </view> -->
       <view class="smallTag lxCenterRow">
         <view class="smallBox" style="background-color: #999999" />
         <text class="smallWord">排队</text>
