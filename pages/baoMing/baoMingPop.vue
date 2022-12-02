@@ -105,9 +105,13 @@
     let param = user
     param.tieziId = tieziId
     getApp().post('tz_person/addTZPerson', param).then(res => {
-      emit('closeBaoMingPop')
-      handleRes(res)
-      tryDeleteOldMyself(tieziId)
+      if (res.code === 1) {
+        emit('closeBaoMingPop')
+        handleRes(res)
+        tryDeleteOldMyself(tieziId)
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
     }).catch(err => {
       emit('closeBaoMingPop')
       getApp().toastAndConsoleSystemError(err)
