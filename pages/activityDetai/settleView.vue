@@ -1,6 +1,11 @@
 <template>
-  <view class="lxColumn" style="padding-top: 20px;width: 100vw;height:100vh;background-color: white;">
-    <image :src="src" mode="aspectFit" style="width: 100vw;height: 100vw;"></image>
+  <view class="lxColumn">
+    <view v-if="tiezi.isSettled === 1">
+      已结算
+    </view>
+    <view v-else class="emptySettle lxCenterC">
+      暂未结算
+    </view>
   </view>
 </template>
 
@@ -14,23 +19,13 @@
   const tz = computed(() => {
     return props.tiezi
   })
-  let src = ref('https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/settle/empty.jpg')
-
-  onMounted(() => {
-    src.value = `https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/settle/empty.jpg?time=${new Date().getTime()}`
-  })
-
-  // function getRecordArr() {
-  //   let param = {}
-  //   param.tieziId = tz.value.id
-  //   getApp().get('', param).then(res => {
-
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-  // }
 </script>
 
 <style lang="scss">
-
+  .emptySettle {
+    color: #999999;
+    font-size: 14px;
+    width: 100vw;
+    height: 100vw;
+  }
 </style>
