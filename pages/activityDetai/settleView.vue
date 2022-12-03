@@ -1,5 +1,5 @@
 <template>
-  <view class="lxColumn" style="background-color: white;width: 100vw;height: 100vh;">
+  <view class="lxColumn" style="background-color:white;width:100vw;min-height: 100vh;">
     <view v-if="tz.isSettled === 1">
       已结算
     </view>
@@ -7,14 +7,13 @@
       <view v-if="canSettle" class="lxColumn lxCheckBox">
         <uni-section title="场地数量" type="line" padding="0">
           <view style="margin-left: 20px;">
-            <uni-number-box @change="changeValue" />
+            <uni-number-box v-model="inputFieldsNumber" />
           </view>
         </uni-section>
         <uni-section title="用球数量" type="line" padding="0">
           <view style="margin-left: 20px;">
-            <uni-number-box @change="changeValue" />
+            <uni-number-box v-model="inputBallNumber" />
           </view>
-
         </uni-section>
         <uni-section title="活动人员" type="line" padding="0">
           <view style="margin-left: 20px;">
@@ -43,11 +42,11 @@
     return props.tiezi
   })
   const selectedArr = ref([])
-
+  const inputFieldsNumber = ref(0)
+  const inputBallNumber = ref(0)
   const canSettle = computed(() => {
     return true
   })
-
   const personArr = ref([])
 
   onMounted(() => {
