@@ -5,7 +5,7 @@
     </view>
     <view v-else class="emptySettle lxCenterC">
       <view class="lxCheckBox lxColumn">
-        <uni-data-checkbox mode="tag" multiple v-model="checkboxValue" :localdata="hobby"></uni-data-checkbox>
+        <uni-data-checkbox multiple v-model="checkboxValue" :localdata="hobby"></uni-data-checkbox>
       </view>
     </view>
   </view>
@@ -57,10 +57,11 @@
     color: #999999;
     font-size: 15px;
     width: 100vw;
-    height: 100vw;
   }
 
   .lxCheckBox {
     transform: scale(1.2);
+    width: 80vw;
+    margin-left: 7vw;
   }
 </style>
