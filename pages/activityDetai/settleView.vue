@@ -62,7 +62,14 @@
   }
 
   function tapBottomBtn() {
-    console.log('去结算')
+    let selectPersonArr = []
+    for (var i = 0; i < personArr.value.length; i++) {
+      let person = personArr.value[i]
+      if (selectedArr.value.indexOf(i) >= 0) {
+        selectPersonArr.push(person)
+        console.log(person.nickName)
+      }
+    }
   }
 </script>
 
