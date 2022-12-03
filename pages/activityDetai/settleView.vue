@@ -57,10 +57,6 @@
     inputBallNumber.value = fieldsArr.length * 12
   })
 
-  function changeValue() {
-
-  }
-
   function getPersonArr() {
     let param = {}
     param.tieziId = tz.value.id
@@ -92,6 +88,8 @@
         console.log(person.nickName)
       }
     }
+    console.log(inputFieldsNumber.value)
+    console.log(inputBallNumber.value)
   }
 </script>
 
