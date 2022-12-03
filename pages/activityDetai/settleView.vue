@@ -1,16 +1,18 @@
 <template>
   <view class="lxColumn">
-    <view v-if="tiezi.isSettled === 1">
+    <view v-if="tz.isSettled === 1">
       已结算
     </view>
-    <view v-else style="padding-top: 10px;">
+    <view v-else style="padding-top: 30px;">
       <view v-if="canSettle" class="lxCheckBox lxColumn">
         <uni-data-checkbox multiple v-model="checkboxValue" :localdata="hobby"></uni-data-checkbox>
+
       </view>
       <view v-else class="emptySettle lxCenterC">
         未结算
       </view>
     </view>
+    <LXBottomBtn v-if="tz.isSettled != 1 && canSettle" title="去结算" @tapBottomBtn="tapBottomBtn" />
   </view>
 </template>
 
@@ -58,6 +60,10 @@
     text: '游泳',
     value: 8
   }]
+
+  function tapBottomBtn() {
+    console.log('去结算')
+  }
 </script>
 
 <style lang="scss">
