@@ -27,7 +27,7 @@
   import settleView from '/pages/activityDetai/settleView.vue'
 
   let tabs = ref(['活动信息', '报名人员', '操作记录', '活动费用'])
-  let tabIndex = ref(0)
+  let tabIndex = ref(3)
   let tiezi = ref(null)
   let tieziId = ref(null)
 
