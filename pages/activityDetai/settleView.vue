@@ -3,14 +3,25 @@
     <view v-if="tz.isSettled === 1">
       已结算
     </view>
-    <view v-else style="padding-top: 30px;">
-      <view v-if="canSettle" class="lxCheckBox lxColumn">
-        <uni-data-checkbox multiple v-model="selectedArr" :localdata="personArr" selectedColor="#4685F3"
-          selectedTextColor="#333">
-        </uni-data-checkbox>
+    <view v-else style="padding-top: 36px;">
+      <view v-if="canSettle" class="lxColumn lxCheckBox">
+        <uni-section title="场地数量" type="line" padding="0">
+          <view style="margin-left: 20px;">
+            <uni-number-box @change="changeValue" />
+          </view>
+        </uni-section>
+        <uni-section title="用球数量" type="line" padding="0">
+          <view style="margin-left: 20px;">
+            <uni-number-box @change="changeValue" />
+          </view>
 
-        <uni-section title="场地数量" type="line" padding>
-          <uni-number-box @change="changeValue" />
+        </uni-section>
+        <uni-section title="活动人员" type="line" padding="0">
+          <view style="margin-left: 20px;">
+            <uni-data-checkbox multiple v-model="selectedArr" :localdata="personArr" selectedColor="#4685F3"
+              selectedTextColor="#333">
+            </uni-data-checkbox>
+          </view>
         </uni-section>
       </view>
       <view v-else class="emptySettle lxCenterC">
@@ -91,7 +102,7 @@
 
   .lxCheckBox {
     transform: scale(1.2);
-    width: 80vw;
-    margin-left: 13vw;
+    width: 85vw;
+    margin-left: 9vw;
   }
 </style>
