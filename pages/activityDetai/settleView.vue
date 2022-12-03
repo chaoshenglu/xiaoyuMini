@@ -5,8 +5,9 @@
     </view>
     <view v-else style="padding-top: 30px;">
       <view v-if="canSettle" class="lxCheckBox lxColumn">
-        <uni-data-checkbox multiple v-model="checkboxValue" :localdata="hobby"></uni-data-checkbox>
-
+        <uni-data-checkbox multiple v-model="selectedArr" :localdata="personArr" selectedColor="#4685F3"
+          selectedTextColor="#333">
+        </uni-data-checkbox>
       </view>
       <view v-else class="emptySettle lxCenterC">
         未结算
@@ -26,40 +27,39 @@
   const tz = computed(() => {
     return props.tiezi
   })
-  const checkboxValue = ref([])
+  const selectedArr = ref([])
 
   const canSettle = computed(() => {
-    return false
+    return true
   })
 
-  const hobby = [{
-    text: '足球',
-    value: 0
-  }, {
-    text: '篮球',
-    value: 1
-  }, {
-    text: '游泳',
-    value: 2
-  }, {
-    text: '足球',
-    value: 3
-  }, {
-    text: '篮球',
-    value: 4
-  }, {
-    text: '游泳',
-    value: 5
-  }, {
-    text: '足球',
-    value: 6
-  }, {
-    text: '篮球',
-    value: 7
-  }, {
-    text: '游泳',
-    value: 8
-  }]
+  const personArr = ref([])
+
+  onMounted(() => {
+    getPersonArr()
+  })
+
+  function getPersonArr() {
+    let param = {}
+    param.tieziId = tz.value.id
+    param.status = [1]
+    param.page = 1
+    param.size = 100
+    getApp().post('tz_person/getTZPerson', param).then(res => {
+      let arr = res.data.list || []
+      let indexArr = []
+      for (var i = 0; i < arr.length; i++) {
+        let person = arr[i]
+        person.text = person.nickName
+        person.value = i
+        indexArr.push(i)
+      }
+      personArr.value = arr
+      selectedArr.value = indexArr
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
   function tapBottomBtn() {
     console.log('去结算')
