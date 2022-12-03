@@ -1,5 +1,5 @@
 <template>
-  <view class="lxColumn">
+  <view class="lxColumn" style="background-color: white;width: 100vw;height: 100vh;">
     <view v-if="tz.isSettled === 1">
       已结算
     </view>
@@ -8,6 +8,10 @@
         <uni-data-checkbox multiple v-model="selectedArr" :localdata="personArr" selectedColor="#4685F3"
           selectedTextColor="#333">
         </uni-data-checkbox>
+
+        <uni-section title="场地数量" type="line" padding>
+          <uni-number-box @change="changeValue" />
+        </uni-section>
       </view>
       <view v-else class="emptySettle lxCenterC">
         未结算
@@ -38,6 +42,10 @@
   onMounted(() => {
     getPersonArr()
   })
+
+  function changeValue() {
+
+  }
 
   function getPersonArr() {
     let param = {}
@@ -84,6 +92,6 @@
   .lxCheckBox {
     transform: scale(1.2);
     width: 80vw;
-    margin-left: 7vw;
+    margin-left: 13vw;
   }
 </style>
