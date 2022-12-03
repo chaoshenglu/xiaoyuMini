@@ -51,6 +51,10 @@
 
   onMounted(() => {
     getPersonArr()
+    let fieldsStr = tz.value.fields.slice(0, tz.value.fields.length - 2)
+    let fieldsArr = fieldsStr.split(',')
+    inputFieldsNumber.value = fieldsArr.length
+    inputBallNumber.value = fieldsArr.length * 12
   })
 
   function changeValue() {
