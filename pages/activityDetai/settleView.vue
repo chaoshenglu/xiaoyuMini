@@ -24,7 +24,7 @@
 <style lang="scss">
   .emptySettle {
     color: #999999;
-    font-size: 14px;
+    font-size: 15px;
     width: 100vw;
     height: 100vw;
   }
