@@ -3,9 +3,12 @@
     <view v-if="tiezi.isSettled === 1">
       已结算
     </view>
-    <view v-else class="emptySettle lxCenterC">
-      <view class="lxCheckBox lxColumn">
+    <view v-else style="padding-top: 10px;">
+      <view v-if="canSettle" class="lxCheckBox lxColumn">
         <uni-data-checkbox multiple v-model="checkboxValue" :localdata="hobby"></uni-data-checkbox>
+      </view>
+      <view v-else class="emptySettle lxCenterC">
+        未结算
       </view>
     </view>
   </view>
@@ -22,6 +25,11 @@
     return props.tiezi
   })
   const checkboxValue = ref([])
+
+  const canSettle = computed(() => {
+    return false
+  })
+
   const hobby = [{
     text: '足球',
     value: 0
@@ -55,8 +63,9 @@
 <style lang="scss">
   .emptySettle {
     color: #999999;
-    font-size: 15px;
+    font-size: 16px;
     width: 100vw;
+    height: 100vw;
   }
 
   .lxCheckBox {
