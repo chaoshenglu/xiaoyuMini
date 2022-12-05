@@ -64,7 +64,7 @@
   function getPersonArr() {
     let param = {}
     param.tieziId = tz.value.id
-    param.status = [1]
+    param.status = [1, 3]
     param.page = 1
     param.size = 100
     getApp().post('tz_person/getTZPerson', param).then(res => {
