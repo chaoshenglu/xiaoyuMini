@@ -287,6 +287,9 @@
     if (timestamp > 1670313600000) {
       content = '取消后若无人接替，将扣除10积分，且须支付10元飞机费'
       status = 3
+      if (person.isVip === 1) {
+        content = '取消后若无人接替，将扣除10积分'
+      }
     }
     uni.showModal({
       title: '确定取消报名吗？',
