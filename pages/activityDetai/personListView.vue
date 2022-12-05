@@ -61,7 +61,7 @@
     }
     getApp().post('tz_person/delTZPerson', param).then(res => {
       console.log('delTZPerson', res)
-      queryList(1, 20)
+      paging.value.reload()
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
