@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view v-if="settle">
     <uni-section title="执行参数" type="line" padding="0">
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxCenterRow">
@@ -67,6 +67,8 @@
     onLoad
   } from "@dcloudio/uni-app"
 
+  const settle = ref(null)
+
   const personArr = [{
     nickName: '正道的光',
     isGirl: 0,
@@ -80,7 +82,7 @@
   }]
 
   onLoad((option) => {
-
+    settle.value = JSON.parse(option.settle)
   })
 
   function backEdit() {

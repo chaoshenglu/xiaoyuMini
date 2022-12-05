@@ -175,7 +175,7 @@
       }
       newPersonArr.push(newPerson)
     }
-
+    let arrStr = JSON.stringify(newPersonArr)
     let settleModel = {
       "boyPrice": boyPrice,
       "girlPrice": girlPrice,
@@ -196,12 +196,11 @@
       "ballPrice": ballPrice,
       "gaiJia": 0,
       "gaiJiaReason": null,
-      "personArrStr": '',
+      "personArrStr": arrStr,
       "tieziId": tz.value.id
     }
-
     uni.navigateTo({
-      url: '/pages/previewSettle/previewSettle'
+      url: '/pages/previewSettle/previewSettle?settle=' + JSON.stringify(settleModel)
     })
   }
 </script>
