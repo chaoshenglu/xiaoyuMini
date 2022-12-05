@@ -51,6 +51,9 @@
       </view>
     </uni-section>
 
+    <HalfBottomBtn title='返回修改' :isLeft="true" @tapBottomBtn="backEdit()" />
+    <HalfBottomBtn title='确定提交' :isLeft="false" @tapBottomBtn="confirm()" />
+
   </view>
 </template>
 
@@ -79,6 +82,14 @@
   onLoad((option) => {
 
   })
+
+  function backEdit() {
+
+  }
+
+  function confirm() {
+
+  }
 </script>
 
 <style lang="scss">
