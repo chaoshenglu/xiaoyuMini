@@ -47,7 +47,8 @@
             <view class="lxColumn" v-for="(person, index) in netPersonArr" :index="index" :key="index">
               <view class="lxCenterRow">
                 <view class="lxCenterRow">
-                  <image src="/static/vipPre.png" mode="aspectFit" style="width: 25px;height: 14px;margin-right: 5px;">
+                  <image v-if="person.isVip===1" src="/static/vipPre.png" mode="aspectFit"
+                    style="width: 25px;height: 14px;margin-right: 5px;">
                   </image>
                   <text v-if="person.status===3" class="lx999" style="width: 160px;">{{person.nickName}}【飞机】</text>
                   <text v-else class="lx999"
