@@ -45,7 +45,7 @@
         <uni-section title="费用分摊" type="line" padding="0">
           <view class="lxColumn" style="margin-left: 20px;">
             <view class="lxColumn" v-for="(person, index) in netPersonArr" :index="index" :key="index">
-              <view class="lxCenterRow">
+              <view class="lxCenterRow" style="justify-content: space-between;">
                 <view class="lxCenterRow">
                   <image v-if="person.isVip===1" src="/static/vipPre.png" mode="aspectFit"
                     style="width: 25px;height: 14px;margin-right: 5px;">
@@ -54,7 +54,7 @@
                   <text v-else class="lx999"
                     style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
                 </view>
-                <text class="lx999" style="margin-left: 10px;">费用：{{person.money}}元</text>
+                <text class="lx999" style="margin-right: 30px;">费用：{{person.money}}元</text>
               </view>
             </view>
           </view>
