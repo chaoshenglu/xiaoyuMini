@@ -1,7 +1,60 @@
 <template>
   <view class="lxColumn" style="background-color:white;width:100vw;min-height: 100vh;">
     <view v-if="tz.isSettled === 1">
-      已结算
+      <view v-if="settle" style="margin-top:15px;">
+        <uni-section title="执行参数" type="line" padding="0">
+          <view class="lxColumn" style="margin-left: 20px;">
+            <view class="lxCenterRow">
+              <view class="lxColumn" style="width: 160px;">
+                <text class="lx999">场地时长：{{parseInt(settle.fieldHours)}}小时</text>
+                <text class="lx999">场地单价：{{parseInt(settle.fieldPrice)}}元/小时</text>
+                <text class="lx999">场地数量：{{parseInt(settle.fieldNum)}}</text>
+                <text class="lx999">用球数量：{{parseInt(settle.ballNum)}}个</text>
+                <text class="lx999">用球单价：{{settle.ballPrice}}元/个</text>
+                <text class="lx999">手动改价：{{settle.gaiJia}}元</text>
+              </view>
+              <view class="lxColumn" style="margin-left: 30px;">
+                <text class="lx999">男生人数：{{parseInt(settle.boyNum)}}</text>
+                <text class="lx999">女生人数：{{parseInt(settle.girlNum)}}</text>
+                <text class="lx999">VIP男生人数：{{parseInt(settle.boyVipNum)}}</text>
+                <text class="lx999">VIP女生人数：{{parseInt(settle.girlVipNum)}}</text>
+                <text class="lx999">飞机人数：{{parseInt(settle.flyNum)}}</text>
+                <text class="lx999">正义指数：{{settle.justice}}</text>
+              </view>
+            </view>
+          </view>
+        </uni-section>
+
+        <uni-section title="计算结果" type="line" padding="0">
+          <view class="lxColumn" style="margin-left: 20px;">
+            <view class="lxCenterRow">
+              <view class="lxColumn" style="width: 160px;">
+                <text class="lx999">男生：{{settle.boyPrice}}元/人</text>
+                <text class="lx999">女生：{{settle.girlPrice}}元/人</text>
+                <text class="lx999">飞机：{{settle.flyPrice}}元/人</text>
+              </view>
+              <view class="lxColumn" style="margin-left: 30px;">
+                <text class="lx999">VIP男生：{{settle.boyVipPrice}}元/人</text>
+                <text class="lx999">VIP女生：{{settle.girlVipPrice}}元/人</text>
+                <text class="lx999">总费用：{{settle.allPrice}}元</text>
+              </view>
+            </view>
+          </view>
+        </uni-section>
+
+        <uni-section title="费用分摊" type="line" padding="0">
+          <view class="lxColumn" style="margin-left: 20px;">
+            <view class="lxColumn" v-for="(person, index) in netPersonArr" :index="index" :key="index">
+              <view class="lxCenterRow">
+                <text v-if="person.status===3" class="lx999" style="width: 160px;">{{person.nickName}}【飞机】</text>
+                <text v-else class="lx999"
+                  style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
+                <text class="lx999" style="margin-left: 30px;">费用：{{person.money}}元</text>
+              </view>
+            </view>
+          </view>
+        </uni-section>
+      </view>
     </view>
     <view v-else style="padding-top: 36px;">
       <view v-if="canSettle" class="lxColumn lxCheckBox">
@@ -49,9 +102,11 @@
   const justiceScale = ref(0.7)
   const oneFlyPrice = ref(10)
   const canSettle = computed(() => {
-    return true
+    return tz.value.isSettled != 1 && tz.value.createdPersonId === getApp().globalData.openid
   })
   const personArr = ref([])
+  const netPersonArr = ref([])
+  const settle = ref(null)
 
   onMounted(() => {
     getPersonArr()
@@ -59,7 +114,22 @@
     let fieldsArr = fieldsStr.split(',')
     inputFieldsNumber.value = fieldsArr.length
     inputBallNumber.value = fieldsArr.length * 12
+    if (tz.value.isSettled) {
+      getSettleDetail()
+    }
   })
+
+  function getSettleDetail() {
+    let uri = 'settle/getSettleDetail'
+    getApp().get(uri, {
+      tieziId: tz.value.id
+    }).then(res => {
+      settle.value = res.data
+      netPersonArr.value = JSON.parse(settle.value.personArrStr)
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
   function getPersonArr() {
     let param = {}
