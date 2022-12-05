@@ -35,7 +35,8 @@
             <view class="headBox">
               <image class="head" :src="person.avatar" mode="aspectFill" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
-              <!-- <image v-else class="vip" src="/static/vipHead.png" mode="aspectFit" /> -->
+              <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
+                mode="aspectFit" />
             </view>
             <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
             <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
