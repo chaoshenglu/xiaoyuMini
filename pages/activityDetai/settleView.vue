@@ -46,10 +46,14 @@
           <view class="lxColumn" style="margin-left: 20px;">
             <view class="lxColumn" v-for="(person, index) in netPersonArr" :index="index" :key="index">
               <view class="lxCenterRow">
-                <text v-if="person.status===3" class="lx999" style="width: 160px;">{{person.nickName}}【飞机】</text>
-                <text v-else class="lx999"
-                  style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
-                <text class="lx999" style="margin-left: 30px;">费用：{{person.money}}元</text>
+                <view class="lxCenterRow">
+                  <image src="/static/vipPre.png" mode="aspectFit" style="width: 25px;height: 14px;margin-right: 5px;">
+                  </image>
+                  <text v-if="person.status===3" class="lx999" style="width: 160px;">{{person.nickName}}【飞机】</text>
+                  <text v-else class="lx999"
+                    style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
+                </view>
+                <text class="lx999" style="margin-left: 10px;">费用：{{person.money}}元</text>
               </view>
             </view>
           </view>
