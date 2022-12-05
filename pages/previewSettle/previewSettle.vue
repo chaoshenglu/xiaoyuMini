@@ -82,7 +82,30 @@
   }
 
   function confirm() {
+    let param = settle.value
+    getApp().post('settle/addSettle', param).then(res => {
+      console.log('res=', JSON.stringify(res, null, 2))
+      if (res.code === 1) {
+        updateTiezi()
+        uni.navigateBack(2)
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
+  function updateTiezi() {
+    let param = {
+      id: settle.value.id,
+      isSettled: 1
+    }
+    getApp().post('tiezi/updateTiezi', param).then(res => {
+      console.log('updateTiezi res=', res)
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 </script>
 

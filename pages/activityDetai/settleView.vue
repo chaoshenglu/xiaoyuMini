@@ -195,7 +195,7 @@
       "girlVipNum": 0,
       "ballPrice": ballPrice,
       "gaiJia": 0,
-      "gaiJiaReason": null,
+      "gaiJiaReason": '', //lxtodo
       "personArrStr": arrStr,
       "tieziId": tz.value.id
     }
