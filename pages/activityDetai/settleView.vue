@@ -121,8 +121,8 @@
 
     console.log('男生人数=', bcount)
     console.log('女生人数=', gcount)
-    console.log('飞机人数=', gcount)
-    console.log('新女生人数=', flyCount)
+    console.log('飞机人数=', flyCount)
+    console.log('新女生人数=', newGirlsCount)
     console.log('新总人数(飞机除外)=', newPersonCount)
     console.log('完美的男女总金额', priceWithoutFly)
 

@@ -40,6 +40,12 @@
       "navigationBarTitleText": "我的积分",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/previewSettle/previewSettle",
+    "style": {
+      "navigationBarTitleText": "账单结算",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
