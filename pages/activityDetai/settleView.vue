@@ -54,7 +54,7 @@
                   <text v-else class="lx999"
                     style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
                 </view>
-                <text class="lx999" style="margin-right: 30px;">费用：{{person.money}}元</text>
+                <text class="lx999" style="margin-right: 30px;">费用：{{(parseFloat(person.money)).toFixed(2)}}元</text>
               </view>
             </view>
           </view>
