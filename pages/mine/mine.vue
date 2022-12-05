@@ -10,7 +10,7 @@
       <view class="lxColumn" style="margin-left: 10px;" v-if="user.nickName && user.avatar">
         <view class="lxCenterRow">
           <text class="lx333" style="font-size: 17px;margin-right: 5px;">{{user.nickName}}</text>
-          <!-- <image src="/static/vip.png" mode="aspectFit" style="width: 16px;height: 16px;"></image> -->
+          <image v-if="user.isVip" src="/static/vip.png" mode="aspectFit" style="width: 16px;height: 16px;"></image>
         </view>
         <text v-if="user.openid" class="lx999" style="font-size: 15px;margin-top: 3px;">id
           :{{user.openid.slice(0,15)}}</text>
