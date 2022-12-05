@@ -227,8 +227,8 @@
       }
     }
 
-    let qunShouKuan = parseFloat(newPrice) + allFlyPrice
-    console.log(qunShouKuan)
+    let boyVipPrice = (boyPrice * 0.9).toFixed(2)
+    let girlVipPrice = (girlPrice * 0.9).toFixed(2)
 
     let newPersonArr = []
     for (var i = 0; i < personArr.value.length; i++) {
@@ -243,9 +243,9 @@
         newPerson.money = oneFlyPrice.value
       } else {
         if (person.isGirl === 1) {
-          newPerson.money = girlPrice
+          newPerson.money = newPerson.isVip === 1 ? girlVipPrice : girlPrice
         } else {
-          newPerson.money = boyPrice
+          newPerson.money = newPerson.isVip === 1 ? boyVipPrice : boyPrice
         }
       }
       newPersonArr.push(newPerson)
@@ -256,8 +256,8 @@
       "girlPrice": girlPrice,
       "allPrice": price,
       "flyPrice": oneFlyPrice.value,
-      "boyVipPrice": (boyPrice * 0.9).toFixed(2),
-      "girlVipPrice": (girlPrice * 0.9).toFixed(2),
+      "boyVipPrice": boyVipPrice,
+      "girlVipPrice": girlVipPrice,
       "fieldPrice": fieldPrice,
       "fieldHours": 2, //lxtodo
       "boyNum": bcount,
