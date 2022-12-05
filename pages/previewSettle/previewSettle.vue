@@ -22,6 +22,24 @@
 
       </view>
     </uni-section>
+
+    <uni-section title="计算结果" type="line" padding="0">
+      <view class="lxColumn" style="margin-left: 20px;">
+        <view class="lxCenterRow">
+          <view class="lxColumn">
+            <text class="lx999">男生费用：15元/人</text>
+            <text class="lx999">女生费用：11元/人</text>
+            <text class="lx999">飞机费用：10元/人</text>
+          </view>
+          <view class="lxColumn" style="margin-left: 30px;">
+            <text class="lx999">男生VIP费用：14元/人</text>
+            <text class="lx999">女生VIP费用：10元/人</text>
+            <text class="lx999">总费用：139元</text>
+          </view>
+        </view>
+      </view>
+    </uni-section>
+
   </view>
 </template>
 
