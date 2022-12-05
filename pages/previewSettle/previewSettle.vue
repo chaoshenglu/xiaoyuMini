@@ -27,14 +27,14 @@
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxCenterRow">
           <view class="lxColumn" style="width: 160px;">
-            <text class="lx999">男生：15元/人</text>
-            <text class="lx999">女生：11元/人</text>
-            <text class="lx999">飞机：10元/人</text>
+            <text class="lx999">男生：{{settle.boyPrice}}元/人</text>
+            <text class="lx999">女生：{{settle.girlPrice}}元/人</text>
+            <text class="lx999">飞机：{{settle.flyPrice}}元/人</text>
           </view>
           <view class="lxColumn" style="margin-left: 30px;">
-            <text class="lx999">VIP男生：13元/人</text>
-            <text class="lx999">VIP女生：9元/人</text>
-            <text class="lx999">总费用：139元</text>
+            <text class="lx999">VIP男生：{{settle.boyVipPrice}}元/人</text>
+            <text class="lx999">VIP女生：{{settle.girlVipPrice}}元/人</text>
+            <text class="lx999">总费用：{{settle.allPrice}}元</text>
           </view>
         </view>
       </view>
@@ -44,8 +44,10 @@
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxColumn" v-for="(person, index) in personArr" :index="index" :key="index">
           <view class="lxCenterRow">
-            <text class="lx999" style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】【vip】</text>
-            <text class="lx999" style="margin-left: 30px;">费用：9元</text>
+            <text v-if="person.status===3" class="lx999" style="width: 160px;">{{person.nickName}}【飞机】</text>
+            <text v-else class="lx999"
+              style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
+            <text class="lx999" style="margin-left: 30px;">费用：{{person.money}}元</text>
           </view>
         </view>
       </view>
