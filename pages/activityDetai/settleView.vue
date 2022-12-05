@@ -86,27 +86,28 @@
   function tapBottomBtn() {
     let selectPersonArr = []
     let girlsCount = 0
+    let boysCount = 0
     let fCount = 0
     for (var i = 0; i < personArr.value.length; i++) {
       let person = personArr.value[i]
       if (selectedArr.value.indexOf(i) >= 0) {
         selectPersonArr.push(person)
         console.log(person.nickName)
-        if (person.isGirl === 1) {
-          girlsCount = girlsCount + 1
-        }
         if (person.status === 3) {
           fCount = fCount + 1
+        } else {
+          if (person.isGirl === 1) {
+            girlsCount = girlsCount + 1
+          } else {
+            boysCount = boysCount + 1
+          }
         }
       }
     }
-    console.log(inputFieldsNumber.value)
-    console.log(inputBallNumber.value)
-
 
     let fcount = parseFloat(inputFieldsNumber.value) // 场地数量
     let ballCount = parseFloat(inputBallNumber.value) // 球的数量
-    let bcount = parseFloat(selectPersonArr.length - girlsCount) // 男生数量
+    let bcount = parseFloat(boysCount) // 男生数量
     let gcount = parseFloat(girlsCount) // 女生数量
     let flyCount = parseFloat(fCount) // 飞机人数
     let fieldPrice = parseFloat(oneFieldPrice.value)
