@@ -92,7 +92,9 @@
       console.log('res=', JSON.stringify(res, null, 2))
       if (res.code === 1) {
         updateTiezi()
-        uni.navigateBack(2)
+        uni.navigateBack({
+          delta: 2
+        })
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
