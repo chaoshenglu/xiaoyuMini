@@ -3,7 +3,7 @@
     <uni-section title="执行参数" type="line" padding="0">
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxCenterRow">
-          <view class="lxColumn" style="width: 150px;">
+          <view class="lxColumn" style="width: 160px;">
             <text class="lx999">场地时长：2小时</text>
             <text class="lx999">场地单价：40元/小时</text>
             <text class="lx999">场地数量：1</text>
@@ -24,7 +24,7 @@
     <uni-section title="计算结果" type="line" padding="0">
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxCenterRow">
-          <view class="lxColumn" style="width: 150px;">
+          <view class="lxColumn" style="width: 160px;">
             <text class="lx999">男生：15元/人</text>
             <text class="lx999">女生：11元/人</text>
             <text class="lx999">飞机：10元/人</text>
@@ -41,7 +41,10 @@
     <uni-section title="费用分摊" type="line" padding="0">
       <view class="lxColumn" style="margin-left: 20px;">
         <view class="lxColumn" v-for="(person, index) in personArr" :index="index" :key="index">
-          <text class="lx999">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】</text>
+          <view class="lxCenterRow">
+            <text class="lx999" style="width: 160px;">{{person.nickName}}【{{person.isGirl === 1 ? '女':'男'}}】【vip】</text>
+            <text class="lx999" style="margin-left: 30px;">费用：9元</text>
+          </view>
         </view>
       </view>
     </uni-section>
@@ -60,7 +63,12 @@
   } from "@dcloudio/uni-app"
 
   const personArr = [{
-    nickName: '张三',
+    nickName: '正道的光',
+    isGirl: 0,
+    isVip: 0,
+    money: 10
+  }, {
+    nickName: '正道的光',
     isGirl: 0,
     isVip: 0,
     money: 10
