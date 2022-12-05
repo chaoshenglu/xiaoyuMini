@@ -68,21 +68,11 @@
   } from "@dcloudio/uni-app"
 
   const settle = ref(null)
-
-  const personArr = [{
-    nickName: '正道的光',
-    isGirl: 0,
-    isVip: 0,
-    money: 10
-  }, {
-    nickName: '正道的光',
-    isGirl: 0,
-    isVip: 0,
-    money: 10
-  }]
+  const personArr = ref([])
 
   onLoad((option) => {
     settle.value = JSON.parse(option.settle)
+    personArr.value = JSON.parse(settle.value.personArrStr)
   })
 
   function backEdit() {
