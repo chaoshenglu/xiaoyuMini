@@ -44,6 +44,10 @@
   const selectedArr = ref([])
   const inputFieldsNumber = ref(0)
   const inputBallNumber = ref(0)
+  const oneFieldPrice = ref(80)
+  const oneBallPrice = ref(8)
+  const justiceScale = ref(0.7)
+  const oneFlyPrice = ref(10)
   const canSettle = computed(() => {
     return true
   })
@@ -105,11 +109,14 @@
     let bcount = parseFloat(selectPersonArr.length - girlsCount) // 男生数量
     let gcount = parseFloat(girlsCount) // 女生数量
     let flyCount = parseFloat(fCount) // 飞机人数
+    let fieldPrice = parseFloat(oneFieldPrice.value)
+    let ballPrice = parseFloat(oneBallPrice.value)
+    let scale = parseFloat(justiceScale.value)
 
-    let allFlyPrice = parseFloat(flyCount * parseFloat(this.flyPrice)) //所有飞机人应付的费用
-    this.price = parseFloat(fcount * this.fieldPrice + ballCount * this.ballPrice) // 总费用=场地费+球费
-    let priceWithoutFly = parseFloat(this.price - allFlyPrice) // 不包括飞机费用的总费用
-    let newGirlsCount = parseFloat(this.scale * gcount)
+    let allFlyPrice = parseFloat(flyCount * parseFloat(oneFlyPrice.value)) //所有飞机人应付的费用
+    let price = parseFloat(fcount * fieldPrice + ballCount * ballPrice) // 总费用=场地费+球费
+    let priceWithoutFly = parseFloat(price - allFlyPrice) // 不包括飞机费用的总费用
+    let newGirlsCount = parseFloat(scale * gcount)
     let newPersonCount = parseFloat(newGirlsCount + bcount)
 
     console.log('男生人数=', bcount)
@@ -119,32 +126,32 @@
     console.log('完美的男女总金额', priceWithoutFly)
 
     let newAverage = (priceWithoutFly / newPersonCount).toFixed(2)
-    this.boyPrice = parseFloat(newAverage)
-    this.girlPrice = parseFloat((newAverage * this.scale).toFixed(2))
-    let boyAndGrilsPrice = (this.boyPrice * bcount + this.girlPrice * gcount).toFixed(2)
-    this.newPrice = parseFloat(boyAndGrilsPrice)
-    console.log('newPrice=', this.newPrice)
+    let boyPrice = parseFloat(newAverage)
+    let girlPrice = parseFloat((newAverage * scale).toFixed(2))
+    let boyAndGrilsPrice = (boyPrice * bcount + girlPrice * gcount).toFixed(2)
+    let newPrice = parseFloat(boyAndGrilsPrice)
+    console.log('newPrice=', newPrice)
 
-    if (this.newPrice < priceWithoutFly) {
+    if (newPrice < priceWithoutFly) {
       console.log('群收款不完美，开始调整价格')
       if (gcount >= bcount) {
-        console.log('女生原价', this.girlPrice)
+        console.log('女生原价', girlPrice)
         console.log('女生再加一分钱')
-        this.girlPrice = (parseFloat(this.girlPrice) + 0.01).toFixed(2)
-        console.log('女生最终价', this.girlPrice)
-        this.newPrice = (this.boyPrice * bcount + this.girlPrice * gcount).toFixed(2)
-        console.log('newnewPrice=', this.newPrice)
+        girlPrice = (parseFloat(girlPrice) + 0.01).toFixed(2)
+        console.log('女生最终价', girlPrice)
+        newPrice = (boyPrice * bcount + girlPrice * gcount).toFixed(2)
+        console.log('newnewPrice=', newPrice)
       } else {
-        console.log('男生原价', this.boyPrice)
+        console.log('男生原价', boyPrice)
         console.log('男生再加一分钱')
-        this.boyPrice = (parseFloat(this.boyPrice) + 0.01).toFixed(2)
-        console.log('男生最终价', this.boyPrice)
-        this.newPrice = (this.boyPrice * bcount + this.girlPrice * gcount).toFixed(2)
-        console.log('newnewPrice=', this.newPrice)
+        boyPrice = (parseFloat(boyPrice) + 0.01).toFixed(2)
+        console.log('男生最终价', boyPrice)
+        newPrice = (boyPrice * bcount + girlPrice * gcount).toFixed(2)
+        console.log('newnewPrice=', newPrice)
       }
     }
 
-    let qunShouKuan = parseFloat(this.newPrice) + allFlyPrice
+    let qunShouKuan = parseFloat(newPrice) + allFlyPrice
     console.log(qunShouKuan)
 
   }
