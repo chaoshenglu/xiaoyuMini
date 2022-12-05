@@ -114,7 +114,7 @@
     let scale = parseFloat(justiceScale.value)
 
     let allFlyPrice = parseFloat(flyCount * parseFloat(oneFlyPrice.value)) //所有飞机人应付的费用
-    let price = parseFloat(fcount * fieldPrice + ballCount * ballPrice) // 总费用=场地费+球费
+    let price = parseFloat(fcount * fieldPrice + ballCount * ballPrice).toFixed(2) // 总费用=场地费+球费
     let priceWithoutFly = parseFloat(price - allFlyPrice) // 不包括飞机费用的总费用
     let newGirlsCount = parseFloat(scale * gcount)
     let newPersonCount = parseFloat(newGirlsCount + bcount)
@@ -155,6 +155,54 @@
     let qunShouKuan = parseFloat(newPrice) + allFlyPrice
     console.log(qunShouKuan)
 
+    let newPersonArr = []
+    for (var i = 0; i < personArr.value.length; i++) {
+      let person = personArr.value[i]
+      let newPerson = {
+        nickName: person.nickName,
+        isGirl: person.isGirl,
+        isVip: person.isVip,
+        status: person.status
+      }
+      if (person.status === 3) {
+        newPerson.money = oneFlyPrice.value
+      } else {
+        if (person.isGirl === 1) {
+          newPerson.money = girlPrice
+        } else {
+          newPerson.money = boyPrice
+        }
+      }
+      newPersonArr.push(newPerson)
+    }
+
+    let settleModel = {
+      "boyPrice": boyPrice,
+      "girlPrice": girlPrice,
+      "allPrice": price,
+      "flyPrice": oneFlyPrice.value,
+      "boyVipPrice": (boyPrice * 0.9).toFixed(2),
+      "girlVipPrice": (girlPrice * 0.9).toFixed(2),
+      "fieldPrice": fieldPrice,
+      "fieldHours": 2, //lxtodo
+      "boyNum": bcount,
+      "girlNum": gcount,
+      "fieldNum": fcount,
+      "ballNum": ballCount,
+      "flyNum": flyCount,
+      "justice": scale,
+      "boyVipNum": 0,
+      "girlVipNum": 0,
+      "ballPrice": ballPrice,
+      "gaiJia": 0,
+      "gaiJiaReason": null,
+      "personArrStr": '',
+      "tieziId": tz.value.id
+    }
+
+    uni.navigateTo({
+      url: '/pages/previewSettle/previewSettle'
+    })
   }
 </script>
 
