@@ -98,7 +98,7 @@
 
   function updateTiezi() {
     let param = {
-      id: settle.value.id,
+      id: settle.value.tieziId,
       isSettled: 1
     }
     getApp().post('tiezi/updateTiezi', param).then(res => {
