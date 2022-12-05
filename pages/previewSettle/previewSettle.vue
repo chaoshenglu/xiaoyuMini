@@ -92,9 +92,12 @@
       console.log('res=', JSON.stringify(res, null, 2))
       if (res.code === 1) {
         updateTiezi()
-        uni.navigateBack({
-          delta: 2
-        })
+        getApp().toast('保存成功')
+        setTimeout(function() {
+          uni.navigateBack({
+            delta: 2
+          })
+        }, 500)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
