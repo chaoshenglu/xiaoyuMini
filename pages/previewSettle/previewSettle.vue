@@ -9,11 +9,13 @@
             <text class="lx999">场地数量：1</text>
             <text class="lx999">用球数量：6个</text>
             <text class="lx999">用球单价：8元/个</text>
+            <text class="lx999">手动改价：0元</text>
           </view>
           <view class="lxColumn" style="margin-left: 30px;">
             <text class="lx999">男生人数：5</text>
             <text class="lx999">女生人数：2</text>
-            <text class="lx999">VIP人数：0</text>
+            <text class="lx999">VIP男生人数：0</text>
+            <text class="lx999">VIP女生人数：0</text>
             <text class="lx999">飞机人数：3</text>
             <text class="lx999">正义指数：0.7</text>
           </view>
@@ -30,8 +32,8 @@
             <text class="lx999">飞机：10元/人</text>
           </view>
           <view class="lxColumn" style="margin-left: 30px;">
-            <text class="lx999">男生VIP：13元/人</text>
-            <text class="lx999">女生VIP：9元/人</text>
+            <text class="lx999">VIP男生：13元/人</text>
+            <text class="lx999">VIP女生：9元/人</text>
             <text class="lx999">总费用：139元</text>
           </view>
         </view>
