@@ -42,9 +42,13 @@
 
   function tapMineCell(e) {
     if (e === '我的积分') {
-
+      uni.navigateTo({
+        url: '/pages/jifenHome/jifenHome'
+      })
     } else if (e === '我的优惠券') {
-      pushCouponList()
+      uni.navigateTo({
+        url: '/pages/couponList/couponList'
+      })
     } else if (e === '我的报名') {
 
     } else if (e === '我的组织') {
@@ -72,12 +76,6 @@
       uni.hideLoading()
       getApp().loginAndGetOpenId()
     }, 500)
-  }
-
-  function pushCouponList() {
-    uni.navigateTo({
-      url: '/pages/couponList/couponList'
-    })
   }
 
   function chooseHead(e) {
