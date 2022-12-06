@@ -58,6 +58,12 @@
       "navigationBarTitleText": "更多功能",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/baoMing2/baoMing2",
+    "style": {
+      "navigationBarTitleText": "活动报名",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
