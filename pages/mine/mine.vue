@@ -50,9 +50,13 @@
         url: '/pages/couponList/couponList'
       })
     } else if (e === '我的活动') { //我发起的 我参与的
-
+      uni.navigateTo({
+        url: '/pages/myActivitys/myActivitys'
+      })
     } else if (e === '我的组织') {
-
+      uni.navigateTo({
+        url: '/pages/myClubs/myClubs' // 我创办的 我参与的
+      })
     } else if (e === '更多功能') {
 
     } else if (e === '清除缓存') {

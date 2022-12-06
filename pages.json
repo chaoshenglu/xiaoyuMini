@@ -46,6 +46,12 @@
       "navigationBarTitleText": "账单结算",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/myClubs/myClubs",
+    "style": {
+      "navigationBarTitleText": "我的组织",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
