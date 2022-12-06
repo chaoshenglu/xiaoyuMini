@@ -52,6 +52,12 @@
       "navigationBarTitleText": "我的组织",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/moreFunc/moreFunc",
+    "style": {
+      "navigationBarTitleText": "更多功能",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
