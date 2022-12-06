@@ -4,7 +4,11 @@
       <image :src="props.icon" mode="aspectFit" class="rowIcon"></image>
       <text class="lx666" style="font-size: 16px;">{{props.title}}</text>
     </view>
-    <uni-icons color="#666666" type="right"></uni-icons>
+    <view class="lxCenterRow">
+      <text v-if="props.desc" class="lx999">{{props.desc}}</text>
+      <view v-if="props.desc" style="width: 5px;"></view>
+      <uni-icons color="#666666" type="right"></uni-icons>
+    </view>
   </view>
   <view>
 
@@ -16,7 +20,7 @@
     computed,
     ref
   } from 'vue'
-  const props = defineProps(['title', 'icon'])
+  const props = defineProps(['title', 'desc', 'icon'])
   const emit = defineEmits(['tapMineCell'])
 
   function tapMineCell() {
