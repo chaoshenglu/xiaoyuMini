@@ -34,6 +34,10 @@
       <view class="vLine" />
 
       <view class="leftBox">
+        <view class="lxCenterRow">
+          <view class="bluePrefix" />
+          <text class="lx333" style="font-size: 15px;">颐瑾</text>
+        </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
             <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
