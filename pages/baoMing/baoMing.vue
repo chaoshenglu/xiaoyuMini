@@ -282,6 +282,10 @@
   }
 
   function alert2cancel2owner(person) {
+    if (tiezi.value.status === 2) {
+      console.log('活动已经取消')
+      return
+    }
     let content = '每次取消报名，将扣除10积分'
     let timestamp = new Date().getTime()
     let status = 2
