@@ -28,22 +28,46 @@
         <text class="smallWord">排队</text>
       </view>
     </view>
-    <view style="margin-left: 4px;margin-right: 4px;margin-top: 8px;">
-      <uni-grid :column="4" :highlight="true" @change="change" :showBorder="false" :square="false">
-        <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
-          <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
-            <view class="headBox">
-              <image class="head" :src="person.avatar" mode="aspectFill" />
-              <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
-              <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
-                mode="aspectFit" />
+
+    <view class="leftAndRightBox lxCenterRow">
+
+      <view class="vLine" />
+
+      <view class="leftBox">
+        <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
+          <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
+            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
+              <view class="headBox">
+                <image class="head" :src="person.avatar" mode="aspectFill" />
+                <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+                <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
+                  mode="aspectFit" />
+              </view>
+              <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
+              <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
+              <text v-else class="pname">{{person.nickName}}</text>
             </view>
-            <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
-            <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
-            <text v-else class="pname">{{person.nickName}}</text>
-          </view>
-        </uni-grid-item>
-      </uni-grid>
+          </uni-grid-item>
+        </uni-grid>
+      </view>
+
+      <view class="rightBox">
+        <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
+          <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
+            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
+              <view class="headBox">
+                <image class="head" :src="person.avatar" mode="aspectFill" />
+                <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
+                <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
+                  mode="aspectFit" />
+              </view>
+              <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
+              <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
+              <text v-else class="pname">{{person.nickName}}</text>
+            </view>
+          </uni-grid-item>
+        </uni-grid>
+      </view>
     </view>
 
     <view class="bottomBox" :style="bottomBoxStyle" @click="tapDetail">
@@ -378,6 +402,30 @@
     background-color: #F6F6F6;
   }
 
+  .leftAndRightBox {
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .vLine {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: #AAAAAA;
+    left: 49.5vw;
+    top: 0px;
+  }
+
+  .leftBox {
+    margin-left: 2vw;
+    width: 48vw;
+  }
+
+  .rightBox {
+    width: 48vw;
+    margin-left: 2vw;
+  }
+
   .bottomBox {
     background-color: white;
     width: 88vw;
@@ -427,8 +475,10 @@
   .cell {
     background-color: #FD5FA9;
     border-radius: 6px;
-    margin: 5px;
-    padding: 5px;
+    margin-right: 2vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    padding: 1vw;
   }
 
   .headBox {
