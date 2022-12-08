@@ -34,9 +34,9 @@
       <view class="vLine" />
 
       <view class="leftBox">
-        <view class="lxCenterRow">
+        <view class="lxCenterRow" style="margin-bottom: 8px;">
           <view class="bluePrefix" />
-          <text class="lx333" style="font-size: 15px;">颐瑾</text>
+          <text class="lx333" style="font-size: 15px;">颐瑾球馆</text>
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
@@ -56,6 +56,10 @@
       </view>
 
       <view class="rightBox">
+        <view class="lxCenterRow" style="margin-bottom: 8px;">
+          <view class="bluePrefix" />
+          <text class="lx333" style="font-size: 15px;">鑫富龙球馆</text>
+        </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
             <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
@@ -407,7 +411,7 @@
   }
 
   .leftAndRightBox {
-    margin-top: 8px;
+    margin-top: 12px;
     position: relative;
   }
 
