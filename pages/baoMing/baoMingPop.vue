@@ -11,6 +11,15 @@
               <view class="lx666">{{item.name}}</view>
             </view>
           </radio-group>
+
+          <radio-group v-if="props.tiezi.qiuguanArr" @change="qiuGuanChange" class="lxCenterRow">
+            <view v-for="(qiuguan, index) in props.tiezi.qiuguanArr" :key="qiuguan.value" class="lxCenterRow">
+              <radio color="#4685F3" style="margin-left: 6px;" :value="qiuguan.value"
+                :checked="index === qiuGuanIndex" />
+              <view class="lx666">{{qiuguan.name}}</view>
+            </view>
+          </radio-group>
+
         </view>
       </view>
     </view>
@@ -25,6 +34,7 @@
     onMounted
   } from 'vue'
   let current = ref(getApp().globalData.user.isGirl === 1 ? 1 : 0)
+  let qiuGuanIndex = ref(0)
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
@@ -144,6 +154,10 @@
     } else {
       getApp().toastAndConsoleSystemError(res)
     }
+  }
+
+  function qiuGuanChange(e) {
+    //lxtodo
   }
 
   function radioChange(e) {
