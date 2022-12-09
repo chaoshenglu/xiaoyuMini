@@ -57,7 +57,7 @@
     </view>
 
     <view v-if="tiezi.status===1">
-      <view v-if="didAddMyself">
+      <view v-if="didAddMyself === 1">
         <LXBottomBtn title="报名+1" @tapBottomBtn="baoMing(1)" />
       </view>
       <view v-else>
@@ -92,7 +92,7 @@
   const jiayiPopup = ref(null)
   const bmPopup = ref(null)
   let personArr = ref([])
-  let didAddMyself = ref(false)
+  let didAddMyself = ref(0)
   let tiezi = ref(null)
   let tieziId = ref(null)
   let bottomOffset = ref(0)
