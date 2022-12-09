@@ -84,6 +84,10 @@
   })
 
   function tapConfirm() {
+    if (!selectedQiuguanId.value) {
+      getApp().toast('请选择球馆')
+      return
+    }
     let user = getApp().globalData.user
     user.isGirl = parseInt(current.value)
     user.isJiaYi = 0
