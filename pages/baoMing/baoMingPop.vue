@@ -84,7 +84,7 @@
   })
 
   function tapConfirm() {
-    if (!selectedQiuguanId.value) {
+    if (!selectedQiuguanId.value && props.tiezi.qiuguanArr) {
       getApp().toast('请选择球馆')
       return
     }
@@ -99,10 +99,10 @@
   function addTZRecord(user, tieziId) {
     let param = {
       openid: user.openid,
-      name: user.name,
       nickName: user.nickName,
       tieziId: tieziId,
       actionType: 1, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
+      qiuguanId: selectedQiuguanId.value
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
@@ -132,6 +132,7 @@
   function baoMing_addTZPerson(user, tieziId) {
     let param = user
     param.tieziId = tieziId
+    param.qiuguanId = selectedQiuguanId.value
     getApp().post('tz_person/addTZPerson', param).then(res => {
       if (res.code === 1) {
         emit('closeBaoMingPop')
