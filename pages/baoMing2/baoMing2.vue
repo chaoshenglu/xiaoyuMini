@@ -36,7 +36,7 @@
       <view class="leftBox">
         <view class="lxCenterRow" style="margin-bottom: 8px;">
           <view class="bluePrefix" />
-          <text class="lx333" style="font-size: 15px;">颐瑾球馆</text>
+          <text class="lx333" style="font-size: 15px;">{{qiuguanArr[0].qiuguanName}}</text>
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
@@ -58,7 +58,7 @@
       <view class="rightBox">
         <view class="lxCenterRow" style="margin-bottom: 8px;">
           <view class="bluePrefix" />
-          <text class="lx333" style="font-size: 15px;">鑫富龙球馆</text>
+          <text class="lx333" style="font-size: 15px;">{{qiuguanArr[1].qiuguanName}}</text>
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
@@ -131,6 +131,15 @@
   const bottomBoxStyle = computed(() => {
     return {
       bottom: `${bottomOffset.value + 56}px`
+    }
+  })
+
+  const qiuguanArr = computed(() => {
+    if (tiezi.value.qiuguanArr) {
+      // console.log('⭕️tiezi.value.qiuguanArr⭕️', tiezi.value.qiuguanArr)
+      return JSON.parse(tiezi.value.qiuguanArr)
+    } else {
+      return []
     }
   })
 
