@@ -11,17 +11,22 @@
               <view class="lx666">{{item.name}}</view>
             </view>
           </radio-group>
-
-          <radio-group v-if="props.tiezi.qiuguanArr" @change="qiuGuanChange" class="lxCenterRow">
-            <view v-for="(qiuguan, index) in props.tiezi.qiuguanArr" :key="qiuguan.value" class="lxCenterRow">
-              <radio color="#4685F3" style="margin-left: 6px;" :value="qiuguan.value"
-                :checked="index === qiuGuanIndex" />
-              <view class="lx666">{{qiuguan.name}}</view>
-            </view>
-          </radio-group>
-
         </view>
       </view>
+
+      <view v-if="qiuguanArr" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
+        <view class="lxCenterRow">
+          <text class="lx333" style="font-size: 16px;margin-right: 4px;">球馆</text>
+          <radio-group @change="qiuGuanChange" class="lxCenterRow">
+            <view v-for="(qiuguan, index) in qiuguanArr" :key="qiuguan.qiuguanId" class="lxCenterRow">
+              <radio color="#4685F3" style="margin-left: 6px;" :value="qiuguan.qiuguanId"
+                :checked="qiuguan.qiuguanId === selectedQiuguanId" />
+              <view class="lx666">{{qiuguan.qiuguanTinyName}}</view>
+            </view>
+          </radio-group>
+        </view>
+      </view>
+
     </view>
     <button type="default" @click="tapConfirm" class="confirmBtn">确定</button>
     <view style="height: 12px;" />
@@ -31,14 +36,22 @@
 <script setup>
   import {
     ref,
+    computed,
     onMounted
   } from 'vue'
   let current = ref(getApp().globalData.user.isGirl === 1 ? 1 : 0)
-  let qiuGuanIndex = ref(0)
+  let selectedQiuguanId = ref(null)
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
   let existingMyself = ref(null)
+  const qiuguanArr = computed(() => {
+    if (props.tiezi.qiuguanArr) {
+      return JSON.parse(props.tiezi.qiuguanArr)
+    } else {
+      return []
+    }
+  })
 
   const items = [{
       value: 0,
@@ -157,11 +170,10 @@
   }
 
   function qiuGuanChange(e) {
-    //lxtodo
+    selectedQiuguanId.value = e.detail.value
   }
 
   function radioChange(e) {
-    console.log('e.detail.value', e.detail.value)
     current.value = e.detail.value
   }
 </script>
