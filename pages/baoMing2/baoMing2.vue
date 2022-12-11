@@ -329,14 +329,24 @@
     }
     let content = '每次取消报名，将扣除10积分'
     let timestamp = new Date().getTime()
-    let status = 2
+    let status = 2 //person.status 1.已报名 2.已取消 3.已飞机
     let stopBaoMingTime = tiezi.value.stopBaoMingTime
     if (timestamp > dayjs(stopBaoMingTime, "YYYY-MM-DD HH:mm:ss").valueOf()) {
       content = '取消后若无人接替，将扣除10积分，且须支付10元飞机费'
-      status = 3
+      status = 3 //person.status 1.已报名 2.已取消 3.已飞机
       if (person.isVip === 1) {
         content = '取消后若无人接替，将扣除10积分'
       }
+    }
+    let personCount = 0
+    for (const p of personArr.value) {
+      if (p.openid === person.openid && p.isJiaYi != 1) {
+        personCount = personCount + 1
+      }
+    }
+    if (personCount > 1) {
+      console.log('另一个球馆仍有报名')
+      status = 1 //person.status 1.已报名 2.已取消 3.已飞机
     }
     uni.showModal({
       title: '确定取消报名吗？',
@@ -345,7 +355,7 @@
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
-          updatePersonStatus(person, status)
+          updatePersonStatus(person, status) //person.status 1.已报名 2.已取消 3.已飞机
           addCancelRecord(person)
         }
       }
