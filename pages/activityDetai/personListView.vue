@@ -11,7 +11,7 @@
               <image v-if="person.isVip === 1 && person.isJiaYi != 1" class="vip" src="/static/vipHead.png"
                 mode="aspectFit" />
             </view>
-            <text class="pname lx333">{{person.nickName}}</text>
+            <text class="pname lx333">{{person.nickName}}{{person.qiuguanTinyName}}</text>
             <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
             <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
           </view>
@@ -35,6 +35,15 @@
   const tz = computed(() => {
     return props.tiezi
   })
+
+  const qiuguanArr = computed(() => {
+    if (props.tiezi.qiuguanArr) {
+      return JSON.parse(props.tiezi.qiuguanArr)
+    } else {
+      return []
+    }
+  })
+
   let personArr = ref([])
   const paging = ref(null)
   const pagingStyle = ref({
@@ -75,6 +84,13 @@
     param.tieziId = tz.value.id
     getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
+      for (const person of arr) {
+        for (const qiuguan of qiuguanArr.value) {
+          if (person.qiuguanId === qiuguan.qiuguanId) {
+            person.qiuguanTinyName = qiuguan.qiuguanTinyName
+          }
+        }
+      }
       paging.value.complete(arr)
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
