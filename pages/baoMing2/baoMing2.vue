@@ -29,11 +29,11 @@
       </view>
     </view>
 
-    <view class="leftAndRightBox lxCenterRow">
+    <view class="leftAndRightBox lxRow">
 
       <view class="vLine" />
 
-      <view class="leftBox">
+      <view class="leftBox lxColumn">
         <view class="lxCenterRow" style="margin-bottom: 8px;">
           <view class="bluePrefix" />
           <text class="lx333" style="font-size: 15px;">{{qiuguanArr[0].qiuguanName}}</text>
@@ -55,7 +55,7 @@
         </uni-grid>
       </view>
 
-      <view class="rightBox">
+      <view class="rightBox lxColumn">
         <view class="lxCenterRow" style="margin-bottom: 8px;">
           <view class="bluePrefix" />
           <text class="lx333" style="font-size: 15px;">{{qiuguanArr[1].qiuguanName}}</text>
