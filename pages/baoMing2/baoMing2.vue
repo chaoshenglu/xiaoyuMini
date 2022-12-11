@@ -324,7 +324,7 @@
 
   function alert2cancel2remove(person) {
     uni.showModal({
-      title: '确定将此人移除吗？',
+      title: '确定将此人移除吗？', //lxtodo弹框：将此人状态设为“已取消”“已飞机”
       cancelText: '再考虑下',
       confirmText: '确定',
       success: res => {
