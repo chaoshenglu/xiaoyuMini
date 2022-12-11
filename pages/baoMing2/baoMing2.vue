@@ -358,9 +358,9 @@
         personCount = personCount + 1
       }
     }
-    if (personCount > 1) {
-      console.log('另一个球馆仍有报名')
-      status = 1 //person.status 1.已报名 2.已取消 3.已飞机
+    if (personCount > 1 && status === 3) {
+      console.log('另一个球馆仍有报名，不算飞机')
+      status = 2 //person.status 1.已报名 2.已取消 3.已飞机
     }
     uni.showModal({
       title: '确定取消报名吗？',
