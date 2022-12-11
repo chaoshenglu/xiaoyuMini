@@ -39,7 +39,7 @@
           <text class="lx333" style="font-size: 15px;">{{qiuguanArr[0].qiuguanName}}</text>
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
-          <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
+          <uni-grid-item v-for="(person, index) in personArrLeft" :index="index" :key="index">
             <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
               <view class="headBox">
                 <image class="head" :src="person.avatar" mode="aspectFill" />
@@ -61,7 +61,7 @@
           <text class="lx333" style="font-size: 15px;">{{qiuguanArr[1].qiuguanName}}</text>
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
-          <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
+          <uni-grid-item v-for="(person, index) in personArrRight" :index="index" :key="index">
             <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
               <view class="headBox">
                 <image class="head" :src="person.avatar" mode="aspectFill" />
@@ -124,6 +124,8 @@
   const jiayiPopup = ref(null)
   const bmPopup = ref(null)
   let personArr = ref([])
+  let personArrLeft = ref([])
+  let personArrRight = ref([])
   let didAddMyself = ref(0) //0代表未报名  1代表报名了一个球馆  2代表报名了两个球馆
   let tiezi = ref(null)
   let tieziId = ref(null)
@@ -192,6 +194,9 @@
     param.size = 100
     getApp().post('tz_person/getTZPerson', param).then(res => {
       let arr = res.data.list || []
+      let leftArr = []
+      let rightArr = []
+      let leftQiuGuanId = qiuguanArr.value[0].qiuguanId
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
@@ -212,8 +217,17 @@
         if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
           didAddMyself.value = didAddMyself.value + 1
         }
+
+        if (person.qiuguanId === leftQiuGuanId) {
+          leftArr.push(person)
+        } else {
+          rightArr.push(person)
+        }
+
       }
       personArr.value = arr
+      personArrLeft.value = leftArr
+      personArrRight.value = rightArr
 
       if (updateTiezi === 1) {
         updateTieziPersonNumber(arr.length)
