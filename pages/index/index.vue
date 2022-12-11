@@ -72,9 +72,15 @@
   }
 
   function tapCell(tiezi) {
-    uni.navigateTo({
-      url: '/pages/baoMing/baoMing?id=' + tiezi.id
-    })
+    if (tiezi.qiuguanArr) {
+      uni.navigateTo({
+        url: '/pages/baoMing2/baoMing2?id=' + tiezi.id
+      })
+    } else {
+      uni.navigateTo({
+        url: '/pages/baoMing/baoMing?id=' + tiezi.id
+      })
+    }
   }
 
   const queryList = (pageNo, pageSize) => {
