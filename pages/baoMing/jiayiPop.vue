@@ -47,6 +47,7 @@
   const emit = defineEmits(['closeJiaYiPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
+  let selectedQiuguanId = ref(null)
 
   const qiuguanArr = computed(() => {
     if (props.tiezi.qiuguanArr) {
@@ -71,6 +72,10 @@
   }
 
   function tapConfirm() {
+    if (!selectedQiuguanId.value && props.tiezi.qiuguanArr) {
+      getApp().toast('请选择球馆')
+      return
+    }
     if (nickName.value === '' || !nickName.value) {
       return
     }
@@ -82,6 +87,7 @@
       openid: getApp().globalData.openid,
       status: 1, //1已报名2已取消3已飞机
       tieziId: props.tiezi.id,
+      qiuguanId: selectedQiuguanId.value
     }
     addTZRecord(user)
   }
@@ -93,6 +99,7 @@
       nickName: getApp().globalData.user.nickName,
       onNickName: user.nickName,
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
+      qiuguanId: selectedQiuguanId.value
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
