@@ -10,7 +10,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName }}</text>
+        <text class="lx666">活动地点</text> <text class="lx333">{{ tz.qiuguanName || '投票中' }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">

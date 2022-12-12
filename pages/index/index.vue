@@ -14,8 +14,8 @@
           <view class="lxCenterRow" style="margin-top: 8px;">
             <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFill" />
             <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
-            <text class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
-            <text class="name">{{tiezi.qiuguanName || '-'}}</text>
+            <text v-if="tiezi.qiuguanName" class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
+            <text v-if="tiezi.qiuguanName" class="name">{{tiezi.qiuguanName}}</text>
           </view>
         </view>
       </view>

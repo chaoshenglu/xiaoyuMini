@@ -133,6 +133,10 @@
     }
   }
 
+  function qiuGuanChange(e) {
+    selectedQiuguanId.value = e.detail.value
+  }
+
   function radioChange(e) {
     current.value = e.detail.value
   }
