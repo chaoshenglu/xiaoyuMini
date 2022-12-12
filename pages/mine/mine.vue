@@ -19,9 +19,9 @@
 
     <MineCell title="我的积分" icon="/static/jifen.png" desc="100" @tapMineCell="tapMineCell" />
     <MineCell title="我的优惠券" icon="/static/coupon.png" @tapMineCell="tapMineCell" />
-    <MineCell title="我的活动" icon="/static/baoming.png" @tapMineCell="tapMineCell" />
-    <MineCell title="我的组织" icon="/static/club.png" @tapMineCell="tapMineCell" />
-    <MineCell title="更多功能" icon="/static/moreFunc.png" @tapMineCell="tapMineCell" />
+    <!-- <MineCell title="我的活动" icon="/static/baoming.png" @tapMineCell="tapMineCell" /> -->
+    <!-- <MineCell title="我的组织" icon="/static/club.png" @tapMineCell="tapMineCell" /> -->
+    <!-- <MineCell title="更多功能" icon="/static/moreFunc.png" @tapMineCell="tapMineCell" /> -->
     <MineCell title="清除缓存" icon="/static/clear.png" @tapMineCell="tapMineCell" />
 
 
@@ -42,9 +42,10 @@
 
   function tapMineCell(e) {
     if (e === '我的积分') {
-      uni.navigateTo({
-        url: '/pages/jifenHome/jifenHome'
-      })
+      // uni.navigateTo({
+      //   url: '/pages/jifenHome/jifenHome'
+      // })
+      getApp().toast('后台结算中...')
     } else if (e === '我的优惠券') {
       uni.navigateTo({
         url: '/pages/couponList/couponList'
