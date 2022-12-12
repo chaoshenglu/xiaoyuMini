@@ -27,6 +27,15 @@
         </view>
       </view>
 
+      <view class="lxCenterRow">
+        <image src="/static/vip.png" mode="aspectFit" style="width: 15px;height: 15px;"></image>
+        <text>临近报名结束时，若总人数不足</text>
+        <uni-number-box v-model="inputNumber" />
+        <text>人</text>
+      </view>
+
+      <text>自动帮我取消报名</text>
+
     </view>
     <button type="default" @click="tapConfirm" class="confirmBtn">确定</button>
     <view style="height: 12px;" />
@@ -45,6 +54,7 @@
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
   let existingMyself = ref(null)
+  const inputNumber = ref(10)
   const qiuguanArr = computed(() => {
     if (props.tiezi.qiuguanArr) {
       return JSON.parse(props.tiezi.qiuguanArr)

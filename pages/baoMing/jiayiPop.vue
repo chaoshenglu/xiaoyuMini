@@ -31,6 +31,14 @@
         </view>
       </view>
 
+      <view class="lxCenterRow">
+        <image src="/static/vip.png" mode="aspectFit" style="width: 22px;height: 22px;"></image>
+        <text style="font-size: 14px;">若总人数不足</text>
+        <uni-number-box v-model="inputNumber" />
+        <text style="font-size: 14px;">人</text>
+      </view>
+      <text style="font-size: 14px;">自动帮我取消报名</text>
+
     </view>
     <button type="default" @click="tapConfirm" class="confirmBtn">确定</button>
     <view style="height: 12px;" />
@@ -44,6 +52,7 @@
   } from 'vue'
   let current = ref(0)
   let nickName = ref('')
+  const inputNumber = ref(10)
   const emit = defineEmits(['closeJiaYiPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
@@ -144,7 +153,7 @@
 
 <style lang="scss">
   .baoMingPop {
-    width: 66vw;
+    width: 72vw;
     background-color: white;
     border-radius: 6px;
   }
@@ -153,6 +162,6 @@
     background-color: #4685F3 !important;
     color: white !important;
     transform: scale(0.88);
-    width: 66vw;
+    width: 72vw;
   }
 </style>
