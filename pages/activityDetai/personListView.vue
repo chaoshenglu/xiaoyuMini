@@ -11,9 +11,19 @@
               <image v-if="person.isVip === 1 && person.isJiaYi != 1" class="vip" src="/static/vipHead.png"
                 mode="aspectFit" />
             </view>
-            <text class="pname lx333">{{person.nickName}}{{person.qiuguanTinyName}}</text>
-            <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
-            <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
+            <view v-if="person.qiuguanTinyName" class="lxColumn">
+              <view class="lxCenterRow">
+                <text class="pname lx333">{{person.nickName}}</text>
+                <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
+                <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
+              </view>
+              <text class="pname lx999" style="font-size: 14px;">{{person.qiuguanTinyName}}</text>
+            </view>
+            <view v-else class="lxCenterRow">
+              <text class="pname lx333">{{person.nickName}}</text>
+              <image v-if="person.isGirl" class="gender" src="/static/woman.png" mode="aspectFit"></image>
+              <image v-else class="gender" src="/static/man.png" mode="aspectFit"></image>
+            </view>
           </view>
           <view class="lxColumn" style="align-items:flex-end;">
             <text class="lx999" style="font-size: 14px;">{{person.createTime}}</text>
