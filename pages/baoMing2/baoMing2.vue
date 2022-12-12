@@ -101,6 +101,8 @@
       <LXBottomBtn :title="tieziStatusStr" backgroundColor="#999999" />
     </view>
 
+    <text class="tip" :style="bottomTipStyle">注意：此帖为投票帖，投票结束后，报名人数更多的一侧将生效，另一侧报名则失效。</text>
+
   </view>
 </template>
 
@@ -133,6 +135,12 @@
   const bottomBoxStyle = computed(() => {
     return {
       bottom: `${bottomOffset.value + 56}px`
+    }
+  })
+
+  const bottomTipStyle = computed(() => {
+    return {
+      bottom: `${bottomOffset.value + 126}px`
     }
   })
 
@@ -442,6 +450,14 @@
 <style lang="scss">
   page {
     background-color: #F6F6F6;
+  }
+
+  .tip {
+    position: fixed;
+    width: 88vw;
+    left: 3vw;
+    font-size: 14px;
+    color: #666666;
   }
 
   .leftAndRightBox {
