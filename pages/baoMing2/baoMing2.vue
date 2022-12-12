@@ -391,6 +391,7 @@
       openid: user.openid,
       nickName: user.nickName,
       tieziId: tiezi.value.id,
+      qiuguanId: person.qiuguanId
       actionType: 3 //默认是给自己取消报名
     }
     if (person.isJiaYi === 1) {
