@@ -349,7 +349,7 @@
       content = '取消后若无人接替，将扣除10积分，且须支付10元飞机费'
       status = 3 //person.status 1.已报名 2.已取消 3.已飞机
       if (person.isVip === 1) {
-        content = '取消后若无人接替，将扣除10积分'
+        content = '每次取消报名，将扣除10积分'
       }
     }
     let personCount = 0
@@ -360,6 +360,7 @@
     }
     if (personCount > 1 && status === 3) {
       console.log('另一个球馆仍有报名，不算飞机')
+      content = '每次取消报名，将扣除10积分'
       status = 2 //person.status 1.已报名 2.已取消 3.已飞机
     }
     uni.showModal({
