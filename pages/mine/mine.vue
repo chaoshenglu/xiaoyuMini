@@ -23,7 +23,7 @@
     <!-- <MineCell title="我的组织" icon="/static/club.png" @tapMineCell="tapMineCell" /> -->
     <!-- <MineCell title="更多功能" icon="/static/moreFunc.png" @tapMineCell="tapMineCell" /> -->
     <MineCell title="清除缓存" icon="/static/clear.png" @tapMineCell="tapMineCell" />
-
+    <MineCell title="隐私设置" icon="/static/privacy.png" @tapMineCell="tapMineCell" />
 
   </view>
 </template>
