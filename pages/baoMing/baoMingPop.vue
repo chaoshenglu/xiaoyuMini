@@ -27,14 +27,13 @@
         </view>
       </view>
 
-      <view class="lxCenterRow">
-        <image src="/static/vip.png" mode="aspectFit" style="width: 15px;height: 15px;"></image>
-        <text>临近报名结束时，若总人数不足</text>
-        <uni-number-box v-model="inputNumber" />
-        <text>人</text>
+      <view class="lxCenterRow" style="margin-top: 14px;">
+        <switch @change="switch2Change" type="checkbox" color="#4685F3" style="transform:scale(0.7)" />
+        <text class="lx666" style="font-size: 14px;">若报名总人数不足</text>
+        <uni-number-box v-model="inputNumber" style="transform:scale(0.85)" />
+        <text class="lx666" style="font-size: 14px;">人</text>
       </view>
-
-      <text>自动帮我取消报名</text>
+      <text class="lx666" style="font-size: 14px;margin-left: 29px;">自动帮TA在合适的时机取消报名</text>
 
     </view>
     <button type="default" @click="tapConfirm" class="confirmBtn">确定</button>
@@ -54,7 +53,7 @@
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
   let existingMyself = ref(null)
-  const inputNumber = ref(10)
+  const inputNumber = ref(8)
   const qiuguanArr = computed(() => {
     if (props.tiezi.qiuguanArr) {
       return JSON.parse(props.tiezi.qiuguanArr)

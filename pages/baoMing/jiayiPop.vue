@@ -34,7 +34,7 @@
       <view class="lxCenterRow" style="margin-top: 14px;">
         <switch @change="switch2Change" type="checkbox" color="#4685F3" style="transform:scale(0.7)" />
         <text class="lx666" style="font-size: 14px;">若报名总人数不足</text>
-        <uni-number-box :v-model="inputNumber" style="transform:scale(0.85)" />
+        <uni-number-box v-model="inputNumber" style="transform:scale(0.85)" />
         <text class="lx666" style="font-size: 14px;">人</text>
       </view>
       <text class="lx666" style="font-size: 14px;margin-left: 29px;">自动帮TA在合适的时机取消报名</text>
