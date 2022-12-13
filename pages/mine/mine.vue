@@ -62,6 +62,10 @@
 
     } else if (e === '清除缓存') {
       clearCache()
+    } else if (e === '隐私设置') {
+      uni.navigateTo({
+        url: '/pages/privacy/privacy'
+      })
     }
   }
 
