@@ -50,7 +50,8 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">费用说明</text> <text class="lx333">女生19元，剩余费用男生AA</text>
+        <!-- lxtodo -->
+        <text class="lx666">费用说明</text> <text class="lx333">女生0.7x，男生1x</text>
       </view>
 
       <view class="infoRow lxCenterRow">
