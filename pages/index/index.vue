@@ -44,6 +44,7 @@
   const paging = ref(null)
   const popup = ref(null)
   let tieziArr = ref([])
+  const lxwx = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/lxwx.jpg'
 
   onShow(() => {
     uni.$on('noGift', function(data) {
