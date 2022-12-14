@@ -14,7 +14,8 @@
             <text class="remark">备注：{{tiezi.remark}}</text>
           </view>
           <view class="lxCenterRow" style="margin-top: 4px;">
-            <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFill" />
+            <image class="head" @click="tapName(tiezi)" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'"
+              mode="aspectFill" />
             <text class="name" @click="tapName(tiezi)">{{tiezi.createdPersonName || '李响'}}</text>
             <text v-if="tiezi.qiuguanName" class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
             <text v-if="tiezi.qiuguanName" @click="tapQiuGuan(tiezi)" class="name">{{tiezi.qiuguanName}}</text>
