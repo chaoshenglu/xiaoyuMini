@@ -73,11 +73,9 @@
       }).then(res => {
         let qiuguan = res.data || {}
         if (qiuguan.qiuguanLat && qiuguan.qiuguanLon) {
-          let lat = parseFloat(qiuguan.qiuguanLat)
-          let lon = parseFloat(qiuguan.qiuguanLon)
           wx.openLocation({
-            latitude: lat,
-            longitude: lon,
+            latitude: parseFloat(qiuguan.qiuguanLat),
+            longitude: parseFloat(qiuguan.qiuguanLon),
             name: tiezi.qiuguanName
           })
         }
