@@ -15,7 +15,7 @@
           </view>
           <view class="lxCenterRow" style="margin-top: 4px;">
             <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFill" />
-            <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
+            <text class="name" @click="tapName(tiezi)">{{tiezi.createdPersonName || '李响'}}</text>
             <text v-if="tiezi.qiuguanName" class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
             <text v-if="tiezi.qiuguanName" @click="tapQiuGuan(tiezi)" class="name">{{tiezi.qiuguanName}}</text>
           </view>
@@ -65,6 +65,29 @@
   onLoad(() => {
 
   })
+
+  function tapName(tiezi) {
+    if (tiezi.createdPersonId) {
+      let uri = 'user/getUserInfo'
+      getApp().get(uri, {
+        openid: tiezi.createdPersonId
+      }).then(res => {
+        let arr = res.data || []
+        let theUser = arr[0] || {}
+        if (theUser.wxQrcode) {
+          wx.previewMedia({
+            sources: [{
+              url: theUser.wxQrcode,
+              type: 'image'
+            }],
+            current: 0
+          })
+        }
+      }).catch(err => {
+        getApp().toastAndConsoleSystemError(err)
+      })
+    }
+  }
 
   function tapQiuGuan(tiezi) {
     if (tiezi.qiuguanId) {
