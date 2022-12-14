@@ -2,20 +2,22 @@
   <view>
     <z-paging ref="paging" v-model="tieziArr" @query="queryList">
       <view class="lxCenterColumn">
-        <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id" @click="tapCell(tiezi)">
-          <text class="title">{{tiezi.title}}</text>
-          <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
-            <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
-            <uni-tag :text="tiezi.fields" type="success" size="small"></uni-tag>
-            <uni-tag :text="tiezi.numberProportion" type="warning" size="small"></uni-tag>
-            <uni-tag :text="tiezi.statusStr" type="error" size="small"></uni-tag>
+        <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id">
+          <view class="lxColumn" style="margin-bottom: 4px;" @click="tapCell(tiezi)">
+            <text class="title">{{tiezi.title}}</text>
+            <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
+              <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
+              <uni-tag :text="tiezi.fields" type="success" size="small"></uni-tag>
+              <uni-tag :text="tiezi.numberProportion" type="warning" size="small"></uni-tag>
+              <uni-tag :text="tiezi.statusStr" type="error" size="small"></uni-tag>
+            </view>
+            <text class="remark">备注：{{tiezi.remark}}</text>
           </view>
-          <text class="remark">备注：{{tiezi.remark}}</text>
-          <view class="lxCenterRow" style="margin-top: 8px;">
+          <view class="lxCenterRow" style="margin-top: 4px;">
             <image class="head" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'" mode="aspectFill" />
             <text class="name">{{tiezi.createdPersonName || '李响'}}</text>
             <text v-if="tiezi.qiuguanName" class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
-            <text v-if="tiezi.qiuguanName" class="name">{{tiezi.qiuguanName}}</text>
+            <text v-if="tiezi.qiuguanName" @click="tapQiuGuan(tiezi)" class="name">{{tiezi.qiuguanName}}</text>
           </view>
         </view>
       </view>
@@ -62,6 +64,28 @@
   onLoad(() => {
 
   })
+
+  function tapQiuGuan(tiezi) {
+    if (tiezi.qiuguanId) {
+      let uri = 'qiuguan/getQiuGuanDetail'
+      getApp().get(uri, {
+        qiuguanId: tiezi.qiuguanId
+      }).then(res => {
+        let qiuguan = res.data || {}
+        if (qiuguan.qiuguanLat && qiuguan.qiuguanLon) {
+          let lat = parseFloat(qiuguan.qiuguanLat)
+          let lon = parseFloat(qiuguan.qiuguanLon)
+          wx.openLocation({
+            latitude: lat,
+            longitude: lon,
+            name: tiezi.qiuguanName
+          })
+        }
+      }).catch(err => {
+        getApp().toastAndConsoleSystemError(err)
+      })
+    }
+  }
 
   function onShareAppMessage(res) {
 
