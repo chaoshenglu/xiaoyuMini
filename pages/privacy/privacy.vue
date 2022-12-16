@@ -11,7 +11,7 @@
     </view>
     <view class="lx100vwLine" style="margin-top: 10px;margin-bottom: 10px;" />
     <text class="lx999"
-      style="font-size: 13px;margin-right: 18px;">注意，小程序所记录的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项，并点击“确定”。</text>
+      style="font-size: 13px;margin-right: 18px;">注意：小程序中的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项，并点击“确定”。</text>
     <LXBottomBtn title="确定" @tapBottomBtn="save" />
   </view>
 </template>
