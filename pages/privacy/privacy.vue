@@ -11,8 +11,8 @@
     </view>
     <view class="lx100vwLine" style="margin-top: 10px;margin-bottom: 10px;" />
     <text class="lx999"
-      style="font-size: 13px;margin-right: 18px;">注意，小程序所记录的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项，并点击“保存”。</text>
-    <LXBottomBtn title="保存" @tapBottomBtn="save" />
+      style="font-size: 13px;margin-right: 18px;">注意，小程序所记录的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项，并点击“确定”。</text>
+    <LXBottomBtn title="确定" @tapBottomBtn="save" />
   </view>
 </template>
 
@@ -58,11 +58,11 @@
         uni.setStorageSync('user', user)
         let content = null
         if (checkedBM.value === 0 && checkedHD.value === 0) {
-          content = '您的报名记录和活动记录将在活动结束后24小时内从服务器上自动删除'
+          content = '已将您3天前的报名记录和活动记录全部清理完毕'
         } else if (checkedBM.value === 0) {
-          content = '您的报名记录将在活动结束后24小时内从服务器上自动删除'
+          content = '已将您3天前的报名记录全部清理完毕'
         } else if (checkedHD.value === 0) {
-          content = '您的活动记录将在活动结束后24小时内从服务器上自动删除'
+          content = '已将您3天前的活动记录全部清理完毕'
         }
         alert(content)
       } else {
@@ -76,7 +76,7 @@
   function alert(content) {
     if (content) {
       uni.showModal({
-        title: '保存成功',
+        title: '操作成功',
         content: content,
         showCancel: false,
         success: res => {
