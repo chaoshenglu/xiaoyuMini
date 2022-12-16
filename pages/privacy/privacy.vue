@@ -20,7 +20,7 @@
   import {
     ref
   } from 'vue'
-
+  import dayjs from 'dayjs'
   import {
     onLoad
   } from "@dcloudio/uni-app"
@@ -71,6 +71,14 @@
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
+  }
+
+  function clearTZPerson() {
+    let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD eee')
+  }
+
+  function clearTZRecord() {
+
   }
 
   function alert(content) {
