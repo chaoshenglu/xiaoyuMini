@@ -33,7 +33,7 @@
         <uni-grid-item v-for="(person, index) in personArr" :index="index" :key="index">
           <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
             <view class="headBox">
-              <image class="head" :src="person.avatar" mode="aspectFill" />
+              <image class="head" :src="person.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
               <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
                 mode="aspectFit" />
