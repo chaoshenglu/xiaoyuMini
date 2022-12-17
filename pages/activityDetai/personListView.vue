@@ -6,7 +6,7 @@
           @click="tapCell(person)">
           <view class="lxCenterRow">
             <view class="headBox">
-              <image class="head" :src="person.avatar" mode="aspectFill" />
+              <image class="head" :src="person.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
               <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
               <image v-if="person.isVip === 1 && person.isJiaYi != 1" class="vip" src="/static/vipHead.png"
                 mode="aspectFit" />
