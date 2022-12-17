@@ -61,11 +61,11 @@
         uni.setStorageSync('user', user)
         let content = null
         if (checkedBM.value === 0 && checkedHD.value === 0) {
-          content = '您的报名记录和活动记录将在活动结束后24小时内从服务器上自动删除'
+          content = '您的报名记录和活动记录将在活动结束后3天内从服务器上自动删除'
         } else if (checkedBM.value === 0) {
-          content = '您的报名记录将在活动结束后24小时内从服务器上自动删除'
+          content = '您的报名记录将在活动结束后3天内从服务器上自动删除'
         } else if (checkedHD.value === 0) {
-          content = '您的活动记录将在活动结束后24小时内从服务器上自动删除'
+          content = '您的活动记录将在活动结束后3天内从服务器上自动删除'
         }
         alert(content)
         anonymousOrNotTZPerson(user)
