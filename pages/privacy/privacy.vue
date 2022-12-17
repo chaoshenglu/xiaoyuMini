@@ -11,8 +11,7 @@
     </view>
     <view class="lx100vwLine" style="margin-top: 10px;margin-bottom: 10px;" />
     <text class="lx999"
-      style="font-size: 13px;margin-right: 18px;">注意：小程序中的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项，并点击“确定”。</text>
-    <LXBottomBtn title="确定" @tapBottomBtn="save" />
+      style="font-size: 13px;margin-right: 18px;">注意：小程序中的头像/昵称并不会与微信号强关联，用户使用本程序，并不必担心隐私问题。若仍不想把个人的报名记录/活动记录保存在服务器，可取消勾选以上选项。</text>
   </view>
 </template>
 
@@ -35,12 +34,15 @@
   })
 
   function changeBM(e) {
-    console.log(e)
     checkedBM.value = e.detail.value ? 1 : 0
+    save()
+    anonymousOrNotTZRecord()
   }
 
   function changeHD(e) {
     checkedHD.value = e.detail.value ? 1 : 0
+    save()
+    anonymousOrNotTZPerson()
   }
 
   function save() {
@@ -73,12 +75,39 @@
     })
   }
 
-  function clearTZPerson() {
-    let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD eee')
+  function anonymousOrNotTZPerson() {
+    let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm:ss')
+    let param = {
+      openid: user.openid,
+      time: day3Ago
+    }
+    if (checkedHD.value === 1) {
+      let user = getApp().globalData.user
+      param.nickName = user.nickName
+      param.avatar = user.avatar
+    }
+    getApp().post('tz_person/anonymousOrNot', param).then(res => {
+
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
-  function clearTZRecord() {
+  function anonymousOrNotTZRecord() {
+    let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm:ss')
+    let param = {
+      openid: user.openid,
+      time: day3Ago
+    }
+    if (checkedBM.value === 1) {
+      let user = getApp().globalData.user
+      param.nickName = user.nickName
+    }
+    getApp().post('tz_record/anonymousOrNot', param).then(res => {
 
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   function alert(content) {
