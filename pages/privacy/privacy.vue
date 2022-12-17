@@ -68,8 +68,8 @@
           content = '您的活动记录将在活动结束后24小时内从服务器上自动删除'
         }
         alert(content)
-        anonymousOrNotTZPerson()
-        anonymousOrNotTZRecord()
+        anonymousOrNotTZPerson(user)
+        anonymousOrNotTZRecord(user)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
@@ -78,7 +78,7 @@
     })
   }
 
-  function anonymousOrNotTZPerson() {
+  function anonymousOrNotTZPerson(user) {
     if (checkedHD.value === ori_checkedHD.value) {
       console.log('没改 TZPerson')
       return
@@ -89,7 +89,6 @@
       time: day3Ago
     }
     if (checkedHD.value === 1) {
-      let user = getApp().globalData.user
       param.nickName = user.nickName
       param.avatar = user.avatar
     }
@@ -100,7 +99,7 @@
     })
   }
 
-  function anonymousOrNotTZRecord() {
+  function anonymousOrNotTZRecord(user) {
     if (checkedBM.value === ori_checkedBM.value) {
       console.log('没改 TZRecord')
       return
@@ -111,7 +110,6 @@
       time: day3Ago
     }
     if (checkedBM.value === 1) {
-      let user = getApp().globalData.user
       param.nickName = user.nickName
     }
     getApp().post('tz_record/anonymousOrNot', param).then(res => {
