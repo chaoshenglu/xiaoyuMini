@@ -27,11 +27,15 @@
 
   const checkedBM = ref(0)
   const checkedHD = ref(0)
+  const ori_checkedBM = ref(0)
+  const ori_checkedHD = ref(0)
 
   onLoad((option) => {
     let user = getApp().globalData.user
     checkedBM.value = user.bmRecord
     checkedHD.value = user.hdRecord
+    ori_checkedBM.value = user.bmRecord
+    ori_checkedHD.value = user.hdRecord
   })
 
   function changeBM(e) {
@@ -64,6 +68,8 @@
           content = '您的活动记录将在活动结束后24小时内从服务器上自动删除'
         }
         alert(content)
+        anonymousOrNotTZPerson()
+        anonymousOrNotTZRecord()
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
@@ -73,6 +79,10 @@
   }
 
   function anonymousOrNotTZPerson() {
+    if (checkedHD.value === ori_checkedHD.value) {
+      console.log('没改 TZPerson')
+      return
+    }
     let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm:ss')
     let param = {
       openid: user.openid,
@@ -91,6 +101,10 @@
   }
 
   function anonymousOrNotTZRecord() {
+    if (checkedBM.value === ori_checkedBM.value) {
+      console.log('没改 TZRecord')
+      return
+    }
     let day3Ago = dayjs().subtract(3, 'day').format('YYYY-MM-DD HH:mm:ss')
     let param = {
       openid: user.openid,
