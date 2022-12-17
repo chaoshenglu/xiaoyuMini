@@ -60,11 +60,11 @@
         uni.setStorageSync('user', user)
         let content = null
         if (checkedBM.value === 0 && checkedHD.value === 0) {
-          content = '已将您3天前的报名记录和活动记录全部清理完毕'
+          content = '您的报名记录和活动记录将在活动结束后24小时内从服务器上自动删除'
         } else if (checkedBM.value === 0) {
-          content = '已将您3天前的报名记录全部清理完毕'
+          content = '您的报名记录将在活动结束后24小时内从服务器上自动删除'
         } else if (checkedHD.value === 0) {
-          content = '已将您3天前的活动记录全部清理完毕'
+          content = '您的活动记录将在活动结束后24小时内从服务器上自动删除'
         }
         alert(content)
       } else {
