@@ -32,7 +32,8 @@
       </view>
 
       <view class="lxCenterRow" style="margin-top: 14px;">
-        <switch @change="switch2Change" type="checkbox" color="#4685F3" style="transform:scale(0.7)" />
+        <switch @change="switch2Change" :checked="isCheckNum" type="checkbox" color="#4685F3"
+          style="transform:scale(0.7)" />
         <text class="lx666" style="font-size: 14px;">若报名总人数不足</text>
         <uni-number-box v-model="inputNumber" :min="6" :max="12" style="transform:scale(0.85)" />
         <text class="lx666" style="font-size: 14px;">人</text>
@@ -52,6 +53,7 @@
   } from 'vue'
   let current = ref(0)
   let nickName = ref('')
+  const isCheckNum = ref(false)
   const inputNumber = ref(8)
   const emit = defineEmits(['closeJiaYiPop'])
   const props = defineProps(['tiezi'])
@@ -75,6 +77,10 @@
       name: '女'
     }
   ]
+
+  function switch2Change(e) {
+    isCheckNum.value = e.detail.value
+  }
 
   function onInput(e) {
     nickName.value = e.detail.value
@@ -109,6 +115,9 @@
       onNickName: user.nickName,
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
       qiuguanId: selectedQiuguanId.value
+    }
+    if (isCheckNum.value === true) {
+      param.targetNum = inputNumber.value
     }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
