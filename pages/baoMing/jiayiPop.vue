@@ -116,9 +116,6 @@
       actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
       qiuguanId: selectedQiuguanId.value
     }
-    if (isCheckNum.value === true) {
-      param.targetNum = inputNumber.value
-    }
     getApp().post('tz_record/addTZRecord', param).then(res => {
       if (res.code === 1) {
         baoMing_addTZPerson(user)
@@ -131,7 +128,11 @@
   }
 
   function baoMing_addTZPerson(user) {
-    getApp().post('tz_person/addTZPerson', user).then(res => {
+    let param = user
+    if (isCheckNum.value === true) {
+      param.targetNum = inputNumber.value
+    }
+    getApp().post('tz_person/addTZPerson', param).then(res => {
       emit('closeJiaYiPop')
       handleRes(res)
     }).catch(err => {
