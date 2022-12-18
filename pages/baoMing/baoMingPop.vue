@@ -148,6 +148,9 @@
     let param = user
     param.tieziId = tieziId
     param.qiuguanId = selectedQiuguanId.value
+    if (isCheckNum.value === true) {
+      param.targetNum = inputNumber.value
+    }
     getApp().post('tz_person/addTZPerson', param).then(res => {
       if (res.code === 1) {
         emit('closeBaoMingPop')
