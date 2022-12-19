@@ -285,19 +285,19 @@
 
   }
 
-  function baoMing(isJiaYi) {
-    if (personArr.value.length >= tiezi.value.limitNumber) {
-      uni.showModal({
-        title: '报名人数超限',
-        content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
-        success: res => {
-          if (res.confirm) {
-            baoMing_continue(isJiaYi)
-          }
-        }
-      })
-      return
-    }
+  function baoMing(isJiaYi) { //lxtodo
+    // if (personArr.value.length >= tiezi.value.limitNumber) {
+    //   uni.showModal({
+    //     title: '报名人数超限',
+    //     content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
+    //     success: res => {
+    //       if (res.confirm) {
+    //         baoMing_continue(isJiaYi)
+    //       }
+    //     }
+    //   })
+    //   return
+    // }
     if (personArr.value.length >= 100) {
       uni.showModal({
         title: '报名人数过多',
