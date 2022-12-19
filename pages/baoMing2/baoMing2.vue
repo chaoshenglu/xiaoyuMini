@@ -208,31 +208,54 @@
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
-        if (person.isGirl) {
-          person.style = {
-            backgroundColor: '#FD5FA9'
-          }
-        } else {
-          person.style = {
-            backgroundColor: '#4685F3'
-          }
-        }
-        if (i >= tiezi.value.limitNumber) {
-          person.style = {
-            backgroundColor: '#999999'
-          }
-        }
         if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
           didAddMyself.value = didAddMyself.value + 1
         }
-
         if (person.qiuguanId === leftQiuGuanId) {
           leftArr.push(person)
         } else {
           rightArr.push(person)
         }
-
       }
+
+      for (var i = 0; i < leftArr.length; i++) {
+        let person = leftArr[i]
+        if (i >= tiezi.value.limitNumber) {
+          person.style = {
+            backgroundColor: '#999999'
+          }
+        } else {
+          if (person.isGirl === 1) {
+            person.style = {
+              backgroundColor: '#FD5FA9'
+            }
+          } else {
+            person.style = {
+              backgroundColor: '#4685F3'
+            }
+          }
+        }
+      }
+
+      for (var i = 0; i < rightArr.length; i++) {
+        let person = rightArr[i]
+        if (i >= tiezi.value.limitNumber) {
+          person.style = {
+            backgroundColor: '#999999'
+          }
+        } else {
+          if (person.isGirl === 1) {
+            person.style = {
+              backgroundColor: '#FD5FA9'
+            }
+          } else {
+            person.style = {
+              backgroundColor: '#4685F3'
+            }
+          }
+        }
+      }
+
       personArr.value = arr
       personArrLeft.value = leftArr
       personArrRight.value = rightArr
