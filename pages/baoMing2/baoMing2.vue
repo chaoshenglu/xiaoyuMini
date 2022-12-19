@@ -227,16 +227,7 @@
         }
 
         if (person.qiuguanId === leftQiuGuanId) {
-          if (person.targetNum) {
-            let stopBaoMingTime = tiezi.value.stopBaoMingTime
-            let timestamp1 = dayjs(stopBaoMingTime, "YYYY-MM-DD HH:mm:ss").valueOf()
-            let timestamp2 = new Date().getTime()
-            if (timestamp2 > timestamp1 && tiezi.value.personNumber > person.targetNum) {
-              leftArr.push(person) //lxtodo
-            }
-          } else {
-            leftArr.push(person)
-          }
+          leftArr.push(person)
         } else {
           rightArr.push(person)
         }
