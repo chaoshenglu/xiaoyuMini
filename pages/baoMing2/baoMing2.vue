@@ -226,6 +226,7 @@
           }
           person.waiting = true
         } else {
+          person.waiting = false
           if (person.isGirl === 1) {
             person.style = {
               backgroundColor: '#FD5FA9'
@@ -246,6 +247,7 @@
           }
           person.waiting = true
         } else {
+          person.waiting = false
           if (person.isGirl === 1) {
             person.style = {
               backgroundColor: '#FD5FA9'
@@ -370,8 +372,13 @@
   }
 
   function alert2cancelWait(person) {
+    let content = null
+    if (person.targetNum) {
+      content = `若现在不取消排队，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消`
+    }
     uni.showModal({
       title: '确定取消排队吗？',
+      content: content,
       cancelText: '先等等',
       confirmText: '确定',
       success: res => {
