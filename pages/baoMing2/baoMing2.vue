@@ -377,7 +377,7 @@
     uni.showModal({
       title: '确定取消报名吗？',
       content: content,
-      cancelText: '再考虑下',
+      cancelText: '先等等',
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
