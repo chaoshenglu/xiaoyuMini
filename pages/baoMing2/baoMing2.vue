@@ -224,6 +224,7 @@
           person.style = {
             backgroundColor: '#999999'
           }
+          person.waiting = true
         } else {
           if (person.isGirl === 1) {
             person.style = {
@@ -243,6 +244,7 @@
           person.style = {
             backgroundColor: '#999999'
           }
+          person.waiting = true
         } else {
           if (person.isGirl === 1) {
             person.style = {
@@ -367,9 +369,27 @@
     })
   }
 
+  function alert2cancelWait(person) {
+    uni.showModal({
+      title: '确定取消排队吗？',
+      cancelText: '先等等',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          updatePersonStatus(person, 2)
+          addCancelRecord(person)
+        }
+      }
+    })
+  }
+
   function alert2cancel2owner(person) {
     if (tiezi.value.status === 2) {
       console.log('活动已经取消')
+      return
+    }
+    if (person.waiting) {
+      alert2cancelWait(person)
       return
     }
     let content = '每次取消报名，将扣除10积分'
