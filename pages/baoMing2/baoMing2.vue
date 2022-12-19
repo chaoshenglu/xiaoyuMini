@@ -371,6 +371,9 @@
       content = '每次取消报名，将扣除10积分'
       status = 2 //person.status 1.已报名 2.已取消 3.已飞机
     }
+    if (person.targetNum) {
+      content = `现在取消报名，将扣除10积分，若现在不取消报名，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消报名`
+    }
     uni.showModal({
       title: '确定取消报名吗？',
       content: content,
