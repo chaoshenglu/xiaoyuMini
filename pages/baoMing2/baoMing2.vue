@@ -345,7 +345,7 @@
     let ownClubIds = ownClubIdsStr.split(',')
     console.log('ownClubIds=', ownClubIds)
     if (person.openid == getApp().globalData.openid) {
-      console.log('报名者取消报名')
+      console.log('报名者取消报名') //lxtodo发起者不能取消报名
       alert2cancel2owner(person)
     } else if (ownClubIds.indexOf(`${tiezi.value.clubId}`) >= 0) {
       console.log('管理员取消报名')
