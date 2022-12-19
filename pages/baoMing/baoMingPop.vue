@@ -28,7 +28,8 @@
       </view>
 
       <view class="lxCenterRow" style="margin-top: 14px;">
-        <switch @change="switch2Change" type="checkbox" color="#4685F3" style="transform:scale(0.7)" />
+        <switch @change="switch2Change" :checked="isCheckNum" type="checkbox" color="#4685F3"
+          style="transform:scale(0.7)" />
         <text class="lx666" style="font-size: 14px;">若报名总人数不足</text>
         <uni-number-box v-model="inputNumber" :min="6" :max="12" style="transform:scale(0.85)" />
         <text class="lx666" style="font-size: 14px;">人</text>
@@ -54,6 +55,7 @@
   let user = ref(getApp().globalData.user)
   let existingMyself = ref(null)
   const inputNumber = ref(8)
+  const isCheckNum = ref(false)
   const qiuguanArr = computed(() => {
     if (props.tiezi.qiuguanArr) {
       return JSON.parse(props.tiezi.qiuguanArr)
@@ -91,6 +93,10 @@
       getApp().toastAndConsoleSystemError(err)
     })
   })
+
+  function switch2Change(e) {
+    isCheckNum.value = e.detail.value
+  }
 
   function tapConfirm() {
     if (!selectedQiuguanId.value && props.tiezi.qiuguanArr) {
@@ -142,6 +148,9 @@
     let param = user
     param.tieziId = tieziId
     param.qiuguanId = selectedQiuguanId.value
+    if (isCheckNum.value === true) {
+      param.targetNum = inputNumber.value
+    }
     getApp().post('tz_person/addTZPerson', param).then(res => {
       if (res.code === 1) {
         emit('closeBaoMingPop')

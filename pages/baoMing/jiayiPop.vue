@@ -32,7 +32,8 @@
       </view>
 
       <view class="lxCenterRow" style="margin-top: 14px;">
-        <switch @change="switch2Change" type="checkbox" color="#4685F3" style="transform:scale(0.7)" />
+        <switch @change="switch2Change" :checked="isCheckNum" type="checkbox" color="#4685F3"
+          style="transform:scale(0.7)" />
         <text class="lx666" style="font-size: 14px;">若报名总人数不足</text>
         <uni-number-box v-model="inputNumber" :min="6" :max="12" style="transform:scale(0.85)" />
         <text class="lx666" style="font-size: 14px;">人</text>
@@ -52,6 +53,7 @@
   } from 'vue'
   let current = ref(0)
   let nickName = ref('')
+  const isCheckNum = ref(false)
   const inputNumber = ref(8)
   const emit = defineEmits(['closeJiaYiPop'])
   const props = defineProps(['tiezi'])
@@ -75,6 +77,10 @@
       name: '女'
     }
   ]
+
+  function switch2Change(e) {
+    isCheckNum.value = e.detail.value
+  }
 
   function onInput(e) {
     nickName.value = e.detail.value
@@ -122,7 +128,11 @@
   }
 
   function baoMing_addTZPerson(user) {
-    getApp().post('tz_person/addTZPerson', user).then(res => {
+    let param = user
+    if (isCheckNum.value === true) {
+      param.targetNum = inputNumber.value
+    }
+    getApp().post('tz_person/addTZPerson', param).then(res => {
       emit('closeJiaYiPop')
       handleRes(res)
     }).catch(err => {
