@@ -22,8 +22,6 @@
     <MineCell title="我的活动" icon="/static/baoming.png" @tapMineCell="tapMineCell" />
     <MineCell title="我的组织" icon="/static/club.png" @tapMineCell="tapMineCell" />
     <MineCell title="更多功能" icon="/static/moreFunc.png" @tapMineCell="tapMineCell" />
-    <MineCell title="清除缓存" icon="/static/clear.png" @tapMineCell="tapMineCell" />
-    <MineCell title="隐私设置" icon="/static/privacy.png" @tapMineCell="tapMineCell" />
 
   </view>
 </template>
@@ -59,32 +57,10 @@
         url: '/pages/myClubs/myClubs' // 我创办的 我参与的
       })
     } else if (e === '更多功能') {
-
-    } else if (e === '清除缓存') {
-      clearCache()
-    } else if (e === '隐私设置') {
       uni.navigateTo({
-        url: '/pages/privacy/privacy'
+        url: '/pages/moreFunc/moreFunc'
       })
     }
-  }
-
-  function clearCache() {
-    getApp().globalData.openid = null
-    getApp().globalData.saveOpenIdTime = null
-    getApp().globalData.user = null
-    uni.showLoading({
-      title: '正在清理'
-    })
-    try {
-      uni.clearStorageSync()
-    } catch (e) {
-      console.log(eee)
-    }
-    setTimeout(() => {
-      uni.hideLoading()
-      getApp().loginAndGetOpenId()
-    }, 500)
   }
 
   function chooseHead(e) {
@@ -232,13 +208,5 @@
     width: 56px;
     height: 56px;
     border-radius: 40px;
-  }
-
-  .rowIcon {
-    height: 24px;
-    width: 24px;
-    margin-right: 8px;
-    margin-left: 4px;
-    margin-bottom: 1px;
   }
 </style>

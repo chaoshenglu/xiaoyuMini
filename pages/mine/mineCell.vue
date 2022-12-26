@@ -33,4 +33,12 @@
     margin-bottom: 10px;
     justify-content: space-between;
   }
+
+  .rowIcon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    margin-left: 4px;
+    margin-bottom: 1px;
+  }
 </style>
