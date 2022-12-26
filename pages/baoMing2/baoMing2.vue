@@ -208,24 +208,9 @@
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
-        if (person.isGirl) {
-          person.style = {
-            backgroundColor: '#FD5FA9'
-          }
-        } else {
-          person.style = {
-            backgroundColor: '#4685F3'
-          }
-        }
-        if (i >= tiezi.value.limitNumber) {
-          person.style = {
-            backgroundColor: '#999999'
-          }
-        }
         if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
           didAddMyself.value = didAddMyself.value + 1
         }
-
         if (person.qiuguanId === leftQiuGuanId) {
           if (person.targetNum) {
             let stopBaoMingTime = tiezi.value.stopBaoMingTime
@@ -240,8 +225,50 @@
         } else {
           rightArr.push(person)
         }
-
       }
+
+      for (var i = 0; i < leftArr.length; i++) {
+        let person = leftArr[i]
+        if (i >= tiezi.value.limitNumber) {
+          person.style = {
+            backgroundColor: '#999999'
+          }
+          person.waiting = true
+        } else {
+          person.waiting = false
+          if (person.isGirl === 1) {
+            person.style = {
+              backgroundColor: '#FD5FA9'
+            }
+          } else {
+            person.style = {
+              backgroundColor: '#4685F3'
+            }
+          }
+        }
+      }
+
+      for (var i = 0; i < rightArr.length; i++) {
+        let person = rightArr[i]
+        if (i >= tiezi.value.limitNumber) {
+          person.style = {
+            backgroundColor: '#999999'
+          }
+          person.waiting = true
+        } else {
+          person.waiting = false
+          if (person.isGirl === 1) {
+            person.style = {
+              backgroundColor: '#FD5FA9'
+            }
+          } else {
+            person.style = {
+              backgroundColor: '#4685F3'
+            }
+          }
+        }
+      }
+
       personArr.value = arr
       personArrLeft.value = leftArr
       personArrRight.value = rightArr
@@ -271,19 +298,19 @@
 
   }
 
-  function baoMing(isJiaYi) {
-    if (personArr.value.length >= tiezi.value.limitNumber) {
-      uni.showModal({
-        title: '报名人数超限',
-        content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
-        success: res => {
-          if (res.confirm) {
-            baoMing_continue(isJiaYi)
-          }
-        }
-      })
-      return
-    }
+  function baoMing(isJiaYi) { //lxtodo
+    // if (personArr.value.length >= tiezi.value.limitNumber) {
+    //   uni.showModal({
+    //     title: '报名人数超限',
+    //     content: `当前人数已达${personArr.value.length}人，是否进入排队区？`,
+    //     success: res => {
+    //       if (res.confirm) {
+    //         baoMing_continue(isJiaYi)
+    //       }
+    //     }
+    //   })
+    //   return
+    // }
     if (personArr.value.length >= 100) {
       uni.showModal({
         title: '报名人数过多',
@@ -329,7 +356,7 @@
     let ownClubIds = ownClubIdsStr.split(',')
     console.log('ownClubIds=', ownClubIds)
     if (person.openid == getApp().globalData.openid) {
-      console.log('报名者取消报名')
+      console.log('报名者取消报名') //lxtodo发起者不能取消报名
       alert2cancel2owner(person)
     } else if (ownClubIds.indexOf(`${tiezi.value.clubId}`) >= 0) {
       console.log('管理员取消报名')
@@ -353,9 +380,32 @@
     })
   }
 
+  function alert2cancelWait(person) {
+    let content = null
+    if (person.targetNum) {
+      content = `若现在不取消排队，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消`
+    }
+    uni.showModal({
+      title: '确定取消排队吗？',
+      content: content,
+      cancelText: '先等等',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          updatePersonStatus(person, 2)
+          addCancelRecord(person)
+        }
+      }
+    })
+  }
+
   function alert2cancel2owner(person) {
     if (tiezi.value.status === 2) {
       console.log('活动已经取消')
+      return
+    }
+    if (person.waiting) {
+      alert2cancelWait(person)
       return
     }
     let content = '每次取消报名，将扣除10积分'
@@ -380,10 +430,13 @@
       content = '每次取消报名，将扣除10积分'
       status = 2 //person.status 1.已报名 2.已取消 3.已飞机
     }
+    if (person.targetNum) {
+      content = `现在取消报名，将扣除10积分，若现在不取消报名，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消报名`
+    }
     uni.showModal({
       title: '确定取消报名吗？',
       content: content,
-      cancelText: '再考虑下',
+      cancelText: '先等等',
       confirmText: '确定',
       success: res => {
         if (res.confirm) {

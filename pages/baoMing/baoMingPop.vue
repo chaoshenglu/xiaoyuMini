@@ -203,7 +203,7 @@
 
 <style lang="scss">
   .baoMingPop {
-    width: 66vw;
+    width: 80vw;
     background-color: white;
     border-radius: 6px;
   }
@@ -212,6 +212,6 @@
     background-color: #4685F3 !important;
     color: white !important;
     transform: scale(0.88);
-    width: 66vw;
+    width: 80vw;
   }
 </style>

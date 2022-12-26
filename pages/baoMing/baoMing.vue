@@ -167,6 +167,9 @@
           person.style = {
             backgroundColor: '#999999'
           }
+          person.waiting = true
+        } else {
+          person.waiting = false
         }
         if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
           didAddMyself.value = 1
@@ -257,7 +260,7 @@
     let ownClubIds = ownClubIdsStr.split(',')
     console.log('ownClubIds=', ownClubIds)
     if (person.openid == getApp().globalData.openid) {
-      console.log('报名者取消报名')
+      console.log('报名者取消报名') //lxtodo发起者不能取消报名
       alert2cancel2owner(person)
     } else if (ownClubIds.indexOf(`${tiezi.value.clubId}`) >= 0) {
       console.log('管理员取消报名')
@@ -281,9 +284,32 @@
     })
   }
 
+  function alert2cancelWait(person) {
+    let content = null
+    if (person.targetNum) {
+      content = `若现在不取消排队，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消`
+    }
+    uni.showModal({
+      title: '确定取消排队吗？',
+      content: content,
+      cancelText: '先等等',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+          updatePersonStatus(person, 2)
+          addCancelRecord(person)
+        }
+      }
+    })
+  }
+
   function alert2cancel2owner(person) {
     if (tiezi.value.status === 2) {
       console.log('活动已经取消')
+      return
+    }
+    if (person.waiting) {
+      alert2cancelWait(person)
       return
     }
     let content = '每次取消报名，将扣除10积分'
@@ -297,10 +323,13 @@
         content = '取消后若无人接替，将扣除10积分'
       }
     }
+    if (person.targetNum) {
+      content = `现在取消报名，将扣除10积分，若现在不取消报名，系统将在报名人数未达到${person.targetNum}人时，为你选择合适的时间自动取消报名`
+    }
     uni.showModal({
       title: '确定取消报名吗？',
       content: content,
-      cancelText: '再考虑下',
+      cancelText: '先等等',
       confirmText: '确定',
       success: res => {
         if (res.confirm) {
