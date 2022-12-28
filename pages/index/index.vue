@@ -29,7 +29,7 @@
       <Gift @closePop="closePop" />
     </uni-popup>
 
-    <uni-fab :content="content" direction="vertical" horizontal="right" @trigger="trigger"></uni-fab>
+    <uni-fab ref="fab" :content="content" direction="vertical" horizontal="right" @trigger="trigger"></uni-fab>
 
   </view>
 </template>
@@ -47,21 +47,19 @@
 
   const paging = ref(null)
   const popup = ref(null)
+  const fab = ref(null)
   let tieziArr = ref([])
   const content = ref([{
       iconPath: '/static/badminton0.png',
-      selectedIconPath: '/static/badminton1.png',
       text: '打球帖',
       active: false
     }, {
       iconPath: '/static/addGame0.png',
-      selectedIconPath: '/static/addGame1.png',
       text: '比赛帖',
       active: false
     },
     {
       iconPath: '/static/beer0.png',
-      selectedIconPath: '/static/beer1.png',
       text: '聚餐帖',
       active: false
     }
@@ -87,10 +85,7 @@
   })
 
   function trigger(e) {
-    console.log(e)
-    let value = content.value
-    value[e.index].active = !e.item.active
-
+    fab.value.close()
   }
 
   function tapName(tiezi) {
