@@ -19,6 +19,7 @@
             <text class="name" @click="tapName(tiezi)">{{tiezi.createdPersonName || '李响'}}</text>
             <text v-if="tiezi.qiuguanName" class="name" style="margin-left: 4px;margin-right: 4px;">|</text>
             <text v-if="tiezi.qiuguanName" @click="tapQiuGuan(tiezi)" class="name">{{tiezi.qiuguanName}}</text>
+            <view style="flex: 1;height: 100%;color: white" @click="tapCell(tiezi)">方便点击</view>
           </view>
         </view>
       </view>
@@ -45,7 +46,6 @@
   const paging = ref(null)
   const popup = ref(null)
   let tieziArr = ref([])
-  const lxwx = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/lxwx.jpg'
 
   onShow(() => {
     uni.$on('noGift', function(data) {
