@@ -76,6 +76,12 @@
       "navigationBarTitleText": "申请入驻",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/addTz/addTz",
+    "style": {
+      "navigationBarTitleText": "新增活动",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",

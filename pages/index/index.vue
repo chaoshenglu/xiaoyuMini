@@ -48,7 +48,7 @@
   const paging = ref(null)
   const popup = ref(null)
   let tieziArr = ref([])
-  const content = [{
+  const content = ref([{
       iconPath: '/static/badminton0.png',
       selectedIconPath: '/static/badminton1.png',
       text: '打球帖',
@@ -65,7 +65,7 @@
       text: '聚餐帖',
       active: false
     }
-  ]
+  ])
 
   onShow(() => {
     uni.$on('noGift', function(data) {
@@ -76,7 +76,6 @@
     if (tieziArr.value.length > 0) {
       queryList(1, 10)
     }
-
   })
 
   onHide(() => {
@@ -88,6 +87,9 @@
   })
 
   function trigger(e) {
+    console.log(e)
+    let value = content.value
+    value[e.index].active = !e.item.active
 
   }
 
