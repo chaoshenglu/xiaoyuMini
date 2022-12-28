@@ -29,6 +29,8 @@
       <Gift @closePop="closePop" />
     </uni-popup>
 
+    <uni-fab :content="content" direction="vertical" horizontal="right" @trigger="trigger"></uni-fab>
+
   </view>
 </template>
 
@@ -46,6 +48,19 @@
   const paging = ref(null)
   const popup = ref(null)
   let tieziArr = ref([])
+  const content = [{
+      iconPath: '/static/image.png',
+      selectedIconPath: '/static/image-active.png',
+      text: '相册',
+      active: false
+    },
+    {
+      iconPath: '/static/home.png',
+      selectedIconPath: '/static/home-active.png',
+      text: '首页',
+      active: false
+    }
+  ]
 
   onShow(() => {
     uni.$on('noGift', function(data) {
@@ -66,6 +81,10 @@
   onLoad(() => {
 
   })
+
+  function trigger(e) {
+
+  }
 
   function tapName(tiezi) {
     if (tiezi.createdPersonId) {
