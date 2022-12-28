@@ -85,7 +85,17 @@
   })
 
   function trigger(e) {
+    console.log(e)
     fab.value.close()
+    if (e.index === 0) {
+      uni.navigateTo({
+        url: '/pages/addTz/addTz'
+      })
+    } else if (e.index === 1) {
+
+    } else if (e.index === 2) {
+
+    }
   }
 
   function tapName(tiezi) {
