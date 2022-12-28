@@ -49,15 +49,20 @@
   const popup = ref(null)
   let tieziArr = ref([])
   const content = [{
-      iconPath: '/static/image.png',
-      selectedIconPath: '/static/image-active.png',
-      text: '相册',
+      iconPath: '/static/badminton0.png',
+      selectedIconPath: '/static/badminton1.png',
+      text: '打球帖',
+      active: false
+    }, {
+      iconPath: '/static/addGame0.png',
+      selectedIconPath: '/static/addGame1.png',
+      text: '比赛帖',
       active: false
     },
     {
-      iconPath: '/static/home.png',
-      selectedIconPath: '/static/home-active.png',
-      text: '首页',
+      iconPath: '/static/beer0.png',
+      selectedIconPath: '/static/beer1.png',
+      text: '聚餐帖',
       active: false
     }
   ]
