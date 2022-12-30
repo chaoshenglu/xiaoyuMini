@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="pageView">
     <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
       <uni-forms-item label="姓名" required name="name">
         <uni-easyinput v-model="valiFormData.name" placeholder="请输入姓名" />
@@ -11,7 +11,7 @@
         <uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
       </uni-forms-item>
     </uni-forms>
-    <button type="primary" @click="submit('valiForm')">提交</button>
+    <LXBottomBtn title="提交" @tapBottomBtn="submit" />
   </view>
 </template>
 
@@ -68,5 +68,7 @@
 </script>
 
 <style lang="scss">
-
+  .pageView {
+    padding: 20px;
+  }
 </style>
