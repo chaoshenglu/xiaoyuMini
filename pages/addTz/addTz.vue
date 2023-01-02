@@ -5,7 +5,9 @@
         <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
       </uni-forms-item>
       <uni-forms-item label="时间" required name="time">
-        <uni-easyinput v-model="valiFormData.time" placeholder="请输入活动时间" />
+        <uni-combox :candidates="candidates" placeholder="请输入活动时间" emptyTips="若无匹配项,请自行手动输入"
+          v-model="valiFormData.time">
+        </uni-combox>
       </uni-forms-item>
       <uni-forms-item label="自我介绍" name="introduction">
         <uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
@@ -34,6 +36,8 @@
     introduction: '',
     date: dayjs().add(1, 'day').format('YYYY-MM-DD')
   })
+
+  const candidates = ['09:00-11:00', '15:00-17:00', '16:00-18:00', '19:00-21:00', '20:00-22:00']
 
   const rules = {
     date: {
