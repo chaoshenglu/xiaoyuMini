@@ -27,7 +27,7 @@
         <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
       <uni-forms-item label="备注" name="remark">
-        <uni-easyinput type="textarea" v-model="valiFormData.remark" placeholder="请输入备注" />
+        <uni-easyinput type="textarea" :maxlength="40" v-model="valiFormData.remark" placeholder="请输入备注" />
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
