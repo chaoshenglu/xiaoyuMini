@@ -11,7 +11,7 @@
       </uni-forms-item>
       <uni-forms-item label="飞机时间" required name="stopBaoMingTime">
         <uni-datetime-picker type="datetime" :clear-icon="false" v-model="valiFormData.stopBaoMingTime"
-          placeholder="此时间点后取消报名将视为飞机" />
+          placeholder="此时过后取消报名将视为飞机" />
       </uni-forms-item>
       <uni-forms-item label="球馆" required name="qiuguanId">
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
@@ -164,7 +164,7 @@
 
 <style lang="scss">
   .pageView {
-    padding: 20px;
+    padding: 16px;
   }
 
   .checklist-box {
