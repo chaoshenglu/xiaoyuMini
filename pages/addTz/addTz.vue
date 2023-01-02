@@ -5,9 +5,12 @@
         <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
       </uni-forms-item>
       <uni-forms-item label="时间" required name="time">
-        <uni-combox :candidates="candidates" placeholder="请输入活动时间" emptyTips="若无匹配项,请自行手动输入"
-          v-model="valiFormData.time">
-        </uni-combox>
+        <view class="timeSlotBox lxCenterRow">
+          <uni-icons type="calendar" color="#c0c4cc" size="22"></uni-icons>
+          <text class="lx666 timeSlotText">20:00</text>
+          <text class="lx666 timeSlotText">至</text>
+          <text class="lx666 timeSlotText">22:00</text>
+        </view>
       </uni-forms-item>
       <uni-forms-item label="飞机时间" required name="stopBaoMingTime">
         <uni-datetime-picker type="datetime" :clear-icon="false" v-model="valiFormData.stopBaoMingTime"
@@ -90,15 +93,6 @@
   }]
 
   const fieldsRange = ref([])
-
-  const candidates = ['09:00-11:00',
-    '14:30-16:30',
-    '15:00-17:00',
-    '15:30-17:30',
-    '19:30-21:30',
-    '20:00-22:00'
-  ]
-
 
   const rules = {
     date: {
@@ -185,5 +179,16 @@
 
   .checklist-box {
     margin-right: 15px !important;
+  }
+
+  .timeSlotBox {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    height: 36px;
+    padding-left: 10px;
+  }
+
+  .timeSlotText {
+    margin-left: 10px;
   }
 </style>
