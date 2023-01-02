@@ -1,6 +1,6 @@
 <template>
   <view class="pageView">
-    <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
+    <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData" :labelWidth="80">
       <uni-forms-item label="日期" required name="date">
         <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
       </uni-forms-item>
@@ -18,6 +18,9 @@
           <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange">
           </uni-data-checkbox>
         </scroll-view>
+      </uni-forms-item>
+      <uni-forms-item label="限制人数" required name="limitNumber">
+        <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
@@ -42,8 +45,8 @@
     time: '',
     qiuguanName: null,
     qiuguanId: null,
-    selectedFields: []
-
+    selectedFields: [],
+    limitNumber: 0
   })
 
   const qiuguanRange = [{
