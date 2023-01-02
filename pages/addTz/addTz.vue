@@ -14,7 +14,10 @@
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
-        <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange"></uni-data-checkbox>
+        <scroll-view scroll-y="true" style="height: 80px;">
+          <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange">
+          </uni-data-checkbox>
+        </scroll-view>
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
@@ -91,7 +94,7 @@
 
   function createFieldsRange() {
     let arr = []
-    for (var i = 1; i <= 6; i++) {
+    for (var i = 1; i <= 42; i++) {
       arr.push({
         text: `${i}号场`,
         value: i
@@ -119,5 +122,9 @@
 <style lang="scss">
   .pageView {
     padding: 20px;
+  }
+
+  .checklist-box {
+    margin-right: 15px !important;
   }
 </style>
