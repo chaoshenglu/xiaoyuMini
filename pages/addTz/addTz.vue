@@ -7,11 +7,11 @@
       <uni-forms-item label="时间" required name="time">
         <view class="timeSlotBox lxCenterRow">
           <uni-icons type="calendar" color="#c0c4cc" size="22"></uni-icons>
-          <picker mode="time" :value="beginTime" start="09:01" end="21:01" @change="beginTimeChange">
+          <picker mode="time" :value="beginTime" @change="beginTimeChange">
             <view class="lx666 timeSlotText">{{beginTime}}</view>
           </picker>
           <text class="lx666 timeSlotText">至</text>
-          <picker mode="time" :value="endTime" start="09:01" end="21:01" @change="endTimeChange">
+          <picker mode="time" :value="endTime" @change="endTimeChange">
             <view class="lx666 timeSlotText">{{endTime}}</view>
           </picker>
         </view>
@@ -61,8 +61,8 @@
   import dayjs from 'dayjs'
 
   const valiForm = ref(null)
-  const beginTime = ref('09:02')
-  const endTime = ref('09:03')
+  const beginTime = ref('20:00')
+  const endTime = ref('22:00')
 
 
   const valiFormData = ref({
@@ -153,12 +153,30 @@
     },
   }
 
-  function beginTimeChange() {
-
+  function beginTimeChange(e) {
+    let newBeginValue = e.detail.value
+    let begin = `2000-01-01 ${newBeginValue}`
+    let end = `2000-01-01 ${endTime.value}`
+    let beginDate = dayjs(begin)
+    let endDate = dayjs(end)
+    if (beginDate.isBefore(endDate) === false) {
+      getApp().toast('开始时间应早于结束时间')
+    } else {
+      beginTime.value = e.detail.value
+    }
   }
 
-  function endTimeChange() {
-
+  function endTimeChange(e) {
+    let newEndValue = e.detail.value
+    let begin = `2000-01-01 ${beginTime.value}`
+    let end = `2000-01-01 ${newEndValue}`
+    let beginDate = dayjs(begin)
+    let endDate = dayjs(end)
+    if (beginDate.isBefore(endDate) === false) {
+      getApp().toast('结束时间应晚于开始时间')
+    } else {
+      endTime.value = e.detail.value
+    }
   }
 
   function createFieldsRange() {
