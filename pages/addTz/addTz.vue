@@ -253,12 +253,20 @@
       param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
       delete param.selectedFields
       console.log('最终参数', JSON.stringify(param, null, 2))
+      addTieziByParam(param)
     }).catch(err => {
       console.log('err', err)
     })
   }
 
-
+  function addTieziByParam(param) {
+    let uri = 'tiezi/addTieZi'
+    getApp().post(uri, param).then(res => {
+      console.log('addTieZi res=', JSON.stringify(res, null, 2))
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
   onLoad((option) => {
     createFieldsRange()
