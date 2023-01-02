@@ -9,8 +9,9 @@
           v-model="valiFormData.time">
         </uni-combox>
       </uni-forms-item>
-      <uni-forms-item label="自我介绍" name="introduction">
-        <uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
+      <uni-forms-item label="球馆" required name="qiuguanName">
+        <uni-data-select v-model="valiFormData.qiuguanName" :localdata="qiuguanRange" placeholder="请选择球馆">
+        </uni-data-select>
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
@@ -36,6 +37,20 @@
     introduction: '',
     date: dayjs().add(1, 'day').format('YYYY-MM-DD')
   })
+
+  const qiuguanRange = [{
+    qiuguanName: "颐瑾羽毛球馆",
+    qiuguanTinyName: "颐瑾",
+    qiuguanId: 1,
+    value: 1,
+    text: '颐瑾羽毛球馆'
+  }, {
+    qiuguanName: "鑫富龙羽毛球馆",
+    qiuguanTinyName: "鑫富龙",
+    qiuguanId: 2,
+    value: 2,
+    text: '鑫富龙羽毛球馆'
+  }]
 
   const candidates = ['09:00-11:00', '15:00-17:00', '16:00-18:00', '19:00-21:00', '20:00-22:00']
 
