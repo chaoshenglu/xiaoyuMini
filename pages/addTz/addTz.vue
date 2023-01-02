@@ -13,6 +13,10 @@
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
       </uni-forms-item>
+      <uni-forms-item label="组织" required name="clubId">
+        <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织">
+        </uni-data-select>
+      </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
         <scroll-view scroll-y="true" style="height: 80px;">
           <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange">
@@ -22,12 +26,9 @@
       <uni-forms-item label="人数限制" required name="limitNumber">
         <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
-      <uni-forms-item label="备注">
+      <uni-forms-item label="备注" name="remark">
         <uni-easyinput type="textarea" v-model="valiFormData.remark" placeholder="请输入备注" />
       </uni-forms-item>
-
-
-
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
   </view>
@@ -53,8 +54,17 @@
     qiuguanId: null,
     selectedFields: [],
     limitNumber: 0,
-    remark: ''
+    remark: '',
+    clubId: null,
   })
+
+  const clubRange = [{
+    value: 1,
+    text: '后生仔羽毛球俱乐部'
+  }, {
+    value: 2,
+    text: '菜鸟羽毛球俱乐部'
+  }]
 
   const qiuguanRange = [{
     qiuguanName: "颐瑾羽毛球馆",
