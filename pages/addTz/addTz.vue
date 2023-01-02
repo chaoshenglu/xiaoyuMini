@@ -210,6 +210,14 @@
     }
   }
 
+  function findQiuguanNameById(id) {
+    for (const qiuguan of qiuguanRange) {
+      if (qiuguan.value === id) {
+        return qiuguan.text
+      }
+    }
+  }
+
   function createFieldsRange() {
     let arr = []
     for (var i = 1; i <= 42; i++) {
@@ -227,6 +235,7 @@
       getApp().toast('请选择完整的飞机时间')
       return
     }
+    let user = getApp().globalData.user
     valiForm.value.validate().then(res => {
       console.log('校验通过', JSON.stringify(res, null, 2))
       let param = res
@@ -235,7 +244,14 @@
       let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
       let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
       param.title = `${zhouJi}(${chineseDate})${shortClubName}报名帖`
-
+      param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
+      param.status = 1
+      param.createdPersonId = user.openid
+      param.createdPersonName = user.nickName
+      param.createdPersonAvatar = user.avatar
+      param.personNumber = 1
+      param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
+      console.log('最终参数', JSON.stringify(param, null, 2))
     }).catch(err => {
       console.log('err', err)
     })
