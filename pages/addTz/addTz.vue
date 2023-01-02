@@ -19,9 +19,15 @@
           </uni-data-checkbox>
         </scroll-view>
       </uni-forms-item>
-      <uni-forms-item label="限制人数" required name="limitNumber">
+      <uni-forms-item label="人数限制" required name="limitNumber">
         <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
+      <uni-forms-item label="备注" name="remark">
+        <uni-easyinput type="textarea" v-model="valiFormData.remark" placeholder="请输入备注" />
+      </uni-forms-item>
+
+
+
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
   </view>
@@ -46,7 +52,8 @@
     qiuguanName: null,
     qiuguanId: null,
     selectedFields: [],
-    limitNumber: 0
+    limitNumber: 0,
+    remark: '1'
   })
 
   const qiuguanRange = [{
@@ -92,7 +99,13 @@
         required: true,
         errorMessage: '场地不能为空'
       }]
-    }
+    },
+    limitNumber: {
+      rules: [{
+        required: true,
+        errorMessage: '人数限制不能为空'
+      }]
+    },
   }
 
   function createFieldsRange() {
