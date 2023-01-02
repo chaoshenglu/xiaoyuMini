@@ -31,7 +31,7 @@
         </scroll-view>
       </uni-forms-item>
       <uni-forms-item label="人数限制" required name="limitNumber">
-        <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
+        <uni-number-box v-model="valiFormData.limitNumber" :min="6" :max="100"></uni-number-box>
       </uni-forms-item>
       <uni-forms-item label="备注" name="remark">
         <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注" />
@@ -104,13 +104,13 @@
     date: {
       rules: [{
         required: true,
-        errorMessage: '日期不能为空'
+        errorMessage: '活动日期不能为空'
       }]
     },
     time: {
       rules: [{
         required: true,
-        errorMessage: '时间不能为空'
+        errorMessage: '活动时间不能为空'
       }]
     },
     stopBaoMingTime: {
@@ -129,6 +129,12 @@
       rules: [{
         required: true,
         errorMessage: '球馆不能为空'
+      }]
+    },
+    clubId: {
+      rules: [{
+        required: true,
+        errorMessage: '组织不能为空'
       }]
     },
     selectedFields: {
