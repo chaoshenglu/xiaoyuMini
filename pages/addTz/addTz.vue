@@ -9,6 +9,10 @@
           v-model="valiFormData.time">
         </uni-combox>
       </uni-forms-item>
+      <uni-forms-item label="飞机时间" required name="stopBaoMingTime">
+        <uni-datetime-picker type="datetime" :clear-icon="false" v-model="valiFormData.stopBaoMingTime"
+          placeholder="此时间点后取消报名将视为飞机" />
+      </uni-forms-item>
       <uni-forms-item label="球馆" required name="qiuguanId">
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
@@ -27,7 +31,7 @@
         <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
       <uni-forms-item label="备注" name="remark">
-        <uni-easyinput type="textarea" :maxlength="40" v-model="valiFormData.remark" placeholder="请输入备注" />
+        <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注" />
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
@@ -50,12 +54,13 @@
   const valiFormData = ref({
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
     time: '',
+    stopBaoMingTime: '',
     qiuguanName: null,
     qiuguanId: null,
     selectedFields: [],
     limitNumber: 0,
     remark: '',
-    clubId: null,
+    clubId: null
   })
 
   const clubRange = [{
@@ -96,6 +101,12 @@
       rules: [{
         required: true,
         errorMessage: '时间不能为空'
+      }]
+    },
+    stopBaoMingTime: {
+      rules: [{
+        required: true,
+        errorMessage: '飞机时间不能为空'
       }]
     },
     qiuguanId: {
