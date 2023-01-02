@@ -64,6 +64,24 @@
   const beginTime = ref('20:00')
   const endTime = ref('22:00')
 
+  const zhouJi = computed(() => {
+    let num = dayjs(valiFormData.value.date).format('d')
+    if (num === 0) {
+      return '周日'
+    } else if (num === 1) {
+      return '周一'
+    } else if (num === 2) {
+      return '周二'
+    } else if (num === 3) {
+      return '周三'
+    } else if (num === 4) {
+      return '周四'
+    } else if (num === 5) {
+      return '周五'
+    } else if (num === 6) {
+      return '周六'
+    }
+  })
 
   const valiFormData = ref({
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
@@ -125,6 +143,9 @@
       rules: [{
         required: true,
         errorMessage: '飞机扣费不能为空'
+      }, {
+        format: 'number',
+        errorMessage: '扣费金额只能输入数字'
       }]
     },
     qiuguanId: {
@@ -181,6 +202,14 @@
     }
   }
 
+  function findClubNameById(id) {
+    for (const club of clubRange) {
+      if (club.value === id) {
+        return club.text
+      }
+    }
+  }
+
   function createFieldsRange() {
     let arr = []
     for (var i = 1; i <= 42; i++) {
@@ -199,14 +228,20 @@
       return
     }
     valiForm.value.validate().then(res => {
-      console.log('success', JSON.stringify(res, null, 2))
-      uni.showToast({
-        title: `校验通过`
-      })
+      console.log('校验通过', JSON.stringify(res, null, 2))
+      let param = res
+      let clubName = findClubNameById(valiFormDataValue.clubId)
+      param.clubName = clubName
+      let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
+      let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
+      param.title = `${zhouJi}(${chineseDate})${shortClubName}报名帖`
+
     }).catch(err => {
-      console.log('err', err);
+      console.log('err', err)
     })
   }
+
+
 
   onLoad((option) => {
     createFieldsRange()
