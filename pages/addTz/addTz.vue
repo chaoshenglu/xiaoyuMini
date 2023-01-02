@@ -78,7 +78,7 @@
       return '周四'
     } else if (num === 5) {
       return '周五'
-    } else if (num === 6) {
+    } else {
       return '周六'
     }
   })
@@ -243,7 +243,7 @@
       param.clubName = clubName
       let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
       let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
-      param.title = `${zhouJi}(${chineseDate})${shortClubName}报名帖`
+      param.title = `${zhouJi.value}(${chineseDate})${shortClubName}报名帖`
       param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
       param.status = 1
       param.createdPersonId = user.openid

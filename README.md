@@ -8,7 +8,7 @@
 
 <script setup>
 import {
-  computed,
+  computed,//计算型属性在使用的时候，也要加.value
   ref
 } from 'vue'
 
