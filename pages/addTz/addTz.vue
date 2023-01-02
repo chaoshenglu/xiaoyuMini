@@ -13,6 +13,10 @@
         <uni-data-select v-model="valiFormData.qiuguanName" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
       </uni-forms-item>
+      <uni-forms-item label="场地" required name="selectedFields">
+        <uni-data-select v-model="valiFormData.selectedFields" :localdata="fieldsRange" placeholder="请选择场地">
+        </uni-data-select>
+      </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
   </view>
@@ -32,10 +36,12 @@
   const valiForm = ref(null)
 
   const valiFormData = ref({
-    name: '',
-    age: '',
-    introduction: '',
-    date: dayjs().add(1, 'day').format('YYYY-MM-DD')
+    date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
+    time: null,
+    qiuguanName: null,
+    qiuguanId: null,
+    selectedFields: []
+
   })
 
   const qiuguanRange = [{
@@ -52,7 +58,10 @@
     text: '鑫富龙羽毛球馆'
   }]
 
+  const fieldsRange = ref([])
+
   const candidates = ['09:00-11:00', '15:00-17:00', '16:00-18:00', '19:00-21:00', '20:00-22:00']
+
 
   const rules = {
     date: {
@@ -78,6 +87,17 @@
     }
   }
 
+  function createFieldsRange() {
+    let arr = []
+    for (var i = 1; i < 31; i++) {
+      arr.push({
+        text: `${i}号场`,
+        value: i
+      })
+    }
+    fieldsRange.value = arr
+  }
+
   function submit() {
     valiForm.value.validate().then(res => {
       console.log('success', res)
@@ -90,7 +110,7 @@
   }
 
   onLoad((option) => {
-
+    createFieldsRange()
   })
 </script>
 
