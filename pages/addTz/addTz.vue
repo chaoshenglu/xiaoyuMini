@@ -13,6 +13,9 @@
         <uni-datetime-picker type="datetime" :clear-icon="false" v-model="valiFormData.stopBaoMingTime"
           placeholder="此时过后取消报名将视为飞机" />
       </uni-forms-item>
+      <uni-forms-item label="飞机扣费" required name="feijiMoney">
+        <uni-easyinput type="number" v-model="valiFormData.feijiMoney" placeholder="请输入金额(元)" />
+      </uni-forms-item>
       <uni-forms-item label="球馆" required name="qiuguanId">
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
@@ -55,6 +58,7 @@
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
     time: '',
     stopBaoMingTime: '',
+    feijiMoney: null,
     qiuguanName: null,
     qiuguanId: null,
     selectedFields: [],
@@ -113,6 +117,12 @@
       rules: [{
         required: true,
         errorMessage: '飞机时间不能为空'
+      }]
+    },
+    feijiMoney: {
+      rules: [{
+        required: true,
+        errorMessage: '飞机扣费不能为空'
       }]
     },
     qiuguanId: {
