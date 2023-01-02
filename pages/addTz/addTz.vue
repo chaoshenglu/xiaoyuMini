@@ -36,6 +36,12 @@
   })
 
   const rules = {
+    date: {
+      rules: [{
+        required: true,
+        errorMessage: '日期不能为空'
+      }]
+    },
     name: {
       rules: [{
         required: true,
