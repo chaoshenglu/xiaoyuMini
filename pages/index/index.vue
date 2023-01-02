@@ -11,8 +11,7 @@
               <uni-tag :text="tiezi.numberProportion" type="warning" size="small"></uni-tag>
               <uni-tag :text="tiezi.statusStr" type="error" size="small"></uni-tag>
             </view>
-            <text
-              class="remark">备注：{{tiezi.remark || '请各位球友根据自身的身体情况控制运动强度，避免出现意外，如在运动中出现碰伤或者意外发生，组织者不承担任何法律责任。'}}</text>
+            <text class="remark">备注：{{tiezi.remark || '请各位球友根据自身的身体情况控制运动强度，避免出现意外，如在运动中碰伤或突发疾病，组织者不承担任何法律责任。'}}</text>
           </view>
           <view class="lxCenterRow" style="margin-top: 4px;">
             <image class="head" @click="tapName(tiezi)" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'"
