@@ -67,7 +67,7 @@
 
   const valiFormData = ref({
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
-    time: '',
+    time: '20:00-22:00',
     stopBaoMingTime: '',
     feijiMoney: null,
     qiuguanName: null,
@@ -163,6 +163,7 @@
       getApp().toast('开始时间应早于结束时间')
     } else {
       beginTime.value = e.detail.value
+      valiFormData.value.time = `${beginTime.value}-${endTime.value}`
     }
   }
 
@@ -176,6 +177,7 @@
       getApp().toast('结束时间应晚于开始时间')
     } else {
       endTime.value = e.detail.value
+      valiFormData.value.time = `${beginTime.value}-${endTime.value}`
     }
   }
 
@@ -191,6 +193,11 @@
   }
 
   function submit() {
+    let valiFormDataValue = valiFormData.value
+    if (valiFormDataValue.stopBaoMingTime.length === 11) {
+      getApp().toast('请选择完整的飞机时间')
+      return
+    }
     valiForm.value.validate().then(res => {
       console.log('success', JSON.stringify(res, null, 2))
       uni.showToast({
