@@ -65,7 +65,7 @@
   const endTime = ref('22:00')
 
   const zhouJi = computed(() => {
-    let num = dayjs(valiFormData.value.date).format('d')
+    let num = parseInt(dayjs(valiFormData.value.date).format('d'))
     if (num === 0) {
       return '周日'
     } else if (num === 1) {
@@ -251,6 +251,7 @@
       param.createdPersonAvatar = user.avatar
       param.personNumber = 1
       param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
+      delete param.selectedFields
       console.log('最终参数', JSON.stringify(param, null, 2))
     }).catch(err => {
       console.log('err', err)
