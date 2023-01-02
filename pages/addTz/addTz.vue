@@ -14,8 +14,7 @@
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
-        <uni-data-select v-model="valiFormData.selectedFields" :localdata="fieldsRange" placeholder="请选择场地">
-        </uni-data-select>
+        <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange"></uni-data-checkbox>
       </uni-forms-item>
     </uni-forms>
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
@@ -76,20 +75,23 @@
         errorMessage: '时间不能为空'
       }]
     },
-    age: {
+    qiuguanName: {
       rules: [{
         required: true,
         errorMessage: '年龄不能为空'
-      }, {
-        format: 'number',
-        errorMessage: '年龄只能输入数字'
+      }]
+    },
+    selectedFields: {
+      rules: [{
+        required: true,
+        errorMessage: '年龄不能为空'
       }]
     }
   }
 
   function createFieldsRange() {
     let arr = []
-    for (var i = 1; i < 31; i++) {
+    for (var i = 1; i <= 6; i++) {
       arr.push({
         text: `${i}号场`,
         value: i
