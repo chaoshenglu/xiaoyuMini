@@ -78,13 +78,13 @@
     qiuguanName: {
       rules: [{
         required: true,
-        errorMessage: '年龄不能为空'
+        errorMessage: '球馆不能为空'
       }]
     },
     selectedFields: {
       rules: [{
         required: true,
-        errorMessage: '年龄不能为空'
+        errorMessage: '场地不能为空'
       }]
     }
   }
@@ -102,7 +102,7 @@
 
   function submit() {
     valiForm.value.validate().then(res => {
-      console.log('success', res)
+      console.log('success', JSON.stringify(res, null, 2))
       uni.showToast({
         title: `校验通过`
       })
