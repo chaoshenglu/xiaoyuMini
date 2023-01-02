@@ -45,7 +45,7 @@
       </uni-forms-item>
     </uni-forms>
 
-    <LXBottomBtn title="提交" @tapBottomBtn="submit" />
+    <LXBottomBtn title="发布" @tapBottomBtn="submit" />
   </view>
 </template>
 
@@ -262,7 +262,12 @@
   function addTieziByParam(param) {
     let uri = 'tiezi/addTieZi'
     getApp().post(uri, param).then(res => {
-      console.log('addTieZi res=', JSON.stringify(res, null, 2))
+      if (res.code === 1) {
+        getApp().toast('发布成功')
+        uni.navigateBack()
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
