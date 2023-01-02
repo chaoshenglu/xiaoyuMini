@@ -9,8 +9,8 @@
           v-model="valiFormData.time">
         </uni-combox>
       </uni-forms-item>
-      <uni-forms-item label="球馆" required name="qiuguanName">
-        <uni-data-select v-model="valiFormData.qiuguanName" :localdata="qiuguanRange" placeholder="请选择球馆">
+      <uni-forms-item label="球馆" required name="qiuguanId">
+        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
@@ -36,7 +36,7 @@
 
   const valiFormData = ref({
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
-    time: null,
+    time: '',
     qiuguanName: null,
     qiuguanId: null,
     selectedFields: []
@@ -75,7 +75,7 @@
         errorMessage: '时间不能为空'
       }]
     },
-    qiuguanName: {
+    qiuguanId: {
       rules: [{
         required: true,
         errorMessage: '球馆不能为空'
