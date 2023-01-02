@@ -92,7 +92,7 @@
     qiuguanId: null,
     selectedFields: [],
     limitNumber: 0,
-    remark: '',
+    remark: null,
     clubId: null
   })
 
