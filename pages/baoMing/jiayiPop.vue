@@ -18,7 +18,7 @@
         </view>
       </view>
 
-      <view v-if="qiuguanArr" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
+      <view v-if="qiuguanArr.length" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
         <view class="lxCenterRow">
           <text class="lx333" style="font-size: 16px;margin-right: 4px;">球馆</text>
           <radio-group @change="qiuGuanChange" class="lxCenterRow">
