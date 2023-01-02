@@ -1,11 +1,11 @@
 <template>
   <view class="pageView">
     <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
-      <uni-forms-item label="日期" required name="name">
+      <uni-forms-item label="日期" required name="date">
         <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
       </uni-forms-item>
-      <uni-forms-item label="年龄" required name="age">
-        <uni-easyinput v-model="valiFormData.age" placeholder="请输入年龄" />
+      <uni-forms-item label="时间" required name="time">
+        <uni-easyinput v-model="valiFormData.time" placeholder="请输入活动时间" />
       </uni-forms-item>
       <uni-forms-item label="自我介绍" name="introduction">
         <uni-easyinput type="textarea" v-model="valiFormData.introduction" placeholder="请输入自我介绍" />
@@ -42,10 +42,10 @@
         errorMessage: '日期不能为空'
       }]
     },
-    name: {
+    time: {
       rules: [{
         required: true,
-        errorMessage: '姓名不能为空'
+        errorMessage: '时间不能为空'
       }]
     },
     age: {
