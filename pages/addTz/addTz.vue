@@ -22,7 +22,7 @@
       <uni-forms-item label="人数限制" required name="limitNumber">
         <uni-number-box v-model="valiFormData.limitNumber"></uni-number-box>
       </uni-forms-item>
-      <uni-forms-item label="备注" name="remark">
+      <uni-forms-item label="备注">
         <uni-easyinput type="textarea" v-model="valiFormData.remark" placeholder="请输入备注" />
       </uni-forms-item>
 
@@ -53,7 +53,7 @@
     qiuguanId: null,
     selectedFields: [],
     limitNumber: 0,
-    remark: '1'
+    remark: ''
   })
 
   const qiuguanRange = [{
