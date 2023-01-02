@@ -1,8 +1,8 @@
 <template>
   <view class="pageView">
     <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
-      <uni-forms-item label="姓名" required name="name">
-        <uni-easyinput v-model="valiFormData.name" placeholder="请输入姓名" />
+      <uni-forms-item label="日期" required name="name">
+        <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
       </uni-forms-item>
       <uni-forms-item label="年龄" required name="age">
         <uni-easyinput v-model="valiFormData.age" placeholder="请输入年龄" />
@@ -24,6 +24,7 @@
   import {
     onLoad
   } from "@dcloudio/uni-app"
+  import dayjs from 'dayjs'
 
   const valiForm = ref(null)
 
@@ -31,6 +32,7 @@
     name: '',
     age: '',
     introduction: '',
+    date: dayjs().add(1, 'day').format('YYYY-MM-DD')
   })
 
   const rules = {
