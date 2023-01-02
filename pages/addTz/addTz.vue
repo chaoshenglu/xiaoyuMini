@@ -7,9 +7,13 @@
       <uni-forms-item label="时间" required name="time">
         <view class="timeSlotBox lxCenterRow">
           <uni-icons type="calendar" color="#c0c4cc" size="22"></uni-icons>
-          <text class="lx666 timeSlotText">20:00</text>
+          <picker mode="time" :value="beginTime" start="09:01" end="21:01" @change="beginTimeChange">
+            <view class="lx666 timeSlotText">{{beginTime}}</view>
+          </picker>
           <text class="lx666 timeSlotText">至</text>
-          <text class="lx666 timeSlotText">22:00</text>
+          <picker mode="time" :value="endTime" start="09:01" end="21:01" @change="endTimeChange">
+            <view class="lx666 timeSlotText">{{endTime}}</view>
+          </picker>
         </view>
       </uni-forms-item>
       <uni-forms-item label="飞机时间" required name="stopBaoMingTime">
@@ -40,6 +44,7 @@
         <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注" />
       </uni-forms-item>
     </uni-forms>
+
     <LXBottomBtn title="提交" @tapBottomBtn="submit" />
   </view>
 </template>
@@ -56,6 +61,9 @@
   import dayjs from 'dayjs'
 
   const valiForm = ref(null)
+  const beginTime = ref('09:02')
+  const endTime = ref('09:03')
+
 
   const valiFormData = ref({
     date: dayjs().add(1, 'day').format('YYYY-MM-DD'),
@@ -143,6 +151,14 @@
         errorMessage: '人数限制不能为空'
       }]
     },
+  }
+
+  function beginTimeChange() {
+
+  }
+
+  function endTimeChange() {
+
   }
 
   function createFieldsRange() {
