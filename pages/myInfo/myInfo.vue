@@ -1,16 +1,22 @@
 <template>
   <view class="lxColumn">
     <button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-      <image class="avatar" :src="avatarUrl || '/static/defaultAvatar.png'"></image>
+      <image class="avatarImg" :src="valiFormData.avatar || '/static/defaultAvatar.png'"></image>
     </button>
-    <view style="padding: 20px;">
+    <view>
       <uni-forms ref="valiForm" :modelValue="valiFormData">
+        <view class="lx100vwLine" />
         <uni-forms-item label="昵称" name="nickName">
-          <input type="nickname" placeholder="请输入昵称" />
+          <input type="nickname" placeholder="请输入昵称" style="margin-top: 6px;" />
         </uni-forms-item>
+        <view class="lx100vwLine" />
         <uni-forms-item label="性别" name="isGirl">
-          <uni-data-checkbox v-model="valiFormData.isGirl" :localdata="genderArr"></uni-data-checkbox>
+          <view style="margin-top: 5px;">
+            <uni-data-checkbox v-model="valiFormData.isGirl" :localdata="genderArr">
+            </uni-data-checkbox>
+          </view>
         </uni-forms-item>
+        <view class="lx100vwLine" />
       </uni-forms>
     </view>
   </view>
@@ -50,11 +56,22 @@
     padding: 0;
     width: 56px !important;
     border-radius: 8px;
+    border-style: none !important;
     margin-top: 40px;
     margin-bottom: 40px;
   }
 
-  .avatar {
+  .uni-forms-item {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    padding-left: 20px !important;
+  }
+
+  button::after {
+    border-style: none !important;
+  }
+
+  .avatarImg {
     display: block;
     width: 56px;
     height: 56px;
