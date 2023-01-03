@@ -3,6 +3,10 @@
     <view style="padding: 16px;">
       <text class="lx333" style="font-size: 18px;font-weight: 500;">报名信息</text>
 
+      <view class="lxColumn" style="margin-top: 14px;">
+        <text class="lx333" style="margin-bottom: 5px;">时间：{{jiYueJiRi}} {{tiezi.time}}</text>
+        <text class="lx333">地点：{{tiezi.qiuguanName}}</text>
+      </view>
 
       <view v-if="qiuguanArr.length" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
         <view class="lxCenterRow">
@@ -38,6 +42,7 @@
     computed,
     onMounted
   } from 'vue'
+  import dayjs from 'dayjs'
 
   let selectedQiuguanId = ref(null)
   const emit = defineEmits(['closeBaoMingPop'])
@@ -52,6 +57,12 @@
     } else {
       return []
     }
+  })
+
+  const jiYueJiRi = computed(() => {
+    let dateStr = props.tiezi.date
+    let date = dayjs(dateStr)
+    return date.format('M月D日')
   })
 
   onMounted(() => {
