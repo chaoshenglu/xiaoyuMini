@@ -98,7 +98,7 @@
       getApp().toast('请填写昵称')
       return
     }
-    if (!param.isGirl) {
+    if (param.isGirl === null) {
       getApp().toast('请选择性别')
       return
     }
