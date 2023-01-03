@@ -1,7 +1,7 @@
 <template>
   <view class="lxColumn">
     <button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-      <image class="avatar" :src="avatarUrl"></image>
+      <image class="avatar" :src="avatarUrl || '/static/defaultAvatar.png'"></image>
     </button>
     <view style="padding: 20px;">
       <uni-forms ref="valiForm" :modelValue="valiFormData">
