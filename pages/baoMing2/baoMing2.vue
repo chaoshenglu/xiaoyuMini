@@ -336,12 +336,7 @@
         success: res => {
           if (res.confirm) {
             uni.navigateTo({
-              url: '/pages/mine/mine',
-              fail: function() {
-                uni.switchTab({
-                  url: '/pages/mine/mine',
-                })
-              }
+              url: '/pages/myInfo/myInfo'
             })
           }
         }
