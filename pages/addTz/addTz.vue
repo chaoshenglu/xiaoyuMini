@@ -33,7 +33,8 @@
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
         <scroll-view scroll-y="true" style="height: 80px;">
-          <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange">
+          <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange"
+            @change="changeFields">
           </uni-data-checkbox>
         </scroll-view>
       </uni-forms-item>
@@ -258,6 +259,11 @@
     }).catch(err => {
       console.log('❌为自己报名失败', err)
     })
+  }
+
+  function changeFields(e) {
+    let arr = e.detail.value
+    valiFormData.value.limitNumber = arr.length * 7
   }
 
   onLoad((option) => {
