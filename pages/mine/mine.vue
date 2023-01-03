@@ -3,10 +3,6 @@
     <view class="mineCard lxCenterRow" style="margin-bottom: 16px;">
       <image class="avatar" @click="tapAvatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
       <text v-if="user.nickName && !user.avatar" class="lx333" style="margin-left: 10px;">{{user.nickName}}</text>
-      <button v-if="!user.avatar" class="setAvatar" @chooseavatar="chooseHead" open-type="chooseAvatar">设置头像</button>
-
-      <button v-if="!user.nickName" class="setAvatar" @click="alert2setNickName">设置昵称</button>
-
       <view class="lxColumn" style="margin-left: 10px;" v-if="user.nickName && user.avatar">
         <view class="lxCenterRow">
           <text class="lx333" style="font-size: 17px;margin-right: 5px;">{{user.nickName}}</text>
@@ -62,126 +58,12 @@
       })
     }
   }
-
-  function chooseHead(e) {
-    uni.showLoading({
-      title: '正在上传',
-      mask: true
-    })
-    wx.compressImage({
-      src: e.detail.avatarUrl,
-      compressedWidth: 112,
-      compressHeight: 112,
-      quality: 90,
-      success: res => {
-        upload(res.tempFilePath)
-        // uni.getFileSystemManager().readFile({
-        //   filePath: res.tempFilePath,
-        //   encoding: 'base64',
-        //   success: resp => {
-        //     setAvatar('data:image/jpeg;base64,' + resp.data)
-        //   }
-        // })
-      },
-      fail: (err) => {
-        uni.hideLoading()
-        getApp().toastAndConsoleSystemError(err)
-      }
-    })
-  }
-
-  function upload(tempFilePath) {
-    let random = getApp().randomNum(0, 999999)
-    let ossConfig = getApp().globalData.ossConfig
-    ossConfig.key = getApp().globalData.openid + `_${random}.jpg`
-    let host = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/'
-    uni.uploadFile({
-      url: host,
-      filePath: tempFilePath,
-      name: 'file',
-      formData: ossConfig,
-      success: resp => {
-        uni.hideLoading()
-        setAvatar(host + ossConfig.key)
-      },
-      fail: error => {
-        uni.hideLoading()
-        getApp().toastAndConsoleSystemError(err)
-      }
-    })
-  }
-
-  function alert2setNickName() {
-    uni.showModal({
-      title: '请输入昵称（限四字以内）',
-      editable: true,
-      placeholderText: '请尽量与群昵称相同或相似',
-      success: (res) => {
-        if (res.confirm && res.content) {
-          if (res.content.length === 0 || res.content.length > 4) {
-            getApp().toast('请输入四字以内的昵称')
-            return
-          }
-          setNickName(res.content)
-        }
-      }
-    })
-  }
-
-  function setNickName(nickName) {
-    let param = {
-      nickName: nickName,
-      openid: user.value.openid
-    }
-    getApp().post('user/updateUserInfo', param).then(res => {
-      user.value.nickName = nickName
-      uni.setStorageSync('user', user.value)
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
-
-  function tapAvatar() {
-    uni.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album'], //从相册选择
-      success: function(res) {
-        let avatarUrl = res.tempFilePaths[0]
-        let detail = {
-          avatarUrl
-        }
-        chooseHead({
-          detail
-        })
-      }
-    })
-  }
-
-  function setAvatar(avatar) {
-    let param = {
-      avatar: avatar,
-      openid: user.value.openid
-    }
-    getApp().post('user/updateUserInfo', param).then(res => {
-      user.value.avatar = avatar
-      uni.setStorageSync('user', user.value)
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
 </script>
 
 <style lang="scss">
   page {
     padding-top: 5vw;
     background-color: #f6f6f6;
-  }
-
-  .setAvatar {
-    transform: scale(0.9);
-    margin-right: 0px !important;
-    margin-left: 8px !important;
   }
 
   .avatar {
