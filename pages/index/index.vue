@@ -72,9 +72,26 @@
 
   })
 
+  function alertUserInfo() {
+    uni.showModal({
+      title: '温馨提示',
+      content: '发帖前，请先设置您的个人信息',
+      success: res => {
+        if (res.confirm) {
+          uni.navigateTo({
+            url: '/pages/myInfo/myInfo'
+          })
+        }
+      }
+    })
+  }
+
   function trigger(e) {
-    console.log(e)
     fab.value.close()
+    if (!getApp().globalData.user || !getApp().globalData.user.nickName) {
+      alertUserInfo()
+      return
+    }
     if (e.index === 0) {
       uni.navigateTo({
         url: '/pages/addTz/addTz'
@@ -82,6 +99,8 @@
     } else if (e.index === 1) {
 
     } else if (e.index === 2) {
+
+    } else if (e.index === 3) {
 
     }
   }
