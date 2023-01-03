@@ -42,7 +42,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">报名截止时间</text> <text class="lx333">{{ tz.stopBaoMingTime }}</text>
+        <text class="lx666">飞机时间</text> <text class="lx333">{{ tz.stopBaoMingTime }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
