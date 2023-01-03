@@ -62,6 +62,19 @@
 
     </view>
     <div class="tip" v-if="tz.remark">请各位球友根据自身的身体情况控制运动强度，避免出现意外，如在运动中碰伤或突发疾病，组织者不承担任何法律责任。</div>
+
+    <view v-if="tz.status === 0 || tz.status === 1">
+      <HalfBottomBtn title='修改帖子' :isLeft="true" @tapBottomBtn="editTieZi()" />
+      <HalfBottomBtn title='停止报名' :isLeft="false" @tapBottomBtn="stopForWhat()" />
+    </view>
+    <view v-if="tz.status === 3">
+      <HalfBottomBtn title='修改帖子' :isLeft="true" @tapBottomBtn="editTieZi()" />
+      <HalfBottomBtn title='允许报名' :isLeft="false" @tapBottomBtn="allowBaoMing()" />
+    </view>
+    <view v-if="tz.status === 2">
+      <LXBottomBtn title="恢复此活动" @tapBottomBtn="resumeActivity()" />
+    </view>
+
   </view>
 </template>
 
@@ -88,6 +101,38 @@
       return '活动已结束'
     }
   })
+
+  function editTieZi() {
+    let str = JSON.stringify(tz.value)
+    uni.navigateTo({
+      url: '/pages/addTz/addTz?tiezi=' + str
+    })
+  }
+
+  function stopForWhat() {
+    uni.showActionSheet({
+      itemList: ['仅停止报名', '停止报名并取消活动'],
+      success: function(res) {
+        if (res.tapIndex === 0) {
+          console.log('仅停止报名')
+        } else {
+          console.log('停止报名并取消活动')
+        }
+      }
+    })
+  }
+
+  function resumeActivity() {
+
+  }
+
+  function allowBaoMing() {
+
+  }
+
+  function cancelActivity() {
+
+  }
 </script>
 
 <style lang="scss">
