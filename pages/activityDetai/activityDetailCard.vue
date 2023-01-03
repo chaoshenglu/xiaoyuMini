@@ -26,7 +26,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">发起组织</text> <text class="lx333">{{ tz.clubName }}</text>
+        <text class="lx666">发起组织</text> <text class="lx333">{{ tz.clubName || '-' }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">
