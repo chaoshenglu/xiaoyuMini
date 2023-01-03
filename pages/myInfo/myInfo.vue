@@ -88,10 +88,46 @@
     })
   }
 
-
+  function save() {
+    let param = valiFormData.value
+    if (!param.avatar) {
+      getApp().toast('请选择头像')
+      return
+    }
+    if (!param.nickName) {
+      getApp().toast('请填写昵称')
+      return
+    }
+    if (!param.isGirl) {
+      getApp().toast('请选择性别')
+      return
+    }
+    let user = getApp().globalData.user
+    param.openid = user.openid
+    getApp().post('user/updateUserInfo', param).then(res => {
+      if (res.code === 1) {
+        user.avatar = param.avatar
+        user.nickName = param.nickName
+        user.isGirl = param.isGirl
+        uni.setStorageSync('user', user)
+        console.log('getApp().globalData.user===>', getApp().globalData.user)
+        getApp().toast('保存成功')
+        setTimeout(function() {
+          uni.navigateBack()
+        }, 1000)
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
+  }
 
   onLoad((option) => {
-
+    let user = getApp().globalData.user
+    valiFormData.value.avatar = user.avatar
+    valiFormData.value.nickName = user.nickName
+    valiFormData.value.isGirl = user.isGirl
   })
 </script>
 
