@@ -232,7 +232,7 @@
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
         getApp().toast('发布成功')
-        baoMingForMyself()
+        baoMingForMyself(res.data)
         setTimeout(function() {
           uni.navigateBack()
         }, 1000)
@@ -244,25 +244,18 @@
     })
   }
 
-  function baoMingForMyself() {
-    // let param = getApp().globalData.user
-    // param.tieziId = tieziId
-    // param.qiuguanId = selectedQiuguanId.value
-    // if (isCheckNum.value === true) {
-    //   param.targetNum = inputNumber.value
-    // }
-    // getApp().post('tz_person/addTZPerson', param).then(res => {
-    //   if (res.code === 1) {
-    //     emit('closeBaoMingPop')
-    //     handleRes(res)
-    //     tryDeleteOldMyself(tieziId)
-    //   } else {
-    //     getApp().toastAndConsoleSystemError(res)
-    //   }
-    // }).catch(err => {
-    //   emit('closeBaoMingPop')
-    //   getApp().toastAndConsoleSystemError(err)
-    // })
+  function baoMingForMyself(tieziId) {
+    let param = getApp().globalData.user
+    param.tieziId = tieziId
+    getApp().post('tz_person/addTZPerson', param).then(res => {
+      if (res.code === 1) {
+        console.log('为自己报名成功')
+      } else {
+        console.log('❌为自己报名失败', res)
+      }
+    }).catch(err => {
+      console.log('❌为自己报名失败', err)
+    })
   }
 
   onLoad((option) => {

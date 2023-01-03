@@ -29,7 +29,7 @@
       <Gift @closePop="closePop" />
     </uni-popup>
 
-    <uni-fab ref="fab" :content="content" direction="vertical" horizontal="right" @trigger="trigger"></uni-fab>
+    <uni-fab ref="fab" :content="tieziTypes" direction="vertical" horizontal="right" @trigger="trigger"></uni-fab>
 
   </view>
 </template>
@@ -43,27 +43,15 @@
     onLoad,
     onShow,
     onHide
-  } from "@dcloudio/uni-app";
+  } from "@dcloudio/uni-app"
 
   const paging = ref(null)
   const popup = ref(null)
   const fab = ref(null)
   let tieziArr = ref([])
-  const content = ref([{
-      iconPath: '/static/badminton0.png',
-      text: '打球帖',
-      active: false
-    }, {
-      iconPath: '/static/addGame0.png',
-      text: '比赛帖',
-      active: false
-    },
-    {
-      iconPath: '/static/beer0.png',
-      text: '聚餐帖',
-      active: false
-    }
-  ])
+  import {
+    tieziTypes
+  } from '/pages/index/tieziTypes.js'
 
   onShow(() => {
     uni.$on('noGift', function(data) {
