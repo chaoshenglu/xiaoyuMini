@@ -108,20 +108,57 @@
   }]
 
   const qiuguanRange = [{
-    qiuguanName: "颐瑾羽毛球馆",
-    qiuguanTinyName: "颐瑾",
-    qiuguanId: 1,
     value: 1,
     text: '颐瑾羽毛球馆'
   }, {
-    qiuguanName: "鑫富龙羽毛球馆",
-    qiuguanTinyName: "鑫富龙",
-    qiuguanId: 2,
     value: 2,
     text: '鑫富龙羽毛球馆'
   }]
 
   const fieldsRange = ref([])
+
+  function getClubArr() {
+    let param = {}
+    param.page = 1
+    param.size = 100
+    getApp().post('club/getClubArr', param).then(res => {
+      let arr = res.data.list || []
+      let clubs = []
+      for (var i = 0; i < arr.length; i++) {
+        let item = arr[i]
+        clubs.push({
+          value: item.id,
+          text: item.name
+        })
+      }
+      if (clubs.length) {
+        clubRange.value = clubs
+        console.log('⭕️', JSON.stringify(clubs, null, 2))
+      }
+    })
+  }
+
+  function getQiuguanArr() {
+    let param = {}
+    param.page = 1
+    param.size = 100
+    getApp().post('qiuguan/getQiuguanArr', param).then(res => {
+      let arr = res.data.list || []
+      let qiuguanArr = []
+      for (var i = 0; i < arr.length; i++) {
+        let item = arr[i]
+        qiuguanArr.push({
+          value: item.qiuguanId,
+          text: item.qiuguanName
+        })
+      }
+      if (qiuguanArr.length) {
+        qiuguanRange.value = qiuguanArr
+        console.log('⭕⭕️', JSON.stringify(qiuguanArr, null, 2))
+      }
+    })
+  }
+
 
   function beginTimeChange(e) {
     let newBeginValue = e.detail.value
@@ -224,6 +261,8 @@
 
   onLoad((option) => {
     createFieldsRange()
+    getClubArr()
+    getQiuguanArr()
   })
 </script>
 
