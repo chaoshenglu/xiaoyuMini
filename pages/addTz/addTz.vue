@@ -66,6 +66,9 @@
   const valiForm = ref(null)
   const beginTime = ref('20:00')
   const endTime = ref('22:00')
+  const clubRange = ref([])
+  const qiuguanRange = ref([])
+  const fieldsRange = ref([])
 
   const zhouJi = computed(() => {
     let num = parseInt(dayjs(valiFormData.value.date).format('d'))
@@ -99,10 +102,6 @@
     clubId: null
   })
 
-  const clubRange = ref([])
-  const qiuguanRange = ref([])
-  const fieldsRange = ref([])
-
   function getClubArr() {
     let param = {}
     param.page = 1
@@ -119,7 +118,6 @@
       }
       if (clubs.length) {
         clubRange.value = clubs
-        console.log('⭕️', JSON.stringify(clubs, null, 2))
       }
     })
   }
@@ -140,11 +138,9 @@
       }
       if (qiuguanArr.length) {
         qiuguanRange.value = qiuguanArr
-        console.log('⭕⭕️', JSON.stringify(qiuguanArr, null, 2))
       }
     })
   }
-
 
   function beginTimeChange(e) {
     let newBeginValue = e.detail.value
