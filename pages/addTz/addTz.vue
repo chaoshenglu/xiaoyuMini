@@ -208,11 +208,11 @@
     valiForm.value.validate().then(res => {
       console.log('校验通过', JSON.stringify(res, null, 2))
       let param = res
+      let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
       if (valiFormDataValue.clubId) {
         let clubName = findClubNameById(valiFormDataValue.clubId)
         param.clubName = clubName
         let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
-        let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
         param.title = `${zhouJi.value}(${chineseDate})${shortClubName}报名帖`
       } else {
         param.title = `${zhouJi.value}(${chineseDate})羽毛球报名帖`
