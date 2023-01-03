@@ -133,13 +133,9 @@
       nickName: nickName,
       openid: user.value.openid
     }
-    if (getApp().globalData.penddingGift && user.value.avatar) {
-      param.gift = getApp().globalData.penddingGift.money
-    }
     getApp().post('user/updateUserInfo', param).then(res => {
       user.value.nickName = nickName
       uni.setStorageSync('user', user.value)
-      handlePenddingGift()
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
@@ -167,28 +163,12 @@
       avatar: avatar,
       openid: user.value.openid
     }
-    if (getApp().globalData.penddingGift && user.value.nickName) {
-      param.gift = getApp().globalData.penddingGift.money
-    }
     getApp().post('user/updateUserInfo', param).then(res => {
       user.value.avatar = avatar
       uni.setStorageSync('user', user.value)
-      handlePenddingGift()
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
-  }
-
-  function handlePenddingGift() {
-    if (getApp().globalData.penddingGift && user.value.avatar && user.value.nickName) {
-      let gift = getApp().globalData.penddingGift
-      getApp().globalData.penddingGift = null
-      uni.showModal({
-        title: '🥳 🥳 🥳',
-        showCancel: false,
-        content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
-      })
-    }
   }
 </script>
 

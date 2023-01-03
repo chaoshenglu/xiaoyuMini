@@ -7,7 +7,6 @@
       openid: null,
       saveOpenIdTime: null,
       gift: null,
-      penddingGift: null,
       saveOssTime: null,
       ossConfig: null,
     },
