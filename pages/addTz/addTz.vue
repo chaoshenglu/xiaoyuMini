@@ -99,29 +99,15 @@
     clubId: null
   })
 
-  const clubRange = [{
-    value: 1,
-    text: '后生仔羽毛球俱乐部'
-  }, {
-    value: 2,
-    text: '菜鸟羽毛球俱乐部'
-  }]
-
-  const qiuguanRange = [{
-    value: 1,
-    text: '颐瑾羽毛球馆'
-  }, {
-    value: 2,
-    text: '鑫富龙羽毛球馆'
-  }]
-
+  const clubRange = ref([])
+  const qiuguanRange = ref([])
   const fieldsRange = ref([])
 
   function getClubArr() {
     let param = {}
     param.page = 1
     param.size = 100
-    getApp().post('club/getClubArr', param).then(res => {
+    getApp().get('club/getClubArr', param).then(res => {
       let arr = res.data.list || []
       let clubs = []
       for (var i = 0; i < arr.length; i++) {
@@ -142,7 +128,7 @@
     let param = {}
     param.page = 1
     param.size = 100
-    getApp().post('qiuguan/getQiuguanArr', param).then(res => {
+    getApp().get('qiuguan/getQiuguanArr', param).then(res => {
       let arr = res.data.list || []
       let qiuguanArr = []
       for (var i = 0; i < arr.length; i++) {
@@ -189,7 +175,7 @@
   }
 
   function findClubNameById(id) {
-    for (const club of clubRange) {
+    for (const club of clubRange.value) {
       if (club.value === id) {
         return club.text
       }
@@ -197,7 +183,7 @@
   }
 
   function findQiuguanNameById(id) {
-    for (const qiuguan of qiuguanRange) {
+    for (const qiuguan of qiuguanRange.value) {
       if (qiuguan.value === id) {
         return qiuguan.text
       }
