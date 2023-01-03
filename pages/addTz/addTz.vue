@@ -97,7 +97,7 @@
     qiuguanName: null,
     qiuguanId: null,
     selectedFields: [],
-    limitNumber: 0,
+    limitNumber: 21,
     remark: null,
     clubId: null
   })
@@ -246,6 +246,8 @@
 
   function baoMingForMyself(tieziId) {
     let param = getApp().globalData.user
+    param.isJiaYi = 0
+    param.status = 1 //1已报名2已取消3已飞机
     param.tieziId = tieziId
     getApp().post('tz_person/addTZPerson', param).then(res => {
       if (res.code === 1) {
