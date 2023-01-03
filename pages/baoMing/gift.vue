@@ -24,6 +24,7 @@
   function tapReceiveGift() {
     emit('closePop')
     setTimeout(function() {
+      let user = getApp().globalData.user
       let param = {
         gift: gift.money,
         openid: user.openid
@@ -31,7 +32,6 @@
       getApp().post('user/updateUserInfo', param).then(res => {
         console.log('⭕️', res)
         user.gift = gift.money
-        getApp().globalData.user = user
         uni.setStorageSync('user', user)
         uni.showModal({
           title: '🥳 🥳 🥳',

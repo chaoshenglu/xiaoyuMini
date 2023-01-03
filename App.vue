@@ -58,13 +58,9 @@
       },
 
       onLaunch_checkGift() {
-        this.globalData.gift = uni.getStorageSync('gift') || {}
-        if (!this.globalData.gift.money) {
-          this.globalData.gift = {
-            name: '新用户专享红包',
-            money: 3
-          }
-          uni.setStorageSync('gift', this.globalData.gift)
+        this.globalData.gift = {
+          name: '新用户专享红包',
+          money: 2
         }
       },
 
