@@ -7,7 +7,7 @@
       <uni-forms ref="valiForm" :modelValue="valiFormData">
         <view class="lx100vwLine" />
         <uni-forms-item label="昵称" name="nickName">
-          <input type="nickname" placeholder="请输入昵称" style="margin-top: 6px;" />
+          <input type="nickname" placeholder="请输入昵称" style="margin-top: 6px;" v-model="valiFormData.nickName" />
         </uni-forms-item>
         <view class="lx100vwLine" />
         <uni-forms-item label="性别" name="isGirl">
@@ -18,6 +18,7 @@
         </uni-forms-item>
         <view class="lx100vwLine" />
       </uni-forms>
+      <LXBottomBtn title="保存" @tapBottomBtn="save" />
     </view>
   </view>
 </template>
@@ -45,6 +46,49 @@
     value: 1,
     text: '女'
   }]
+
+  function onChooseAvatar(e) {
+    uni.showLoading({
+      title: '正在上传',
+      mask: true
+    })
+    wx.compressImage({
+      src: e.detail.avatarUrl,
+      compressedWidth: 112,
+      compressHeight: 112,
+      quality: 90,
+      success: res => {
+        upload(res.tempFilePath)
+      },
+      fail: (err) => {
+        uni.hideLoading()
+        getApp().toastAndConsoleSystemError(err)
+      }
+    })
+  }
+
+  function upload(tempFilePath) {
+    let random = getApp().randomNum(0, 999999)
+    let ossConfig = getApp().globalData.ossConfig
+    ossConfig.key = getApp().globalData.openid + `_${random}.jpg`
+    let host = 'https://xiaoyu-mini.oss-cn-guangzhou.aliyuncs.com/'
+    uni.uploadFile({
+      url: host,
+      filePath: tempFilePath,
+      name: 'file',
+      formData: ossConfig,
+      success: resp => {
+        uni.hideLoading()
+        valiFormData.value.avatar = host + ossConfig.key
+      },
+      fail: error => {
+        uni.hideLoading()
+        getApp().toastAndConsoleSystemError(err)
+      }
+    })
+  }
+
+
 
   onLoad((option) => {
 
