@@ -24,45 +24,23 @@
   function tapReceiveGift() {
     emit('closePop')
     setTimeout(function() {
-      let user = getApp().globalData.user
-      if (user.nickName && user.avatar) {
-        let param = {
-          gift: gift.money,
-          openid: user.openid
-        }
-        getApp().post('user/updateUserInfo', param).then(res => {
-          console.log('⭕️', res)
-          user.gift = gift.money
-          getApp().globalData.user = user
-          uni.setStorageSync('user', user)
-          uni.showModal({
-            title: '🥳 🥳 🥳',
-            showCancel: false,
-            content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
-          })
-        }).catch(err => {
-          console.log(err)
-        })
-      } else {
-        uni.showModal({
-          title: '温馨提示',
-          content: '为了方便活动组织者识别身份，请先前往设置微信头像与昵称',
-          success: function(res) {
-            if (res.confirm) {
-              getApp().globalData.penddingGift = gift
-              uni.navigateTo({
-                url: '/pages/mine/mine',
-                fail: function() {
-                  uni.switchTab({
-                    url: '/pages/mine/mine',
-                  })
-                }
-              })
-            }
-          }
-        })
+      let param = {
+        gift: gift.money,
+        openid: user.openid
       }
-
+      getApp().post('user/updateUserInfo', param).then(res => {
+        console.log('⭕️', res)
+        user.gift = gift.money
+        getApp().globalData.user = user
+        uni.setStorageSync('user', user)
+        uni.showModal({
+          title: '🥳 🥳 🥳',
+          showCancel: false,
+          content: `恭喜你,获得了价值${gift.money}元的优惠券，订单结算时将自动抵扣`
+        })
+      }).catch(err => {
+        console.log(err)
+      })
     }, 400)
   }
 </script>
