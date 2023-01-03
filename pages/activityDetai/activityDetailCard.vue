@@ -63,6 +63,8 @@
     </view>
     <div class="tip" v-if="tz.remark">请各位球友根据自身的身体情况控制运动强度，避免出现意外，如在运动中碰伤或突发疾病，组织者不承担任何法律责任。</div>
 
+    <view style="width: 100px;height: 100px;"></view>
+
     <view v-if="tz.status === 0 || tz.status === 1">
       <HalfBottomBtn title='修改帖子' :isLeft="true" @tapBottomBtn="editTieZi()" />
       <HalfBottomBtn title='停止报名' :isLeft="false" @tapBottomBtn="stopForWhat()" />

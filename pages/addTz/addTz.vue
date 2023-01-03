@@ -268,6 +268,10 @@
 </script>
 
 <style lang="scss">
+  page {
+    padding-bottom: 100px;
+  }
+
   .pageView {
     padding: 16px;
   }
