@@ -2,17 +2,7 @@
   <view class="baoMingPop">
     <view style="padding: 16px;">
       <text class="lx333" style="font-size: 18px;font-weight: 500;">报名信息</text>
-      <view class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
-        <view class="lxCenterRow">
-          <text class="lx333" style="font-size: 16px;margin-right: 4px;">{{user.nickName}}</text>
-          <radio-group @change="radioChange" class="lxCenterRow">
-            <view v-for="(item, index) in items" :key="item.value" class="lxCenterRow">
-              <radio color="#4685F3" style="margin-left: 6px;" :value="item.value" :checked="index === current" />
-              <view class="lx666">{{item.name}}</view>
-            </view>
-          </radio-group>
-        </view>
-      </view>
+
 
       <view v-if="qiuguanArr.length" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
         <view class="lxCenterRow">
@@ -48,7 +38,7 @@
     computed,
     onMounted
   } from 'vue'
-  let current = ref(getApp().globalData.user.isGirl === 1 ? 1 : 0)
+
   let selectedQiuguanId = ref(null)
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
@@ -63,16 +53,6 @@
       return []
     }
   })
-
-  const items = [{
-      value: 0,
-      name: '男'
-    },
-    {
-      value: 1,
-      name: '女'
-    }
-  ]
 
   onMounted(() => {
     let param = {}
@@ -104,11 +84,9 @@
       return
     }
     let user = getApp().globalData.user
-    user.isGirl = parseInt(current.value)
     user.isJiaYi = 0
     user.status = 1 //1已报名2已取消3已飞机
     addTZRecord(user, props.tiezi.id)
-    updateUserGender(user)
   }
 
   function addTZRecord(user, tieziId) {
@@ -124,20 +102,6 @@
         baoMing_addTZPerson(user, tieziId)
       } else {
         getApp().toastAndConsoleSystemError(res)
-      }
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
-
-  function updateUserGender(user) {
-    let param = {
-      isGirl: user.isGirl,
-      openid: user.openid
-    }
-    getApp().post('user/updateUserInfo', param).then(res => {
-      if (res.code === 1) {
-        uni.setStorageSync('user', user)
       }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
@@ -194,10 +158,6 @@
 
   function qiuGuanChange(e) {
     selectedQiuguanId.value = e.detail.value
-  }
-
-  function radioChange(e) {
-    current.value = e.detail.value
   }
 </script>
 
