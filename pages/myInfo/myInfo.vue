@@ -67,6 +67,12 @@
     padding-left: 20px !important;
   }
 
+  .uni-forms-item__label {
+    font-weight: 400;
+    color: #333333 !important;
+    font-size: 16px !important;
+  }
+
   button::after {
     border-style: none !important;
   }
