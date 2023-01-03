@@ -232,13 +232,37 @@
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
         getApp().toast('发布成功')
-        uni.navigateBack()
+        baoMingForMyself()
+        setTimeout(function() {
+          uni.navigateBack()
+        }, 1000)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
+  }
+
+  function baoMingForMyself() {
+    // let param = getApp().globalData.user
+    // param.tieziId = tieziId
+    // param.qiuguanId = selectedQiuguanId.value
+    // if (isCheckNum.value === true) {
+    //   param.targetNum = inputNumber.value
+    // }
+    // getApp().post('tz_person/addTZPerson', param).then(res => {
+    //   if (res.code === 1) {
+    //     emit('closeBaoMingPop')
+    //     handleRes(res)
+    //     tryDeleteOldMyself(tieziId)
+    //   } else {
+    //     getApp().toastAndConsoleSystemError(res)
+    //   }
+    // }).catch(err => {
+    //   emit('closeBaoMingPop')
+    //   getApp().toastAndConsoleSystemError(err)
+    // })
   }
 
   onLoad((option) => {
