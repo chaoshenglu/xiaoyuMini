@@ -82,6 +82,12 @@
       "navigationBarTitleText": "新增活动",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/myInfo/myInfo",
+    "style": {
+      "navigationBarTitleText": "个人资料",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
