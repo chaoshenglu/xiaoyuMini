@@ -3,7 +3,7 @@
     <z-paging ref="paging" v-model="tieziArr" @query="queryList">
       <view class="lxCenterColumn">
         <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id">
-          <view class="lxColumn" style="margin-bottom: 4px;" @click="tapCell(tiezi)">
+          <view class="lxColumn" style="padding-bottom: 8px;" @click="tapCell(tiezi)">
             <text class="title">{{tiezi.title}}</text>
             <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
               <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
@@ -13,7 +13,7 @@
             </view>
             <text class="remark">备注：{{tiezi.remark || '请各位球友根据自身的身体情况控制运动强度，避免出现意外，如在运动中碰伤或突发疾病，组织者不承担任何法律责任。'}}</text>
           </view>
-          <view class="lxCenterRow" style="margin-top: 4px;">
+          <view class="lxCenterRow">
             <image class="head" @click="tapName(tiezi)" :src="tiezi.createdPersonAvatar || '/static/defaultAvatar.png'"
               mode="aspectFill" />
             <text class="name" @click="tapName(tiezi)">{{tiezi.createdPersonName || '李响'}}</text>
