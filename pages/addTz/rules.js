@@ -32,12 +32,6 @@ export const rules = {
       errorMessage: '球馆不能为空'
     }]
   },
-  clubId: {
-    rules: [{
-      required: true,
-      errorMessage: '组织不能为空'
-    }]
-  },
   selectedFields: {
     rules: [{
       required: true,

@@ -27,8 +27,8 @@
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
       </uni-forms-item>
-      <uni-forms-item label="组织" required name="clubId">
-        <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织">
+      <uni-forms-item label="组织" name="clubId">
+        <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织(可选)">
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
@@ -42,7 +42,7 @@
         <uni-number-box v-model="valiFormData.limitNumber" :min="6" :max="100"></uni-number-box>
       </uni-forms-item>
       <uni-forms-item label="备注" name="remark">
-        <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注" />
+        <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注(可选)" />
       </uni-forms-item>
     </uni-forms>
 
@@ -208,11 +208,15 @@
     valiForm.value.validate().then(res => {
       console.log('校验通过', JSON.stringify(res, null, 2))
       let param = res
-      let clubName = findClubNameById(valiFormDataValue.clubId)
-      param.clubName = clubName
-      let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
-      let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
-      param.title = `${zhouJi.value}(${chineseDate})${shortClubName}报名帖`
+      if (valiFormDataValue.clubId) {
+        let clubName = findClubNameById(valiFormDataValue.clubId)
+        param.clubName = clubName
+        let shortClubName = clubName.replace('俱乐部', '').replace('球会', '')
+        let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
+        param.title = `${zhouJi.value}(${chineseDate})${shortClubName}报名帖`
+      } else {
+        param.title = `${zhouJi.value}(${chineseDate})羽毛球报名帖`
+      }
       param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
       param.status = 1
       param.createdPersonId = user.openid
