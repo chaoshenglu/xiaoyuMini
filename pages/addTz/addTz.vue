@@ -46,7 +46,7 @@
       </uni-forms-item>
     </uni-forms>
 
-    <LXBottomBtn title="发布" @tapBottomBtn="submit" />
+    <LXBottomBtn :title="bottomBtnTitle" @tapBottomBtn="submit" />
   </view>
 </template>
 
@@ -70,6 +70,7 @@
   const clubRange = ref([])
   const qiuguanRange = ref([])
   const fieldsRange = ref([])
+  const bottomBtnTitle = ref('发布')
 
   const zhouJi = computed(() => {
     let num = parseInt(dayjs(valiFormData.value.date).format('d'))
@@ -222,8 +223,7 @@
 
     let user = getApp().globalData.user
     valiForm.value.validate().then(res => {
-      console.log('校验通过', JSON.stringify(res, null, 2))
-      let param = res
+      let param = valiFormDataValue
       let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
       if (valiFormDataValue.clubId) {
         let clubName = findClubNameById(valiFormDataValue.clubId)
@@ -234,17 +234,16 @@
         param.title = `${zhouJi.value}(${chineseDate})羽毛球报名帖`
       }
       param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
-      param.status = 1
-      param.createdPersonId = user.openid
-      param.createdPersonName = user.nickName
-      param.createdPersonAvatar = user.avatar
-      param.personNumber = 1
       param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
       delete param.selectedFields
-      console.log('最终参数', JSON.stringify(param, null, 2))
       if (param.id) {
         updateTieziByParam(param)
       } else {
+        param.status = 1
+        param.createdPersonId = user.openid
+        param.createdPersonName = user.nickName
+        param.createdPersonAvatar = user.avatar
+        param.personNumber = 1
         addTieziByParam(param)
       }
     }).catch(err => {
@@ -253,6 +252,7 @@
   }
 
   function updateTieziByParam(param) {
+    console.log('最终参数', JSON.stringify(param, null, 2))
     getApp().post('tiezi/updateTiezi', param).then(res => {
       console.log('updateTiezi res=', res)
     }).catch(err => {
@@ -261,6 +261,7 @@
   }
 
   function addTieziByParam(param) {
+    console.log('最终参数', JSON.stringify(param, null, 2))
     let uri = 'tiezi/addTieZi'
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
@@ -306,6 +307,7 @@
       uni.setNavigationBarTitle({
         title: '编辑活动'
       })
+      bottomBtnTitle.value = '保存'
       valiFormData.value = JSON.parse(option.tiezi)
       let str = valiFormData.value.fields.replace('号场', '')
       let strArr = str.split(',')
@@ -314,6 +316,7 @@
         idArr.push(parseInt(idstr))
       }
       valiFormData.value.selectedFields = idArr
+      console.log("valiFormData.value: " + JSON.stringify(valiFormData.value, null, 2))
     }
   })
 </script>
