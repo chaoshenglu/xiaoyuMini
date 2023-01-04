@@ -18,7 +18,8 @@
   } from 'vue'
 
   import {
-    onLoad
+    onLoad,
+    onUnload
   } from "@dcloudio/uni-app"
 
   import activityDetailCard from '/pages/activityDetai/activityDetailCard.vue'
@@ -34,6 +35,13 @@
   onLoad((option) => {
     tieziId.value = option.tieziId
     getTieZi()
+    uni.$on('didEditTieZi', data => {
+      getTieZi()
+    })
+  })
+
+  onUnload(() => {
+    uni.$off('didEditTieZi')
   })
 
   function getTieZi() {

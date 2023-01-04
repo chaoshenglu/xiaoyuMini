@@ -266,6 +266,9 @@
       console.log('updateTiezi res=', res)
       if (res.code === 1) {
         getApp().toast('保存成功')
+        uni.$emit('didEditTieZi', {
+          msg: '帖子已更新，刷新数据吧'
+        })
         setTimeout(function() {
           uni.navigateBack()
         }, 1000)
