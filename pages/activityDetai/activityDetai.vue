@@ -36,6 +36,8 @@
     tieziId.value = option.tieziId
     getTieZi()
     uni.$on('didEditTieZi', data => {
+      console.log('⭕️监听到didEditTieZi', data)
+      tiezi.value = null
       getTieZi()
     })
   })
@@ -49,7 +51,7 @@
     getApp().get(uri, {
       id: tieziId.value
     }).then(res => {
-      console.log('data=', JSON.stringify(res.data, null, 2))
+      //console.log('data=', JSON.stringify(res.data, null, 2))
       tiezi.value = res.data
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
