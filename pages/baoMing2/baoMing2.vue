@@ -186,7 +186,7 @@
     getApp().get(uri, {
       id
     }).then(res => {
-      console.log('data=', JSON.stringify(res.data, null, 2))
+      //console.log('data=', JSON.stringify(res.data, null, 2))
       tiezi.value = res.data
       getPersonArr(tieziId.value)
     }).catch(err => {

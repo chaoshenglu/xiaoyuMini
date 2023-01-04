@@ -44,6 +44,7 @@
 
   onUnload(() => {
     uni.$off('didEditTieZi')
+    console.log('⭕️已移除监听 didEditTieZi')
   })
 
   function getTieZi() {
