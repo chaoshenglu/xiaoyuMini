@@ -3,7 +3,7 @@
     <z-paging ref="paging" v-model="tieziArr" @query="queryList">
       <view class="lxCenterColumn">
         <view class="listCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id">
-          <view class="lxColumn" style="padding-bottom: 8px;" @click="tapCell(tiezi)">
+          <view class="lxColumn" style="padding-bottom: 8px;" @click="tapCell(tiezi)" @longpress="didLongPress(tiezi)">
             <text class="title">{{tiezi.title}}</text>
             <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
               <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
@@ -166,6 +166,31 @@
         url: '/pages/baoMing/baoMing?id=' + tiezi.id
       })
     }
+  }
+
+  function didLongPress(tiezi) {
+    if (getApp().globalData.openid === 'oNNsT5GULfIM8Yv9cXO7mzKlVsU4') {
+      uni.showModal({
+        title: '确定删除吗？',
+        success: res => {
+          if (res.confirm) {
+            delTieZi(tiezi)
+          }
+        }
+      })
+    }
+  }
+
+  function delTieZi(tiezi) {
+    let param = {
+      id: tiezi.id
+    }
+    getApp().post('tiezi/delTieZi', param).then(res => {
+      console.log('delTieZi', res)
+      paging.value.reload()
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   const queryList = (pageNo, pageSize) => {
