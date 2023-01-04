@@ -337,7 +337,7 @@
     } else {
       uni.showModal({
         title: '温馨提示',
-        content: '为了方便活动组织者识别身份，请先前往设置微信头像与昵称',
+        content: '为了方便活动组织者识别身份，请先前往完善个人信息',
         success: res => {
           if (res.confirm) {
             uni.navigateTo({
