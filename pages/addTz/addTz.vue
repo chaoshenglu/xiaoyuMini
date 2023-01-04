@@ -27,7 +27,7 @@
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
         </uni-data-select>
       </uni-forms-item>
-      <uni-forms-item label="组织" name="clubId">
+      <uni-forms-item v-if="clubRange.length" label="组织" name="clubId">
         <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织(可选)">
         </uni-data-select>
       </uni-forms-item>
