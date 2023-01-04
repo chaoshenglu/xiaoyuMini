@@ -40,16 +40,16 @@
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArrLeft" :index="index" :key="index">
-            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
+            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.shortName">
               <view class="headBox">
                 <image class="head" :src="person.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
                 <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
                 <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
                   mode="aspectFit" />
               </view>
-              <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
-              <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
-              <text v-else class="pname">{{person.nickName}}</text>
+              <text v-if="person.shortName.length === 4" class="pname10">{{person.shortName}}</text>
+              <text v-else-if="person.shortName.length === 3" class="pname12">{{person.shortName}}</text>
+              <text v-else class="pname">{{person.shortName}}</text>
             </view>
           </uni-grid-item>
         </uni-grid>
@@ -62,16 +62,16 @@
         </view>
         <uni-grid :column="2" :highlight="true" @change="change" :showBorder="false" :square="false">
           <uni-grid-item v-for="(person, index) in personArrRight" :index="index" :key="index">
-            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.nickName">
+            <view class="lxCenterR cell" :style="person.style" @click="tapCell(person)" v-if="person.shortName">
               <view class="headBox">
                 <image class="head" :src="person.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
                 <image v-if="person.isJiaYi" class="jia" src="/static/jiayi.png" mode="aspectFit" />
                 <image v-if="person.isJiaYi != 1 && person.isVip===1" class="vip" src="/static/vipHead.png"
                   mode="aspectFit" />
               </view>
-              <text v-if="person.nickName.length === 4" class="pname10">{{person.nickName}}</text>
-              <text v-else-if="person.nickName.length === 3" class="pname12">{{person.nickName}}</text>
-              <text v-else class="pname">{{person.nickName}}</text>
+              <text v-if="person.shortName.length === 4" class="pname10">{{person.shortName}}</text>
+              <text v-else-if="person.shortName.length === 3" class="pname12">{{person.shortName}}</text>
+              <text v-else class="pname">{{person.shortName}}</text>
             </view>
           </uni-grid-item>
         </uni-grid>
@@ -208,6 +208,11 @@
       didAddMyself.value = 0 //恢复默认值
       for (var i = 0; i < arr.length; i++) {
         let person = arr[i]
+        if (person.nickName.length > 4) {
+          person.shortName = person.nickName.slice(0, 4)
+        } else {
+          person.shortName = person.nickName
+        }
         if (person.openid === getApp().globalData.openid && person.isJiaYi != 1) {
           didAddMyself.value = didAddMyself.value + 1
         }
@@ -323,7 +328,7 @@
 
   function baoMing_continue(isJiaYi) {
     let user = getApp().globalData.user
-    if (user.nickName && user.avatar) {
+    if (user.nickName) {
       if (isJiaYi) {
         jiayiPopup.value.open()
       } else {
