@@ -204,6 +204,20 @@
       getApp().toast('请选择完整的飞机时间')
       return
     }
+
+    let flyDate = dayjs(valiFormDataValue.stopBaoMingTime)
+    let beginDate = dayjs(`${valiFormDataValue.date} ${beginTime.value}`)
+    let nowDate = dayjs()
+
+    if (flyDate.isBefore(beginDate) === false) {
+      getApp().toast('飞机时间应早于活动时间')
+      return
+    }
+    if (flyDate.isAfter(nowDate) === false) {
+      getApp().toast('飞机时间应晚于当前时间')
+      return
+    }
+
     let user = getApp().globalData.user
     valiForm.value.validate().then(res => {
       console.log('校验通过', JSON.stringify(res, null, 2))
