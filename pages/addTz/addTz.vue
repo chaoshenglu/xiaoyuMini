@@ -242,10 +242,18 @@
       param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
       delete param.selectedFields
       console.log('最终参数', JSON.stringify(param, null, 2))
-      addTieziByParam(param)
+      if (param.id) {
+        updateTieziByParam(param)
+      } else {
+        addTieziByParam(param)
+      }
     }).catch(err => {
       console.log('err', err)
     })
+  }
+
+  function updateTieziByParam(param) {
+
   }
 
   function addTieziByParam(param) {
@@ -291,6 +299,9 @@
     getClubArr()
     getQiuguanArr()
     if (option.tiezi) {
+      uni.setNavigationBarTitle({
+        title: '编辑活动'
+      })
       valiFormData.value = JSON.parse(option.tiezi)
       let str = valiFormData.value.fields.replace('号场', '')
       let strArr = str.split(',')
