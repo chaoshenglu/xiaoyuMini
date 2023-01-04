@@ -290,6 +290,16 @@
     createFieldsRange()
     getClubArr()
     getQiuguanArr()
+    if (option.tiezi) {
+      valiFormData.value = JSON.parse(option.tiezi)
+      let str = valiFormData.value.fields.replace('号场', '')
+      let strArr = str.split(',')
+      let idArr = []
+      for (const idstr of strArr) {
+        idArr.push(parseInt(idstr))
+      }
+      valiFormData.value.selectedFields = idArr
+    }
   })
 </script>
 
