@@ -104,10 +104,12 @@
   })
 
   function getClubArr() {
+    let str = getApp().globalData.user.clubIdsStr || ''
     let param = {}
     param.page = 1
     param.size = 100
-    getApp().get('club/getClubArr', param).then(res => {
+    param.ids = str.split(',')
+    getApp().post('club/getClubArr', param).then(res => {
       let arr = res.data.list || []
       let clubs = []
       for (var i = 0; i < arr.length; i++) {
