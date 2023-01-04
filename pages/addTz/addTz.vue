@@ -261,16 +261,24 @@
   }
 
   function updateTieziByParam(param) {
-    console.log('最终参数', JSON.stringify(param, null, 2))
+    console.log('保存-最终参数', JSON.stringify(param, null, 2))
     getApp().post('tiezi/updateTiezi', param).then(res => {
       console.log('updateTiezi res=', res)
+      if (res.code === 1) {
+        getApp().toast('保存成功')
+        setTimeout(function() {
+          uni.navigateBack()
+        }, 1000)
+      } else {
+        getApp().toastAndConsoleSystemError(res)
+      }
     }).catch(err => {
       getApp().toastAndConsoleSystemError(err)
     })
   }
 
   function addTieziByParam(param) {
-    console.log('最终参数', JSON.stringify(param, null, 2))
+    console.log('新增-最终参数', JSON.stringify(param, null, 2))
     let uri = 'tiezi/addTieZi'
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
