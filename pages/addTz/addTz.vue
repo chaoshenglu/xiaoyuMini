@@ -260,18 +260,43 @@
     })
   }
 
-  function updateTieziByParam(param) {
-    console.log('保存-最终参数', JSON.stringify(param, null, 2))
-    getApp().post('tiezi/updateTiezi', param).then(res => {
-      console.log('updateTiezi res=', res)
-      if (res.code === 1) {
-        getApp().toast('保存成功')
+  function alertFinishEdit() {
+    uni.showModal({
+      title: '保存成功',
+      content: '请及时将此变动告知活动参与者',
+      showCancel: false,
+      confirmText: '我知道了',
+      success: res => {
         uni.$emit('didEditTieZi', {
           msg: '帖子已更新，刷新数据吧'
         })
         setTimeout(function() {
           uni.navigateBack()
         }, 1000)
+      }
+    })
+  }
+
+  function alertAddSuccess(id) {
+    uni.showModal({
+      title: '发布成功',
+      content: '快转发小程序到微信群吧',
+      showCancel: false,
+      confirmText: '我知道了',
+      success: res => {
+        uni.redirectTo({
+          url: '/pages/baoMing/baoMing?id=' + id
+        })
+      }
+    })
+  }
+
+  function updateTieziByParam(param) {
+    console.log('保存-最终参数', JSON.stringify(param, null, 2))
+    getApp().post('tiezi/updateTiezi', param).then(res => {
+      console.log('updateTiezi res=', res)
+      if (res.code === 1) {
+        alertFinishEdit()
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
@@ -285,11 +310,8 @@
     let uri = 'tiezi/addTieZi'
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
-        getApp().toast('发布成功')
         baoMingForMyself(res.data)
-        setTimeout(function() {
-          uni.navigateBack()
-        }, 1000)
+        alertAddSuccess(res.data)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
