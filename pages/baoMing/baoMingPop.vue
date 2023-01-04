@@ -5,7 +5,7 @@
 
       <view class="lxColumn" style="margin-top: 14px;">
         <text class="lx333" style="margin-bottom: 5px;">时间：{{jiYueJiRi}} {{tiezi.time}}</text>
-        <text class="lx333">地点：{{tiezi.qiuguanName}}</text>
+        <text class="lx333" v-if="qiuguanArr.length === 0">地点：{{tiezi.qiuguanName}}</text>
       </view>
 
       <view v-if="qiuguanArr.length" class="lxCenterRow" style="justify-content: space-between;margin-top: 14px;">
