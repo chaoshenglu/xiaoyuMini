@@ -253,7 +253,11 @@
   }
 
   function updateTieziByParam(param) {
-
+    getApp().post('tiezi/updateTiezi', param).then(res => {
+      console.log('updateTiezi res=', res)
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   function addTieziByParam(param) {
