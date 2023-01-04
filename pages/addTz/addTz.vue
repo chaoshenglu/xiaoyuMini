@@ -270,9 +270,7 @@
         uni.$emit('didEditTieZi', {
           msg: '帖子已更新，刷新数据吧'
         })
-        setTimeout(function() {
-          uni.navigateBack()
-        }, 1000)
+        uni.navigateBack()
       }
     })
   }
