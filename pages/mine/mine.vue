@@ -1,6 +1,6 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
-    <view class="mineCard lxCenterRow" style="margin-bottom: 16px;">
+    <view class="mineCard lxCenterRow" style="margin-bottom: 16px;" @click="tapMineHeadCell">
       <image class="avatar" @click="tapAvatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
       <view class="lxColumn" style="margin-left: 10px;">
         <view class="lxCenterRow">
@@ -29,9 +29,23 @@
   } from 'vue';
   let user = ref(getApp().globalData.user)
 
+  import {
+    onShow
+  } from "@dcloudio/uni-app"
+
+  onShow(() => {
+    user.value = getApp().globalData.user
+  })
+
   const genderIcon = computed(() => {
     return user.value.isGirl === 1 ? "/static/woman.png" : "/static/man.png"
   })
+
+  function tapMineHeadCell() {
+    uni.navigateTo({
+      url: '/pages/myInfo/myInfo'
+    })
+  }
 
   function tapMineCell(e) {
     if (e === '我的积分') {
