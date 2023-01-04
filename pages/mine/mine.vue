@@ -1,6 +1,6 @@
 <template>
   <view class="lxColumn" style="width: 100vw;">
-    <view class="mineCard lxCenterRow" style="margin-bottom: 16px;" @click="tapMineHeadCell">
+    <view v-if="reloadFlag && user" class="mineCard lxCenterRow" style="margin-bottom: 16px;" @click="tapMineHeadCell">
       <image class="avatar" @click="tapAvatar" :src="user.avatar || '/static/defaultAvatar.png'" mode="aspectFill" />
       <view class="lxColumn" style="margin-left: 10px;">
         <view class="lxCenterRow">
@@ -26,8 +26,10 @@
   import {
     ref,
     computed
-  } from 'vue';
-  let user = ref(getApp().globalData.user)
+  } from 'vue'
+
+  const user = ref(null)
+  const reloadFlag = ref(true)
 
   import {
     onShow
@@ -35,6 +37,8 @@
 
   onShow(() => {
     user.value = getApp().globalData.user
+    reloadFlag.value = false
+    reloadFlag.value = true
   })
 
   const genderIcon = computed(() => {
