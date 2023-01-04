@@ -2,7 +2,7 @@
   <view class="pageView">
     <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData" :labelWidth="80">
       <uni-forms-item label="日期" required name="date">
-        <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" />
+        <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" :disabled="isEdit" />
       </uni-forms-item>
       <uni-forms-item label="时间" required name="time">
         <view class="timeSlotBox lxCenterRow">
@@ -24,11 +24,13 @@
         <uni-easyinput type="number" v-model="valiFormData.feijiMoney" placeholder="请输入金额(元)" />
       </uni-forms-item>
       <uni-forms-item label="球馆" required name="qiuguanId">
-        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆">
+        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
+          :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item v-if="clubRange.length" label="组织" name="clubId">
-        <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织(可选)">
+        <uni-data-select v-model="valiFormData.clubId" :localdata="clubRange" placeholder="请选择组织(可选)" :clear="false"
+          :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
       <uni-forms-item label="场地" required name="selectedFields">
@@ -71,6 +73,13 @@
   const qiuguanRange = ref([])
   const fieldsRange = ref([])
   const bottomBtnTitle = ref('发布')
+  const isEdit = computed(() => {
+    if (valiFormData.value.id) {
+      return true
+    } else {
+      return false
+    }
+  })
 
   const zhouJi = computed(() => {
     let num = parseInt(dayjs(valiFormData.value.date).format('d'))
