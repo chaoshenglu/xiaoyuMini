@@ -112,7 +112,7 @@
       if (res.code === 1) {
         emit('closeBaoMingPop')
         handleRes(res)
-        tryDeleteOldMyself(tieziId)
+        tryDeleteOldMyself()
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
@@ -122,11 +122,11 @@
     })
   }
 
-  function tryDeleteOldMyself(tieziId) {
+  function tryDeleteOldMyself() {
     if (existingMyself.value && existingMyself.value.id) {
       let param = {
         personId: existingMyself.value.id,
-        tieziId: tieziId
+        tieziId: props.tiezi.id
       }
       getApp().post('tz_person/delTZPerson', param).then(res => {
         console.log('删除我上次报名产生的person', res)
