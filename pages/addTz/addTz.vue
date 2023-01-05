@@ -47,8 +47,13 @@
         <uni-easyinput type="textarea" :maxlength="100" v-model="valiFormData.remark" placeholder="请输入备注(可选)" />
       </uni-forms-item>
     </uni-forms>
-
-    <LXBottomBtn :title="bottomBtnTitle" @tapBottomBtn="submit" />
+    <view v-if="isEdit">
+      <LXBottomBtn title="保存" @tapBottomBtn="submit" />
+    </view>
+    <view v-else>
+      <HalfBottomBtn title='导入' :isLeft="true" @tapBottomBtn="importTieZi" />
+      <HalfBottomBtn title='发布' :isLeft="false" @tapBottomBtn="submit" />
+    </view>
   </view>
 </template>
 
@@ -72,7 +77,6 @@
   const clubRange = ref([])
   const qiuguanRange = ref([])
   const fieldsRange = ref([])
-  const bottomBtnTitle = ref('发布')
   const isEdit = computed(() => {
     if (valiFormData.value.id) {
       return true
@@ -339,6 +343,10 @@
     valiFormData.value.limitNumber = arr.length * 7
   }
 
+  function importTieZi() {
+
+  }
+
   onLoad((option) => {
     createFieldsRange()
     getClubArr()
@@ -347,7 +355,6 @@
       uni.setNavigationBarTitle({
         title: '编辑活动'
       })
-      bottomBtnTitle.value = '保存'
       valiFormData.value = JSON.parse(option.tiezi)
       let str = valiFormData.value.fields.replace('号场', '')
       let strArr = str.split(',')
