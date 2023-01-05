@@ -94,39 +94,21 @@
       getApp().toast('请选择球馆')
       return
     }
-    let user = getApp().globalData.user
-    user.isJiaYi = 0
-    user.status = 1 //1已报名2已取消3已飞机
-    addTZRecord(user, props.tiezi.id)
-  }
-
-  function addTZRecord(user, tieziId) {
-    let param = {
-      openid: user.openid,
-      nickName: user.nickName,
-      tieziId: tieziId,
-      actionType: 1, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
-      qiuguanId: selectedQiuguanId.value
+    let person = JSON.parse(JSON.stringify(getApp().globalData.user))
+    person.isJiaYi = 0
+    person.status = 1 //1已报名2已取消3已飞机
+    person.tieziId = props.tiezi.id
+    if (selectedQiuguanId.value) {
+      person.qiuguanId = selectedQiuguanId.value
     }
-    getApp().post('tz_record/addTZRecord', param).then(res => {
-      if (res.code === 1) {
-        baoMing_addTZPerson(user, tieziId)
-      } else {
-        getApp().toastAndConsoleSystemError(res)
-      }
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
-
-  function baoMing_addTZPerson(user, tieziId) {
-    let param = user
-    param.tieziId = tieziId
-    param.qiuguanId = selectedQiuguanId.value
     if (isCheckNum.value === true) {
-      param.targetNum = inputNumber.value
+      person.targetNum = inputNumber.value
     }
-    getApp().post('tz_person/addTZPerson', param).then(res => {
+    baoMing_addTZPerson(person)
+  }
+
+  function baoMing_addTZPerson(person) {
+    getApp().post('tz_person/addTZPerson', person).then(res => {
       if (res.code === 1) {
         emit('closeBaoMingPop')
         handleRes(res)
