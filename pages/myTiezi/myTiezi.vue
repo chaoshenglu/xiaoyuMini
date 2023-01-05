@@ -61,6 +61,7 @@
 
   function tapCell(tiezi) {
     uni.$emit('importTieZi', tiezi)
+    uni.navigateBack()
   }
 </script>
 

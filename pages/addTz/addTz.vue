@@ -355,10 +355,29 @@
     })
   }
 
+  function useImportData(tiezi) {
+    valiFormData.value = tiezi
+    valiFormData.value.date = dayjs().add(1, 'day').format('YYYY-MM-DD')
+    valiFormData.value.stopBaoMingTime = valiFormData.value.date + tiezi.stopBaoMingTime.slice(10, 19)
+    valiFormData.value.id = null
+    createSelectedFieldsByFields()
+  }
+
+  function createSelectedFieldsByFields() {
+    if (valiFormData.value.fields) {
+      let str = valiFormData.value.fields.replace('号场', '')
+      let strArr = str.split(',')
+      let idArr = []
+      for (const idstr of strArr) {
+        idArr.push(parseInt(idstr))
+      }
+      valiFormData.value.selectedFields = idArr
+    }
+  }
+
   onLoad((option) => {
     uni.$on('importTieZi', data => {
-      console.log('⭕️监听到importTieZi', data)
-
+      useImportData(data)
     })
 
     createFieldsRange()
@@ -369,14 +388,7 @@
         title: '编辑活动'
       })
       valiFormData.value = JSON.parse(option.tiezi)
-      let str = valiFormData.value.fields.replace('号场', '')
-      let strArr = str.split(',')
-      let idArr = []
-      for (const idstr of strArr) {
-        idArr.push(parseInt(idstr))
-      }
-      valiFormData.value.selectedFields = idArr
-      console.log("valiFormData.value: " + JSON.stringify(valiFormData.value, null, 2))
+      createSelectedFieldsByFields()
     }
   })
 </script>
