@@ -169,7 +169,10 @@
         let item = arr[i]
         qiuguanArr.push({
           value: item.qiuguanId,
-          text: item.qiuguanName
+          text: item.qiuguanName,
+          qiuguanName: item.qiuguanName,
+          qiuguanTinyName: item.qiuguanTinyName,
+          qiuguanId: item.qiuguanId
         })
       }
       if (qiuguanArr.length) {
@@ -226,7 +229,11 @@
     let qiuguanArr = []
     for (const qiuguan of qiuguanRange.value) {
       if (qiuguan.value === id1 || qiuguan.value === id2) {
-        qiuguanArr.push(qiuguan)
+        qiuguanArr.push({
+          qiuguanName: qiuguan.qiuguanName,
+          qiuguanTinyName: qiuguan.qiuguanTinyName,
+          qiuguanId: qiuguan.qiuguanId
+        })
       }
     }
     return qiuguanArr
