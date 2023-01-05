@@ -28,13 +28,13 @@
           :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
-      <uni-forms-item v-if="isVote" label="球馆选项1" required name="qiuguanId">
-        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
+      <uni-forms-item v-if="isVote" label="球馆选项1" required name="qiuguanId1">
+        <uni-data-select v-model="valiFormData.qiuguanId1" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
           :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
-      <uni-forms-item v-if="isVote" label="球馆选项2" required name="qiuguanId">
-        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
+      <uni-forms-item v-if="isVote" label="球馆选项2" required name="qiuguanId2">
+        <uni-data-select v-model="valiFormData.qiuguanId2" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
           :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
