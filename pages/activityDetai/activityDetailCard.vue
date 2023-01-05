@@ -14,7 +14,7 @@
       </view>
 
       <view class="infoRow lxCenterRow">
-        <text class="lx666">活动场地</text> <text class="lx333">{{ tz.fields }}</text>
+        <text class="lx666">活动场地</text> <text class="lx333">{{ tz.fields || '待定' }}</text>
       </view>
 
       <view class="infoRow lxCenterRow">

@@ -7,7 +7,7 @@
             <text class="title">{{tiezi.title}}</text>
             <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
               <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
-              <uni-tag :text="tiezi.fields" type="success" size="small"></uni-tag>
+              <uni-tag v-if="tiezi.fields" :text="tiezi.fields" type="success" size="small"></uni-tag>
               <uni-tag :text="tiezi.numberProportion" type="warning" size="small"></uni-tag>
               <uni-tag :text="tiezi.statusStr" type="error" size="small"></uni-tag>
             </view>
@@ -205,7 +205,8 @@
         if (tiezi.status == 0) {
           tiezi.statusStr = '未开放'
         } else if (tiezi.status == 1) {
-          tiezi.statusStr = '报名中'
+          let qiuguanArr = tiezi.qiuguanArr || ''
+          tiezi.statusStr = qiuguanArr.length ? '投票中' : '报名中'
         } else if (tiezi.status == 2) {
           tiezi.statusStr = '活动已取消'
         } else if (tiezi.status == 3) {
