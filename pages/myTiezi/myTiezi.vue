@@ -4,7 +4,10 @@
       <view class="lxColumn">
         <view class="myTieziCell lxColumn" v-for="(tiezi,index) in tieziArr" :key="tiezi.id">
           <view class="lxColumn" @click="tapCell(tiezi)">
-            <text class="title">{{tiezi.title}}</text>
+            <view class="lxCenterRow" style="justify-content: space-between;">
+              <text class="title">{{tiezi.title}}</text>
+              <uni-icons color="#666666" type="right"></uni-icons>
+            </view>
             <view class="lxCenterRow" style="margin-top: 3px;margin-bottom: 9px;">
               <uni-tag :text="tiezi.shortQiuGuanName" type="error" size="small"></uni-tag>
               <uni-tag :text="tiezi.time" type="primary" size="small"></uni-tag>
