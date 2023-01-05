@@ -48,7 +48,7 @@
   const paging = ref(null)
   const popup = ref(null)
   const fab = ref(null)
-  let tieziArr = ref([])
+  const tieziArr = ref([])
   import {
     tieziTypes
   } from '/pages/index/tieziTypes.js'
