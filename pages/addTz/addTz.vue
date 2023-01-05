@@ -222,6 +222,16 @@
     }
   }
 
+  function find2qiuguan(id1, id2) {
+    let qiuguanArr = []
+    for (const qiuguan of qiuguanRange.value) {
+      if (qiuguan.value === id1 || qiuguan.value === id2) {
+        qiuguanArr.push(qiuguan)
+      }
+    }
+    return qiuguanArr
+  }
+
   function createFieldsRange() {
     let arr = []
     for (var i = 1; i <= 42; i++) {
@@ -268,7 +278,12 @@
       if (valiFormDataValue.selectedFields.length) {
         param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
       }
-      param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
+      if (valiFormDataValue.qiuguanId) {
+        param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
+      } else if (valiFormDataValue.qiuguanId1 && valiFormDataValue.qiuguanId2) {
+        let objArr = find2qiuguan(valiFormDataValue.qiuguanId1, valiFormDataValue.qiuguanId2)
+        param.qiuguanArr = JSON.stringify(objArr)
+      }
       delete param.selectedFields
       if (param.id) {
         updateTieziByParam(param)
