@@ -97,7 +97,9 @@
         url: '/pages/addTz/addTz'
       })
     } else if (e.index === 1) {
-
+      uni.navigateTo({
+        url: '/pages/addTz/addTz?isVote=1'
+      })
     } else if (e.index === 2) {
 
     } else if (e.index === 3) {

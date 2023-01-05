@@ -359,6 +359,8 @@
   }
 
   function useImportData(tiezi) {
+    let qiuguanArrStr = tiezi.qiuguanArr || ''
+    isVote.value = qiuguanArrStr.length > 0
     valiFormData.value = tiezi
     valiFormData.value.date = dayjs().add(1, 'day').format('YYYY-MM-DD')
     valiFormData.value.stopBaoMingTime = valiFormData.value.date + tiezi.stopBaoMingTime.slice(10, 19)
@@ -388,6 +390,9 @@
     createFieldsRange()
     getClubArr()
     getQiuguanArr()
+    if (option.isVote === '1') {
+      isVote.value = true
+    }
     if (option.tiezi) {
       uni.setNavigationBarTitle({
         title: '编辑活动'
