@@ -32,6 +32,18 @@ export const rules = {
       errorMessage: '球馆不能为空'
     }]
   },
+  qiuguanId1: {
+    rules: [{
+      required: true,
+      errorMessage: '球馆选项1不能为空'
+    }]
+  },
+  qiuguanId2: {
+    rules: [{
+      required: true,
+      errorMessage: '球馆选项2不能为空'
+    }]
+  },
   limitNumber: {
     rules: [{
       required: true,

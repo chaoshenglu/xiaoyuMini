@@ -128,6 +128,8 @@
     feijiMoney: null,
     qiuguanName: null,
     qiuguanId: null,
+    qiuguanId1: null,
+    qiuguanId2: null,
     selectedFields: [],
     limitNumber: 21,
     remark: null,
