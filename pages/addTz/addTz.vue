@@ -330,15 +330,16 @@
     })
   }
 
-  function alertAddSuccess(id) {
+  function alertAddSuccess(id, param) {
     uni.showModal({
       title: '发布成功',
       content: '快转发小程序到微信群吧',
       showCancel: false,
       confirmText: '我知道了',
       success: res => {
+        let uri = param.qiuguanArr ? '/pages/baoMing2/baoMing2' : '/pages/baoMing/baoMing'
         uni.redirectTo({
-          url: '/pages/baoMing/baoMing?id=' + id
+          url: uri + '?id=' + id
         })
       }
     })
@@ -364,7 +365,7 @@
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
         baoMingForMyself(res.data)
-        alertAddSuccess(res.data)
+        alertAddSuccess(res.data, param)
       } else {
         getApp().toastAndConsoleSystemError(res)
       }
