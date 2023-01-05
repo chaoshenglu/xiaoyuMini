@@ -61,7 +61,7 @@
         </uni-section>
       </view>
     </view>
-    <view v-else style="padding-top: 36px;">
+    <view v-else-if="tz.qiuguanArr===null" style="padding-top: 36px;">
       <view v-if="canSettle" class="lxColumn lxCheckBox">
         <uni-section title="场地数量" type="line" padding="0">
           <view style="margin-left: 20px;">
@@ -85,7 +85,11 @@
         未结算
       </view>
     </view>
-    <LXBottomBtn v-if="tz.isSettled != 1 && canSettle" title="去结算" @tapBottomBtn="tapBottomBtn" />
+    <view v-else class="lxCenterR" style="width: 100vw;height: 100vh;background-color: #f6f6f6;">
+      <text class="lx666" style="padding-bottom: 20vh;">暂未结算</text>
+    </view>
+    <LXBottomBtn v-if="tz.isSettled != 1 && canSettle && tz.qiuguanArr===null" title="去结算"
+      @tapBottomBtn="tapBottomBtn" />
   </view>
 </template>
 
