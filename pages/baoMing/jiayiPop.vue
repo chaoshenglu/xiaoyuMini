@@ -94,7 +94,7 @@
     if (nickName.value === '' || !nickName.value) {
       return
     }
-    let user = {
+    let person = {
       nickName: nickName.value,
       avatar: getApp().globalData.user.avatar,
       isGirl: current.value,
@@ -104,31 +104,11 @@
       tieziId: props.tiezi.id,
       qiuguanId: selectedQiuguanId.value
     }
-    addTZRecord(user)
+    baoMing_addTZPerson(person)
   }
 
-  function addTZRecord(user) {
-    let param = {
-      openid: user.openid,
-      tieziId: props.tiezi.id,
-      nickName: getApp().globalData.user.nickName,
-      onNickName: user.nickName,
-      actionType: 2, //1报名 2为加一报名 3.为自己取消报名 4为自己的加一取消报名 5为其他人取消报名
-      qiuguanId: selectedQiuguanId.value
-    }
-    getApp().post('tz_record/addTZRecord', param).then(res => {
-      if (res.code === 1) {
-        baoMing_addTZPerson(user)
-      } else {
-        getApp().toastAndConsoleSystemError(res)
-      }
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  }
-
-  function baoMing_addTZPerson(user) {
-    let param = user
+  function baoMing_addTZPerson(person) {
+    let param = person
     if (isCheckNum.value === true) {
       param.targetNum = inputNumber.value
     }
