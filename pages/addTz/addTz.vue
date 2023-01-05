@@ -1,6 +1,6 @@
 <template>
   <view class="pageView">
-    <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData" :labelWidth="80">
+    <uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData" :labelWidth="85">
       <uni-forms-item label="日期" required name="date">
         <uni-datetime-picker type="date" :clear-icon="false" v-model="valiFormData.date" :disabled="isEdit" />
       </uni-forms-item>
@@ -23,7 +23,17 @@
       <uni-forms-item label="飞机扣费" required name="feijiMoney">
         <uni-easyinput type="number" v-model="valiFormData.feijiMoney" placeholder="请输入金额(元)" />
       </uni-forms-item>
-      <uni-forms-item label="球馆" required name="qiuguanId">
+      <uni-forms-item v-if="!isVote" label="球馆" required name="qiuguanId">
+        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
+          :disabled="isEdit">
+        </uni-data-select>
+      </uni-forms-item>
+      <uni-forms-item v-if="isVote" label="球馆选项1" required name="qiuguanId">
+        <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
+          :disabled="isEdit">
+        </uni-data-select>
+      </uni-forms-item>
+      <uni-forms-item v-if="isVote" label="球馆选项2" required name="qiuguanId">
         <uni-data-select v-model="valiFormData.qiuguanId" :localdata="qiuguanRange" placeholder="请选择球馆" :clear="false"
           :disabled="isEdit">
         </uni-data-select>
