@@ -64,12 +64,18 @@
   } from 'vue'
 
   import {
-    onLoad
+    onLoad,
+    onUnload
   } from "@dcloudio/uni-app"
   import dayjs from 'dayjs'
   import {
     rules
   } from '/pages/addTz/rules.js'
+
+  onUnload(() => {
+    uni.$off('importTieZi')
+    console.log('⭕️已移除监听 importTieZi')
+  })
 
   const valiForm = ref(null)
   const beginTime = ref('20:00')
@@ -344,10 +350,17 @@
   }
 
   function importTieZi() {
-
+    uni.navigateTo({
+      url: '/pages/myTiezi/myTiezi'
+    })
   }
 
   onLoad((option) => {
+    uni.$on('importTieZi', data => {
+      console.log('⭕️监听到importTieZi', data)
+
+    })
+
     createFieldsRange()
     getClubArr()
     getQiuguanArr()

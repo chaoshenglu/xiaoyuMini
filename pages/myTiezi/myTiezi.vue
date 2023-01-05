@@ -60,7 +60,7 @@
   }
 
   function tapCell(tiezi) {
-
+    uni.$emit('importTieZi', tiezi)
   }
 </script>
 
