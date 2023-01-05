@@ -83,6 +83,7 @@
   const clubRange = ref([])
   const qiuguanRange = ref([])
   const fieldsRange = ref([])
+  const isVote = ref(false)
   const isEdit = computed(() => {
     if (valiFormData.value.id) {
       return true
@@ -252,7 +253,9 @@
       } else {
         param.title = `${zhouJi.value}(${chineseDate})羽毛球报名帖`
       }
-      param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
+      if (valiFormDataValue.selectedFields.length) {
+        param.fields = `${valiFormDataValue.selectedFields.join(',')}号场`
+      }
       param.qiuguanName = findQiuguanNameById(valiFormDataValue.qiuguanId)
       delete param.selectedFields
       if (param.id) {
@@ -372,6 +375,8 @@
         idArr.push(parseInt(idstr))
       }
       valiFormData.value.selectedFields = idArr
+    } else {
+      valiFormData.value.selectedFields = []
     }
   }
 
