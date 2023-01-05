@@ -252,6 +252,12 @@
 
   function submit() {
     let valiFormDataValue = valiFormData.value
+
+    if (valiFormDataValue.stopBaoMingTime === null || valiFormDataValue.stopBaoMingTime === '') {
+      getApp().toast('请选择飞机时间')
+      return
+    }
+
     if (valiFormDataValue.stopBaoMingTime.length === 11) {
       getApp().toast('请选择完整的飞机时间')
       return
@@ -272,7 +278,7 @@
 
     let user = getApp().globalData.user
     valiForm.value.validate().then(res => {
-      let param = valiFormDataValue
+      let param = JSON.parse(JSON.stringify(valiFormDataValue))
       let chineseDate = dayjs(valiFormDataValue.date).format('M月D日')
       if (valiFormDataValue.clubId) {
         let clubName = findClubNameById(valiFormDataValue.clubId)
@@ -292,6 +298,8 @@
         param.qiuguanArr = JSON.stringify(objArr)
       }
       delete param.selectedFields
+      delete param.qiuguanId1
+      delete param.qiuguanId2
       if (param.id) {
         updateTieziByParam(param)
       } else {
