@@ -88,6 +88,12 @@
       "navigationBarTitleText": "个人资料",
       "enablePullDownRefresh": false
     }
+  }, {
+    "path": "pages/myTiezi/myTiezi",
+    "style": {
+      "navigationBarTitleText": "导入",
+      "enablePullDownRefresh": false
+    }
   }],
   "tabBar": {
     "color": "#666666",
