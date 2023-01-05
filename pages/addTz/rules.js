@@ -32,12 +32,6 @@ export const rules = {
       errorMessage: '球馆不能为空'
     }]
   },
-  selectedFields: {
-    rules: [{
-      required: true,
-      errorMessage: '场地不能为空'
-    }]
-  },
   limitNumber: {
     rules: [{
       required: true,

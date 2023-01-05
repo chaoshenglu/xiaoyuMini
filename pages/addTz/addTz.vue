@@ -33,7 +33,7 @@
           :disabled="isEdit">
         </uni-data-select>
       </uni-forms-item>
-      <uni-forms-item label="场地" required name="selectedFields">
+      <uni-forms-item label="场地" name="selectedFields">
         <scroll-view scroll-y="true" style="height: 80px;">
           <uni-data-checkbox multiple v-model="valiFormData.selectedFields" :localdata="fieldsRange"
             @change="changeFields">
