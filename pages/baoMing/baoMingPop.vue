@@ -40,7 +40,7 @@
   import {
     ref,
     computed,
-    onMounted
+    // onMounted
   } from 'vue'
   import dayjs from 'dayjs'
 
@@ -48,7 +48,6 @@
   const emit = defineEmits(['closeBaoMingPop'])
   const props = defineProps(['tiezi'])
   let user = ref(getApp().globalData.user)
-  let existingMyself = ref(null)
   const inputNumber = ref(8)
   const isCheckNum = ref(false)
   const qiuguanArr = computed(() => {
@@ -65,25 +64,9 @@
     return date.format('M月D日')
   })
 
-  onMounted(() => {
-    let param = {}
-    param.tieziId = props.tiezi.id
-    param.page = 1
-    param.size = 100
-    param.status = [2, 3]
-    param.openid = getApp().globalData.openid
-    getApp().post('tz_person/getTZPerson', param).then(res => {
-      let arr = res.data.list || []
-      for (const person of arr) {
-        if (person.isJiaYi != 1) {
-          existingMyself.value = person
-          break
-        }
-      }
-    }).catch(err => {
-      getApp().toastAndConsoleSystemError(err)
-    })
-  })
+  // onMounted(() => {
+
+  // })
 
   function switch2Change(e) {
     isCheckNum.value = e.detail.value
@@ -123,17 +106,37 @@
   }
 
   function tryDeleteOldMyself() {
-    if (existingMyself.value && existingMyself.value.id) {
-      let param = {
-        personId: existingMyself.value.id,
-        tieziId: props.tiezi.id
+    let param = {}
+    param.tieziId = props.tiezi.id
+    param.page = 1
+    param.size = 100
+    param.status = [2, 3]
+    param.openid = getApp().globalData.openid
+    getApp().post('tz_person/getTZPerson', param).then(res => {
+      let arr = res.data.list || []
+      let existingMyself = null
+      for (const person of arr) {
+        if (person.isJiaYi != 1) {
+          existingMyself = person
+          console.log('⭕️existingMyself =', person)
+          break
+        }
       }
-      getApp().post('tz_person/delTZPerson', param).then(res => {
-        console.log('删除我上次报名产生的person', res)
-      }).catch(err => {
-        getApp().toastAndConsoleSystemError(err)
-      })
-    }
+
+      if (existingMyself && existingMyself.id) {
+        getApp().post('tz_person/delTZPerson', {
+          personId: existingMyself.id,
+          tieziId: props.tiezi.id
+        }).then(res => {
+          console.log('⭕删除我上次报名产生的person', res)
+        }).catch(err => {
+          getApp().toastAndConsoleSystemError(err)
+        })
+      }
+
+    }).catch(err => {
+      getApp().toastAndConsoleSystemError(err)
+    })
   }
 
   function handleRes(res) {
