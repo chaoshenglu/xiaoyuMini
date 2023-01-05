@@ -364,7 +364,7 @@
     let uri = 'tiezi/addTieZi'
     getApp().post(uri, param).then(res => {
       if (res.code === 1) {
-        baoMingForMyself(res.data)
+        baoMingForMyself(res.data, param)
         alertAddSuccess(res.data, param)
       } else {
         getApp().toastAndConsoleSystemError(res)
@@ -374,11 +374,26 @@
     })
   }
 
-  function baoMingForMyself(tieziId) {
-    let param = getApp().globalData.user
-    param.isJiaYi = 0
-    param.status = 1 //1已报名2已取消3已飞机
-    param.tieziId = tieziId
+  function baoMingForMyself(tieziId, tiezi) {
+    if (tiezi.qiuguanArr) {
+      let param = getApp().globalData.user
+      param.isJiaYi = 0
+      param.status = 1 //1已报名2已取消3已飞机
+      param.tieziId = tieziId
+      param.qiuguanId = valiFormData.value.qiuguanId1
+      addTZPersonByParam(param)
+      param.qiuguanId = valiFormData.value.qiuguanId2
+      addTZPersonByParam(param)
+    } else {
+      let param = getApp().globalData.user
+      param.isJiaYi = 0
+      param.status = 1 //1已报名2已取消3已飞机
+      param.tieziId = tieziId
+      addTZPersonByParam(param)
+    }
+  }
+
+  function addTZPersonByParam(param) {
     getApp().post('tz_person/addTZPerson', param).then(res => {
       if (res.code === 1) {
         console.log('为自己报名成功')
